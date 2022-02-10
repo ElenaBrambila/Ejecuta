@@ -1,0 +1,131 @@
+﻿@using IntegramsaUltimate.Models.ViewModels
+@model TiendaViewModel
+@{
+    Layout = null;
+}
+
+<form id="frmFormulario" enctype="multipart/form-data">
+    @Html.HiddenFor(d => d.latitud)
+    @Html.HiddenFor(d => d.longitud)
+
+    @Html.HiddenFor(d => d.id)
+    <div>
+        <div class="tercio float">
+            <div class="bloque">
+                <div id="map" style="height:400px;">
+
+                </div>
+            </div>
+        </div>
+        <div class="tercio float">
+            <div class="bloque">
+                <div>
+                    @Html.LabelFor(d => d.nombre)
+                    <br />
+                    <h5>@ViewBag.TiendaNombre</h5>                    
+                </div>
+
+                <div>
+                    @Html.LabelFor(d => d.codigo)                    
+                    <br />
+                    <h5>@ViewBag.codigo</h5> 
+                </div>
+                @*<div>
+                    @Html.LabelFor(d => d.idGiro)
+                    <input type="text" value="@ViewBag.Giro" readonly />
+                </div>*@
+                <div>
+                    @Html.LabelFor(d => d.idCadena)
+                   <br />
+                    <h5>@ViewBag.cadenaNombre</h5>
+                    
+                   @*// <input type="text" value="@ViewBag.cadenaNombre" readonly />*@
+                </div>
+
+                <div>
+                    
+                    @Html.LabelFor(d => d.idFormato) 
+                    <br />
+                    <h5>@ViewBag.FormatoNombre</h5>
+                    
+
+
+                </div>
+
+
+            </div>
+        </div>
+        <div class="tercio float">
+            <div class="bloque">
+                <div>
+                    @Html.LabelFor(d => d.iddEstado)
+                    <br />
+                    <h5>@ViewBag.NombreEstado</h5>             
+                </div>
+                <div>
+                  
+                    @Html.LabelFor(d => d.idMunicipio)
+                    <br />
+                    <h5>@ViewBag.NombreMunicipio</h5> 
+                </div>
+
+                <div>
+                    @Html.LabelFor(d => d.colonia)
+                    <br />
+                    <h5>@ViewBag.colonia</h5> 
+                </div>
+                <div>
+                    @Html.LabelFor(d => d.calle)
+                    <br />
+                    <h5>@ViewBag.calle</h5> 
+                </div>
+                <div>
+                    @Html.LabelFor(d => d.numero)
+                    <br />
+                    <h5>@ViewBag.numero</h5>
+                </div>
+                <div>
+                    @Html.LabelFor(d => d.cp)
+                    <br />
+                    <h5>@ViewBag.cp</h5>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+  
+</form>
+
+
+<script>
+
+
+    $(document).ready(function () {
+
+        jsLoadMapa();
+             
+
+    })
+
+
+
+    function jsLoadMapa() {
+        mapOptions = {
+            center: new google.maps.LatLng("@Model.latitud", "@Model.longitud"),
+            zoom: 15,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        //Creamos el mapa
+        map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+        marker = new google.maps.Marker({
+            position: new google.maps.LatLng("@Model.latitud", "@Model.longitud"),
+            map: map,
+            draggable: false,
+            icon: '@Url.Content("~/Images/icon_point.png")',
+        });
+
+    }
+
+</script>

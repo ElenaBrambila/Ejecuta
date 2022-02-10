@@ -1,0 +1,81 @@
+﻿@model IntegramsaUltimate.Models.ViewModels.RutaViewModel
+@{
+    Layout = null;
+}
+
+<form id="frmFormulario">
+    @Html.HiddenFor(d => d.idCliente)
+    @Html.HiddenFor(d=>d.id)
+    <div class="bloque">
+        <div>
+            @Html.LabelFor(d => d.codigo)
+            @Html.TextBoxFor(d => d.codigo)
+        </div>
+        <div>
+            @Html.LabelFor(d => d.idPerfil)
+            @Html.DropDownListFor(d => d.idPerfil, (SelectList)ViewBag.lstPerfiles)
+        </div>
+        <div>
+            @Html.LabelFor(d => d.idTurno)
+            @Html.DropDownListFor(d => d.idTurno, (SelectList)ViewBag.lstTurnos)
+        </div>
+        <div>
+            @Html.LabelFor(d => d.idEstadoRuta)
+            @Html.DropDownListFor(d => d.idEstadoRuta, (SelectList)ViewBag.lstEstadoRutas)
+        </div>
+        <div>
+            @Html.LabelFor(d => d.idPromotor)
+            @Html.DropDownListFor(d => d.idPromotor, (SelectList)ViewBag.lstPromotores)
+        </div>
+
+
+
+        <div style="text-align:right;">
+            <input class="btn-success" type="submit" value="Guardar" />
+        </div>
+
+    </div>
+
+</form>
+
+<script>
+
+    $(document).ready(function () {
+
+        //actualizar el formulario
+        $("#frmFormulario").submit(function (e) {
+
+            e.preventDefault();
+
+            jsShowWindowLoad();
+
+            url="@Url.Content("~/Ruta/GuardarEditar")"
+            parametros = $(this).serialize();
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: parametros,
+
+                success: function (data) {
+
+                    if (data == "1") {
+                        MensajeExito("Ruta editada con éxito");
+                        jsCloseDialog();
+
+                        jsRefrescaGrid("tabla")
+                    } else {
+                        MensajeError(data);
+                    }
+                    jsRemoveWindowLoad();
+                },
+                error: function (r) {
+                    jsRemoveWindowLoad();
+                    MensajeError("Error del servidor");
+                }
+            });
+
+        })
+
+    })
+</script>

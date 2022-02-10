@@ -1,0 +1,53 @@
+﻿@model IntegramsaUltimate.Models.ViewModels.InventarioViewModel
+@{ ViewBag.Title = "InventarioById"; }
+
+
+
+<div class="bloque" style="width:350px; margin-top: 60px; padding-left:80px; padding-top:10px">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Inventario</h5>
+            <hr />
+            <div class="card-text">
+                <div class="row">
+                    @Html.LabelFor(d => d.Cliente)
+                    @Html.DisplayFor(d => d.Cliente)
+                </div>
+                <br />
+                <div class="row">
+                    @Html.LabelFor(d => d.Sku)
+                    @Html.DisplayFor(d => d.Sku)
+                </div>
+                <br />
+                <div class="row">
+                    @Html.LabelFor(d => d.NumTienda)
+                    @Html.DisplayFor(d => d.NumTienda)
+                </div>
+                <br />
+                <div class="row">
+                    @Html.LabelFor(d => d.Cantidad)
+                    @Html.DisplayFor(d => d.Cantidad)
+                </div>
+                <br />
+                <div class="row">
+                    @Html.LabelFor(d => d.EstatusInv)
+                    @Html.DisplayFor(d => d.EstatusInv)
+                </div>
+                <br />
+
+                <div class="row">
+                    @Html.LabelFor(d => d.Cadena)
+                    @Html.DisplayFor(d => d.Cadena)
+                </div>
+                <br />
+
+                <div class="row">
+                    @Html.LabelFor(d => d.Producto)
+                    @Html.DisplayFor(d => d.Producto)
+                </div>
+                <br />
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,31 @@
+﻿@model IntegramsaUltimate.Models.ViewModels.StatusViewModel
+@{
+    ViewBag.Title = "GetStatus";
+    Layout = null;
+}
+
+
+<div class="row">
+    <div class="col-md-5 col-md-offset-4">
+        <h4 style="padding-top:25px" class="text-center">Estatus</h4>
+        <div class="bloque text-center" style="padding-top:15px; margin-top:10px; background-color:#eee; border-color: @Model.Color; font-size:large">
+            @Html.LabelFor(d => d.Cadena)
+            @Html.DisplayFor(d => d.Cadena)
+            <br />
+            @Html.LabelFor(d => d.Tienda)
+            @Html.DisplayFor(d => d.Tienda)
+            <br />
+            @Html.LabelFor(d => d.Producto)
+            @Html.DisplayFor(d => d.Producto)
+            <br />
+            @Html.LabelFor(d => d.Semana)
+            @Html.DisplayFor(d => d.Semana)
+            <br />
+            @Html.LabelFor(d => d.Status)
+            @Html.DisplayFor(d => d.Status)
+            <br />
+            @Html.LabelFor(d => d.StatusComparativo)
+            <span style="color:@Model.Color;">@Html.DisplayFor(d => d.StatusComparativo)</span>
+        </div>
+    </div>
+</div>

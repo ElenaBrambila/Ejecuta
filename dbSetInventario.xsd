@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dbSetInventario" targetNamespace="http://tempuri.org/dbSetInventario.xsd" xmlns:mstns="http://tempuri.org/dbSetInventario.xsd" xmlns="http://tempuri.org/dbSetInventario.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="IntegramsaUltimateConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="IntegramsaUltimateConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.IntegramsaUltimateConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="vwInventarioTableAdapter" GeneratorDataComponentClassName="vwInventarioTableAdapter" Name="vwInventario" UserDataComponentName="vwInventarioTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="IntegramsaUltimateConnectionString (Web.config)" DbObjectName="IntegramsaUltimate.dbo.vwInventario" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT numSemana, idTienda, idInventario, Producto, Tienda, Status, Criterio, Ventas, Días_Inv, Inventario FROM dbo.vwInventario</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="numSemana" DataSetColumn="numSemana" />
+              <Mapping SourceColumn="idTienda" DataSetColumn="idTienda" />
+              <Mapping SourceColumn="idInventario" DataSetColumn="idInventario" />
+              <Mapping SourceColumn="Producto" DataSetColumn="Producto" />
+              <Mapping SourceColumn="Tienda" DataSetColumn="Tienda" />
+              <Mapping SourceColumn="Status" DataSetColumn="Status" />
+              <Mapping SourceColumn="Criterio" DataSetColumn="Criterio" />
+              <Mapping SourceColumn="Ventas" DataSetColumn="Ventas" />
+              <Mapping SourceColumn="Días_Inv" DataSetColumn="Días_Inv" />
+              <Mapping SourceColumn="Inventario" DataSetColumn="Inventario" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dbSetInventario" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="dbSetInventario" msprop:Generator_UserDSName="dbSetInventario">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="vwInventario" msprop:Generator_TableClassName="vwInventarioDataTable" msprop:Generator_TableVarName="tablevwInventario" msprop:Generator_TablePropName="vwInventario" msprop:Generator_RowDeletingName="vwInventarioRowDeleting" msprop:Generator_RowChangingName="vwInventarioRowChanging" msprop:Generator_RowEvHandlerName="vwInventarioRowChangeEventHandler" msprop:Generator_RowDeletedName="vwInventarioRowDeleted" msprop:Generator_UserTableName="vwInventario" msprop:Generator_RowChangedName="vwInventarioRowChanged" msprop:Generator_RowEvArgName="vwInventarioRowChangeEvent" msprop:Generator_RowClassName="vwInventarioRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="numSemana" msprop:Generator_ColumnVarNameInTable="columnnumSemana" msprop:Generator_ColumnPropNameInRow="numSemana" msprop:Generator_ColumnPropNameInTable="numSemanaColumn" msprop:Generator_UserColumnName="numSemana" type="xs:int" minOccurs="0" />
+              <xs:element name="idTienda" msprop:Generator_ColumnVarNameInTable="columnidTienda" msprop:Generator_ColumnPropNameInRow="idTienda" msprop:Generator_ColumnPropNameInTable="idTiendaColumn" msprop:Generator_UserColumnName="idTienda" type="xs:int" minOccurs="0" />
+              <xs:element name="idInventario" msprop:Generator_ColumnVarNameInTable="columnidInventario" msprop:Generator_ColumnPropNameInRow="idInventario" msprop:Generator_ColumnPropNameInTable="idInventarioColumn" msprop:Generator_UserColumnName="idInventario" type="xs:int" />
+              <xs:element name="Producto" msprop:Generator_ColumnVarNameInTable="columnProducto" msprop:Generator_ColumnPropNameInRow="Producto" msprop:Generator_ColumnPropNameInTable="ProductoColumn" msprop:Generator_UserColumnName="Producto" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Tienda" msprop:Generator_ColumnVarNameInTable="columnTienda" msprop:Generator_ColumnPropNameInRow="Tienda" msprop:Generator_ColumnPropNameInTable="TiendaColumn" msprop:Generator_UserColumnName="Tienda" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Status" msprop:Generator_ColumnVarNameInTable="columnStatus" msprop:Generator_ColumnPropNameInRow="Status" msprop:Generator_ColumnPropNameInTable="StatusColumn" msprop:Generator_UserColumnName="Status" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Criterio" msprop:Generator_ColumnVarNameInTable="columnCriterio" msprop:Generator_ColumnPropNameInRow="Criterio" msprop:Generator_ColumnPropNameInTable="CriterioColumn" msprop:Generator_UserColumnName="Criterio" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Ventas" msprop:Generator_ColumnVarNameInTable="columnVentas" msprop:Generator_ColumnPropNameInRow="Ventas" msprop:Generator_ColumnPropNameInTable="VentasColumn" msprop:Generator_UserColumnName="Ventas" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Días_Inv" msprop:Generator_ColumnVarNameInTable="columnDías_Inv" msprop:Generator_ColumnPropNameInRow="Días_Inv" msprop:Generator_ColumnPropNameInTable="Días_InvColumn" msprop:Generator_UserColumnName="Días_Inv" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Inventario" msprop:Generator_ColumnVarNameInTable="columnInventario" msprop:Generator_ColumnPropNameInRow="Inventario" msprop:Generator_ColumnPropNameInTable="InventarioColumn" msprop:Generator_UserColumnName="Inventario" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:vwInventario" />
+      <xs:field xpath="mstns:idInventario" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

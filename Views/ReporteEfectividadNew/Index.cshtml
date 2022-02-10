@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "Efectividad";
+    int? idCliente = (int?)ViewBag.idCliente;
+}
+<br />
+
+<div style="background-color: #eee; padding: 10px; height: 160PX;" class="head-module">
+    <form id="frmBuscar">
+        <br />
+        <span style="margin-right:35px" class="modulo-titulo">@ViewBag.Title</span>
+        <br />
+        <br />
+            @if (idCliente == null)
+            {
+                @Html.Partial("~/Views/Partials/Filtros/_ClienteCoordinador.cshtml")
+            }
+            else
+            {
+                @Html.Partial("~/Views/Partials/Filtros/_Promotores.cshtml", idCliente)
+            }
+          
+</form>
+</div>
+<hr />
+<div id="divGrid">
+
+</div>
+
+<script>
+
+    $(document).ready(function () {
+
+        //eliminamos y ponemos el body en fluid
+        $(".body-content").removeClass("container");
+        $(".body-content").addClass("container-fluid");
+
+       
+
+        $("#cboCliente").change(); //invocamos el listado
+
+        $("#frmBuscar").submit(function (e) {
+          
+            e.preventDefault();
+            idCliente = $("#cboCliente").prop("value");
+            fechaInicio = $("#fechaInicio").prop("value")
+            fechaFin = $("#fechaFin").prop("value");
+            idCoordinador = $("#cboCoordinadores").prop("value");
+            idPromotor = $("#cboPromotores").prop("value");
+            if (idCliente == "") {
+                idCliente = 0;
+            }
+            if (idPromotor == "") {
+                idPromotor = 0;
+            }
+            if (idCoordinador == "") {
+                idCoordinador = 0;
+            }
+            url = "@Url.Content("~/ReporteEfectividadNew/Listado")" + "?idCliente=" + idCliente + "&fechaInicio=" + fechaInicio + "&fechaFin=" + fechaFin + "&idPromotor=" + idPromotor + "&idCoordinador=" + idCoordinador
+            parametros = $(this).serialize();
+           
+            $.post(url, parametros, function (data) {
+
+                $("#divGrid").html(data);
+
+            })
+        })
+
+
+    })
+
+</script>

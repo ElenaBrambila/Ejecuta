@@ -1,0 +1,37 @@
+﻿@{
+    Layout = null;
+    int idPlaza = Model;
+   
+   
+    }
+
+@(Html.Kendo().Grid<IntegramsaUltimate.Models.TableViewModels.TablePlazaMunicipioViewModel>()
+                    .Name("tabla")
+
+                     .Columns(c =>
+                        {
+                            c.Bound(p => p.idMunicipio).Title("#");
+                            c.Bound(p => p.Nombre).Title("Nombre del Municipio");
+                            c.Bound(p => p.id).ClientTemplate(@"
+                                                                <img class='imgGrid' src='/Images/icon_edit.png' onclick='jsEditar(#=id#)' /> |
+                                                                <img class='imgGrid' src='/Images/icon_delete.png' onclick='jsEliminar(#=id#)' />")
+                                                             .Title("").Width(150);
+
+                        })
+                        .ToolBar(tools => tools.Excel())
+                        .Pageable()
+                        .Sortable()
+                        .Filterable()
+
+                        .Excel(excel => excel
+                            .FileName("reporte.xlsx")
+                            .AllPages(true)
+                                 .ProxyURL(Url.Action("JsonGrid", "Plaza", new { idPlaza = idPlaza }))
+                         )
+                        .Resizable(resize => resize.Columns(true))
+                        .DataSource(d => d.Ajax()
+                            //.Sort(sort => sort.Add("id").Descending())
+                               .Read(r => r.Action("JsonGrid", "Plaza", new { idPlaza = idPlaza }))
+                        )
+
+)

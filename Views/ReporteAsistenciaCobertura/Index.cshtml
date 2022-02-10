@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "Cobertura";
+
+    int? idCliente = (int?)ViewBag.idCliente;
+}
+
+
+<div style="background-color:#eee;padding:10px" class="head-module">
+    <span style="margin-right:35px" class="modulo-titulo">@ViewBag.Title</span>
+    <br />
+    @if (idCliente == null)
+    {
+        @Html.Partial("~/Views/Partials/Filtros/_ClientePromotor.cshtml")
+    }
+    else
+    {
+        @Html.Partial("~/Views/Partials/Filtros/_Promotores.cshtml", idCliente)
+    }
+   
+    <span>
+        <label>Semanas</label>
+        @Html.DropDownList("cboSemanas", (SelectList)ViewBag.lstSemanas,
+                                         null, 
+                                         new { style = "width:200px;" })
+    </span>
+    <span>
+        <label>Año</label>
+        @Html.DropDownList("cboAno", 
+                                    (SelectList)ViewBag.lstAnos, 
+                                    null,
+                                    new { style = "width:200px;" })
+    </span>
+</div>
+<hr />
+<div id="divGrid">
+
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        $("#cboPromotores,#cboSemanas,#cboAno").change(function () {
+
+            idPromotor = $("#cboPromotores").prop("value");
+            numSemana = $("#cboSemanas").prop("value");
+            ano = $("#cboAno").prop("value");
+
+            url = "@Url.Content("~/ReporteAsistenciaCobertura/Listado")" + "?idPromotor=" + idPromotor + "&numSemana=" + numSemana+"&ano="+ano;
+
+            $("#divGrid").load(url);
+
+        })
+
+        $("#cboPromotores").change(); //invocamos el listado
+
+    })
+
+    //funciones
+
+</script>

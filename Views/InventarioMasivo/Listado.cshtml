@@ -1,0 +1,48 @@
+﻿@model int
+@{
+    Layout = null;
+    int idCliente = Model;
+}
+
+<div class="row">
+
+    <div class="col-md-12">
+        @(Html.Kendo().Grid<IntegramsaUltimate.Models.TableViewModels.TableInventarioViewModel>()
+                    .Name("tabla")
+
+                     .Columns(c =>
+                        {
+                            c.Bound(p => p.numSemana).Title("Semana");
+                            c.Bound(p => p.numTienda).Title("Tienda");
+                            c.Bound(p => p.sku).Title("Producto");
+                            c.Bound(p => p.cantidadVendida).Title("Ventas");
+                            c.Bound(p => p.cantidadInventario).Title("Inventario");
+                            c.Bound(p => p.diasDeInventario).Title("Días de inv.");
+                            c.Bound(p => p.idInventario).Title("#").Width(50).Hidden();
+                            c.Bound(p => p.status).Title("Status");
+                            c.Bound(p => p.EstatusComparado).Title("Comparado");
+                            c.Bound(p => p.idInventario).ClientTemplate(@"
+                                                                <img class='imgGrid' src='/Images/icon_edit.png' onclick='jsEditar(#=idInventario#)' /> |
+                                                                <img class='imgGrid' src='/Images/icon_delete.png' onclick='jsEliminar(#=idInventario#)' />")
+                                                             .Title("").Width(100);
+
+                        })
+                        .ToolBar(tools => tools.Excel())
+                        .Pageable()
+                        .Sortable()
+                        .Filterable()
+
+                        .Excel(excel => excel
+                            .FileName("reporte.xlsx")
+                            .AllPages(true)
+                             .ProxyURL(Url.Action("JsonGrid", "InventarioMasivo", new { idCliente = idCliente }))
+                         )
+                        .Resizable(resize => resize.Columns(true))
+                        .DataSource(d => d.Ajax()
+                            .Sort(sort => sort.Add("idInventario").Descending())
+                           .Read(r => r.Action("JsonGrid", "InventarioMasivo", new { idCliente = idCliente }))
+                        )
+
+        )
+    </div>
+</div>

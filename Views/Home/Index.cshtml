@@ -1,0 +1,358 @@
+﻿@using IntegramsaUltimate.Models.FilterViewModel
+@model ReporteAsistenciaCoberturaViewModel
+@{
+    /**/
+
+    ViewBag.Title = "Inicio";
+}
+
+
+<div style="margin-top: 50pt;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <img src="http://portalsistema.com/v2/img/logo/logo.png" /><br />
+                @if (ViewBag.cliente != null)
+                {
+                    <h2>@ViewBag.cliente </h2>
+
+                }
+            </div>
+            <div class="col-md-4">
+                @if (ViewBag.cliente != null)
+                {
+                    <img src="Images/clientes/@ViewBag.imagenCliente" width="205px" /><br />
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@if (ViewBag.cliente != null)
+{
+
+    <div>
+        <div class="containerKcard">
+
+
+            <div class="k-card k-state-success" style="margin:2%">
+                <div class="k-card-body">
+                    <h5 class="k-card-title"><img src="~/Images/igDiaSemana.png" style="width:60px" /> Cobertura de la semana:  </h5>
+                    <h6 class="k-card-subtitle">Total de la ruta recorrida durante toda la semana</h6>
+                    <br /> <h2><span class="count">@ViewBag.cobertura</span>%</h2>
+
+                    @(Html.Kendo().LinearGauge()
+             .Name("linearGauge") // The name of the LinearGauge is mandatory. It specifies the "id" attribute of the LinearGauge.
+             .Scale(scale => scale
+                 .Min(0) // Set the min value of the LinearGauge.
+                 .Max(100) // Set the min value of the LinearGauge.
+             )
+             .Pointer(pointer => pointer
+                 .Value(ViewBag.cobertura) // Set the value of the LinearGauge.
+             )
+                    )
+                    <p>Semana: @ViewBag.semana</p>
+
+                </div>
+                <div class="k-card-actions">
+                    <span class="k-button k-flat k-primary">Cubiertas: @ViewBag.cubiertas</span>
+                    <span class="k-button k-flat k-primary">Asignados: @ViewBag.asignadas </span>
+                </div>
+            </div>
+
+            <div class="k-card k-state-primary" style="margin:2%">
+                <div class="k-card-body">
+                    <h5 class="k-card-title">Tiempo efectivo por día</h5>
+                    <h6 class="k-card-subtitle"></h6>
+                    @(Html.Kendo().Chart<IntegramsaUltimate.Models.TableViewModels.TableReporteAsistenciaCoberturaViewModel>
+        ()
+        .Name("chart2")
+        .Title("2020")
+        .HtmlAttributes(new { @class = "small-chart" })
+        .Legend(legend => legend
+        .Visible(false)
+        )
+    
+        .Series(series =>
+            {
+    series.Pie(new dynamic[] {
+
+        new { category = "Lunes", value = ViewBag.lHorasLunes, color = "#9de219" },
+        new { category = "Martes", value = ViewBag.lHorasMartes, color = "#90cc38" },
+        new { category = "Miércoles", value = ViewBag.lHorasMiercoles, color = "#068c35" },
+        new { category = "Jueves", value = ViewBag.lHorasJueves, color = "#006634" },
+        new { category = "Viernes", value = ViewBag.lHorasViernes, color = "#004d38" },
+        new { category = "Sábado", value = ViewBag.lHorasSabado, color = "#033939" }
+
+        })
+                    .Labels(labels => labels
+                .Template("#= category #: \n #= value#")
+                .Background("transparent")
+                .Visible(true)
+            )
+            .StartAngle(150);
+        })
+                    .Tooltip(tooltip => tooltip
+                    .Visible(true)
+                    .Format("{0:N0}")
+                    .Template("#= category # - #= kendo.format('{0:P}', percentage)#")
+                    )
+                    )
+                    }
+                </div>
+
+            </div>
+
+            <div class="k-card k-state-info" style="margin:2%">
+                <div class="k-card-body">
+                    <h5 class="k-card-title"><img src="~/Images/imgTiempoEfectivo.png" style="width:60px" />Tiempo efectivo</h5>
+                    <h6 class="k-card-subtitle">  </h6>
+                    <br />
+                    <h3>Semana <b> @ViewBag.semana :</b> <br /><b> @ViewBag.tiempoEfectivoTotal </b>horas</h3><br />
+                    <h3>Promedio por promotor de la semana: <br /><b> @ViewBag.promPromotorTiempoEfectivo horas</b></h3><br />
+                    <h3>Tiempo efectivo del día <b>@ViewBag.dia</b></h3><br />
+                    <h3><b>@ViewBag.tiempoEfectivoDiaAnterior</b> horas</h3> <br />
+                </div>
+
+            </div>
+
+            <div class="k-card k-state-success" style="margin:2%">
+                <div class="k-card-body">
+                    <h5 class="k-card-title">Tiempo efectivo de la semana <b>@ViewBag.semana</b></h5>
+                    <h6 class="k-card-subtitle"></h6>
+
+                    @(Html.Kendo().Chart<IntegramsaUltimate.Models.TableViewModels.TableReporteAsistenciaCoberturaViewModel>()
+              .Name("ReporteAsistencia1")
+              .DataSource(dataSource => dataSource
+                  .Read(r => r.Action("JsonGrid", "Home", new { idPromotor = "", ano = 2020, numSemana = 43 })) // Specify the action method and controller names.
+              )
+              .Series(series =>
+              {
+
+                  series.Bar(ViewBag.ListaTotales).Name("Asignadas2");
+
+
+                        series.Bar(ViewBag.ListaTotales).Name("Asignadas");
+
+                  series.Bar(ViewBag.ListaTotales).Name("Cubiertas");
+              })
+        .CategoryAxis(axis => axis
+            .Categories("Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado")
+            .MajorGridLines(lines => lines.Visible(false))
+        )
+                    )
+                </div>
+            </div>
+
+
+            <div class="k-card k-state-success" style="margin:2%">
+                <div class="k-card-body">
+                    <h5 class="k-card-title">Tiempo efectivo por cadena</h5>
+                    <h6 class="k-card-subtitle"></h6>
+                    @(Html.Kendo().Chart<IntegramsaUltimate.Models.TableViewModels.TableReporteAsistenciaCoberturaViewModel>
+        ()
+        .Name("chart")
+        .Title("2020")
+        .HtmlAttributes(new { @class = "small-chart" })
+        .Legend(legend => legend
+        .Visible(false)
+        )
+        .DataSource(ds =>
+        {
+        ds.Read(r => r.Action("JsonGrid", "ReporteAsistenciaCobertura", new { idPromotor = "", ano = 2019, numSemana = 43 })); // Specify the action method and controller names.
+
+        }
+        )
+        .Series(series =>
+            {
+    series.Pie(new dynamic[] {
+
+        new { category = ViewBag.cNombre1, value = ViewBag.cValor1, color = "#9de219" },
+        new { category = ViewBag.cNombre2, value = ViewBag.cValor2, color = "#90cc38" },
+        new { category = ViewBag.cNombre3, value = ViewBag.cValor3, color = "#068c35" },
+        new { category = ViewBag.cNombre4, value = ViewBag.cValor4, color = "#006634" },
+        new { category = ViewBag.cNombre5, value = ViewBag.cValor5, color = "#004d38" },
+        new { category = ViewBag.cNombre6, value = ViewBag.cValor6, color = "#033939" },
+        new { category = ViewBag.cNombre7, value = ViewBag.cValor7, color = "#004d38" },
+        new { category = ViewBag.cNombre8, value = ViewBag.cValor8, color = "#033939" }
+
+                })
+                    .Labels(labels => labels
+                .Template("#= category #: \n #= value#")
+                .Background("transparent")
+                .Visible(true)
+            )
+            .StartAngle(150);
+        })
+                    .Tooltip(tooltip => tooltip
+                    .Visible(true)
+                    .Format("{0:N0}")
+                    .Template("#= category # - #= kendo.format('{0:P}', percentage)#")
+                    )
+                    )
+                    }
+                </div>
+            </div>
+
+
+        </div>
+
+        <style>
+            .containerKcard {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+
+            .k-card {
+                flex: 300px;
+                margin: 5%;
+            }
+        </style>
+    </div>
+
+            //EMPIEZAN LAS CIUDADES
+    <h2>Top 10 del tiempo efectivo por cadena</h2><br />
+    <h5>Presiona sobre la flecha o sobre los elementos para avanzar</h5>
+    <div id="list">
+        <div class="k-card-deck-scrollwrap">
+            <button class="k-button k-button-icon">
+                <span class="k-icon k-i-arrow-chevron-left"></span>
+            </button>
+            <button class="k-button k-button-icon">
+                <span class="k-icon k-i-arrow-chevron-right"></span>
+            </button>
+            <div class="k-card-deck">
+                @if (ViewBag.listaCadenas != null)
+                                                {
+                                                    foreach (var item in ViewBag.listaCadenas)
+                                                    {
+
+
+                <div class="k-card k-card-type-rich">
+                    @*<img src="https://demos.telerik.com/kendo-ui/content/chat/quote_full.jpeg" alt="undefined" class="k-card-image">*@
+
+                    <div class="k-card-body" style="background-color:#ed1c24;color:white">
+                        <h5 class="k-card-title">@item.Nombre  </h5>
+                        <h6 class="k-card-subtitle"> </h6>
+                    </div>
+                    <div class="k-card-actions k-card-actions-vertical">
+                        <span class="k-card-action">
+                            <span class="k-button k-flat k-primary" data-value="View details of Full Coverage">Tiempo efectivo</span>
+                        </span>
+                        <span class="k-card-action">
+                            <span class="k-button k-flat k-primary" data-value="Get a quote for Full Coverage">@item.totalHoras horas</span>
+                        </span>
+                    </div>
+                </div>
+
+
+
+                                                    }
+
+
+
+}
+
+                <button class="k-button k-button-icon">
+                    <span class="k-icon k-i-arrow-chevron-right"></span>
+                </button>
+            </div>
+
+            <script>
+                function scrollButtonClick(e) {
+                    var button = $(e.currentTarget);
+                    var scrollToLeft = button.find(".k-i-arrow-chevron-left").length !== 0;
+                    var scrollContainer = $(".k-card-deck").eq(0);
+                    var lastCard = scrollContainer.find(".k-card").last();
+                    var cardWidth = lastCard.outerWidth(true);
+
+
+                    if (scrollToLeft) {
+                        scrollContainer.scrollLeft(scrollContainer.scrollLeft() - cardWidth);
+                    } else {
+                        scrollContainer.scrollLeft(scrollContainer.scrollLeft() + cardWidth);
+                    }
+                };
+
+                $(document).ready(function () {
+                    var cardDeck = $(".k-card-deck-scrollwrap").eq(0);
+
+                    cardDeck.on("click", ".k-button", scrollButtonClick);
+                });
+            </script>
+
+            <style>
+                #list {
+                    display: flex;
+                    justify-content: center;
+                }
+
+                .k-card-deck-scrollwrap {
+                    max-width: 728px;
+                }
+
+                .k-card-deck {
+                    box-sizing: border-box;
+                    margin-left: -16px;
+                    margin-right: -16px;
+                    padding: 16px 16px 16px;
+                    overflow-y: hidden;
+                    overflow-x: auto;
+                }
+            </style>
+        </div>
+    </div>
+//FIN DE CIUDADES
+
+//INICIO DE TIEMPO
+    <div>
+        <div class="containerKcard">
+            <div class="k-card k-state-info">
+                <div class="k-card-body">
+                    <h5 class="k-card-title"></h5>
+                    <h6 class="k-card-subtitle"></h6>
+                    <h1>@ViewBag.cadenas</h1>
+                </div>
+
+            </div>
+
+            <div class="k-card k-state-success">
+                <div class="k-card-body">
+                    <h5 class="k-card-title"></h5>
+                    <h6 class="k-card-subtitle"></h6>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+            //FIN DE TIEMPO
+
+            //INICIO SCRIPT DE CONTEO
+    <script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-de7e2ef6bfefd24b79a3f68b414b87b8db5b08439cac3f1012092b2290c719cd.js"></script>
+            // <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script id="rendered-js">
+        $('.count').each(function () {
+            $(this).prop('Counter', 0).animate({
+                Counter: $(this).text()
+            },
+                {
+                    duration: 4000,
+                    easing: 'swing',
+                    step: function (now) {
+                        $(this).text(Math.ceil(now));
+                    }
+                });
+
+        });
+                                                              //# sourceURL=pen.js
+    </script>
+            //FIN DE SCRIPT CONTEO
+
+
+}
+

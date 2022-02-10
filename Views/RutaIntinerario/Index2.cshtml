@@ -1,0 +1,134 @@
+﻿@{
+    ViewBag.Title = "Ruta - Itinerario";
+}
+<div style="background-color:#eee;padding:10px" class="head-module">
+
+    <div>
+        <span style="margin-right:35px" class="modulo-titulo">@ViewBag.Title</span>
+        <span>
+            <label>Seleccionar Cliente</label>
+            @(Html.Kendo().DropDownList()
+                      .Name("idCliente")
+
+                      .OptionLabel("Selecciona un cliente...")
+                      .DataTextField("nombre")
+                      .DataValueField("Id")
+                      .DataSource(source =>
+                      {
+                          source.Read(read =>
+                          {
+                              read.Action("GetClientes", "DropDownList");
+                          });
+                      })
+            )
+        </span>
+        <span>
+            <label>Selecciona una ruta</label>
+            <script>
+                function filterFormatos() {
+                    return {
+                        idCliente: $("#idCliente").val()
+                    };
+                }
+            </script>
+            @(Html.Kendo().DropDownList()
+                      .Name("idRuta")
+
+                      .OptionLabel("Selecciona una ruta...")
+                      .DataTextField("nombre")
+                      .DataValueField("Id")
+                      .DataSource(source =>
+                      {
+                          source.Read(read =>
+                          {
+                              read.Action("GetRutas", "DropDownList").Data("filterFormatos");
+
+                          })
+                          .ServerFiltering(true);
+                      })
+                      .Enable(false)
+                      .AutoBind(false)
+                      .CascadeFrom("idCliente")
+
+            )
+
+        </span>
+
+
+
+
+      
+
+       
+    </div>
+
+    <div class="clearfix"></div>
+
+
+</div><br />
+<hr />
+<div id="divGrid">
+
+</div>
+<hr />
+<div id="divHorario">
+
+</div>
+<script>
+    var idRutaSeleccionada;
+    $(document).ready(function () {
+        $("#idRuta").change(function () {
+            jsShowWindowLoad("Cargando la información de la ruta, tardará unos segundos...");
+
+            idRutaSeleccionada = $(this).prop("value");
+
+            url = "@Url.Content("~/RutaIntinerario/Ruta")" + "?idRuta=" + idRutaSeleccionada
+
+            $("#divGrid").load(url, function () { jsRemoveWindowLoad();});
+           
+
+            jsRefrescaHorario();
+
+
+        })
+
+        
+
+    });
+
+    function jsRefrescaHorario() {
+        $("#divHorario").html("");
+        $("#divHorario").html("<div style='text-align:center;'><img src='@Url.Content("~/Images/ajaxload.gif")'></div>")
+        $("#divHorario").load("@Url.Content("~/RutaIntinerario/VerHorario/")"+"?idRuta="+idRutaSeleccionada)
+    }
+
+
+</script>
+
+<style>
+    #tableTienda, #tableTienda tr, #tableTienda td, #tableTienda th, .tableHorario, .tableHorario tr, .tableHorario td, .tableHorario th {
+        border: 1px solid #999;
+    }
+
+        #tableTienda th, .tableHorario th {
+            text-align: center;
+            background: #eee;
+        }
+
+        #tableTienda td, .tableHorario td {
+            padding: 3px;
+        }
+
+        #tableTienda .dia {
+            width: 26px !important;
+        }
+
+    .bordeFin {
+        border-right: 1px solid #000 !important;
+    }
+
+    .tableHorario img {
+        cursor: pointer;
+        width:20px;
+    }
+</style>

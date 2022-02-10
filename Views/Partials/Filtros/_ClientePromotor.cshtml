@@ -1,0 +1,57 @@
+﻿
+@{
+    Layout = null;
+}
+
+<span>
+    <label>Cliente</label>
+    @(Html.Kendo().DropDownList()
+                      .Name("cboCliente")
+                      .HtmlAttributes(new { style = "width:180px;display:none;" })
+                      .OptionLabel("Selecciona un cliente...")
+                      .DataTextField("nombre")
+                      .DataValueField("Id")
+                      .DataSource(source =>
+                      {
+                          source.Read(read =>
+                          {
+                              read.Action("GetClientes", "DropDownList");
+                          });
+
+                      })
+    )
+
+
+
+</span>
+
+<span>
+    <label>Promotor</label>
+    <script>
+                function filterPromotores() {
+                    return {
+                        idCliente: $("#cboCliente").val()
+                    };
+                }
+    </script>
+
+    @(Html.Kendo().DropDownList()
+                      .Name("cboPromotores")
+                      .HtmlAttributes(new { style = "width:220px" })
+                      .OptionLabel("Selecciona un promotor...")
+                      .DataTextField("nombre")
+                      .DataValueField("Id")
+                      .DataSource(source =>
+                      {
+                          source.Read(read =>
+                          {
+                              read.Action("GetPromotoresByCliente", "DropDownList").Data("filterPromotores");
+
+                          })
+                          .ServerFiltering(true);
+                      })
+                      .Enable(false)
+                      .AutoBind(false)
+                      .CascadeFrom("cboCliente")
+    )
+</span>

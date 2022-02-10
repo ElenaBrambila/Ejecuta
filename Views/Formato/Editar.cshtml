@@ -1,0 +1,64 @@
+﻿@model IntegramsaUltimate.Models.ViewModels.FormatoViewModel
+@{
+    Layout = null;
+}
+
+<form id="frmFormulario">
+    @Html.HiddenFor(d => d.idCadena)
+    @Html.HiddenFor(d=>d.id)
+
+    <div class="bloque">
+        <div>
+            @Html.LabelFor(d => d.nombre)
+            @Html.TextBoxFor(d => d.nombre)
+        </div>
+
+        <div style="text-align:right;">
+            <input class="btn-success" type="submit" value="Guardar" />
+        </div>
+
+    </div>
+
+</form>
+
+<script>
+
+    $(document).ready(function () {
+
+        //actualizar el formulario
+        $("#frmFormulario").submit(function (e) {
+
+            e.preventDefault();
+
+            jsShowWindowLoad();
+
+            url="@Url.Content("~/Formato/GuardarEditar")"
+            parametros = $(this).serialize();
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: parametros,
+
+                success: function (data) {
+
+                    if (data == "1") {
+                        MensajeExito("Formato editado con éxito");
+                        jsCloseDialog();
+
+                        jsRefrescaGrid("tabla")
+                    } else {
+                        MensajeError(data);
+                    }
+                    jsRemoveWindowLoad();
+                },
+                error: function (r) {
+                    jsRemoveWindowLoad();
+                    MensajeError("Error del servidor");
+                }
+            });
+
+        })
+
+    })
+</script>

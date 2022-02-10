@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "Foto Anaquel";
+
+    int? idCliente = (int?)ViewBag.idCliente;
+   
+}
+<div style="background-color:#eee;padding:10px" class="head-module">
+    <form id="frmBuscador">
+        <span style="margin-right:35px" class="modulo-titulo">@ViewBag.Title</span>
+        <br />
+        <i>Selecciona los valores de tu búsqueda</i>
+        <br />
+        @if(idCliente==null){
+            @Html.Partial("~/Views/Partials/Filtros/_ClientePromotor.cshtml")
+        }
+        else
+        {
+            @Html.Partial("~/Views/Partials/Filtros/_Promotores.cshtml",idCliente)
+        }
+        <span>
+            <label>Fecha Inicio</label>
+            @Html.Kendo().DatePicker().Name("fechaInicio").Min("01/01/2016").Max(DateTime.Now).Value(DateTime.Now).Format("dd/MM/yyyy")
+        </span>
+        <span>
+            <label>Fecha Fin</label>
+            @Html.Kendo().DatePicker().Name("fechaFin").Min("01/01/2016").Max(DateTime.Now).Value(DateTime.Now).Format("dd/MM/yyyy")
+        </span>
+        <br />
+        <div style="text-align:right;padding-top:5px;">
+            <span>
+                <input class="btn-success" type="submit" value="Buscar" />
+            </span>
+        </div>
+    </form>
+
+</div>
+<br />
+<div id="divGrid">
+
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        //busca
+        $("#frmBuscador").submit(function (e) {
+            e.preventDefault();
+            url = "@Url.Content("~/ReporteFoto/Listado")"+"?"+$(this).serialize();
+            alert(url);
+
+            $("#divGrid").load(url);
+
+        })
+
+    });
+
+    //funciones
+    function jsAbreFoto(id,idProposito) {
+        url="@Url.Content("~/ReporteFoto/Ver")"+"?id="+id+"&idProposito="+idProposito
+        jsShowDialog(url, 800,550, "Foto")
+
+
+
+    }
+
+    function jsVerFoto(id) {
+        url = "@Url.Content("~/ReporteFoto/VerFirma")" + "?id=" + id
+        window.open(url);
+       
+
+    }
+</script>
+

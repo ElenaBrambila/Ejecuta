@@ -1,0 +1,70 @@
+﻿@model IntegramsaUltimate.Models.ViewModels.ProductoViewModel
+@{
+    Layout = null;
+}
+
+<form id="frmFormulario">
+    @Html.HiddenFor(d => d.idCliente)
+    <div class="bloque">
+        <div>
+            @Html.LabelFor(d => d.sku)
+            @Html.TextBoxFor(d => d.sku)
+        </div>
+        <div>
+            @Html.LabelFor(d => d.nombre)
+            @Html.TextBoxFor(d => d.nombre)
+        </div>
+        <div>
+            @Html.LabelFor(d => d.presentacion)
+            @Html.TextBoxFor(d => d.presentacion)
+        </div>
+
+        <div style="text-align:right;">
+            <input class="btn-success" type="submit" value="Guardar" />
+        </div>
+
+    </div>
+
+</form>
+
+<script>
+
+    $(document).ready(function () {
+
+        //actualizar el formulario
+        $("#frmFormulario").submit(function (e) {
+
+            e.preventDefault();
+
+            jsShowWindowLoad();
+
+            url="@Url.Content("~/Producto/Guardar")"
+            parametros = $(this).serialize();
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: parametros,
+
+                success: function (data) {
+
+                    if (data == "1") {
+                        MensajeExito("Producto agregado con éxito");
+                        jsCloseDialog();
+
+                        jsRefrescaGrid("tabla")
+                    } else {
+                        MensajeError(data);
+                    }
+                    jsRemoveWindowLoad();
+                },
+                error: function (r) {
+                    jsRemoveWindowLoad();
+                    MensajeError("Error del servidor");
+                }
+            });
+
+        })
+
+    })
+</script>

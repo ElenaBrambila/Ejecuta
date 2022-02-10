@@ -1,0 +1,37 @@
+﻿
+@{
+    Layout = null;
+}
+
+ @(Html.Kendo().Grid<IntegramsaUltimate.Models.TableViewModels.TableCadenasViewModel>()
+                    .Name("tabla")
+
+                     .Columns(c =>
+                        {
+                            c.Bound(p => p.id).Title("#");
+                            c.Bound(p => p.nombre).Title("Nombre");
+                            c.Bound(p => p.tipoGiro).Title("Giro");
+
+                            c.Bound(p => p.id).ClientTemplate(@"
+                                                                <img class='imgGrid' src='/Images/icon_edit.png' onclick='jsEditar(#=id#)' /> |
+                                                                <img class='imgGrid' src='/Images/icon_delete.png' onclick='jsEliminar(#=id#)' />")
+                                                             .Title("").Width(150);
+
+                        })
+                        .ToolBar(tools => tools.Excel())
+                        .Pageable()
+                        .Sortable()
+                        .Filterable()
+                       
+                        .Excel(excel => excel
+                            .FileName("reporte.xlsx")
+                            .AllPages(true)
+                             .ProxyURL(Url.Action("JsonGrid", "Cadena"))
+                         )
+                        .Resizable(resize => resize.Columns(true))
+                        .DataSource(d => d.Ajax()
+                            .Sort(sort=>sort.Add("id").Descending())
+                           .Read(r => r.Action("JsonGrid", "Cadena"))
+                        )
+
+        )

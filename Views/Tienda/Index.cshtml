@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "Tiendas";
+}
+
+
+<div style="background-color:#eee;padding:10px" class="head-module">
+    <span style="margin-right:35px" class="modulo-titulo">@ViewBag.Title</span>
+
+    <span class="boton-style" style="float:right" onclick="jsNuevo()">
+        <img class="boton-image" src="~/Images/icon_new_element.png" />
+    </span>
+</div>
+<hr />
+<div id="divGrid">
+    @Html.Partial("~/Views/Tienda/Listado.cshtml")
+</div>
+
+<script>
+
+    $(document).ready(function () {
+
+
+    })
+
+    //funciones
+
+    function jsNuevo() {
+
+        url="@Url.Content("~/Tienda/Nuevo")";
+        jsShowDialog(url, 1000,500, "Nueva Tienda")
+    }
+
+    function jsEditar(id) {
+
+        url="@Url.Content("~/Tienda/Editar")"+"?id="+id;
+        jsShowDialog(url, 1000,500, "Editar Tienda")
+    }
+
+    function jsEliminar(id){
+        if(confirm("¿Estas seguro de eliminar la tienda?")){
+
+            url = "@Url.Content("~/Tienda/Eliminar")";
+            parametros = "id=" + id;
+            jsShowWindowLoad();
+
+            $.post(url, parametros, function (data) {
+
+                if (data == "1") {
+                    MensajeExito("Eliminado.")
+                    jsRefrescaGrid("tabla")
+                } else {
+                    MensajeError(data) //trae el error data
+                }
+
+                jsRemoveWindowLoad();
+            })
+
+
+        }
+    }
+
+    
+</script>

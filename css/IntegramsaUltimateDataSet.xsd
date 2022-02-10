@@ -1,0 +1,1288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="IntegramsaUltimateDataSet" targetNamespace="http://tempuri.org/IntegramsaUltimateDataSet.xsd" xmlns:mstns="http://tempuri.org/IntegramsaUltimateDataSet.xsd" xmlns="http://tempuri.org/IntegramsaUltimateDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="IntegramsaUltimateConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="IntegramsaUltimateConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.IntegramsaUltimateConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="vwReporteFotosTableAdapter" GeneratorDataComponentClassName="vwReporteFotosTableAdapter" Name="vwReporteFotos" UserDataComponentName="vwReporteFotosTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="IntegramsaUltimateConnectionString (Web.config)" DbObjectName="IntegramsaUltimate.dbo.vwReporteFotos" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT id, proposito, fecha, promotor, idDUsuario, idDTienda, tienda, idFormato, formatoTienda, idCliente, idcMunicipio, municipio, cadena, idCadena, plaza, idPlaza FROM vwReporteFotos</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="id" DataSetColumn="id" />
+              <Mapping SourceColumn="proposito" DataSetColumn="proposito" />
+              <Mapping SourceColumn="fecha" DataSetColumn="fecha" />
+              <Mapping SourceColumn="promotor" DataSetColumn="promotor" />
+              <Mapping SourceColumn="idDUsuario" DataSetColumn="idDUsuario" />
+              <Mapping SourceColumn="idDTienda" DataSetColumn="idDTienda" />
+              <Mapping SourceColumn="tienda" DataSetColumn="tienda" />
+              <Mapping SourceColumn="idFormato" DataSetColumn="idFormato" />
+              <Mapping SourceColumn="formatoTienda" DataSetColumn="formatoTienda" />
+              <Mapping SourceColumn="idCliente" DataSetColumn="idCliente" />
+              <Mapping SourceColumn="idcMunicipio" DataSetColumn="idcMunicipio" />
+              <Mapping SourceColumn="municipio" DataSetColumn="municipio" />
+              <Mapping SourceColumn="cadena" DataSetColumn="cadena" />
+              <Mapping SourceColumn="idCadena" DataSetColumn="idCadena" />
+              <Mapping SourceColumn="plaza" DataSetColumn="plaza" />
+              <Mapping SourceColumn="idPlaza" DataSetColumn="idPlaza" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="IntegramsaUltimateConnectionString (Web.config)" DbObjectName="" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillBy" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy" GeneratorSourceName="FillBy" GetMethodModifier="Public" GetMethodName="GetDataBy" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillBy">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT cadena, fecha, formatoTienda, id, idCadena, idCliente, idDTienda, idDUsuario, idFormato, idPlaza, idcMunicipio, municipio, plaza, promotor, proposito, tienda FROM vwReporteFotos WHERE (idCliente = @idCliente) AND (fecha BETWEEN @fecha1 AND @fecha2) AND i(dDUsuario= @idPromotor)</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="IntegramsaUltimateConnectionString (Web.config)" DbObjectName="IntegramsaUltimate.dbo.vwReporteFotos" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByClienteCiudadFecha" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByClienteCiudadFecha" GeneratorSourceName="FillByClienteCiudadFecha" GetMethodModifier="Public" GetMethodName="GetDataByClienteCiudadFecha" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByClienteCiudadFecha" UserSourceName="FillByClienteCiudadFecha">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT cadena, fecha, formatoTienda, id, idCadena, idCliente, idDTienda, idDUsuario, idFormato, idPlaza, idcMunicipio, municipio, plaza, promotor, proposito, tienda FROM vwReporteFotos WHERE (idCliente = @idCliente) AND (fecha BETWEEN @fecha1 AND @fecha2) AND (idcMunicipio= @idMunicipio)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="idCliente" ColumnName="idCliente" DataSourceName="IntegramsaUltimate.dbo.vwReporteFotos" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@idCliente" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="idCliente" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="fecha1" ColumnName="fecha" DataSourceName="IntegramsaUltimate.dbo.vwReporteFotos" DataTypeServer="datetime" DbType="DateTime" Direction="Input" ParameterName="@fecha1" Precision="0" ProviderType="DateTime" Scale="0" Size="8" SourceColumn="fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="fecha2" ColumnName="fecha" DataSourceName="IntegramsaUltimate.dbo.vwReporteFotos" DataTypeServer="datetime" DbType="DateTime" Direction="Input" ParameterName="@fecha2" Precision="0" ProviderType="DateTime" Scale="0" Size="8" SourceColumn="fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="idMunicipio" ColumnName="idcMunicipio" DataSourceName="IntegramsaUltimate.dbo.vwReporteFotos" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@idMunicipio" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="idcMunicipio" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="IntegramsaUltimateConnectionString (Web.config)" DbObjectName="IntegramsaUltimate.dbo.vwReporteFotos" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByClienteFecha" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByClienteFecha" GeneratorSourceName="FillByClienteFecha" GetMethodModifier="Public" GetMethodName="GetDataByClienteFecha" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByClienteFecha" UserSourceName="FillByClienteFecha">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT cadena, fecha, formatoTienda, id, idCadena, idCliente, idDTienda, idDUsuario, idFormato, idPlaza, idcMunicipio, municipio, plaza, promotor, proposito, tienda FROM vwReporteFotos WHERE (idCliente = @idCliente) AND (fecha BETWEEN @fecha1 AND @fecha2)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="idCliente" ColumnName="idCliente" DataSourceName="IntegramsaUltimate.dbo.vwReporteFotos" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@idCliente" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="idCliente" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="fecha1" ColumnName="fecha" DataSourceName="IntegramsaUltimate.dbo.vwReporteFotos" DataTypeServer="datetime" DbType="DateTime" Direction="Input" ParameterName="@fecha1" Precision="0" ProviderType="DateTime" Scale="0" Size="8" SourceColumn="fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="fecha2" ColumnName="fecha" DataSourceName="IntegramsaUltimate.dbo.vwReporteFotos" DataTypeServer="datetime" DbType="DateTime" Direction="Input" ParameterName="@fecha2" Precision="0" ProviderType="DateTime" Scale="0" Size="8" SourceColumn="fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="IntegramsaUltimateConnectionString (Web.config)" DbObjectName="IntegramsaUltimate.dbo.vwReporteFotos" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByClienteFechaCadena" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByClienteFechaCadena" GeneratorSourceName="FillByClienteFechaCadena" GetMethodModifier="Public" GetMethodName="GetDataByClienteFechaCadena" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByClienteFechaCadena" UserSourceName="FillByClienteFechaCadena">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT cadena, fecha, formatoTienda, id, idCadena, idCliente, idDTienda, idDUsuario, idFormato, idPlaza, idcMunicipio, municipio, plaza, promotor, proposito, tienda FROM vwReporteFotos WHERE (idCliente = @idCliente) AND (fecha BETWEEN @fecha1 AND @fecha2) AND (idCadena = @idCadena)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="idCliente" ColumnName="idCliente" DataSourceName="IntegramsaUltimate.dbo.vwReporteFotos" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@idCliente" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="idCliente" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="fecha1" ColumnName="fecha" DataSourceName="IntegramsaUltimate.dbo.vwReporteFotos" DataTypeServer="datetime" DbType="DateTime" Direction="Input" ParameterName="@fecha1" Precision="0" ProviderType="DateTime" Scale="0" Size="8" SourceColumn="fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="fecha2" ColumnName="fecha" DataSourceName="IntegramsaUltimate.dbo.vwReporteFotos" DataTypeServer="datetime" DbType="DateTime" Direction="Input" ParameterName="@fecha2" Precision="0" ProviderType="DateTime" Scale="0" Size="8" SourceColumn="fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="idCadena" ColumnName="idCadena" DataSourceName="IntegramsaUltimate.dbo.vwReporteFotos" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@idCadena" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="idCadena" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="IntegramsaUltimateConnectionString (Web.config)" DbObjectName="IntegramsaUltimate.dbo.vwReporteFotos" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByClienteFechaFormato" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByClienteFechaFormato" GeneratorSourceName="FillByClienteFechaFormato" GetMethodModifier="Public" GetMethodName="GetDataByClienteFechaFormato" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByClienteFechaFormato" UserSourceName="FillByClienteFechaFormato">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT cadena, fecha, formatoTienda, id, idCadena, idCliente, idDTienda, idDUsuario, idFormato, idPlaza, idcMunicipio, municipio, plaza, promotor, proposito, tienda FROM vwReporteFotos WHERE (idCliente = @idCliente) AND (fecha BETWEEN @fecha1 AND @fecha2) AND (idFormato = @idFormato)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="idCliente" ColumnName="idCliente" DataSourceName="IntegramsaUltimate.dbo.vwReporteFotos" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@idCliente" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="idCliente" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="fecha1" ColumnName="fecha" DataSourceName="IntegramsaUltimate.dbo.vwReporteFotos" DataTypeServer="datetime" DbType="DateTime" Direction="Input" ParameterName="@fecha1" Precision="0" ProviderType="DateTime" Scale="0" Size="8" SourceColumn="fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="fecha2" ColumnName="fecha" DataSourceName="IntegramsaUltimate.dbo.vwReporteFotos" DataTypeServer="datetime" DbType="DateTime" Direction="Input" ParameterName="@fecha2" Precision="0" ProviderType="DateTime" Scale="0" Size="8" SourceColumn="fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="idFormato" ColumnName="idFormato" DataSourceName="IntegramsaUltimate.dbo.vwReporteFotos" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@idFormato" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="idFormato" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="IntegramsaUltimateConnectionString (Web.config)" DbObjectName="IntegramsaUltimate.dbo.vwReporteFotos" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByClienteFechaPlaza" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByClienteFechaPlaza" GeneratorSourceName="FillByClienteFechaPlaza" GetMethodModifier="Public" GetMethodName="GetDataByClienteFechaPlaza" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByClienteFechaPlaza" UserSourceName="FillByClienteFechaPlaza">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT cadena, fecha, formatoTienda, id, idCadena, idCliente, idDTienda, idDUsuario, idFormato, idPlaza, idcMunicipio, municipio, plaza, promotor, proposito, tienda FROM vwReporteFotos WHERE (idCliente = @idCliente) AND (fecha BETWEEN @fecha1 AND @fecha2) AND (idPlaza= @idPlaza)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="idCliente" ColumnName="idCliente" DataSourceName="IntegramsaUltimate.dbo.vwReporteFotos" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@idCliente" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="idCliente" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="fecha1" ColumnName="fecha" DataSourceName="IntegramsaUltimate.dbo.vwReporteFotos" DataTypeServer="datetime" DbType="DateTime" Direction="Input" ParameterName="@fecha1" Precision="0" ProviderType="DateTime" Scale="0" Size="8" SourceColumn="fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="fecha2" ColumnName="fecha" DataSourceName="IntegramsaUltimate.dbo.vwReporteFotos" DataTypeServer="datetime" DbType="DateTime" Direction="Input" ParameterName="@fecha2" Precision="0" ProviderType="DateTime" Scale="0" Size="8" SourceColumn="fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="idPlaza" ColumnName="idPlaza" DataSourceName="IntegramsaUltimate.dbo.vwReporteFotos" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@idPlaza" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="idPlaza" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="IntegramsaUltimateConnectionString (Web.config)" DbObjectName="IntegramsaUltimate.dbo.vwReporteFotos" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByClienteFechaPromo" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByClienteFechaPromo" GeneratorSourceName="FillByClienteFechaPromo" GetMethodModifier="Public" GetMethodName="GetDataByClienteFechaPromo" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByClienteFechaPromo" UserSourceName="FillByClienteFechaPromo">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT cadena, fecha, formatoTienda, id, idCadena, idCliente, idDTienda, idDUsuario, idFormato, idPlaza, idcMunicipio, municipio, plaza, promotor, proposito, tienda FROM vwReporteFotos WHERE (idCliente = @idCliente) AND (fecha BETWEEN @fecha1 AND @fecha2) AND (idDUsuario = @idPromotor)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="idCliente" ColumnName="idCliente" DataSourceName="IntegramsaUltimate.dbo.vwReporteFotos" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@idCliente" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="idCliente" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="fecha1" ColumnName="fecha" DataSourceName="IntegramsaUltimate.dbo.vwReporteFotos" DataTypeServer="datetime" DbType="DateTime" Direction="Input" ParameterName="@fecha1" Precision="0" ProviderType="DateTime" Scale="0" Size="8" SourceColumn="fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="fecha2" ColumnName="fecha" DataSourceName="IntegramsaUltimate.dbo.vwReporteFotos" DataTypeServer="datetime" DbType="DateTime" Direction="Input" ParameterName="@fecha2" Precision="0" ProviderType="DateTime" Scale="0" Size="8" SourceColumn="fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="idPromotor" ColumnName="idDUsuario" DataSourceName="IntegramsaUltimate.dbo.vwReporteFotos" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@idPromotor" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="idDUsuario" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="IntegramsaUltimateConnectionString (Web.config)" DbObjectName="IntegramsaUltimate.dbo.vwReporteFotos" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByClientePlazaFecha" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByClientePlazaFecha" GeneratorSourceName="FillByClientePlazaFecha" GetMethodModifier="Public" GetMethodName="GetDataByClientePlazaFecha" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByClientePlazaFecha" UserSourceName="FillByClientePlazaFecha">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT cadena, fecha, formatoTienda, id, idCadena, idCliente, idDTienda, idDUsuario, idFormato, idPlaza, idcMunicipio, municipio, plaza, promotor, proposito, tienda FROM vwReporteFotos WHERE (idCliente = @idCliente) AND (fecha BETWEEN @fecha1 AND @fecha2) AND (idPlaza = @idPlaza)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="idCliente" ColumnName="idCliente" DataSourceName="IntegramsaUltimate.dbo.vwReporteFotos" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@idCliente" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="idCliente" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="fecha1" ColumnName="fecha" DataSourceName="IntegramsaUltimate.dbo.vwReporteFotos" DataTypeServer="datetime" DbType="DateTime" Direction="Input" ParameterName="@fecha1" Precision="0" ProviderType="DateTime" Scale="0" Size="8" SourceColumn="fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="fecha2" ColumnName="fecha" DataSourceName="IntegramsaUltimate.dbo.vwReporteFotos" DataTypeServer="datetime" DbType="DateTime" Direction="Input" ParameterName="@fecha2" Precision="0" ProviderType="DateTime" Scale="0" Size="8" SourceColumn="fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="idPlaza" ColumnName="idPlaza" DataSourceName="IntegramsaUltimate.dbo.vwReporteFotos" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@idPlaza" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="idPlaza" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="IntegramsaUltimateConnectionString (Web.config)" DbObjectName="IntegramsaUltimate.dbo.vwReporteFotos" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByClientePromotorFecha" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByClientePromotorFecha" GeneratorSourceName="FillByClientePromotorFecha" GetMethodModifier="Public" GetMethodName="GetDataByClientePromotorFecha" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByClientePromotorFecha" UserSourceName="FillByClientePromotorFecha">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT cadena, fecha, formatoTienda, id, idCadena, idCliente, idDTienda, idDUsuario, idFormato, idPlaza, idcMunicipio, municipio, plaza, promotor, proposito, tienda FROM vwReporteFotos WHERE (idCliente = @idCliente) AND (fecha BETWEEN @fecha1 AND @fecha2) AND (idDUsuario= @idPromotor)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="idCliente" ColumnName="idCliente" DataSourceName="IntegramsaUltimate.dbo.vwReporteFotos" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@idCliente" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="idCliente" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="fecha1" ColumnName="fecha" DataSourceName="IntegramsaUltimate.dbo.vwReporteFotos" DataTypeServer="datetime" DbType="DateTime" Direction="Input" ParameterName="@fecha1" Precision="0" ProviderType="DateTime" Scale="0" Size="8" SourceColumn="fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="fecha2" ColumnName="fecha" DataSourceName="IntegramsaUltimate.dbo.vwReporteFotos" DataTypeServer="datetime" DbType="DateTime" Direction="Input" ParameterName="@fecha2" Precision="0" ProviderType="DateTime" Scale="0" Size="8" SourceColumn="fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="idPromotor" ColumnName="idDUsuario" DataSourceName="IntegramsaUltimate.dbo.vwReporteFotos" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@idPromotor" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="idDUsuario" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="vwReporteParticipacionTableAdapter" GeneratorDataComponentClassName="vwReporteParticipacionTableAdapter" Name="vwReporteParticipacion" UserDataComponentName="vwReporteParticipacionTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="IntegramsaUltimateConnectionString (Web.config)" DbObjectName="IntegramsaUltimate.dbo.vwReporteParticipacion" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT id, cantidadProducto, idProducto, cantidadSegmentos, nombre, presentacion, idSegmento, segmento, idCliente, plaza, municipio, idPlaza, idcMunicipio, idCadena, cadena, idFormatoTienda, formato, tienda FROM dbo.vwReporteParticipacion</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="id" DataSetColumn="id" />
+              <Mapping SourceColumn="cantidadProducto" DataSetColumn="cantidadProducto" />
+              <Mapping SourceColumn="idProducto" DataSetColumn="idProducto" />
+              <Mapping SourceColumn="cantidadSegmentos" DataSetColumn="cantidadSegmentos" />
+              <Mapping SourceColumn="nombre" DataSetColumn="nombre" />
+              <Mapping SourceColumn="presentacion" DataSetColumn="presentacion" />
+              <Mapping SourceColumn="idSegmento" DataSetColumn="idSegmento" />
+              <Mapping SourceColumn="segmento" DataSetColumn="segmento" />
+              <Mapping SourceColumn="idCliente" DataSetColumn="idCliente" />
+              <Mapping SourceColumn="plaza" DataSetColumn="plaza" />
+              <Mapping SourceColumn="municipio" DataSetColumn="municipio" />
+              <Mapping SourceColumn="idPlaza" DataSetColumn="idPlaza" />
+              <Mapping SourceColumn="idcMunicipio" DataSetColumn="idcMunicipio" />
+              <Mapping SourceColumn="idCadena" DataSetColumn="idCadena" />
+              <Mapping SourceColumn="cadena" DataSetColumn="cadena" />
+              <Mapping SourceColumn="idFormatoTienda" DataSetColumn="idFormatoTienda" />
+              <Mapping SourceColumn="formato" DataSetColumn="formato" />
+              <Mapping SourceColumn="tienda" DataSetColumn="tienda" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="IntegramsaUltimateConnectionString (Web.config)" DbObjectName="IntegramsaUltimate.dbo.vwReporteParticipacion" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByNacTSegTCad" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByNacTSegTCad" GeneratorSourceName="FillByNacTSegTCad" GetMethodModifier="Public" GetMethodName="GetDataByNacTSegTCad" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByNacTSegTCad" UserSourceName="FillByNacTSegTCad">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        idCliente, cadena, segmento, SUM(cantidadProducto) AS CantProducto, SUM(cantidadSegmentos) AS CantSegmento
+FROM            vwReporteParticipacion
+GROUP BY idCliente, cadena, segmento
+ORDER BY cadena</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="vwReporteFotocFotoTableAdapter" GeneratorDataComponentClassName="vwReporteFotocFotoTableAdapter" Name="vwReporteFotocFoto" UserDataComponentName="vwReporteFotocFotoTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="IntegramsaUltimateConnectionString (Web.config)" DbObjectName="IntegramsaUltimate.dbo.vwReporteFotocFoto" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT id, proposito, fecha, promotor, idDUsuario, idDTienda, tienda, idFormato, formatoTienda, idCliente, idcMunicipio, municipio, idCadena, cadena, foto FROM dbo.vwReporteFotocFoto</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="id" DataSetColumn="id" />
+              <Mapping SourceColumn="proposito" DataSetColumn="proposito" />
+              <Mapping SourceColumn="fecha" DataSetColumn="fecha" />
+              <Mapping SourceColumn="promotor" DataSetColumn="promotor" />
+              <Mapping SourceColumn="idDUsuario" DataSetColumn="idDUsuario" />
+              <Mapping SourceColumn="idDTienda" DataSetColumn="idDTienda" />
+              <Mapping SourceColumn="tienda" DataSetColumn="tienda" />
+              <Mapping SourceColumn="idFormato" DataSetColumn="idFormato" />
+              <Mapping SourceColumn="formatoTienda" DataSetColumn="formatoTienda" />
+              <Mapping SourceColumn="idCliente" DataSetColumn="idCliente" />
+              <Mapping SourceColumn="idcMunicipio" DataSetColumn="idcMunicipio" />
+              <Mapping SourceColumn="municipio" DataSetColumn="municipio" />
+              <Mapping SourceColumn="idCadena" DataSetColumn="idCadena" />
+              <Mapping SourceColumn="cadena" DataSetColumn="cadena" />
+              <Mapping SourceColumn="foto" DataSetColumn="foto" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="IntegramsaUltimateConnectionString (Web.config)" DbObjectName="IntegramsaUltimate.dbo.vwReporteFotocFoto" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillBy" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy" GeneratorSourceName="FillBy" GetMethodModifier="Public" GetMethodName="GetDataBy" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillBy">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT id, proposito, fecha, promotor, idDUsuario, idDTienda, tienda, idFormato, formatoTienda, idCliente, idcMunicipio, municipio, idCadena, cadena, foto FROM vwReporteFotocFoto WHERE (idCliente = @idCliente) AND (fecha BETWEEN @fecha1 AND @fecha2)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="idCliente" ColumnName="idCliente" DataSourceName="IntegramsaUltimate.dbo.vwReporteFotocFoto" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@idCliente" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="idCliente" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="fecha1" ColumnName="fecha" DataSourceName="IntegramsaUltimate.dbo.vwReporteFotocFoto" DataTypeServer="datetime" DbType="DateTime" Direction="Input" ParameterName="@fecha1" Precision="0" ProviderType="DateTime" Scale="0" Size="8" SourceColumn="fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="fecha2" ColumnName="fecha" DataSourceName="IntegramsaUltimate.dbo.vwReporteFotocFoto" DataTypeServer="datetime" DbType="DateTime" Direction="Input" ParameterName="@fecha2" Precision="0" ProviderType="DateTime" Scale="0" Size="8" SourceColumn="fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="vwReporteParticipacionxFechaTableAdapter" GeneratorDataComponentClassName="vwReporteParticipacionxFechaTableAdapter" Name="vwReporteParticipacionxFecha" UserDataComponentName="vwReporteParticipacionxFechaTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="IntegramsaUltimateConnectionString (Web.config)" DbObjectName="IntegramsaUltimate.dbo.vwReporteParticipacionxFecha" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        id, cantidadProducto, idProducto, cantidadSegmentos, nombre, presentacion, idSegmento, segmento, idCliente, plaza, municipio, idPlaza, idcMunicipio, idCadena, cadena, idFormatoTienda, formato, tienda, fecha
+FROM            vwReporteParticipacionxFecha</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="id" DataSetColumn="id" />
+              <Mapping SourceColumn="cantidadProducto" DataSetColumn="cantidadProducto" />
+              <Mapping SourceColumn="idProducto" DataSetColumn="idProducto" />
+              <Mapping SourceColumn="cantidadSegmentos" DataSetColumn="cantidadSegmentos" />
+              <Mapping SourceColumn="nombre" DataSetColumn="nombre" />
+              <Mapping SourceColumn="presentacion" DataSetColumn="presentacion" />
+              <Mapping SourceColumn="idSegmento" DataSetColumn="idSegmento" />
+              <Mapping SourceColumn="segmento" DataSetColumn="segmento" />
+              <Mapping SourceColumn="idCliente" DataSetColumn="idCliente" />
+              <Mapping SourceColumn="plaza" DataSetColumn="plaza" />
+              <Mapping SourceColumn="municipio" DataSetColumn="municipio" />
+              <Mapping SourceColumn="idPlaza" DataSetColumn="idPlaza" />
+              <Mapping SourceColumn="idcMunicipio" DataSetColumn="idcMunicipio" />
+              <Mapping SourceColumn="idCadena" DataSetColumn="idCadena" />
+              <Mapping SourceColumn="cadena" DataSetColumn="cadena" />
+              <Mapping SourceColumn="idFormatoTienda" DataSetColumn="idFormatoTienda" />
+              <Mapping SourceColumn="formato" DataSetColumn="formato" />
+              <Mapping SourceColumn="tienda" DataSetColumn="tienda" />
+              <Mapping SourceColumn="fecha" DataSetColumn="fecha" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="IntegramsaUltimateConnectionString (Web.config)" DbObjectName="IntegramsaUltimate.dbo.vwReporteParticipacionxFecha" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByNacTSegTcadxFecha" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByNacTSegTcadxFecha" GeneratorSourceName="FillByNacTSegTcadxFecha" GetMethodModifier="Public" GetMethodName="GetDataByNacTSegTcadxFecha" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByNacTSegTcadxFecha" UserSourceName="FillByNacTSegTcadxFecha">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        idCliente, cadena, segmento, SUM(cantidadProducto) AS CantProducto, SUM(cantidadSegmentos) AS CantSegmento
+FROM            vwReporteParticipacionxFecha
+WHERE        (fecha BETWEEN @fechaInicial AND @fechaFinal) AND (idCliente = @idCliente)
+GROUP BY idCliente, cadena, segmento
+ORDER BY cadena</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="fechaInicial" ColumnName="fecha" DataSourceName="IntegramsaUltimate.dbo.vwReporteParticipacionxFecha" DataTypeServer="varchar(10)" DbType="AnsiString" Direction="Input" ParameterName="@fechaInicial" Precision="0" ProviderType="VarChar" Scale="0" Size="10" SourceColumn="fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="fechaFinal" ColumnName="fecha" DataSourceName="IntegramsaUltimate.dbo.vwReporteParticipacionxFecha" DataTypeServer="varchar(10)" DbType="AnsiString" Direction="Input" ParameterName="@fechaFinal" Precision="0" ProviderType="VarChar" Scale="0" Size="10" SourceColumn="fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="idCliente" ColumnName="idCliente" DataSourceName="IntegramsaUltimate.dbo.vwReporteParticipacionxFecha" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@idCliente" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="idCliente" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="vwPartNacSegCadenaTableAdapter" GeneratorDataComponentClassName="vwPartNacSegCadenaTableAdapter" Name="vwPartNacSegCadena" UserDataComponentName="vwPartNacSegCadenaTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="IntegramsaUltimateConnectionString (Web.config)" DbObjectName="IntegramsaUltimate.dbo.vwPartNacSegCadena" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT idCliente, cadena, segmento, CantProducto, CantSegmento FROM dbo.vwPartNacSegCadena</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="idCliente" DataSetColumn="idCliente" />
+              <Mapping SourceColumn="cadena" DataSetColumn="cadena" />
+              <Mapping SourceColumn="segmento" DataSetColumn="segmento" />
+              <Mapping SourceColumn="CantProducto" DataSetColumn="CantProducto" />
+              <Mapping SourceColumn="CantSegmento" DataSetColumn="CantSegmento" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="vwPartNacSegTableAdapter" GeneratorDataComponentClassName="vwPartNacSegTableAdapter" Name="vwPartNacSeg" UserDataComponentName="vwPartNacSegTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="IntegramsaUltimateConnectionString (Web.config)" DbObjectName="IntegramsaUltimate.dbo.vwPartNacSeg" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT idCliente, segmento, CantProducto, CantSegmento, fecha FROM dbo.vwPartNacSeg</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="idCliente" DataSetColumn="idCliente" />
+              <Mapping SourceColumn="segmento" DataSetColumn="segmento" />
+              <Mapping SourceColumn="CantProducto" DataSetColumn="CantProducto" />
+              <Mapping SourceColumn="CantSegmento" DataSetColumn="CantSegmento" />
+              <Mapping SourceColumn="fecha" DataSetColumn="fecha" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="vwPartSegFechaPromedioTableAdapter" GeneratorDataComponentClassName="vwPartSegFechaPromedioTableAdapter" Name="vwPartSegFechaPromedio" UserDataComponentName="vwPartSegFechaPromedioTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="IntegramsaUltimateConnectionString (Web.config)" DbObjectName="IntegramsaUltimate.dbo.vwPartSegFechaPromedio" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT idCliente, segmento, fecha, promedio, cantidad, registros FROM dbo.vwPartSegFechaPromedio</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="idCliente" DataSetColumn="idCliente" />
+              <Mapping SourceColumn="segmento" DataSetColumn="segmento" />
+              <Mapping SourceColumn="fecha" DataSetColumn="fecha" />
+              <Mapping SourceColumn="promedio" DataSetColumn="promedio" />
+              <Mapping SourceColumn="cantidad" DataSetColumn="cantidad" />
+              <Mapping SourceColumn="registros" DataSetColumn="registros" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="vwPartSegPromedioTableAdapter" GeneratorDataComponentClassName="vwPartSegPromedioTableAdapter" Name="vwPartSegPromedio" UserDataComponentName="vwPartSegPromedioTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="IntegramsaUltimateConnectionString (Web.config)" DbObjectName="IntegramsaUltimate.dbo.vwReporteParticipacionxFecha" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        idCliente, segmento, CAST(SUM(Participacion) * 1. / COUNT(id) AS DECIMAL(4, 2)) AS promedio, SUM(Participacion) AS cantidad, COUNT(id) AS registros
+FROM            vwReporteParticipacionxFecha
+WHERE        (fecha BETWEEN @fecha1 AND @fecha2) and idCliente = @Cliente
+GROUP BY idCliente, segmento</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="fecha1" ColumnName="fecha" DataSourceName="IntegramsaUltimate.dbo.vwReporteParticipacionxFecha" DataTypeServer="varchar(10)" DbType="AnsiString" Direction="Input" ParameterName="@fecha1" Precision="0" ProviderType="VarChar" Scale="0" Size="10" SourceColumn="fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="fecha2" ColumnName="fecha" DataSourceName="IntegramsaUltimate.dbo.vwReporteParticipacionxFecha" DataTypeServer="varchar(10)" DbType="AnsiString" Direction="Input" ParameterName="@fecha2" Precision="0" ProviderType="VarChar" Scale="0" Size="10" SourceColumn="fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="Cliente" ColumnName="idCliente" DataSourceName="IntegramsaUltimate.dbo.vwReporteParticipacionxFecha" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@Cliente" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="idCliente" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="idCliente" DataSetColumn="idCliente" />
+              <Mapping SourceColumn="segmento" DataSetColumn="segmento" />
+              <Mapping SourceColumn="promedio" DataSetColumn="promedio" />
+              <Mapping SourceColumn="cantidad" DataSetColumn="cantidad" />
+              <Mapping SourceColumn="registros" DataSetColumn="registros" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="IntegramsaUltimateConnectionString (Web.config)" DbObjectName="SELECT producto.idCliente, reporteTiendaFrentes.idReporteTienda, SUM(reporteTiendaFrentes.cantidadProducto) AS cantidadProducto, (SELECT SUM(cantidadSegmento) AS Expr1 FROM ReporteTiendaSegmento AS e1 WHERE (idreporteTienda = reporteTiendaFrentes.idReporteTienda) AND (idSegmento = sp.idSegmento)) AS cantidadSegmentos, sp.idSegmento, segmentos.segmento, CONVERT(VARCHAR(10), reporteTienda_1.fecha, 103) AS fecha FROM reporteTiendaFrentes INNER JOIN segmentoProductos AS sp ON reporteTiendaFrentes.idSegmentoProductos = sp.idSegmentoProducto INNER JOIN reporteTienda AS reporteTienda_1 ON reporteTiendaFrentes.idReporteTienda = reporteTienda_1.id INNER JOIN producto ON sp.idProducto = producto.id INNER JOIN segmentos ON sp.idSegmento = segmentos.idSegmento INNER JOIN rutaIntinerario ON reporteTienda_1.idRutaItinerario = rutaIntinerario.id INNER JOIN tienda AS tienda_1 ON rutaIntinerario.idTienda = tienda_1.id INNER JOIN formatoTienda ON tienda_1.idFormato = formatoTienda.id INNER JOIN cadena ON formatoTienda.idCadena = cadena.id INNER JOIN cliente ON segmentos.idCliente = cliente.id WHERE (producto.idCliente = @idCliente) AND (reporteTienda_1.fecha BETWEEN @fecha1 AND @fecha2) GROUP BY producto.idCliente, reporteTiendaFrentes.idReporteTienda, sp.idSegmento, segmentos.segmento, segmentos.idCliente, reporteTienda_1.fecha" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByFecha" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByFecha" GeneratorSourceName="FillByFecha" GetMethodModifier="Public" GetMethodName="GetDataByFecha" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByFecha" UserSourceName="FillByFecha">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        idCliente, segmento, SUM(cantidadProducto) * 100 * 1. / SUM(cantidadSegmentos) AS promedio
+FROM            (SELECT        producto.idCliente, reporteTiendaFrentes.idReporteTienda, SUM(reporteTiendaFrentes.cantidadProducto) AS cantidadProducto,
+                                                        (SELECT        SUM(cantidadSegmento) AS Expr1
+                                                          FROM            ReporteTiendaSegmento AS e1
+                                                          WHERE        (idreporteTienda = reporteTiendaFrentes.idReporteTienda) AND (idSegmento = sp.idSegmento)) AS cantidadSegmentos, sp.idSegmento, segmentos.segmento, CONVERT(VARCHAR(10), 
+                                                    reporteTienda_1.fecha, 103) AS fecha
+                          FROM            reporteTiendaFrentes INNER JOIN
+                                                    segmentoProductos AS sp ON reporteTiendaFrentes.idSegmentoProductos = sp.idSegmentoProducto INNER JOIN
+                                                    reporteTienda AS reporteTienda_1 ON reporteTiendaFrentes.idReporteTienda = reporteTienda_1.id INNER JOIN
+                                                    producto ON sp.idProducto = producto.id INNER JOIN
+                                                    segmentos ON sp.idSegmento = segmentos.idSegmento INNER JOIN
+                                                    rutaIntinerario ON reporteTienda_1.idRutaItinerario = rutaIntinerario.id INNER JOIN
+                                                    tienda AS tienda_1 ON rutaIntinerario.idTienda = tienda_1.id INNER JOIN
+                                                    formatoTienda ON tienda_1.idFormato = formatoTienda.id INNER JOIN
+                                                    cadena ON formatoTienda.idCadena = cadena.id INNER JOIN
+                                                    cliente ON segmentos.idCliente = cliente.id
+                          WHERE        (producto.idCliente = @idCliente) AND (reporteTienda_1.fecha BETWEEN @fecha1 AND @fecha2)
+                          GROUP BY producto.idCliente, reporteTiendaFrentes.idReporteTienda, sp.idSegmento, segmentos.segmento, segmentos.idCliente, reporteTienda_1.fecha) AS DATOS
+GROUP BY idCliente, segmento</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="idCliente" ColumnName="idCliente" DataSourceName="SELECT producto.idCliente, reporteTiendaFrentes.idReporteTienda, SUM(reporteTiendaFrentes.cantidadProducto) AS cantidadProducto, (SELECT SUM(cantidadSegmento) AS Expr1 FROM ReporteTiendaSegmento AS e1 WHERE (idreporteTienda = reporteTiendaFrentes.idReporteTienda) AND (idSegmento = sp.idSegmento)) AS cantidadSegmentos, sp.idSegmento, segmentos.segmento, CONVERT(VARCHAR(10), reporteTienda_1.fecha, 103) AS fecha FROM reporteTiendaFrentes INNER JOIN segmentoProductos AS sp ON reporteTiendaFrentes.idSegmentoProductos = sp.idSegmentoProducto INNER JOIN reporteTienda AS reporteTienda_1 ON reporteTiendaFrentes.idReporteTienda = reporteTienda_1.id INNER JOIN producto ON sp.idProducto = producto.id INNER JOIN segmentos ON sp.idSegmento = segmentos.idSegmento INNER JOIN rutaIntinerario ON reporteTienda_1.idRutaItinerario = rutaIntinerario.id INNER JOIN tienda AS tienda_1 ON rutaIntinerario.idTienda = tienda_1.id INNER JOIN formatoTienda ON tienda_1.idFormato = formatoTienda.id INNER JOIN cadena ON formatoTienda.idCadena = cadena.id INNER JOIN cliente ON segmentos.idCliente = cliente.id WHERE (producto.idCliente = @idCliente) AND (reporteTienda_1.fecha BETWEEN @fecha1 AND @fecha2) GROUP BY producto.idCliente, reporteTiendaFrentes.idReporteTienda, sp.idSegmento, segmentos.segmento, segmentos.idCliente, reporteTienda_1.fecha" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@idCliente" Precision="0" Scale="0" Size="4" SourceColumn="idCliente" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="fecha1" ColumnName="fecha" DataSourceName="SELECT producto.idCliente, reporteTiendaFrentes.idReporteTienda, SUM(reporteTiendaFrentes.cantidadProducto) AS cantidadProducto, (SELECT SUM(cantidadSegmento) AS Expr1 FROM ReporteTiendaSegmento AS e1 WHERE (idreporteTienda = reporteTiendaFrentes.idReporteTienda) AND (idSegmento = sp.idSegmento)) AS cantidadSegmentos, sp.idSegmento, segmentos.segmento, CONVERT(VARCHAR(10), reporteTienda_1.fecha, 103) AS fecha FROM reporteTiendaFrentes INNER JOIN segmentoProductos AS sp ON reporteTiendaFrentes.idSegmentoProductos = sp.idSegmentoProducto INNER JOIN reporteTienda AS reporteTienda_1 ON reporteTiendaFrentes.idReporteTienda = reporteTienda_1.id INNER JOIN producto ON sp.idProducto = producto.id INNER JOIN segmentos ON sp.idSegmento = segmentos.idSegmento INNER JOIN rutaIntinerario ON reporteTienda_1.idRutaItinerario = rutaIntinerario.id INNER JOIN tienda AS tienda_1 ON rutaIntinerario.idTienda = tienda_1.id INNER JOIN formatoTienda ON tienda_1.idFormato = formatoTienda.id INNER JOIN cadena ON formatoTienda.idCadena = cadena.id INNER JOIN cliente ON segmentos.idCliente = cliente.id WHERE (producto.idCliente = @idCliente) AND (reporteTienda_1.fecha BETWEEN @fecha1 AND @fecha2) GROUP BY producto.idCliente, reporteTiendaFrentes.idReporteTienda, sp.idSegmento, segmentos.segmento, segmentos.idCliente, reporteTienda_1.fecha" DataTypeServer="datetime" DbType="DateTime" Direction="Input" ParameterName="@fecha1" Precision="0" Scale="0" Size="8" SourceColumn="fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="fecha2" ColumnName="fecha" DataSourceName="SELECT producto.idCliente, reporteTiendaFrentes.idReporteTienda, SUM(reporteTiendaFrentes.cantidadProducto) AS cantidadProducto, (SELECT SUM(cantidadSegmento) AS Expr1 FROM ReporteTiendaSegmento AS e1 WHERE (idreporteTienda = reporteTiendaFrentes.idReporteTienda) AND (idSegmento = sp.idSegmento)) AS cantidadSegmentos, sp.idSegmento, segmentos.segmento, CONVERT(VARCHAR(10), reporteTienda_1.fecha, 103) AS fecha FROM reporteTiendaFrentes INNER JOIN segmentoProductos AS sp ON reporteTiendaFrentes.idSegmentoProductos = sp.idSegmentoProducto INNER JOIN reporteTienda AS reporteTienda_1 ON reporteTiendaFrentes.idReporteTienda = reporteTienda_1.id INNER JOIN producto ON sp.idProducto = producto.id INNER JOIN segmentos ON sp.idSegmento = segmentos.idSegmento INNER JOIN rutaIntinerario ON reporteTienda_1.idRutaItinerario = rutaIntinerario.id INNER JOIN tienda AS tienda_1 ON rutaIntinerario.idTienda = tienda_1.id INNER JOIN formatoTienda ON tienda_1.idFormato = formatoTienda.id INNER JOIN cadena ON formatoTienda.idCadena = cadena.id INNER JOIN cliente ON segmentos.idCliente = cliente.id WHERE (producto.idCliente = @idCliente) AND (reporteTienda_1.fecha BETWEEN @fecha1 AND @fecha2) GROUP BY producto.idCliente, reporteTiendaFrentes.idReporteTienda, sp.idSegmento, segmentos.segmento, segmentos.idCliente, reporteTienda_1.fecha" DataTypeServer="datetime" DbType="DateTime" Direction="Input" ParameterName="@fecha2" Precision="0" Scale="0" Size="8" SourceColumn="fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="vwPartSegFechaProdPromTableAdapter" GeneratorDataComponentClassName="vwPartSegFechaProdPromTableAdapter" Name="vwPartSegFechaProdProm" UserDataComponentName="vwPartSegFechaProdPromTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="IntegramsaUltimateConnectionString (Web.config)" DbObjectName="IntegramsaUltimate.dbo.vwPartSegFechaProdProm" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT idCliente, segmento, fecha, nombre, promedio, cantidad, registros FROM dbo.vwPartSegFechaProdProm</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="idCliente" DataSetColumn="idCliente" />
+              <Mapping SourceColumn="segmento" DataSetColumn="segmento" />
+              <Mapping SourceColumn="fecha" DataSetColumn="fecha" />
+              <Mapping SourceColumn="nombre" DataSetColumn="nombre" />
+              <Mapping SourceColumn="promedio" DataSetColumn="promedio" />
+              <Mapping SourceColumn="cantidad" DataSetColumn="cantidad" />
+              <Mapping SourceColumn="registros" DataSetColumn="registros" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="IntegramsaUltimateConnectionString (Web.config)" DbObjectName="IntegramsaUltimate.dbo.vwPartSegFechaProdProm" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByFechaCliente" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByFechaCliente" GeneratorSourceName="FillByFechaCliente" GetMethodModifier="Public" GetMethodName="GetDataByFechaCliente" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByFechaCliente" UserSourceName="FillByFechaCliente">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        idCliente, segmento, fecha, nombre, promedio, cantidad, registros
+FROM            vwPartSegFechaProdProm
+WHERE        (fecha BETWEEN @fecha1 AND @fecha2) AND (idCliente = @idCliente)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="fecha1" ColumnName="fecha" DataSourceName="IntegramsaUltimate.dbo.vwPartSegFechaProdProm" DataTypeServer="varchar(10)" DbType="AnsiString" Direction="Input" ParameterName="@fecha1" Precision="0" ProviderType="VarChar" Scale="0" Size="10" SourceColumn="fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="fecha2" ColumnName="fecha" DataSourceName="IntegramsaUltimate.dbo.vwPartSegFechaProdProm" DataTypeServer="varchar(10)" DbType="AnsiString" Direction="Input" ParameterName="@fecha2" Precision="0" ProviderType="VarChar" Scale="0" Size="10" SourceColumn="fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="idCliente" ColumnName="idCliente" DataSourceName="IntegramsaUltimate.dbo.vwPartSegFechaProdProm" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@idCliente" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="idCliente" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="vwPartSegFechaProdTopTableAdapter" GeneratorDataComponentClassName="vwPartSegFechaProdTopTableAdapter" Name="vwPartSegFechaProdTop" UserDataComponentName="vwPartSegFechaProdTopTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="IntegramsaUltimateConnectionString (Web.config)" DbObjectName="IntegramsaUltimate.dbo.vwPartSegFechaProdTop" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillBy" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetDataBy" GeneratorSourceName="FillBy" GetMethodModifier="Public" GetMethodName="GetDataBy" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetDataBy" UserSourceName="FillBy">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        idCliente, segmento, fecha, nombre, promedio, cantidad, registros, ROWNUMBER
+FROM            vwPartSegFechaProdTop
+WHERE        (fecha BETWEEN @fecha1 AND @fecha2) AND (idCliente = @idCliente) AND (ROWNUMBER &lt;= 5)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="fecha1" ColumnName="fecha" DataSourceName="IntegramsaUltimate.dbo.vwPartSegFechaProdTop" DataTypeServer="varchar(10)" DbType="AnsiString" Direction="Input" ParameterName="@fecha1" Precision="0" ProviderType="VarChar" Scale="0" Size="10" SourceColumn="fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="fecha2" ColumnName="fecha" DataSourceName="IntegramsaUltimate.dbo.vwPartSegFechaProdTop" DataTypeServer="varchar(10)" DbType="AnsiString" Direction="Input" ParameterName="@fecha2" Precision="0" ProviderType="VarChar" Scale="0" Size="10" SourceColumn="fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="idCliente" ColumnName="idCliente" DataSourceName="IntegramsaUltimate.dbo.vwPartSegFechaProdTop" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@idCliente" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="idCliente" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="idCliente" DataSetColumn="idCliente" />
+              <Mapping SourceColumn="segmento" DataSetColumn="segmento" />
+              <Mapping SourceColumn="fecha" DataSetColumn="fecha" />
+              <Mapping SourceColumn="nombre" DataSetColumn="nombre" />
+              <Mapping SourceColumn="promedio" DataSetColumn="promedio" />
+              <Mapping SourceColumn="cantidad" DataSetColumn="cantidad" />
+              <Mapping SourceColumn="registros" DataSetColumn="registros" />
+              <Mapping SourceColumn="ROW NUMBER" DataSetColumn="ROWNUMBER" />
+              <Mapping SourceColumn="ROWNUMBER" DataSetColumn="ROWNUMBER" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="IntegramsaUltimateConnectionString (Web.config)" DbObjectName="SELECT TOP (100) PERCENT segmentos.idCliente, segmentos.segmento, SUM(reporteTiendaFrentes.cantidadProducto) AS cantidad, SUM(reporteTiendaFrentes.cantidadProducto) * 1. / COUNT(reporteTiendaFrentes.id) AS promedio, COUNT(reporteTiendaFrentes.id) AS registros, producto.nombre, SUM(reporteTiendaFrentes.cantidadProducto) AS ROWNUMBER FROM reporteTiendaFrentes INNER JOIN segmentoProductos ON reporteTiendaFrentes.idSegmentoProductos = segmentoProductos.idSegmentoProducto INNER JOIN segmentos ON segmentoProductos.idSegmento = segmentos.idSegmento INNER JOIN producto ON segmentoProductos.idProducto = producto.id INNER JOIN reporteTienda AS reporteTienda_1 ON reporteTiendaFrentes.idReporteTienda = reporteTienda_1.id WHERE (segmentos.idCliente = @idCliente) AND (reporteTienda_1.fecha BETWEEN @fecha1 AND @fecha2) GROUP BY producto.nombre, segmentos.idCliente, segmentos.segmento ORDER BY promedio" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillBy1" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy1" GeneratorSourceName="FillBy1" GetMethodModifier="Public" GetMethodName="GetDataBy1" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="FillBy1">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        TOP (10) idCliente, segmento, cantidad, promedio, registros, nombre
+FROM            (SELECT        TOP (100) PERCENT segmentos.idCliente, segmentos.segmento, SUM(reporteTiendaFrentes.cantidadProducto) AS cantidad, SUM(reporteTiendaFrentes.cantidadProducto) * 1. / COUNT(reporteTiendaFrentes.id) 
+                                                    AS promedio, COUNT(reporteTiendaFrentes.id) AS registros, producto.nombre, SUM(reporteTiendaFrentes.cantidadProducto) AS ROWNUMBER
+                          FROM            reporteTiendaFrentes INNER JOIN
+                                                    segmentoProductos ON reporteTiendaFrentes.idSegmentoProductos = segmentoProductos.idSegmentoProducto INNER JOIN
+                                                    segmentos ON segmentoProductos.idSegmento = segmentos.idSegmento INNER JOIN
+                                                    producto ON segmentoProductos.idProducto = producto.id INNER JOIN
+                                                    reporteTienda AS reporteTienda_1 ON reporteTiendaFrentes.idReporteTienda = reporteTienda_1.id
+                          WHERE        (segmentos.idCliente = @idCliente) AND (reporteTienda_1.fecha BETWEEN @fecha1 AND @fecha2)
+                          GROUP BY producto.nombre, segmentos.idCliente, segmentos.segmento
+                          ORDER BY promedio) AS derivedtbl_1</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="idCliente" ColumnName="idCliente" DataSourceName="SELECT TOP (100) PERCENT segmentos.idCliente, segmentos.segmento, SUM(reporteTiendaFrentes.cantidadProducto) AS cantidad, SUM(reporteTiendaFrentes.cantidadProducto) * 1. / COUNT(reporteTiendaFrentes.id) AS promedio, COUNT(reporteTiendaFrentes.id) AS registros, producto.nombre, SUM(reporteTiendaFrentes.cantidadProducto) AS ROWNUMBER FROM reporteTiendaFrentes INNER JOIN segmentoProductos ON reporteTiendaFrentes.idSegmentoProductos = segmentoProductos.idSegmentoProducto INNER JOIN segmentos ON segmentoProductos.idSegmento = segmentos.idSegmento INNER JOIN producto ON segmentoProductos.idProducto = producto.id INNER JOIN reporteTienda AS reporteTienda_1 ON reporteTiendaFrentes.idReporteTienda = reporteTienda_1.id WHERE (segmentos.idCliente = @idCliente) AND (reporteTienda_1.fecha BETWEEN @fecha1 AND @fecha2) GROUP BY producto.nombre, segmentos.idCliente, segmentos.segmento ORDER BY promedio" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@idCliente" Precision="0" Scale="0" Size="4" SourceColumn="idCliente" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="fecha1" ColumnName="" DataSourceName="" DataTypeServer="datetime" DbType="DateTime" Direction="Input" ParameterName="@fecha1" Precision="0" Scale="0" Size="8" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="fecha2" ColumnName="" DataSourceName="" DataTypeServer="datetime" DbType="DateTime" Direction="Input" ParameterName="@fecha2" Precision="0" Scale="0" Size="8" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="vwPartSegFechaProdCadPromTableAdapter" GeneratorDataComponentClassName="vwPartSegFechaProdCadPromTableAdapter" Name="vwPartSegFechaProdCadProm" UserDataComponentName="vwPartSegFechaProdCadPromTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="IntegramsaUltimateConnectionString (Web.config)" DbObjectName="IntegramsaUltimate.dbo.vwPartSegFechaProdCadProm" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        idCliente, segmento, fecha, nombre, cadena, promedio, cantidad, registros, idCadena
+FROM            vwPartSegFechaProdCadProm</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="idCliente" DataSetColumn="idCliente" />
+              <Mapping SourceColumn="segmento" DataSetColumn="segmento" />
+              <Mapping SourceColumn="fecha" DataSetColumn="fecha" />
+              <Mapping SourceColumn="nombre" DataSetColumn="nombre" />
+              <Mapping SourceColumn="cadena" DataSetColumn="cadena" />
+              <Mapping SourceColumn="promedio" DataSetColumn="promedio" />
+              <Mapping SourceColumn="cantidad" DataSetColumn="cantidad" />
+              <Mapping SourceColumn="registros" DataSetColumn="registros" />
+              <Mapping SourceColumn="idCadena" DataSetColumn="idCadena" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="IntegramsaUltimateConnectionString (Web.config)" DbObjectName="IntegramsaUltimate.dbo.vwPartSegFechaProdCadProm" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByFecha" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByFecha" GeneratorSourceName="FillByFecha" GetMethodModifier="Public" GetMethodName="GetDataByFecha" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByFecha" UserSourceName="FillByFecha">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        idCliente, segmento, fecha, nombre, cadena, promedio, cantidad, registros, idCadena
+FROM            vwPartSegFechaProdCadProm
+WHERE        (idCliente = @idCliente) AND (fecha BETWEEN @fecha1 AND @fecha2)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="idCliente" ColumnName="idCliente" DataSourceName="IntegramsaUltimate.dbo.vwPartSegFechaProdCadProm" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@idCliente" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="idCliente" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="fecha1" ColumnName="fecha" DataSourceName="IntegramsaUltimate.dbo.vwPartSegFechaProdCadProm" DataTypeServer="varchar(10)" DbType="AnsiString" Direction="Input" ParameterName="@fecha1" Precision="0" ProviderType="VarChar" Scale="0" Size="10" SourceColumn="fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="fecha2" ColumnName="fecha" DataSourceName="IntegramsaUltimate.dbo.vwPartSegFechaProdCadProm" DataTypeServer="varchar(10)" DbType="AnsiString" Direction="Input" ParameterName="@fecha2" Precision="0" ProviderType="VarChar" Scale="0" Size="10" SourceColumn="fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="cadenaTableAdapter" GeneratorDataComponentClassName="cadenaTableAdapter" Name="cadena" UserDataComponentName="cadenaTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="IntegramsaUltimateConnectionString (Web.config)" DbObjectName="IntegramsaUltimate.dbo.cadena" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [cadena] WHERE (([id] = @Original_id))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="id" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [cadena] ([nombre], [idGiroComercial], [idEstado], [fecha]) VALUES (@nombre, @idGiroComercial, @idEstado, @fecha)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@nombre" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="nombre" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@idGiroComercial" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="idGiroComercial" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@idEstado" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="idEstado" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@fecha" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        cadena.*
+FROM            cadena</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [cadena] SET [nombre] = @nombre, [idGiroComercial] = @idGiroComercial, [idEstado] = @idEstado, [fecha] = @fecha WHERE (([id] = @Original_id))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@nombre" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="nombre" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@idGiroComercial" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="idGiroComercial" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@idEstado" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="idEstado" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@fecha" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="id" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="id" DataSetColumn="id" />
+              <Mapping SourceColumn="nombre" DataSetColumn="nombre" />
+              <Mapping SourceColumn="idGiroComercial" DataSetColumn="idGiroComercial" />
+              <Mapping SourceColumn="idEstado" DataSetColumn="idEstado" />
+              <Mapping SourceColumn="fecha" DataSetColumn="fecha" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="vwPartCadFechaTableAdapter" GeneratorDataComponentClassName="vwPartCadFechaTableAdapter" Name="vwPartCadFecha" UserDataComponentName="vwPartCadFechaTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="IntegramsaUltimateConnectionString (Web.config)" DbObjectName="IntegramsaUltimate.dbo.vwPartCadFecha" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT idReporteTienda, cantidadProducto, cantidadSegmentos, idSegmento, segmento, idCliente, plaza, municipio, idPlaza, idcMunicipio, idCadena, cadena, idFormatoTienda, formato, tienda, fecha FROM dbo.vwPartCadFecha</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="idReporteTienda" DataSetColumn="idReporteTienda" />
+              <Mapping SourceColumn="cantidadProducto" DataSetColumn="cantidadProducto" />
+              <Mapping SourceColumn="cantidadSegmentos" DataSetColumn="cantidadSegmentos" />
+              <Mapping SourceColumn="idSegmento" DataSetColumn="idSegmento" />
+              <Mapping SourceColumn="segmento" DataSetColumn="segmento" />
+              <Mapping SourceColumn="idCliente" DataSetColumn="idCliente" />
+              <Mapping SourceColumn="plaza" DataSetColumn="plaza" />
+              <Mapping SourceColumn="municipio" DataSetColumn="municipio" />
+              <Mapping SourceColumn="idPlaza" DataSetColumn="idPlaza" />
+              <Mapping SourceColumn="idcMunicipio" DataSetColumn="idcMunicipio" />
+              <Mapping SourceColumn="idCadena" DataSetColumn="idCadena" />
+              <Mapping SourceColumn="cadena" DataSetColumn="cadena" />
+              <Mapping SourceColumn="idFormatoTienda" DataSetColumn="idFormatoTienda" />
+              <Mapping SourceColumn="formato" DataSetColumn="formato" />
+              <Mapping SourceColumn="tienda" DataSetColumn="tienda" />
+              <Mapping SourceColumn="fecha" DataSetColumn="fecha" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="IntegramsaUltimateConnectionString (Web.config)" DbObjectName="IntegramsaUltimate.dbo.vwPartCadFecha" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByFecha" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByFecha" GeneratorSourceName="FillByFecha" GetMethodModifier="Public" GetMethodName="GetDataByFecha" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByFecha" UserSourceName="FillByFecha">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        idReporteTienda, cantidadProducto, cantidadSegmentos, idSegmento, segmento, idCliente, plaza, municipio, idPlaza, idcMunicipio, idCadena, cadena, idFormatoTienda, formato, tienda, fecha
+FROM            vwPartCadFecha
+WHERE        (idCliente = @idCliente) and (fecha BETWEEN @fecha1 AND @fecha2)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="idCliente" ColumnName="idCliente" DataSourceName="IntegramsaUltimate.dbo.vwPartCadFecha" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@idCliente" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="idCliente" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="fecha1" ColumnName="fecha" DataSourceName="IntegramsaUltimate.dbo.vwPartCadFecha" DataTypeServer="varchar(10)" DbType="AnsiString" Direction="Input" ParameterName="@fecha1" Precision="0" ProviderType="VarChar" Scale="0" Size="10" SourceColumn="fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="fecha2" ColumnName="fecha" DataSourceName="IntegramsaUltimate.dbo.vwPartCadFecha" DataTypeServer="varchar(10)" DbType="AnsiString" Direction="Input" ParameterName="@fecha2" Precision="0" ProviderType="VarChar" Scale="0" Size="10" SourceColumn="fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="IntegramsaUltimateConnectionString (Web.config)" DbObjectName="IntegramsaUltimate.dbo.vwPartCadFecha" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillBySegTotales" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySegTotales" GeneratorSourceName="FillBySegTotales" GetMethodModifier="Public" GetMethodName="GetDataBySegTotales" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySegTotales" UserSourceName="FillBySegTotales">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        segmento, SUM(cantidadProducto) AS FrentesPropios, SUM(cantidadSegmentos) AS FrentesTotales, SUM(cantidadProducto) * 100 * 1. / SUM(cantidadSegmentos) AS Participacion
+FROM            vwPartCadFecha
+WHERE        (idCliente = @idCliente) AND (fecha BETWEEN @fecha1 AND @fecha2)
+GROUP BY idCliente, segmento</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="idCliente" ColumnName="idCliente" DataSourceName="IntegramsaUltimate.dbo.vwPartCadFecha" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@idCliente" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="idCliente" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="fecha1" ColumnName="fecha" DataSourceName="IntegramsaUltimate.dbo.vwPartCadFecha" DataTypeServer="varchar(10)" DbType="AnsiString" Direction="Input" ParameterName="@fecha1" Precision="0" ProviderType="VarChar" Scale="0" Size="10" SourceColumn="fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="fecha2" ColumnName="fecha" DataSourceName="IntegramsaUltimate.dbo.vwPartCadFecha" DataTypeServer="varchar(10)" DbType="AnsiString" Direction="Input" ParameterName="@fecha2" Precision="0" ProviderType="VarChar" Scale="0" Size="10" SourceColumn="fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="vwPartPromTerminadosTableAdapter" GeneratorDataComponentClassName="vwPartPromTerminadosTableAdapter" Name="vwPartPromTerminados" UserDataComponentName="vwPartPromTerminadosTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="IntegramsaUltimateConnectionString (Web.config)" DbObjectName="IntegramsaUltimate.dbo.vwPartPromTerminados" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT Promotor, fecha, Cadena, Tienda FROM dbo.vwPartPromTerminados</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Promotor" DataSetColumn="Promotor" />
+              <Mapping SourceColumn="fecha" DataSetColumn="fecha" />
+              <Mapping SourceColumn="Cadena" DataSetColumn="Cadena" />
+              <Mapping SourceColumn="Tienda" DataSetColumn="Tienda" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="IntegramsaUltimateConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByClienteFecha" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByClienteFecha" GeneratorSourceName="FillByClienteFecha" GetMethodModifier="Public" GetMethodName="GetDataByClienteFecha" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByClienteFecha" UserSourceName="FillByClienteFecha">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        usuario.nombre + ' ' + usuario.paterno AS Promotor, cadena.nombre AS Cadena, tienda_1.nombre AS Tienda, reporteTienda_1.fechaEntrada
+FROM            reporteTiendaFrentes INNER JOIN
+                         reporteTienda AS reporteTienda_1 ON reporteTiendaFrentes.idReporteTienda = reporteTienda_1.id INNER JOIN
+                         usuario ON reporteTienda_1.idUsuarioPromotor = usuario.id INNER JOIN
+                         rutaIntinerario ON reporteTienda_1.idRutaItinerario = rutaIntinerario.id INNER JOIN
+                         tienda AS tienda_1 ON rutaIntinerario.idTienda = tienda_1.id INNER JOIN
+                         cadena ON tienda_1.idCadena = cadena.id INNER JOIN
+                         usuarioCliente ON usuarioCliente.idUsuario = usuario.id
+WHERE        (reporteTiendaFrentes.cantidadProducto &gt; 0) AND (usuarioCliente.idCliente = @idCliente) AND (reporteTienda_1.fechaEntrada BETWEEN @fecha1 AND @fecha2)
+GROUP BY usuario.nombre, usuario.paterno, cadena.nombre, tienda_1.nombre, reporteTienda_1.fechaEntrada</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="idCliente" ColumnName="idCliente" DataSourceName="IntegramsaUltimate.dbo.usuarioCliente" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@idCliente" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="idCliente" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="fecha1" ColumnName="fechaEntrada" DataSourceName="IntegramsaUltimate.dbo.reporteTienda" DataTypeServer="datetime" DbType="DateTime" Direction="Input" ParameterName="@fecha1" Precision="0" ProviderType="DateTime" Scale="0" Size="8" SourceColumn="fechaEntrada" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="fecha2" ColumnName="fechaEntrada" DataSourceName="IntegramsaUltimate.dbo.reporteTienda" DataTypeServer="datetime" DbType="DateTime" Direction="Input" ParameterName="@fecha2" Precision="0" ProviderType="DateTime" Scale="0" Size="8" SourceColumn="fechaEntrada" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="IntegramsaUltimateDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="IntegramsaUltimateDataSet" msprop:Generator_UserDSName="IntegramsaUltimateDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="vwReporteFotos" msprop:Generator_TableClassName="vwReporteFotosDataTable" msprop:Generator_TableVarName="tablevwReporteFotos" msprop:Generator_TablePropName="vwReporteFotos" msprop:Generator_RowDeletingName="vwReporteFotosRowDeleting" msprop:Generator_RowChangingName="vwReporteFotosRowChanging" msprop:Generator_RowEvHandlerName="vwReporteFotosRowChangeEventHandler" msprop:Generator_RowDeletedName="vwReporteFotosRowDeleted" msprop:Generator_UserTableName="vwReporteFotos" msprop:Generator_RowChangedName="vwReporteFotosRowChanged" msprop:Generator_RowEvArgName="vwReporteFotosRowChangeEvent" msprop:Generator_RowClassName="vwReporteFotosRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="id" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_UserColumnName="id" type="xs:int" />
+              <xs:element name="proposito" msprop:Generator_ColumnVarNameInTable="columnproposito" msprop:Generator_ColumnPropNameInRow="proposito" msprop:Generator_ColumnPropNameInTable="propositoColumn" msprop:Generator_UserColumnName="proposito">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="fecha" msprop:Generator_ColumnVarNameInTable="columnfecha" msprop:Generator_ColumnPropNameInRow="fecha" msprop:Generator_ColumnPropNameInTable="fechaColumn" msprop:Generator_UserColumnName="fecha" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="promotor" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnpromotor" msprop:Generator_ColumnPropNameInRow="promotor" msprop:Generator_ColumnPropNameInTable="promotorColumn" msprop:Generator_UserColumnName="promotor" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="101" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="idDUsuario" msprop:Generator_ColumnVarNameInTable="columnidDUsuario" msprop:Generator_ColumnPropNameInRow="idDUsuario" msprop:Generator_ColumnPropNameInTable="idDUsuarioColumn" msprop:Generator_UserColumnName="idDUsuario" type="xs:int" />
+              <xs:element name="idDTienda" msprop:Generator_ColumnVarNameInTable="columnidDTienda" msprop:Generator_ColumnPropNameInRow="idDTienda" msprop:Generator_ColumnPropNameInTable="idDTiendaColumn" msprop:Generator_UserColumnName="idDTienda" type="xs:int" />
+              <xs:element name="tienda" msprop:Generator_ColumnVarNameInTable="columntienda" msprop:Generator_ColumnPropNameInRow="tienda" msprop:Generator_ColumnPropNameInTable="tiendaColumn" msprop:Generator_UserColumnName="tienda" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="idFormato" msprop:Generator_ColumnVarNameInTable="columnidFormato" msprop:Generator_ColumnPropNameInRow="idFormato" msprop:Generator_ColumnPropNameInTable="idFormatoColumn" msprop:Generator_UserColumnName="idFormato" type="xs:int" minOccurs="0" />
+              <xs:element name="formatoTienda" msprop:Generator_ColumnVarNameInTable="columnformatoTienda" msprop:Generator_ColumnPropNameInRow="formatoTienda" msprop:Generator_ColumnPropNameInTable="formatoTiendaColumn" msprop:Generator_UserColumnName="formatoTienda" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="idCliente" msprop:Generator_ColumnVarNameInTable="columnidCliente" msprop:Generator_ColumnPropNameInRow="idCliente" msprop:Generator_ColumnPropNameInTable="idClienteColumn" msprop:Generator_UserColumnName="idCliente" type="xs:int" minOccurs="0" />
+              <xs:element name="idcMunicipio" msprop:Generator_ColumnVarNameInTable="columnidcMunicipio" msprop:Generator_ColumnPropNameInRow="idcMunicipio" msprop:Generator_ColumnPropNameInTable="idcMunicipioColumn" msprop:Generator_UserColumnName="idcMunicipio" type="xs:int" />
+              <xs:element name="municipio" msprop:Generator_ColumnVarNameInTable="columnmunicipio" msprop:Generator_ColumnPropNameInRow="municipio" msprop:Generator_ColumnPropNameInTable="municipioColumn" msprop:Generator_UserColumnName="municipio">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="cadena" msprop:Generator_ColumnVarNameInTable="columncadena" msprop:Generator_ColumnPropNameInRow="cadena" msprop:Generator_ColumnPropNameInTable="cadenaColumn" msprop:Generator_UserColumnName="cadena" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="idCadena" msprop:Generator_ColumnVarNameInTable="columnidCadena" msprop:Generator_ColumnPropNameInRow="idCadena" msprop:Generator_ColumnPropNameInTable="idCadenaColumn" msprop:Generator_UserColumnName="idCadena" type="xs:int" />
+              <xs:element name="plaza" msprop:Generator_ColumnVarNameInTable="columnplaza" msprop:Generator_ColumnPropNameInRow="plaza" msprop:Generator_ColumnPropNameInTable="plazaColumn" msprop:Generator_UserColumnName="plaza" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="idPlaza" msprop:Generator_ColumnVarNameInTable="columnidPlaza" msprop:Generator_ColumnPropNameInRow="idPlaza" msprop:Generator_ColumnPropNameInTable="idPlazaColumn" msprop:Generator_UserColumnName="idPlaza" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="vwReporteParticipacion" msprop:Generator_TableClassName="vwReporteParticipacionDataTable" msprop:Generator_TableVarName="tablevwReporteParticipacion" msprop:Generator_RowChangedName="vwReporteParticipacionRowChanged" msprop:Generator_TablePropName="vwReporteParticipacion" msprop:Generator_RowDeletingName="vwReporteParticipacionRowDeleting" msprop:Generator_RowChangingName="vwReporteParticipacionRowChanging" msprop:Generator_RowEvHandlerName="vwReporteParticipacionRowChangeEventHandler" msprop:Generator_RowDeletedName="vwReporteParticipacionRowDeleted" msprop:Generator_RowClassName="vwReporteParticipacionRow" msprop:Generator_UserTableName="vwReporteParticipacion" msprop:Generator_RowEvArgName="vwReporteParticipacionRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="id" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_UserColumnName="id" type="xs:int" />
+              <xs:element name="cantidadProducto" msprop:Generator_ColumnVarNameInTable="columncantidadProducto" msprop:Generator_ColumnPropNameInRow="cantidadProducto" msprop:Generator_ColumnPropNameInTable="cantidadProductoColumn" msprop:Generator_UserColumnName="cantidadProducto" type="xs:int" minOccurs="0" />
+              <xs:element name="idProducto" msprop:Generator_ColumnVarNameInTable="columnidProducto" msprop:Generator_ColumnPropNameInRow="idProducto" msprop:Generator_ColumnPropNameInTable="idProductoColumn" msprop:Generator_UserColumnName="idProducto" type="xs:int" />
+              <xs:element name="cantidadSegmentos" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columncantidadSegmentos" msprop:Generator_ColumnPropNameInRow="cantidadSegmentos" msprop:Generator_ColumnPropNameInTable="cantidadSegmentosColumn" msprop:Generator_UserColumnName="cantidadSegmentos" type="xs:int" minOccurs="0" />
+              <xs:element name="nombre" msprop:Generator_ColumnVarNameInTable="columnnombre" msprop:Generator_ColumnPropNameInRow="nombre" msprop:Generator_ColumnPropNameInTable="nombreColumn" msprop:Generator_UserColumnName="nombre" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="presentacion" msprop:Generator_ColumnVarNameInTable="columnpresentacion" msprop:Generator_ColumnPropNameInRow="presentacion" msprop:Generator_ColumnPropNameInTable="presentacionColumn" msprop:Generator_UserColumnName="presentacion" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="idSegmento" msprop:Generator_ColumnVarNameInTable="columnidSegmento" msprop:Generator_ColumnPropNameInRow="idSegmento" msprop:Generator_ColumnPropNameInTable="idSegmentoColumn" msprop:Generator_UserColumnName="idSegmento" type="xs:int" minOccurs="0" />
+              <xs:element name="segmento" msprop:Generator_ColumnVarNameInTable="columnsegmento" msprop:Generator_ColumnPropNameInRow="segmento" msprop:Generator_ColumnPropNameInTable="segmentoColumn" msprop:Generator_UserColumnName="segmento" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="idCliente" msprop:Generator_ColumnVarNameInTable="columnidCliente" msprop:Generator_ColumnPropNameInRow="idCliente" msprop:Generator_ColumnPropNameInTable="idClienteColumn" msprop:Generator_UserColumnName="idCliente" type="xs:int" minOccurs="0" />
+              <xs:element name="plaza" msprop:Generator_ColumnVarNameInTable="columnplaza" msprop:Generator_ColumnPropNameInRow="plaza" msprop:Generator_ColumnPropNameInTable="plazaColumn" msprop:Generator_UserColumnName="plaza" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="municipio" msprop:Generator_ColumnVarNameInTable="columnmunicipio" msprop:Generator_ColumnPropNameInRow="municipio" msprop:Generator_ColumnPropNameInTable="municipioColumn" msprop:Generator_UserColumnName="municipio">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="idPlaza" msprop:Generator_ColumnVarNameInTable="columnidPlaza" msprop:Generator_ColumnPropNameInRow="idPlaza" msprop:Generator_ColumnPropNameInTable="idPlazaColumn" msprop:Generator_UserColumnName="idPlaza" type="xs:int" />
+              <xs:element name="idcMunicipio" msprop:Generator_ColumnVarNameInTable="columnidcMunicipio" msprop:Generator_ColumnPropNameInRow="idcMunicipio" msprop:Generator_ColumnPropNameInTable="idcMunicipioColumn" msprop:Generator_UserColumnName="idcMunicipio" type="xs:int" />
+              <xs:element name="idCadena" msprop:Generator_ColumnVarNameInTable="columnidCadena" msprop:Generator_ColumnPropNameInRow="idCadena" msprop:Generator_ColumnPropNameInTable="idCadenaColumn" msprop:Generator_UserColumnName="idCadena" type="xs:int" />
+              <xs:element name="cadena" msprop:Generator_ColumnVarNameInTable="columncadena" msprop:Generator_ColumnPropNameInRow="cadena" msprop:Generator_ColumnPropNameInTable="cadenaColumn" msprop:Generator_UserColumnName="cadena" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="idFormatoTienda" msprop:Generator_ColumnVarNameInTable="columnidFormatoTienda" msprop:Generator_ColumnPropNameInRow="idFormatoTienda" msprop:Generator_ColumnPropNameInTable="idFormatoTiendaColumn" msprop:Generator_UserColumnName="idFormatoTienda" type="xs:int" />
+              <xs:element name="formato" msprop:Generator_ColumnVarNameInTable="columnformato" msprop:Generator_ColumnPropNameInRow="formato" msprop:Generator_ColumnPropNameInTable="formatoColumn" msprop:Generator_UserColumnName="formato" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="tienda" msprop:Generator_ColumnVarNameInTable="columntienda" msprop:Generator_ColumnPropNameInRow="tienda" msprop:Generator_ColumnPropNameInTable="tiendaColumn" msprop:Generator_UserColumnName="tienda" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="vwReporteFotocFoto" msprop:Generator_TableClassName="vwReporteFotocFotoDataTable" msprop:Generator_TableVarName="tablevwReporteFotocFoto" msprop:Generator_RowChangedName="vwReporteFotocFotoRowChanged" msprop:Generator_TablePropName="vwReporteFotocFoto" msprop:Generator_RowDeletingName="vwReporteFotocFotoRowDeleting" msprop:Generator_RowChangingName="vwReporteFotocFotoRowChanging" msprop:Generator_RowEvHandlerName="vwReporteFotocFotoRowChangeEventHandler" msprop:Generator_RowDeletedName="vwReporteFotocFotoRowDeleted" msprop:Generator_RowClassName="vwReporteFotocFotoRow" msprop:Generator_UserTableName="vwReporteFotocFoto" msprop:Generator_RowEvArgName="vwReporteFotocFotoRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="id" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_UserColumnName="id" type="xs:int" />
+              <xs:element name="proposito" msprop:Generator_ColumnVarNameInTable="columnproposito" msprop:Generator_ColumnPropNameInRow="proposito" msprop:Generator_ColumnPropNameInTable="propositoColumn" msprop:Generator_UserColumnName="proposito">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="fecha" msprop:Generator_ColumnVarNameInTable="columnfecha" msprop:Generator_ColumnPropNameInRow="fecha" msprop:Generator_ColumnPropNameInTable="fechaColumn" msprop:Generator_UserColumnName="fecha" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="promotor" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnpromotor" msprop:Generator_ColumnPropNameInRow="promotor" msprop:Generator_ColumnPropNameInTable="promotorColumn" msprop:Generator_UserColumnName="promotor" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="101" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="idDUsuario" msprop:Generator_ColumnVarNameInTable="columnidDUsuario" msprop:Generator_ColumnPropNameInRow="idDUsuario" msprop:Generator_ColumnPropNameInTable="idDUsuarioColumn" msprop:Generator_UserColumnName="idDUsuario" type="xs:int" />
+              <xs:element name="idDTienda" msprop:Generator_ColumnVarNameInTable="columnidDTienda" msprop:Generator_ColumnPropNameInRow="idDTienda" msprop:Generator_ColumnPropNameInTable="idDTiendaColumn" msprop:Generator_UserColumnName="idDTienda" type="xs:int" />
+              <xs:element name="tienda" msprop:Generator_ColumnVarNameInTable="columntienda" msprop:Generator_ColumnPropNameInRow="tienda" msprop:Generator_ColumnPropNameInTable="tiendaColumn" msprop:Generator_UserColumnName="tienda" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="idFormato" msprop:Generator_ColumnVarNameInTable="columnidFormato" msprop:Generator_ColumnPropNameInRow="idFormato" msprop:Generator_ColumnPropNameInTable="idFormatoColumn" msprop:Generator_UserColumnName="idFormato" type="xs:int" minOccurs="0" />
+              <xs:element name="formatoTienda" msprop:Generator_ColumnVarNameInTable="columnformatoTienda" msprop:Generator_ColumnPropNameInRow="formatoTienda" msprop:Generator_ColumnPropNameInTable="formatoTiendaColumn" msprop:Generator_UserColumnName="formatoTienda" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="idCliente" msprop:Generator_ColumnVarNameInTable="columnidCliente" msprop:Generator_ColumnPropNameInRow="idCliente" msprop:Generator_ColumnPropNameInTable="idClienteColumn" msprop:Generator_UserColumnName="idCliente" type="xs:int" minOccurs="0" />
+              <xs:element name="idcMunicipio" msprop:Generator_ColumnVarNameInTable="columnidcMunicipio" msprop:Generator_ColumnPropNameInRow="idcMunicipio" msprop:Generator_ColumnPropNameInTable="idcMunicipioColumn" msprop:Generator_UserColumnName="idcMunicipio" type="xs:int" />
+              <xs:element name="municipio" msprop:Generator_ColumnVarNameInTable="columnmunicipio" msprop:Generator_ColumnPropNameInRow="municipio" msprop:Generator_ColumnPropNameInTable="municipioColumn" msprop:Generator_UserColumnName="municipio">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="idCadena" msprop:Generator_ColumnVarNameInTable="columnidCadena" msprop:Generator_ColumnPropNameInRow="idCadena" msprop:Generator_ColumnPropNameInTable="idCadenaColumn" msprop:Generator_UserColumnName="idCadena" type="xs:int" />
+              <xs:element name="cadena" msprop:Generator_ColumnVarNameInTable="columncadena" msprop:Generator_ColumnPropNameInRow="cadena" msprop:Generator_ColumnPropNameInTable="cadenaColumn" msprop:Generator_UserColumnName="cadena" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="foto" msprop:Generator_ColumnVarNameInTable="columnfoto" msprop:Generator_ColumnPropNameInRow="foto" msprop:Generator_ColumnPropNameInTable="fotoColumn" msprop:Generator_UserColumnName="foto" type="xs:base64Binary" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="vwReporteParticipacionxFecha" msprop:Generator_TableClassName="vwReporteParticipacionxFechaDataTable" msprop:Generator_TableVarName="tablevwReporteParticipacionxFecha" msprop:Generator_RowChangedName="vwReporteParticipacionxFechaRowChanged" msprop:Generator_TablePropName="vwReporteParticipacionxFecha" msprop:Generator_RowDeletingName="vwReporteParticipacionxFechaRowDeleting" msprop:Generator_RowChangingName="vwReporteParticipacionxFechaRowChanging" msprop:Generator_RowEvHandlerName="vwReporteParticipacionxFechaRowChangeEventHandler" msprop:Generator_RowDeletedName="vwReporteParticipacionxFechaRowDeleted" msprop:Generator_RowClassName="vwReporteParticipacionxFechaRow" msprop:Generator_UserTableName="vwReporteParticipacionxFecha" msprop:Generator_RowEvArgName="vwReporteParticipacionxFechaRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="id" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_UserColumnName="id" type="xs:int" />
+              <xs:element name="cantidadProducto" msprop:Generator_ColumnVarNameInTable="columncantidadProducto" msprop:Generator_ColumnPropNameInRow="cantidadProducto" msprop:Generator_ColumnPropNameInTable="cantidadProductoColumn" msprop:Generator_UserColumnName="cantidadProducto" type="xs:int" minOccurs="0" />
+              <xs:element name="idProducto" msprop:Generator_ColumnVarNameInTable="columnidProducto" msprop:Generator_ColumnPropNameInRow="idProducto" msprop:Generator_ColumnPropNameInTable="idProductoColumn" msprop:Generator_UserColumnName="idProducto" type="xs:int" />
+              <xs:element name="cantidadSegmentos" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columncantidadSegmentos" msprop:Generator_ColumnPropNameInRow="cantidadSegmentos" msprop:Generator_ColumnPropNameInTable="cantidadSegmentosColumn" msprop:Generator_UserColumnName="cantidadSegmentos" type="xs:int" minOccurs="0" />
+              <xs:element name="nombre" msprop:Generator_ColumnVarNameInTable="columnnombre" msprop:Generator_ColumnPropNameInRow="nombre" msprop:Generator_ColumnPropNameInTable="nombreColumn" msprop:Generator_UserColumnName="nombre" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="presentacion" msprop:Generator_ColumnVarNameInTable="columnpresentacion" msprop:Generator_ColumnPropNameInRow="presentacion" msprop:Generator_ColumnPropNameInTable="presentacionColumn" msprop:Generator_UserColumnName="presentacion" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="idSegmento" msprop:Generator_ColumnVarNameInTable="columnidSegmento" msprop:Generator_ColumnPropNameInRow="idSegmento" msprop:Generator_ColumnPropNameInTable="idSegmentoColumn" msprop:Generator_UserColumnName="idSegmento" type="xs:int" minOccurs="0" />
+              <xs:element name="segmento" msprop:Generator_ColumnVarNameInTable="columnsegmento" msprop:Generator_ColumnPropNameInRow="segmento" msprop:Generator_ColumnPropNameInTable="segmentoColumn" msprop:Generator_UserColumnName="segmento" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="idCliente" msprop:Generator_ColumnVarNameInTable="columnidCliente" msprop:Generator_ColumnPropNameInRow="idCliente" msprop:Generator_ColumnPropNameInTable="idClienteColumn" msprop:Generator_UserColumnName="idCliente" type="xs:int" minOccurs="0" />
+              <xs:element name="plaza" msprop:Generator_ColumnVarNameInTable="columnplaza" msprop:Generator_ColumnPropNameInRow="plaza" msprop:Generator_ColumnPropNameInTable="plazaColumn" msprop:Generator_UserColumnName="plaza" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="municipio" msprop:Generator_ColumnVarNameInTable="columnmunicipio" msprop:Generator_ColumnPropNameInRow="municipio" msprop:Generator_ColumnPropNameInTable="municipioColumn" msprop:Generator_UserColumnName="municipio">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="idPlaza" msprop:Generator_ColumnVarNameInTable="columnidPlaza" msprop:Generator_ColumnPropNameInRow="idPlaza" msprop:Generator_ColumnPropNameInTable="idPlazaColumn" msprop:Generator_UserColumnName="idPlaza" type="xs:int" />
+              <xs:element name="idcMunicipio" msprop:Generator_ColumnVarNameInTable="columnidcMunicipio" msprop:Generator_ColumnPropNameInRow="idcMunicipio" msprop:Generator_ColumnPropNameInTable="idcMunicipioColumn" msprop:Generator_UserColumnName="idcMunicipio" type="xs:int" />
+              <xs:element name="idCadena" msprop:Generator_ColumnVarNameInTable="columnidCadena" msprop:Generator_ColumnPropNameInRow="idCadena" msprop:Generator_ColumnPropNameInTable="idCadenaColumn" msprop:Generator_UserColumnName="idCadena" type="xs:int" />
+              <xs:element name="cadena" msprop:Generator_ColumnVarNameInTable="columncadena" msprop:Generator_ColumnPropNameInRow="cadena" msprop:Generator_ColumnPropNameInTable="cadenaColumn" msprop:Generator_UserColumnName="cadena" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="idFormatoTienda" msprop:Generator_ColumnVarNameInTable="columnidFormatoTienda" msprop:Generator_ColumnPropNameInRow="idFormatoTienda" msprop:Generator_ColumnPropNameInTable="idFormatoTiendaColumn" msprop:Generator_UserColumnName="idFormatoTienda" type="xs:int" />
+              <xs:element name="formato" msprop:Generator_ColumnVarNameInTable="columnformato" msprop:Generator_ColumnPropNameInRow="formato" msprop:Generator_ColumnPropNameInTable="formatoColumn" msprop:Generator_UserColumnName="formato" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="tienda" msprop:Generator_ColumnVarNameInTable="columntienda" msprop:Generator_ColumnPropNameInRow="tienda" msprop:Generator_ColumnPropNameInTable="tiendaColumn" msprop:Generator_UserColumnName="tienda" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="fecha" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnfecha" msprop:Generator_ColumnPropNameInRow="fecha" msprop:Generator_ColumnPropNameInTable="fechaColumn" msprop:Generator_UserColumnName="fecha" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="vwPartNacSegCadena" msprop:Generator_TableClassName="vwPartNacSegCadenaDataTable" msprop:Generator_TableVarName="tablevwPartNacSegCadena" msprop:Generator_RowChangedName="vwPartNacSegCadenaRowChanged" msprop:Generator_TablePropName="vwPartNacSegCadena" msprop:Generator_RowDeletingName="vwPartNacSegCadenaRowDeleting" msprop:Generator_RowChangingName="vwPartNacSegCadenaRowChanging" msprop:Generator_RowEvHandlerName="vwPartNacSegCadenaRowChangeEventHandler" msprop:Generator_RowDeletedName="vwPartNacSegCadenaRowDeleted" msprop:Generator_RowClassName="vwPartNacSegCadenaRow" msprop:Generator_UserTableName="vwPartNacSegCadena" msprop:Generator_RowEvArgName="vwPartNacSegCadenaRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="idCliente" msprop:Generator_ColumnVarNameInTable="columnidCliente" msprop:Generator_ColumnPropNameInRow="idCliente" msprop:Generator_ColumnPropNameInTable="idClienteColumn" msprop:Generator_UserColumnName="idCliente" type="xs:int" minOccurs="0" />
+              <xs:element name="cadena" msprop:Generator_ColumnVarNameInTable="columncadena" msprop:Generator_ColumnPropNameInRow="cadena" msprop:Generator_ColumnPropNameInTable="cadenaColumn" msprop:Generator_UserColumnName="cadena" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="segmento" msprop:Generator_ColumnVarNameInTable="columnsegmento" msprop:Generator_ColumnPropNameInRow="segmento" msprop:Generator_ColumnPropNameInTable="segmentoColumn" msprop:Generator_UserColumnName="segmento" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CantProducto" msprop:Generator_ColumnVarNameInTable="columnCantProducto" msprop:Generator_ColumnPropNameInRow="CantProducto" msprop:Generator_ColumnPropNameInTable="CantProductoColumn" msprop:Generator_UserColumnName="CantProducto" type="xs:int" minOccurs="0" />
+              <xs:element name="CantSegmento" msprop:Generator_ColumnVarNameInTable="columnCantSegmento" msprop:Generator_ColumnPropNameInRow="CantSegmento" msprop:Generator_ColumnPropNameInTable="CantSegmentoColumn" msprop:Generator_UserColumnName="CantSegmento" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="vwPartNacSeg" msprop:Generator_TableClassName="vwPartNacSegDataTable" msprop:Generator_TableVarName="tablevwPartNacSeg" msprop:Generator_RowChangedName="vwPartNacSegRowChanged" msprop:Generator_TablePropName="vwPartNacSeg" msprop:Generator_RowDeletingName="vwPartNacSegRowDeleting" msprop:Generator_RowChangingName="vwPartNacSegRowChanging" msprop:Generator_RowEvHandlerName="vwPartNacSegRowChangeEventHandler" msprop:Generator_RowDeletedName="vwPartNacSegRowDeleted" msprop:Generator_RowClassName="vwPartNacSegRow" msprop:Generator_UserTableName="vwPartNacSeg" msprop:Generator_RowEvArgName="vwPartNacSegRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="idCliente" msprop:Generator_ColumnVarNameInTable="columnidCliente" msprop:Generator_ColumnPropNameInRow="idCliente" msprop:Generator_ColumnPropNameInTable="idClienteColumn" msprop:Generator_UserColumnName="idCliente" type="xs:int" minOccurs="0" />
+              <xs:element name="segmento" msprop:Generator_ColumnVarNameInTable="columnsegmento" msprop:Generator_ColumnPropNameInRow="segmento" msprop:Generator_ColumnPropNameInTable="segmentoColumn" msprop:Generator_UserColumnName="segmento" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CantProducto" msprop:Generator_ColumnVarNameInTable="columnCantProducto" msprop:Generator_ColumnPropNameInRow="CantProducto" msprop:Generator_ColumnPropNameInTable="CantProductoColumn" msprop:Generator_UserColumnName="CantProducto" type="xs:int" minOccurs="0" />
+              <xs:element name="CantSegmento" msprop:Generator_ColumnVarNameInTable="columnCantSegmento" msprop:Generator_ColumnPropNameInRow="CantSegmento" msprop:Generator_ColumnPropNameInTable="CantSegmentoColumn" msprop:Generator_UserColumnName="CantSegmento" type="xs:int" minOccurs="0" />
+              <xs:element name="fecha" msprop:Generator_ColumnVarNameInTable="columnfecha" msprop:Generator_ColumnPropNameInRow="fecha" msprop:Generator_ColumnPropNameInTable="fechaColumn" msprop:Generator_UserColumnName="fecha" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="vwPartSegFechaPromedio" msprop:Generator_TableClassName="vwPartSegFechaPromedioDataTable" msprop:Generator_TableVarName="tablevwPartSegFechaPromedio" msprop:Generator_TablePropName="vwPartSegFechaPromedio" msprop:Generator_RowDeletingName="vwPartSegFechaPromedioRowDeleting" msprop:Generator_RowChangingName="vwPartSegFechaPromedioRowChanging" msprop:Generator_RowEvHandlerName="vwPartSegFechaPromedioRowChangeEventHandler" msprop:Generator_RowDeletedName="vwPartSegFechaPromedioRowDeleted" msprop:Generator_UserTableName="vwPartSegFechaPromedio" msprop:Generator_RowChangedName="vwPartSegFechaPromedioRowChanged" msprop:Generator_RowEvArgName="vwPartSegFechaPromedioRowChangeEvent" msprop:Generator_RowClassName="vwPartSegFechaPromedioRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="idCliente" msprop:Generator_ColumnVarNameInTable="columnidCliente" msprop:Generator_ColumnPropNameInRow="idCliente" msprop:Generator_ColumnPropNameInTable="idClienteColumn" msprop:Generator_UserColumnName="idCliente" type="xs:int" minOccurs="0" />
+              <xs:element name="segmento" msprop:Generator_ColumnVarNameInTable="columnsegmento" msprop:Generator_ColumnPropNameInRow="segmento" msprop:Generator_ColumnPropNameInTable="segmentoColumn" msprop:Generator_UserColumnName="segmento" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="fecha" msprop:Generator_ColumnVarNameInTable="columnfecha" msprop:Generator_ColumnPropNameInRow="fecha" msprop:Generator_ColumnPropNameInTable="fechaColumn" msprop:Generator_UserColumnName="fecha" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="promedio" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnpromedio" msprop:Generator_ColumnPropNameInRow="promedio" msprop:Generator_ColumnPropNameInTable="promedioColumn" msprop:Generator_UserColumnName="promedio" type="xs:decimal" minOccurs="0" />
+              <xs:element name="cantidad" msprop:Generator_ColumnVarNameInTable="columncantidad" msprop:Generator_ColumnPropNameInRow="cantidad" msprop:Generator_ColumnPropNameInTable="cantidadColumn" msprop:Generator_UserColumnName="cantidad" type="xs:decimal" minOccurs="0" />
+              <xs:element name="registros" msprop:Generator_ColumnVarNameInTable="columnregistros" msprop:Generator_ColumnPropNameInRow="registros" msprop:Generator_ColumnPropNameInTable="registrosColumn" msprop:Generator_UserColumnName="registros" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="vwPartSegPromedio" msprop:Generator_TableClassName="vwPartSegPromedioDataTable" msprop:Generator_TableVarName="tablevwPartSegPromedio" msprop:Generator_TablePropName="vwPartSegPromedio" msprop:Generator_RowDeletingName="vwPartSegPromedioRowDeleting" msprop:Generator_RowChangingName="vwPartSegPromedioRowChanging" msprop:Generator_RowEvHandlerName="vwPartSegPromedioRowChangeEventHandler" msprop:Generator_RowDeletedName="vwPartSegPromedioRowDeleted" msprop:Generator_UserTableName="vwPartSegPromedio" msprop:Generator_RowChangedName="vwPartSegPromedioRowChanged" msprop:Generator_RowEvArgName="vwPartSegPromedioRowChangeEvent" msprop:Generator_RowClassName="vwPartSegPromedioRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="idCliente" msprop:Generator_ColumnVarNameInTable="columnidCliente" msprop:Generator_ColumnPropNameInRow="idCliente" msprop:Generator_ColumnPropNameInTable="idClienteColumn" msprop:Generator_UserColumnName="idCliente" type="xs:int" minOccurs="0" />
+              <xs:element name="segmento" msprop:Generator_ColumnVarNameInTable="columnsegmento" msprop:Generator_ColumnPropNameInRow="segmento" msprop:Generator_ColumnPropNameInTable="segmentoColumn" msprop:Generator_UserColumnName="segmento" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="promedio" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnpromedio" msprop:Generator_ColumnPropNameInRow="promedio" msprop:Generator_ColumnPropNameInTable="promedioColumn" msprop:Generator_UserColumnName="promedio" type="xs:decimal" minOccurs="0" />
+              <xs:element name="cantidad" msprop:Generator_ColumnVarNameInTable="columncantidad" msprop:Generator_ColumnPropNameInRow="cantidad" msprop:Generator_ColumnPropNameInTable="cantidadColumn" msprop:Generator_UserColumnName="cantidad" type="xs:decimal" minOccurs="0" />
+              <xs:element name="registros" msprop:Generator_ColumnVarNameInTable="columnregistros" msprop:Generator_ColumnPropNameInRow="registros" msprop:Generator_ColumnPropNameInTable="registrosColumn" msprop:Generator_UserColumnName="registros" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="vwPartSegFechaProdProm" msprop:Generator_TableClassName="vwPartSegFechaProdPromDataTable" msprop:Generator_TableVarName="tablevwPartSegFechaProdProm" msprop:Generator_TablePropName="vwPartSegFechaProdProm" msprop:Generator_RowDeletingName="vwPartSegFechaProdPromRowDeleting" msprop:Generator_RowChangingName="vwPartSegFechaProdPromRowChanging" msprop:Generator_RowEvHandlerName="vwPartSegFechaProdPromRowChangeEventHandler" msprop:Generator_RowDeletedName="vwPartSegFechaProdPromRowDeleted" msprop:Generator_UserTableName="vwPartSegFechaProdProm" msprop:Generator_RowChangedName="vwPartSegFechaProdPromRowChanged" msprop:Generator_RowEvArgName="vwPartSegFechaProdPromRowChangeEvent" msprop:Generator_RowClassName="vwPartSegFechaProdPromRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="idCliente" msprop:Generator_ColumnVarNameInTable="columnidCliente" msprop:Generator_ColumnPropNameInRow="idCliente" msprop:Generator_ColumnPropNameInTable="idClienteColumn" msprop:Generator_UserColumnName="idCliente" type="xs:int" minOccurs="0" />
+              <xs:element name="segmento" msprop:Generator_ColumnVarNameInTable="columnsegmento" msprop:Generator_ColumnPropNameInRow="segmento" msprop:Generator_ColumnPropNameInTable="segmentoColumn" msprop:Generator_UserColumnName="segmento" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="fecha" msprop:Generator_ColumnVarNameInTable="columnfecha" msprop:Generator_ColumnPropNameInRow="fecha" msprop:Generator_ColumnPropNameInTable="fechaColumn" msprop:Generator_UserColumnName="fecha" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="nombre" msprop:Generator_ColumnVarNameInTable="columnnombre" msprop:Generator_ColumnPropNameInRow="nombre" msprop:Generator_ColumnPropNameInTable="nombreColumn" msprop:Generator_UserColumnName="nombre" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="promedio" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnpromedio" msprop:Generator_ColumnPropNameInRow="promedio" msprop:Generator_ColumnPropNameInTable="promedioColumn" msprop:Generator_UserColumnName="promedio" type="xs:decimal" minOccurs="0" />
+              <xs:element name="cantidad" msprop:Generator_ColumnVarNameInTable="columncantidad" msprop:Generator_ColumnPropNameInRow="cantidad" msprop:Generator_ColumnPropNameInTable="cantidadColumn" msprop:Generator_UserColumnName="cantidad" type="xs:decimal" minOccurs="0" />
+              <xs:element name="registros" msprop:Generator_ColumnVarNameInTable="columnregistros" msprop:Generator_ColumnPropNameInRow="registros" msprop:Generator_ColumnPropNameInTable="registrosColumn" msprop:Generator_UserColumnName="registros" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="vwPartSegFechaProdTop" msprop:Generator_TableClassName="vwPartSegFechaProdTopDataTable" msprop:Generator_TableVarName="tablevwPartSegFechaProdTop" msprop:Generator_TablePropName="vwPartSegFechaProdTop" msprop:Generator_RowDeletingName="vwPartSegFechaProdTopRowDeleting" msprop:Generator_RowChangingName="vwPartSegFechaProdTopRowChanging" msprop:Generator_RowEvHandlerName="vwPartSegFechaProdTopRowChangeEventHandler" msprop:Generator_RowDeletedName="vwPartSegFechaProdTopRowDeleted" msprop:Generator_UserTableName="vwPartSegFechaProdTop" msprop:Generator_RowChangedName="vwPartSegFechaProdTopRowChanged" msprop:Generator_RowEvArgName="vwPartSegFechaProdTopRowChangeEvent" msprop:Generator_RowClassName="vwPartSegFechaProdTopRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="idCliente" msprop:Generator_ColumnVarNameInTable="columnidCliente" msprop:Generator_ColumnPropNameInRow="idCliente" msprop:Generator_ColumnPropNameInTable="idClienteColumn" msprop:Generator_UserColumnName="idCliente" type="xs:int" minOccurs="0" />
+              <xs:element name="segmento" msprop:Generator_ColumnVarNameInTable="columnsegmento" msprop:Generator_ColumnPropNameInRow="segmento" msprop:Generator_ColumnPropNameInTable="segmentoColumn" msprop:Generator_UserColumnName="segmento" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="fecha" msprop:Generator_ColumnVarNameInTable="columnfecha" msprop:Generator_ColumnPropNameInRow="fecha" msprop:Generator_ColumnPropNameInTable="fechaColumn" msprop:Generator_UserColumnName="fecha" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="nombre" msprop:Generator_ColumnVarNameInTable="columnnombre" msprop:Generator_ColumnPropNameInRow="nombre" msprop:Generator_ColumnPropNameInTable="nombreColumn" msprop:Generator_UserColumnName="nombre" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="promedio" msprop:Generator_ColumnVarNameInTable="columnpromedio" msprop:Generator_ColumnPropNameInRow="promedio" msprop:Generator_ColumnPropNameInTable="promedioColumn" msprop:Generator_UserColumnName="promedio" type="xs:decimal" minOccurs="0" />
+              <xs:element name="cantidad" msprop:Generator_ColumnVarNameInTable="columncantidad" msprop:Generator_ColumnPropNameInRow="cantidad" msprop:Generator_ColumnPropNameInTable="cantidadColumn" msprop:Generator_UserColumnName="cantidad" type="xs:decimal" minOccurs="0" />
+              <xs:element name="registros" msprop:Generator_ColumnVarNameInTable="columnregistros" msprop:Generator_ColumnPropNameInRow="registros" msprop:Generator_ColumnPropNameInTable="registrosColumn" msprop:Generator_UserColumnName="registros" type="xs:int" minOccurs="0" />
+              <xs:element name="ROWNUMBER" msdata:Caption="ROW NUMBER" msprop:Generator_ColumnVarNameInTable="columnROWNUMBER" msprop:Generator_ColumnPropNameInRow="ROWNUMBER" msprop:Generator_ColumnPropNameInTable="ROWNUMBERColumn" msprop:Generator_UserColumnName="ROWNUMBER" type="xs:long" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="vwPartSegFechaProdCadProm" msprop:Generator_TableClassName="vwPartSegFechaProdCadPromDataTable" msprop:Generator_TableVarName="tablevwPartSegFechaProdCadProm" msprop:Generator_TablePropName="vwPartSegFechaProdCadProm" msprop:Generator_RowDeletingName="vwPartSegFechaProdCadPromRowDeleting" msprop:Generator_RowChangingName="vwPartSegFechaProdCadPromRowChanging" msprop:Generator_RowEvHandlerName="vwPartSegFechaProdCadPromRowChangeEventHandler" msprop:Generator_RowDeletedName="vwPartSegFechaProdCadPromRowDeleted" msprop:Generator_UserTableName="vwPartSegFechaProdCadProm" msprop:Generator_RowChangedName="vwPartSegFechaProdCadPromRowChanged" msprop:Generator_RowEvArgName="vwPartSegFechaProdCadPromRowChangeEvent" msprop:Generator_RowClassName="vwPartSegFechaProdCadPromRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="idCliente" msprop:Generator_ColumnVarNameInTable="columnidCliente" msprop:Generator_ColumnPropNameInRow="idCliente" msprop:Generator_ColumnPropNameInTable="idClienteColumn" msprop:Generator_UserColumnName="idCliente" type="xs:int" minOccurs="0" />
+              <xs:element name="segmento" msprop:Generator_ColumnVarNameInTable="columnsegmento" msprop:Generator_ColumnPropNameInRow="segmento" msprop:Generator_ColumnPropNameInTable="segmentoColumn" msprop:Generator_UserColumnName="segmento" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="fecha" msprop:Generator_ColumnVarNameInTable="columnfecha" msprop:Generator_ColumnPropNameInRow="fecha" msprop:Generator_ColumnPropNameInTable="fechaColumn" msprop:Generator_UserColumnName="fecha" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="nombre" msprop:Generator_ColumnVarNameInTable="columnnombre" msprop:Generator_ColumnPropNameInRow="nombre" msprop:Generator_ColumnPropNameInTable="nombreColumn" msprop:Generator_UserColumnName="nombre" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="cadena" msprop:Generator_ColumnVarNameInTable="columncadena" msprop:Generator_ColumnPropNameInRow="cadena" msprop:Generator_ColumnPropNameInTable="cadenaColumn" msprop:Generator_UserColumnName="cadena" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="promedio" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnpromedio" msprop:Generator_ColumnPropNameInRow="promedio" msprop:Generator_ColumnPropNameInTable="promedioColumn" msprop:Generator_UserColumnName="promedio" type="xs:decimal" minOccurs="0" />
+              <xs:element name="cantidad" msprop:Generator_ColumnVarNameInTable="columncantidad" msprop:Generator_ColumnPropNameInRow="cantidad" msprop:Generator_ColumnPropNameInTable="cantidadColumn" msprop:Generator_UserColumnName="cantidad" type="xs:decimal" minOccurs="0" />
+              <xs:element name="registros" msprop:Generator_ColumnVarNameInTable="columnregistros" msprop:Generator_ColumnPropNameInRow="registros" msprop:Generator_ColumnPropNameInTable="registrosColumn" msprop:Generator_UserColumnName="registros" type="xs:int" minOccurs="0" />
+              <xs:element name="idCadena" msprop:Generator_ColumnVarNameInTable="columnidCadena" msprop:Generator_ColumnPropNameInRow="idCadena" msprop:Generator_ColumnPropNameInTable="idCadenaColumn" msprop:Generator_UserColumnName="idCadena" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="cadena" msprop:Generator_TableClassName="cadenaDataTable" msprop:Generator_TableVarName="tablecadena" msprop:Generator_RowChangedName="cadenaRowChanged" msprop:Generator_TablePropName="cadena" msprop:Generator_RowDeletingName="cadenaRowDeleting" msprop:Generator_RowChangingName="cadenaRowChanging" msprop:Generator_RowEvHandlerName="cadenaRowChangeEventHandler" msprop:Generator_RowDeletedName="cadenaRowDeleted" msprop:Generator_RowClassName="cadenaRow" msprop:Generator_UserTableName="cadena" msprop:Generator_RowEvArgName="cadenaRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_UserColumnName="id" type="xs:int" />
+              <xs:element name="nombre" msprop:Generator_ColumnVarNameInTable="columnnombre" msprop:Generator_ColumnPropNameInRow="nombre" msprop:Generator_ColumnPropNameInTable="nombreColumn" msprop:Generator_UserColumnName="nombre" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="idGiroComercial" msprop:Generator_ColumnVarNameInTable="columnidGiroComercial" msprop:Generator_ColumnPropNameInRow="idGiroComercial" msprop:Generator_ColumnPropNameInTable="idGiroComercialColumn" msprop:Generator_UserColumnName="idGiroComercial" type="xs:int" minOccurs="0" />
+              <xs:element name="idEstado" msprop:Generator_ColumnVarNameInTable="columnidEstado" msprop:Generator_ColumnPropNameInRow="idEstado" msprop:Generator_ColumnPropNameInTable="idEstadoColumn" msprop:Generator_UserColumnName="idEstado" type="xs:int" minOccurs="0" />
+              <xs:element name="fecha" msprop:Generator_ColumnVarNameInTable="columnfecha" msprop:Generator_ColumnPropNameInRow="fecha" msprop:Generator_ColumnPropNameInTable="fechaColumn" msprop:Generator_UserColumnName="fecha" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="vwPartCadFecha" msprop:Generator_TableClassName="vwPartCadFechaDataTable" msprop:Generator_TableVarName="tablevwPartCadFecha" msprop:Generator_TablePropName="vwPartCadFecha" msprop:Generator_RowDeletingName="vwPartCadFechaRowDeleting" msprop:Generator_RowChangingName="vwPartCadFechaRowChanging" msprop:Generator_RowEvHandlerName="vwPartCadFechaRowChangeEventHandler" msprop:Generator_RowDeletedName="vwPartCadFechaRowDeleted" msprop:Generator_UserTableName="vwPartCadFecha" msprop:Generator_RowChangedName="vwPartCadFechaRowChanged" msprop:Generator_RowEvArgName="vwPartCadFechaRowChangeEvent" msprop:Generator_RowClassName="vwPartCadFechaRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="idReporteTienda" msprop:Generator_ColumnVarNameInTable="columnidReporteTienda" msprop:Generator_ColumnPropNameInRow="idReporteTienda" msprop:Generator_ColumnPropNameInTable="idReporteTiendaColumn" msprop:Generator_UserColumnName="idReporteTienda" type="xs:int" minOccurs="0" />
+              <xs:element name="cantidadProducto" msprop:Generator_ColumnVarNameInTable="columncantidadProducto" msprop:Generator_ColumnPropNameInRow="cantidadProducto" msprop:Generator_ColumnPropNameInTable="cantidadProductoColumn" msprop:Generator_UserColumnName="cantidadProducto" type="xs:int" minOccurs="0" />
+              <xs:element name="cantidadSegmentos" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columncantidadSegmentos" msprop:Generator_ColumnPropNameInRow="cantidadSegmentos" msprop:Generator_ColumnPropNameInTable="cantidadSegmentosColumn" msprop:Generator_UserColumnName="cantidadSegmentos" type="xs:int" minOccurs="0" />
+              <xs:element name="idSegmento" msprop:Generator_ColumnVarNameInTable="columnidSegmento" msprop:Generator_ColumnPropNameInRow="idSegmento" msprop:Generator_ColumnPropNameInTable="idSegmentoColumn" msprop:Generator_UserColumnName="idSegmento" type="xs:int" minOccurs="0" />
+              <xs:element name="segmento" msprop:Generator_ColumnVarNameInTable="columnsegmento" msprop:Generator_ColumnPropNameInRow="segmento" msprop:Generator_ColumnPropNameInTable="segmentoColumn" msprop:Generator_UserColumnName="segmento" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="idCliente" msprop:Generator_ColumnVarNameInTable="columnidCliente" msprop:Generator_ColumnPropNameInRow="idCliente" msprop:Generator_ColumnPropNameInTable="idClienteColumn" msprop:Generator_UserColumnName="idCliente" type="xs:int" minOccurs="0" />
+              <xs:element name="plaza" msprop:Generator_ColumnVarNameInTable="columnplaza" msprop:Generator_ColumnPropNameInRow="plaza" msprop:Generator_ColumnPropNameInTable="plazaColumn" msprop:Generator_UserColumnName="plaza" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="municipio" msprop:Generator_ColumnVarNameInTable="columnmunicipio" msprop:Generator_ColumnPropNameInRow="municipio" msprop:Generator_ColumnPropNameInTable="municipioColumn" msprop:Generator_UserColumnName="municipio">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="idPlaza" msprop:Generator_ColumnVarNameInTable="columnidPlaza" msprop:Generator_ColumnPropNameInRow="idPlaza" msprop:Generator_ColumnPropNameInTable="idPlazaColumn" msprop:Generator_UserColumnName="idPlaza" type="xs:int" />
+              <xs:element name="idcMunicipio" msprop:Generator_ColumnVarNameInTable="columnidcMunicipio" msprop:Generator_ColumnPropNameInRow="idcMunicipio" msprop:Generator_ColumnPropNameInTable="idcMunicipioColumn" msprop:Generator_UserColumnName="idcMunicipio" type="xs:int" />
+              <xs:element name="idCadena" msprop:Generator_ColumnVarNameInTable="columnidCadena" msprop:Generator_ColumnPropNameInRow="idCadena" msprop:Generator_ColumnPropNameInTable="idCadenaColumn" msprop:Generator_UserColumnName="idCadena" type="xs:int" />
+              <xs:element name="cadena" msprop:Generator_ColumnVarNameInTable="columncadena" msprop:Generator_ColumnPropNameInRow="cadena" msprop:Generator_ColumnPropNameInTable="cadenaColumn" msprop:Generator_UserColumnName="cadena" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="idFormatoTienda" msprop:Generator_ColumnVarNameInTable="columnidFormatoTienda" msprop:Generator_ColumnPropNameInRow="idFormatoTienda" msprop:Generator_ColumnPropNameInTable="idFormatoTiendaColumn" msprop:Generator_UserColumnName="idFormatoTienda" type="xs:int" />
+              <xs:element name="formato" msprop:Generator_ColumnVarNameInTable="columnformato" msprop:Generator_ColumnPropNameInRow="formato" msprop:Generator_ColumnPropNameInTable="formatoColumn" msprop:Generator_UserColumnName="formato" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="tienda" msprop:Generator_ColumnVarNameInTable="columntienda" msprop:Generator_ColumnPropNameInRow="tienda" msprop:Generator_ColumnPropNameInTable="tiendaColumn" msprop:Generator_UserColumnName="tienda" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="fecha" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnfecha" msprop:Generator_ColumnPropNameInRow="fecha" msprop:Generator_ColumnPropNameInTable="fechaColumn" msprop:Generator_UserColumnName="fecha" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="vwPartPromTerminados" msprop:Generator_TableClassName="vwPartPromTerminadosDataTable" msprop:Generator_TableVarName="tablevwPartPromTerminados" msprop:Generator_TablePropName="vwPartPromTerminados" msprop:Generator_RowDeletingName="vwPartPromTerminadosRowDeleting" msprop:Generator_RowChangingName="vwPartPromTerminadosRowChanging" msprop:Generator_RowEvHandlerName="vwPartPromTerminadosRowChangeEventHandler" msprop:Generator_RowDeletedName="vwPartPromTerminadosRowDeleted" msprop:Generator_UserTableName="vwPartPromTerminados" msprop:Generator_RowChangedName="vwPartPromTerminadosRowChanged" msprop:Generator_RowEvArgName="vwPartPromTerminadosRowChangeEvent" msprop:Generator_RowClassName="vwPartPromTerminadosRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Promotor" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnPromotor" msprop:Generator_ColumnPropNameInRow="Promotor" msprop:Generator_ColumnPropNameInTable="PromotorColumn" msprop:Generator_UserColumnName="Promotor" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="101" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="fecha" msprop:Generator_ColumnVarNameInTable="columnfecha" msprop:Generator_ColumnPropNameInRow="fecha" msprop:Generator_ColumnPropNameInTable="fechaColumn" msprop:Generator_UserColumnName="fecha" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Cadena" msprop:Generator_ColumnVarNameInTable="columnCadena" msprop:Generator_ColumnPropNameInRow="Cadena" msprop:Generator_ColumnPropNameInTable="CadenaColumn" msprop:Generator_UserColumnName="Cadena" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Tienda" msprop:Generator_ColumnVarNameInTable="columnTienda" msprop:Generator_ColumnPropNameInRow="Tienda" msprop:Generator_ColumnPropNameInTable="TiendaColumn" msprop:Generator_UserColumnName="Tienda" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:cadena" />
+      <xs:field xpath="mstns:id" />
+    </xs:unique>
+    <xs:unique name="vwPartCadFecha_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:vwPartCadFecha" />
+      <xs:field xpath="mstns:idPlaza" />
+      <xs:field xpath="mstns:idcMunicipio" />
+      <xs:field xpath="mstns:idCadena" />
+      <xs:field xpath="mstns:idFormatoTienda" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

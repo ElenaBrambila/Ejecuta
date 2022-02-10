@@ -1,0 +1,179 @@
+﻿
+@{
+    ViewBag.Title = "Status";
+}
+
+<h2>Status</h2>
+
+<div style="background-color:#eee; padding:10px" class="head-module">
+    <div class="row">
+        <div class="col-md-1">
+            <label>Semana</label>
+            <input type="number" id="idSemana" />
+            <span id="idSemanaSpan" hidden="hidden" style="color:red">Por favor seleccione una semana </span>
+        </div>
+        <div class="col-md-3">
+            <label>Seleccione la Cadena</label>
+            <input type="hidden" id="idCadena" />
+            @(Html.Kendo().AutoComplete()
+              .Name("cadenas")
+              .DataTextField("Nombre")
+              .Filter("contains")
+              .MinLength(3)
+              .HtmlAttributes(new { style = "width:100%" })
+              .DataSource(source =>
+                      {
+                  source.Read(read =>
+                  {
+                      read.Action("CadenasToList", "InventarioMasivo")
+                          .Data("onAdditionCadena");
+                  })
+                  .ServerFiltering(true);
+              })
+              .Events(e =>
+              {
+                e.Select("onSelectCadena");
+              })
+            )
+        </div>
+        <div class="col-md-3">
+            <label>Seleccione la Tienda</label>
+            <input type="hidden" id="idTienda" value="" />
+            @(Html.Kendo().AutoComplete()
+              .Name("tiendas")
+              .DataTextField("Nombre")
+              .Filter("contains")
+              .MinLength(3)
+              .HtmlAttributes(new { style = "width:100%", hidden="hidden" })
+              .DataSource(source =>
+                      {
+                  source.Read(read =>
+                  {
+                      read.Action("TiendasToList", "InventarioMasivo")
+                          .Data("onAditionTienda");
+                  })
+                  .ServerFiltering(true);
+              })
+              .Events(e =>
+              {
+                e.Select("onSelectTienda");
+              })
+            )
+            <span id="idTiendaSpan" hidden="hidden" style="color:red">Por favor seleccione una tienda </span>
+        </div>
+        <div class="col-md-3">
+            <label>Seleccione el Producto</label>
+            <input type="hidden" id="idProducto" value="" />
+            @(Html.Kendo().AutoComplete()
+              .Name("productos")
+              .DataTextField("Nombre")
+              .Filter("contains")
+              .MinLength(3)
+              .HtmlAttributes(new { style = "width:100%", hidden="hidden" })
+              .DataSource(source =>
+                      {
+                  source.Read(read =>
+                  {
+                      read.Action("ProductosToList", "InventarioMasivo")
+                          .Data("onAditionProducto");
+                  })
+                  .ServerFiltering(true);
+              })
+              .Events(e =>
+              {
+                e.Select("onSelectProducto");
+              })
+            )
+            <span id="idProductoSpan" hidden="hidden" style="color:red">Por favor seleccione un producto </span>
+        </div>
+        <div class="col-md-2">
+            <button id="idSubmit" style="margin-top:23px; height:25px; width:55px" class="btn-success">Buscar</button>
+        </div>
+    </div>
+    
+</div>
+
+<div class="block" id="idResult">
+
+</div>
+
+<script>
+    $(document).ready(function () {
+    })
+    function onAdditionCadena() {
+        return {
+            cadena: $("#cadenas").val()
+        };
+    }
+
+    function onAditionTienda() {
+        let idCadena;
+        if ($("#idCadena").val() == "") {
+            idCadena = null;
+        }
+        else {
+            idCadena = $("#idCadena").val();
+        }
+        return {
+            tienda: $("#tiendas").val(),
+            idCadena: idCadena,
+        };
+    }
+
+    function onAditionProducto() {
+        return {
+            producto: $("#productos").val()
+        };
+    }
+
+    function onSelectCadena(e) {
+        var dataItem = this.dataItem(e.item.index());
+        $("#tiendas").prop('hidden', false);
+        $("#idCadena").val(dataItem.Id);
+    }
+
+    function onSelectTienda(e) {
+        var dataItem = this.dataItem(e.item.index());
+        $("#idTienda").val(dataItem.Id);
+    }
+
+    function onSelectProducto(e) {
+        var dataItem = this.dataItem(e.item.index());
+        $("#idProducto").val(dataItem.Id);
+    }
+    $("#idSubmit").click(function (e) {
+        $("#idResult").empty();
+        $("#idSemanaSpan").prop('hidden', true);
+        $("#idTiendaSpan").prop('hidden', true);
+        $("#idProductoSpan").prop('hidden', true);
+
+        if ($("#idSemana").val() == "") {
+            $("#idSemanaSpan").prop('hidden', false);
+            $("#idSemana").focus();
+            return;
+        }
+        if ($("#idTienda").val() == "") {
+            $("#idTiendaSpan").prop('hidden', false);
+            $("#idTienda").focus();
+            return;
+        }
+        if ($("#idProducto").val() == "") {
+            $("#idProductoSpan").prop('hidden', false);
+            $("#idProducto").focus();
+            return;
+        }
+        let url = "@Url.Content("~/InventarioMasivo/GetStatus")"
+        let idProducto = $("#idProducto").val();
+        let idTienda = $("#idTienda").val();
+        let numSemana = $("#idSemana").val();
+        let params = {
+            idProducto: idProducto, 
+            idTienda: idTienda,
+            numSemana: numSemana,
+        };
+        $.post(url, params, function (data) {
+            $("#idResult").append(data);
+        });
+    })
+
+</script>

@@ -1,0 +1,209 @@
+﻿@{
+    ViewBag.Title = "Inventario Masivo (Carga de Excel)";
+}
+<div style="background-color:#eee; padding:10px;" class="head-module">
+
+    <div class="row">
+        <div class="col-md-4">
+            <label>Seleccionar Cliente</label>
+            @Html.DropDownList("cboClientes", (SelectList)ViewBag.lstClientes, null, new { style = "width:300px;font-size:18px" })
+        </div>
+
+        <div class="col-md-4">
+            <label>Seleccione la Cadena</label>
+            <span hidden="hidden" id="idSpanCadena" style="color:red">La cadena es obligatoria</span>
+            @(Html.Kendo().AutoComplete()
+              .Name("cadenas")
+              .DataTextField("Nombre")
+              .Filter("contains")
+              .MinLength(3)
+              .HtmlAttributes(new { style = "width:100%" })
+              .DataSource(source =>
+                      {
+                  source.Read(read =>
+                  {
+                      read.Action("CadenasToList", "InventarioMasivo")
+                          .Data("onAdditionCadena");
+                  })
+                  .ServerFiltering(true);
+              })
+              .Events(e =>
+              {
+                e.Select("onSelectCadena");
+              })
+            )
+        </div>
+
+        <div class="col-md-2">
+            <label>Semana</label>
+            <input type="number" id="idSemana" />
+            <span hidden="hidden" id="idSpanSemana" style="color:red">La semana es obligatoria</span>
+        </div>
+
+
+
+    </div>
+
+    <div class="clearfix"></div>
+
+
+</div>
+<br />
+<div class="bloque">
+    <form id="frmCargar">
+        <div style="text-align:right;">
+            <div class="mitad float">
+                <label style="text-align: left; font-size:13px;">Selecciona el archivo Excel de inventarios y después da clic en Cargar Archivo</label>
+                <br />
+                <div style="text-align:left;">
+                    <a target="_blank" href="~/ArchivosFormatos/formatoInventario.xlsx">DESCARGAR FORMATO</a><span style="font-size:11px;"></span>
+
+                </div>
+
+            </div>
+            <div class="right mitad">
+
+                <input id="archivo" name="archivo" accept=".xls,.xlsx" style="" type="file" />
+
+                <input style="margin-top:5px;" type="submit" class="btn-success" value="Cargar Archivo" />
+            </div>
+
+        </div>
+        <div class="clearfix"></div>
+
+        <input type="hidden" name="idCadena" id="idCadena" />
+        <input type="hidden" name="idCliente" id="idCliente" value="" />
+        <input type="hidden" name="idSemanaHidden" id="idSemanaHidden" value="" />
+    </form>
+</div>
+<hr />
+<div id="divGrid">
+
+</div>
+
+<script>
+    var idClienteSeleccionado;
+    $(document).ready(function () {
+
+        $("select[id*='cboClientes']").select2({
+            width: 'resolve'
+        });
+
+
+        $("#cboClientes").change(function () {
+
+            idClienteSeleccionado = $(this).prop("value");
+            $("#idCliente").prop("value", idClienteSeleccionado);
+
+            url = "@Url.Content("~/InventarioMasivo/Listado")" + "?idCliente=" + idClienteSeleccionado
+
+            $("#divGrid").load(url);
+
+            //limpiamos el file
+            $("#archivo").val("");
+        })
+
+        $("#cboClientes").change(); //invocamos el listado
+
+        //funcionalidad del formulario
+        $("#frmCargar").submit(function (e) {
+            e.preventDefault();
+            var semana = $("#idSemana").val();
+            if (semana == "") {
+                $("#idSpanSemana").prop('hidden', false);
+                $("#idSemana").focus();
+                return;
+            }
+            else {
+                $("#idSemanaHidden").prop("value", $("#idSemana").val())
+            }
+
+            var cadena = $("#idCadena").val();
+            if (cadena == "") {
+                $("#idSpanCadena").prop('hidden', false);
+                $("#cadenas").focus();
+                return;
+            }
+            else {
+                $("#idCadena").prop("value", $("#idCadena").val())
+            }
+
+            jsShowWindowLoad();
+
+            url="@Url.Content("~/InventarioMasivo/Cargar")"
+
+            var parametros=new FormData($(this)[0])
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: parametros,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    $("#idSemana").val(null);
+                    $("#cadenas").val("");
+                    $("#idCadena").val(null);
+                    $("#idSpanSemana").prop('hidden', true);
+                    $("#idSpanCadena").prop('hidden', true);
+                    if (data == "1") {
+                        MensajeExito("Productos agregados con éxito");
+
+                        jsRefrescaGrid("tabla")
+                    } else {
+                        MensajeError(data);
+                    }
+                    jsRemoveWindowLoad();
+                },
+                error: function (r) {
+                    $("#idSpanSemana").prop('hidden', true);
+                    jsRemoveWindowLoad();
+                    MensajeError("Error del servidor");
+                }
+            });
+
+        })
+    })
+    function jsEditar(idInventario) {
+
+        url = "@Url.Content("~/InventarioMasivo/Editar")" + "?idInventario=" + idInventario;
+        jsShowDialog(url, 400, 350, "Editar Inventario")
+    }
+    function jsEliminar(idInventario) {
+        if (confirm("¿Estas seguro de eliminar el producto?")) {
+
+            url = "@Url.Content("~/InventarioMasivo/Eliminar")";
+            parametros = "idInventario=" + idInventario;
+            jsShowWindowLoad();
+
+            $.post(url, parametros, function (data) {
+
+                if (data == "1") {
+                    MensajeExito("Eliminado.")
+                    jsRefrescaGrid("tabla")
+                } else {
+                    MensajeError(data) //trae el error data
+                }
+
+                jsRemoveWindowLoad();
+            })
+
+
+        }
+    }
+
+   function onSelectCadena(e) {
+        var dataItem = this.dataItem(e.item.index());
+        $("#tiendas").prop('hidden', false);
+        $("#idCadena").val(dataItem.Id);
+    }
+
+    function onAdditionCadena() {
+        return {
+            cadena: $("#cadenas").val()
+        };
+    }
+
+
+</script>
+

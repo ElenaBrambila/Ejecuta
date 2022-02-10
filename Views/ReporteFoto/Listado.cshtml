@@ -1,0 +1,52 @@
+﻿@using IntegramsaUltimate.Models.FilterViewModel
+@model FilterFotoAnaquelViewModel
+@{
+    Layout = null;
+}
+
+<div class="row">
+
+    <div class="col-md-12">
+        @(Html.Kendo().Grid<IntegramsaUltimate.Models.TableViewModels.TableFotoAlmacenViewModel>()
+                    .Name("tabla")
+
+                     .Columns(c =>
+                        {
+                            c.Bound(p => p.id).Title("#").Hidden();
+                            c.Bound(p => p.codigoRuta).Title("Código");
+
+                            c.Bound(p => p.fecha).Format("{0:dd/MM/yyyy}").Title("Fecha");
+                            c.Bound(p => p.nombreTienda).Title("Nombre Tienda");
+                            c.Bound(p => p.encargado).Title("Encargado").Hidden();
+                            c.Bound(p => p.observaciones).Title("Observaciones");
+
+                            c.Bound(p => p.id).Title("Firma").ClientTemplate(@"# if(existeFirma!=null &&existeFirma!='No'){ # <input type='button' value='Ver Foto' onclick='jsVerFoto(#=id#)'   /> #} #").Width(30);                          
+                            c.Bound(p => p.id).Title("Unica").ClientTemplate(@"# if(existeFotoUnica!=null &&existeFotoUnica!='No'){ # <input type='button' value='Ver Foto' onclick='jsAbreFoto(#=id#,1)'   /> #} #").Width(30);
+                            c.Bound(p => p.id).Title("Concurso").ClientTemplate(@"# if(existeFotoConcurso!=null && existeFotoConcurso!='No'){ # <input type='button' value='Ver Foto' onclick='jsAbreFoto(#=id#,2)'   /> #} #").Width(30);
+                            c.Bound(p => p.id).Title("Antes-Despues").ClientTemplate(@"# if(existeFotoAntesDespues!=null && existeFotoAntesDespues!='No'){ # <input type='button' value='Ver Foto' onclick='jsAbreFoto(#=id#,3)'   /> #} #").Width(30);
+                        
+                        })
+                        .ToolBar(tools => tools.Excel())
+                        .Pageable()
+                        .Sortable()
+                        .Filterable()
+                        .Groupable()
+                        .Excel(excel => excel
+                            .FileName("reporte.xlsx")
+                            .AllPages(true)
+                                     .ProxyURL(Url.Action("JsonGrid", "ReporteFoto", new { cboPromotores = Model.cboPromotores, fechaInicio = Model.fechaInicio, fechaFin = Model.fechaFin }))
+                         )
+                        .Resizable(resize => resize.Columns(true))
+                        .DataSource(d => d.Ajax()
+                                    .Sort(sort =>
+                                    {
+                                        sort.Add("Fecha").Descending();
+                                    })
+                                                   .Read(r => r.Action("JsonGrid", "ReporteFoto", new { cboPromotores = Model.cboPromotores, fechaInicio = Model.fechaInicio, fechaFin = Model.fechaFin }))
+                        )
+
+        )
+    </div>
+</div>
+
+

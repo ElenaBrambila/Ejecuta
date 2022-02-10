@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "Region Estado";
+}
+
+
+<div style="background-color:#eee;padding:10px" class="head-module">
+    <span style="margin-right:35px" class="modulo-titulo">@ViewBag.Title</span>
+
+    <span class="boton-style" style="float:right" onclick="jsNuevo()">
+        <img class="boton-image" src="~/Images/icon_new_element.png" />
+    </span>
+
+  
+    <span>
+        <label>Region</label>
+        @Html.DropDownList("cboZona", (SelectList)ViewBag.lst, null, new { style = "width:200px;" })
+    </span>
+
+</div>
+
+<hr />
+<div id="divGrid">
+
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        $("#cboZona").change(function () {
+
+            idZona = $(this).prop("value");
+
+            url = "@Url.Content("~/Region/Listado")" + "?idZona=" + idZona
+
+            $("#divGrid").load(url);
+
+        })
+
+        $("#cboZona").change(); //invocamos el listado
+
+    })
+
+    //funciones
+
+    function jsNuevo() {
+        
+        var idZona = $("#cboZona").prop("value");
+        url = "@Url.Content("~/Region/Nuevo/")" + "?idZona=" + idZona;
+        jsShowDialog(url, 400,150, "Nuevo Estado")
+    }
+
+    function jsEditar(id) {
+
+        url="@Url.Content("~/Region/Editar/")"+"?id="+id;
+        jsShowDialog(url, 400,150, "Editar Region-Estado")
+    }
+
+
+    function jsEliminar(id){
+        if(confirm("¿Estas seguro de eliminar el Estado de la Region?")){
+
+            url = "@Url.Content("~/Region/Eliminar")";
+            parametros = "id=" + id;
+            jsShowWindowLoad();
+
+            $.post(url, parametros, function (data) {
+
+                if (data == "1") {
+                    MensajeExito("Eliminado.")
+                    jsRefrescaGrid("tabla")
+                } else {
+                    MensajeError(data) //trae el error data
+                }
+
+                jsRemoveWindowLoad();
+            })
+
+
+        }
+    }
+   
+      
+    
+</script>
+

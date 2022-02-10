@@ -1,0 +1,199 @@
+﻿
+@{
+    ViewBag.Title = "Reporte";
+}
+
+<div style="background-color:#eee; padding:10px" class="head-module">
+    <div class="row">
+        <div class="col-md-3">
+            <label>Seleccionar Cliente</label>
+            <input type="hidden" id="idCliente" />
+            @Html.DropDownList("cboClientes", (SelectList)ViewBag.lstClientes, null, new { style = "width:250px;font-size:16px" })
+        </div>
+
+        <div class="col-md-1">
+            <label>Semana</label>
+            <input type="number" id="idSemana" />
+            <span id="idSemanaSpan" hidden="hidden" style="color:red">Por favor seleccione una semana </span>
+        </div>
+
+        <div class="col-md-3">
+            <label>Seleccione la Cadena</label>
+            <input type="hidden" id="idCadena" />
+            @(Html.Kendo().AutoComplete()
+              .Name("cadenas")
+              .DataTextField("Nombre")
+              .Filter("contains")
+              .MinLength(3)
+              .HtmlAttributes(new { style = "width:100%"})
+              .DataSource(source =>
+                      {
+                  source.Read(read =>
+                  {
+                      read.Action("CadenasToList", "InventarioMasivo")
+                          .Data("onAdditionCadena");
+                  })
+                  .ServerFiltering(true);
+              })
+              .Events(e =>
+              {
+                e.Select("onSelectCadena");
+              })
+            )
+            <span id="idCadenaSpan" hidden="hidden" style="color:red">Por favor seleccione una cadena </span>
+        </div>
+
+        <div class="col-md-3">
+            <label>Seleccione la Tienda</label>
+            <input type="hidden" id="idTienda" value="" />
+            @(Html.Kendo().AutoComplete()
+              .Name("tiendas")
+              .DataTextField("Nombre")
+              .Filter("contains")
+              .MinLength(3)
+              .HtmlAttributes(new { style = "width:100%" })
+              .DataSource(source =>
+              {
+                  source.Read(read =>
+                  {
+                      read.Action("TiendasToList", "InventarioMasivo")
+                          .Data("onAditionTienda");
+                  })
+                  .ServerFiltering(true);
+              })
+              .Events(e =>
+              {
+                  e.Select("onSelectTienda");
+              })
+            )
+            <span id="idTiendaSpan" hidden="hidden" style="color:red">Por favor seleccione una tienda </span>
+        </div>
+
+        <div class="col-md-3">
+            <label>Filtrar por Estatus</label>
+            <input type="hidden" id="idStatus" />
+            @Html.DropDownList("cboEstatus", (SelectList)ViewBag.lstEstatus, null, new { style = "width:250px;font-size:16px" })
+        </div>
+
+        <div class="col-md-3">
+            <label>Filtrar por Criterio</label>
+            <input type="hidden" id="idCriterio" />
+            @Html.DropDownList("cboCriterios", (SelectList)ViewBag.lstCriterios, null, new { style = "width:250px;font-size:16px" })
+        </div>
+
+        <div class="col-md-2">
+            <button id="idSubmit" style="margin-top:23px; height:25px; width:100px" class="btn-success">Generar Reporte</button>
+        </div>
+    </div>
+
+</div>
+
+<div id="idResult" style="margin-top: 15px;">
+
+</div>
+
+
+<script>
+    var idClienteSeleccionado;
+    var idCriterioSeleccionado;
+    var idEstatusSeleccionado;
+    $(document).ready(function () {  
+        $("#cboClientes").change(function () {
+
+            idClienteSeleccionado = $(this).prop("value");
+            $("#idCliente").prop("value", idClienteSeleccionado);
+        })
+
+        $("#cboCriterios").change(function () {
+
+            idCriterioSeleccionado = $(this).prop("value");
+            $("#idCriterio").prop("value", idCriterioSeleccionado);
+        })
+
+        $("#cboEstatus").change(function () {
+
+            idEstatusSeleccionado = $(this).prop("value");
+            $("#idStatus").prop("value", idEstatusSeleccionado);
+        })
+
+    })
+
+    
+
+
+
+    function onAdditionCadena() {
+        return {
+            cadena: $("#cadenas").val()
+        };
+    }
+
+    function onAditionTienda() {
+        let idCadena;
+        if ($("#idTienda").val() == "") {
+            idTienda = null;
+        }
+        else {
+            idTienda = $("#idTienda").val();
+        }
+        return {
+            tienda: $("#tiendas").val(),
+            idCadena: idCadena,
+            idTienda: idTienda,
+        };
+    }
+    
+    function onSelectCadena(e) {
+        var dataItem = this.dataItem(e.item.index());
+        $("#tiendas").prop('hidden', false);
+        $("#idCadena").val(dataItem.Id);
+    }
+
+    function onSelectTienda(e) {
+        var dataItem = this.dataItem(e.item.index());
+        $("#idTienda").val(dataItem.Id);
+    }
+        
+    $("#idSubmit").click(function (e) {
+        jsShowWindowLoad();
+        $("#idSemanaSpan").prop('hidden', true);
+        $("#idCadenaSpan").prop('hidden', true);
+
+        if ($("#idSemana").val() == "") {
+            $("#idSemanaSpan").prop('hidden', false);
+            $("#idSemana").focus();
+            jsRemoveWindowLoad();
+            return;
+        }
+        if ($("#idCadena").val() == "") {
+            $("#idCadenaSpan").prop('hidden', false);
+            $("#idCadena").focus();
+            jsRemoveWindowLoad();
+            return;
+        }
+        let url = "@Url.Content("~/InventarioMasivo/Report")";
+        let idTienda = $("#idTienda").val();
+        let numSemana = $("#idSemana").val();
+        let idCadena = $("#idCadena").val();
+        let idCriterio = $("#idCriterio").val();
+        let idStatus = $("#idStatus").val();
+        let idCliente = $("#idCliente").val();
+        let params = {
+            idTienda: idTienda,
+            numSemana: numSemana,
+            idCadena: idCadena,
+            idStatus: idStatus,
+            idCriterio: idCriterio,
+            idCliente: idCliente,
+        };
+        $.post(url, params, function (data) {
+            $("#idResult").empty();
+            $("#idResult").append(data);
+            $("#tiendas").val("")
+            $("#idTienda").val(null)      
+
+            jsRemoveWindowLoad();
+        });
+    })
+
+</script>

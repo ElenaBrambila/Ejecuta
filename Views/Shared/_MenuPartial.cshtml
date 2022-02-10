@@ -1,0 +1,154 @@
+﻿@using IntegramsaUltimate.Models
+@{
+    Layout = null;
+    usuario oUsuario=null;
+    if(Session["Usuario"]!=null){
+        oUsuario=(usuario)Session["Usuario"];
+    }
+}
+
+@if (oUsuario != null)
+{
+<ul class="nav navbar-nav">
+    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+
+    @if (oUsuario.idTipoUsuario == 1)
+    { //ejecutivo de cuenta
+
+
+        <li class="dropdown">
+            <a class="dropdown-toggle"
+               data-toggle="dropdown"
+               href="#">
+                Personas
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>@Html.ActionLink("Usuarios", "Index", "Usuario")</li>
+                <li>@Html.ActionLink("Clientes", "Index", "Cliente")</li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a class="dropdown-toggle"
+               data-toggle="dropdown"
+               href="#">
+                Productos
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>@Html.ActionLink("Productos", "Index", "Producto")</li>
+                <li>@Html.ActionLink("Cargar Productos (Excel)", "Index", "ProductoMasivo")</li>
+
+
+            </ul>
+
+        </li>
+        <li class="dropdown">
+            <a class="dropdown-toggle"
+               data-toggle="dropdown"
+               href="#">
+                Inventario
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>@Html.ActionLink("Cargar Inventario (Excel)", "Index", "InventarioMasivo")</li>
+                <li>@Html.ActionLink("Status Comparativo", "Status", "InventarioMasivo")</li>
+                <li>@Html.ActionLink("Reporte", "ReportInventario", "InventarioMasivo")</li>
+                <li>@Html.ActionLink("Editar Criterios", "Index", "Estatus")</li>
+
+            </ul>
+
+        </li>
+        <li class="dropdown">
+            <a class="dropdown-toggle"
+               data-toggle="dropdown"
+               href="#">
+                Rutas
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>@Html.ActionLink("Rutas", "Index", "Ruta")</li>
+                <li>@Html.ActionLink("Rutas Óptimas", "RutaOptima", "Ruta")</li>
+                <li>@Html.ActionLink("Tiendas en Rutas", "Index", "RutaTienda")</li>
+                <li>@Html.ActionLink("Itinerario", "Index", "RutaIntinerario")</li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a class="dropdown-toggle"
+               data-toggle="dropdown"
+               href="#">
+                Sistema
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>@Html.ActionLink("Cadenas", "Index", "Cadena")</li>
+                <li>@Html.ActionLink("Tiendas", "Index", "Tienda")</li>
+                <li>@Html.ActionLink("Formatos", "Index", "Formato")</li>
+                <li>@Html.ActionLink("Plazas", "Index", "Plaza")</li>
+                <li>@Html.ActionLink("Regiones", "Index", "Region")</li>
+                <li><a href="~/TipoFotos.aspx">Tipos de fotos</a></li>
+
+            </ul>
+        </li>
+
+
+
+    }
+    else if (oUsuario.idTipoUsuario == 2) //promotor
+    {
+
+    }
+    else if (oUsuario.idTipoUsuario == 3) //supervisor
+    {
+
+    }
+
+
+    @if (oUsuario.idTipoUsuario == 1 || oUsuario.idTipoUsuario == 6) //ejecutivo de cuenta, cliente
+    {
+        <li style="" class="dropdown">
+            <a class="dropdown-toggle"
+               data-toggle="dropdown"
+               href="#">
+                Fotos
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="~/ReporteFotoSimple.aspx">Reporte de fotos</a></li>
+                <li><a href="~/ReporteFotos.aspx">Reporte de fotos avanzado</a></li>
+            </ul>
+
+        </li>
+
+        if (oUsuario.id != 505) //vamos a discrimiAR por usuario
+        {
+            <li style="" class="dropdown">
+                <a class="dropdown-toggle"
+                   data-toggle="dropdown"
+                   href="#">
+                    Reportes
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>@Html.ActionLink("Cobertura", "Index", "ReporteAsistenciaCobertura")</li>
+                    <li>@Html.ActionLink("Tiempo Efectivo", "Index", "ReporteTiempoEfectivo")</li>
+                    <li>@Html.ActionLink("Tiempo Efectivo/Traslado", "Index", "ReporteTiempoEfectivoMuerto")</li>
+
+                    @if (oUsuario.idTipoUsuario == 1)
+                    {
+                        <li>@Html.ActionLink("Tiempo Efectivo por cadena", "Index", "ReporteTiempoEfectivoByCadena")</li>
+                    }
+                    <li>@Html.ActionLink("Asistencia", "Index", "ReporteAsistenciaNew")</li>
+
+                    <li>@Html.ActionLink("Resumen Ejecutivo", "Index", "ReporteAsistenciaFechaEnEspecifico")</li>
+                    <li>@Html.ActionLink("Resumen Ejecutivo Promedio", "Index", "ReporteAsistenciaFechaEnEspecificoPromedio")</li>
+                    <li><a href="~/ReporteParticipacionCadena.aspx">Reporte participación</a></li>
+                    <li>@Html.ActionLink("Reporte Efectividad", "Index", "ReporteEfectividadNew")</li>
+                </ul>
+
+            </li>
+            }
+        }
+    </ul>
+}
+

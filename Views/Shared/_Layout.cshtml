@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Focusprom</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/kendo/css")
+    @Styles.Render("~/Content/kendo/ejemplos")
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/kendojs")
+    @Scripts.Render("~/bundles/select2")
+
+    <!-- kendo export excel-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
+
+    <!-- google maps -->
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDYH054cm6UIwY8Gl4gwDWNM5K5caPaU9g&sensor=true"></script>
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Focusprom", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                @Html.Partial("_MenuPartial")
+
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+  
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Focusprom</p>
+        </footer>
+    </div>
+
+    <!-- dialogs-->
+    <div style="display:none;" class="window" id="windowDialog">
+        <div class="contenido"></div>
+    </div>
+    <!-- //dialogs -->
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+<script>
+    $(document).ready(function () {
+        //lenguaje kendo
+        kendo.culture("es-MX");
+
+    });
+
+    function jsSalir() {
+        url = "@Url.Content("/Acceso/Salir")";
+        jsShowWindowLoad();
+        $.post(url, function (data) {
+            if (data == "1") {
+                document.location.href = document.location.href;
+            } else {
+                MensajeError(data);
+            }
+            jsRemoveWindowLoad();
+        })
+
+    }
+</script>

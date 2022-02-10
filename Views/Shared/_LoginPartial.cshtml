@@ -1,0 +1,32 @@
+﻿@using IntegramsaUltimate.Models
+@{
+    Layout = null;
+    usuario oUsuario = null;
+    if (Session["Usuario"] != null)
+    {
+        oUsuario = (usuario)Session["Usuario"];
+    }
+}
+@if (oUsuario!=null)
+{
+   
+    @Html.AntiForgeryToken()
+
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            <a>Bienvenido @oUsuario.nombre</a>
+        </li>
+        <li>
+            <a onclick="jsSalir();" href="javascript:void(0);"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
+
+        </li>
+    </ul>
+    
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+       
+        <li>@Html.ActionLink("Iniciar Sesión", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

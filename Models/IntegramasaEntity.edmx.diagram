@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ce2b025bd26e408c9672ae52ed42da5f" Name="Diagram1">
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.cAccionesRecomendaciones" Width="1.5" PointX="3" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.cadena" Width="1.5" PointX="6" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.cClouster" Width="1.5" PointX="17.25" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.cDiaSemana" Width="1.5" PointX="14.25" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.cEstado" Width="1.5" PointX="0.75" PointY="24" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.cEstadoRuta" Width="1.5" PointX="12" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.cFactorVisita" Width="1.5" PointX="17.25" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.cFotoProposito" Width="1.5" PointX="22" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.cGiroComercial" Width="1.5" PointX="3.75" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.cIncidenciaProblema" Width="1.5" PointX="3" PointY="30.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.cliente" Width="1.5" PointX="3" PointY="20.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.cmunicipio" Width="1.5" PointX="0.75" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.cPerfilRuta" Width="1.5" PointX="12" PointY="34" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.cPlaza" Width="1.5" PointX="11.25" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.cTipoAccionRecomendacion" Width="1.5" PointX="0.75" PointY="29.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.cTiposExhibicion" Width="1.5" PointX="3" PointY="37.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.cTipoUsuario" Width="1.5" PointX="6.75" PointY="33.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.cTurnoRuta" Width="1.5" PointX="12" PointY="36.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.cZona" Width="1.5" PointX="11.25" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.destado" Width="1.5" PointX="0.75" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.formatoProducto" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.formatoTienda" Width="1.5" PointX="8.25" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.logError" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.logErrorMobile" Width="1.5" PointX="11.25" PointY="23.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.logWebService" Width="1.5" PointX="11.25" PointY="26.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.participacion" Width="1.5" PointX="7.5" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.PlazaMunicipio" Width="1.5" PointX="16.5" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.producto" Width="1.5" PointX="5.25" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.reporteIntinerarioPromotor" Width="1.5" PointX="18.75" PointY="25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.reporteTienda" Width="1.5" PointX="22" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.reporteTiendaActividadesPropias" Width="1.5" PointX="24.25" PointY="29" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.reporteTiendaDetalleCompetencia" Width="1.5" PointX="24.25" PointY="32.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.reporteTiendaFoto" Width="1.5" PointX="24.25" PointY="23.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.reporteTiendaIncidencia" Width="1.5" PointX="11.5" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.ReporteTiendaSegmento" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.ruta" Width="1.5" PointX="14.25" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.rutaIntinerario" Width="1.5" PointX="16.5" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.rutaTienda" Width="1.5" PointX="19.5" PointY="20.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.segmentoProductos" Width="1.5" PointX="9" PointY="30.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.segmentos" Width="1.5" PointX="5.25" PointY="30" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.tienda" Width="1.5" PointX="13.5" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.usuario" Width="1.5" PointX="9" PointY="22.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.usuarioCliente" Width="1.5" PointX="11.25" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.ZonaEstado" Width="1.5" PointX="19.5" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.reporteTiendaFrentes" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__cAcciones__idEst__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__cAcciones__idTip__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__reporteTi__idAcc__74AE54BC" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__reporteTi__idRec__75A278F5" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__cadena__idEstado__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__cadena__idGiroCo__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__formatoTi__idCad__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__tienda__idCadena__02FC7413" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__rutaTiend__idClo__57DD0BE4" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__rutaIntin__idDia__7F2BE32F" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__cIncidenc__idEst__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__cliente__idEstad__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__cTiposExh__idEst__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__formatoTi__idEst__628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__producto__idEsta__656C112C" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__reporteIn__idEst__6754599E" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__reporteTi__idEst__6A30C649" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__ruta__idEstado__797309D9" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__rutaIntin__idEst__00200768" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__rutaTiend__idEst__58D1301D" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__tienda__idEstado__03F0984C" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__usuario__idEstad__0A9D95DB" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__ruta__idEstadoRu__7A672E12" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__rutaTiend__idFac__59C55456" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__reporteTi__idFot__72C60C4A" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__tienda__idGiro__04E4BC85" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__reporteTi__idPro__76969D2E" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__cliente__iddEsta__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__cliente__idMunic__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__producto__idClie__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__ruta__idCliente__7B5B524B" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__segmentos__idCli__2704CA5F" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__usuarioCl__idCli__0E6E26BF" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__cmunicipi__iddEs__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__PlazaMuni__idMun__6383C8BA" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__tienda__idMunici__05D8E0BE" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__ruta__idPerfil__7C4F7684" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__PlazaMuni__idPla__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__tienda__idPlaza__06CD04F7" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__reporteTi__idTip__6E01572D" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__reporteTi__idTip__70DDC3D8" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__usuario__idTipoU__0B91BA14" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__ruta__idTurno__7D439ABD" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__tienda__idZona__07C12930" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__ZonaEstad__idZon__10566F31" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__tienda__iddEstad__08B54D69" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__usuario__iddEsta__0C85DE4D" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__ZonaEstad__iddEs__114A936A" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__tienda__idFormat__09A971A2" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__logErrorM__idUsu__3C34F16F" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__logWebSer__idUsu__04AFB25B" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__testParti__idPro__1B9317B3" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__reporteTi__idPro__6EF57B66" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__reporteTi__idPro__778AC167" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__segmentoP__idPro__27F8EE98" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__reporteIn__idRut__68487DD7" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__reporteIn__idUsu__693CA210" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__reporteTi__idRep__6B24EA82" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__reporteTi__idRep__6FE99F9F" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__reporteTi__idRep__71D1E811" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__reporteTi__idRep__73BA3083" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__reporteTi__idRep__787EE5A0" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__reporteTi__idRut__6C190EBB" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__reporteTi__idUsu__6D0D32F4" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__ruta__idPromotor__7E37BEF6" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__rutaIntin__idRut__01142BA1" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__rutaTiend__idRut__5AB9788F" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__rutaIntin__idTie__02084FDA" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__rutaTiend__idTie__5BAD9CC8" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__segmentoP__idSeg__28ED12D1" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__usuario__idSuper__0D7A0286" ManuallyRouted="false" />
+        <AssociationConnector Association="IntegramsaUltimateModel.FK__usuarioCl__idUsu__0F624AF8" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

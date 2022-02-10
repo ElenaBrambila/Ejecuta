@@ -1,0 +1,68 @@
+﻿@model IntegramsaUltimate.Models.TableViewModels.TableEstatusViewModel
+@{
+    Layout = null;
+}
+
+<form id="frmFormulario">
+    @Html.HiddenFor(d => d.id)
+    
+    
+
+    <div class="bloque" style="margin-top:15px;">
+        <div  style="margin-left:120px">
+            <b>@Html.DisplayFor(d => d.Nombre)</b>
+        </div>
+        <div style="margin-top:10px">
+            @Html.Label("Rango Superior")
+            @Html.EditorFor(d => d.rangoSuperior)
+        </div>
+        <div style="margin-top:10px">
+            @Html.Label("Rango Inferior")
+            @Html.EditorFor(d => d.rangoInferior)
+        </div>
+        <div style="text-align:center; margin-top:10px">
+            <input class="btn-success" type="submit" value="Guardar" />
+        </div>
+
+    </div>
+
+</form>
+
+
+<script>
+    $(document).ready(() => {
+        $("#frmFormulario").submit(function (e) {
+
+            e.preventDefault();
+
+            jsShowWindowLoad();
+
+            url="@Url.Content("~/Estatus/GuardarEditar")"
+            parametros = $(this).serialize();
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: parametros,
+
+                success: function (data) {
+
+                    if (data == "1") {
+                        MensajeExito("Estatus editado con éxito");
+                        jsCloseDialog();
+
+                        jsRefrescaGrid("tabla")
+                    } else {
+                        MensajeError(data);
+                    }
+                    jsRemoveWindowLoad();
+                },
+                error: function (r) {
+                    jsRemoveWindowLoad();
+                    MensajeError("Error del servidor");
+                }
+            });
+
+        })
+    })
+</script>

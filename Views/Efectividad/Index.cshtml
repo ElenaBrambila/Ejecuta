@@ -1,0 +1,100 @@
+﻿@{
+    ViewBag.Title = "Efectividad 2";
+    int? idCliente = (int?)ViewBag.idCliente;
+}
+
+
+<div style="background-color:#eee;padding:10px" class="head-module">
+    <form id="frmBuscar">
+        <br />
+        <span style="margin-right:35px" class="modulo-titulo">@ViewBag.Title</span>
+        <br />
+        <br />
+        @if (idCliente == null)
+        {
+            @Html.Partial("~/Views/Partials/Filtros/_Clientes.cshtml")
+        }
+        else //si entra el cliente
+        {
+            @Html.Hidden("cboCliente", idCliente)
+        }
+
+
+        <span>
+            <label>Fecha Inicio</label>
+            @Html.Kendo().DatePicker().Name("fechaInicio").Min("01/01/2016").Max(DateTime.Now).Value(DateTime.Now).Format("dd/MM/yyyy")
+        </span>
+        <span>
+            <label>Fecha Fin</label>
+            @Html.Kendo().DatePicker().Name("fechaFin").Min("01/01/2016").Max(DateTime.Now).Value(DateTime.Now).Format("dd/MM/yyyy")
+        </span>
+        <span>
+            <input class="btn btn-success" type="submit" value="Buscar" />
+        </span>
+    </form>
+</div>
+<hr />
+<div id="divGrid">
+
+</div>
+
+<script>
+
+    $(document).ready(function () {
+
+        //eliminamos y ponemos el body en fluid
+        $(".body-content").removeClass("container");
+        $(".body-content").addClass("container-fluid");
+
+        $("#cboCliente").change(function () {
+
+
+            idCliente = $("#cboCliente").prop("value");
+
+            fechaInicio=$("#fechaInicio").prop("value")
+            fechaFin = $("#fechaFin").prop("value");
+            if (idCliente == "") {
+                idCliente = 0;
+            }
+            if (fechaInicio == "") {
+                fechaInicio = 0;
+            }
+            if (fechaFin == "") {
+                fechaFin = 0;
+            }
+
+            url = "@Url.Content("~/Efectividad/Listado")" + "?idCliente=" + idCliente + "&fechaInicio=" + fechaInicio + "&fechaFin=" + fechaFin;
+            $("#divGrid").load(url);
+
+        })
+
+        $("#cboCliente").change(); //invocamos el listado
+        $("#frmBuscar").submit(function (e) {
+            e.preventDefault();
+            idCliente = $("#cboCliente").prop("value");
+
+            fechaInicio = $("#fechaInicio").prop("value")
+            fechaFin = $("#fechaFin").prop("value");
+            if (idCliente == "") {
+                idCliente = 0;
+            }
+            if (fechaInicio == "") {
+                fechaInicio = 0;
+            }
+            if (fechaFin == "") {
+                fechaFin = 0;
+            }
+          url = "@Url.Content("~/Efectividad/Listado")" + "?idCliente=" + idCliente
+           parametros = $(this).serialize();
+
+            $.post(url, parametros, function (data) {
+
+                $("#divGrid").html(data);
+
+       })
+       })
+
+
+    })
+
+</script>

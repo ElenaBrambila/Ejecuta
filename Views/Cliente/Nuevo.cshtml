@@ -1,0 +1,124 @@
+﻿@model IntegramsaUltimate.Models.ViewModels.ClienteViewModel
+@{
+    Layout = null;
+}
+
+<form id="frmFormulario">
+    <div class="bloque">
+        <div>
+            @Html.LabelFor(d => d.razonSocial)
+            @Html.TextBoxFor(d => d.razonSocial)
+        </div>
+        <div>
+            @Html.LabelFor(d => d.domicilio)
+            @Html.TextBoxFor(d => d.domicilio)
+        </div>
+        <div>
+            @Html.LabelFor(d => d.telefono)
+            @Html.TextBoxFor(d => d.telefono)
+        </div>
+        <div>
+            @Html.LabelFor(d => d.email)
+            @Html.TextBoxFor(d => d.email)
+        </div>
+        <div>
+            @Html.LabelFor(d => d.iddEstado)
+            @(Html.Kendo().DropDownList()
+                      .Name("iddEstado")
+                      .HtmlAttributes(new { style = "width:100%" })
+                      .OptionLabel("Selecciona un estado...")
+                      .DataTextField("nombre")
+                      .DataValueField("Id")
+                      .DataSource(source =>
+                      {
+                          source.Read(read =>
+                          {
+                              read.Action("GetEstados", "EstadoMunicipio");
+                          });
+                      })
+            )
+        </div>
+        <div>
+            <script>
+                function filterMunicipios() {
+                    return {
+                        iddEstado: $("#iddEstado").val()
+                    };
+                }
+            </script>
+            @Html.LabelFor(d => d.idMunicipio)
+            @(Html.Kendo().DropDownList()
+                      .Name("idMunicipio")
+                      .HtmlAttributes(new { style = "width:100%" })
+                      .OptionLabel("Selecciona un municipio...")
+                      .DataTextField("nombre")
+                      .DataValueField("Id")
+                      .DataSource(source =>
+                      {
+                          source.Read(read =>
+                          {
+                              read.Action("GetMunicipios", "EstadoMunicipio").Data("filterMunicipios");
+
+                          })
+                          .ServerFiltering(true);
+                      })
+                      .Enable(false)
+                      .AutoBind(false)
+                      .CascadeFrom("iddEstado")
+            )
+
+
+        </div>
+
+
+
+       
+        <div style="text-align:right;">
+            <input class="btn-success" type="submit" value="Guardar" />
+        </div>
+
+    </div>
+
+</form>
+
+<script>
+
+    $(document).ready(function () {
+
+        //actualizar el formulario
+        $("#frmFormulario").submit(function (e) {
+
+            e.preventDefault();
+
+            jsShowWindowLoad();
+
+            url="@Url.Content("~/Cliente/Guardar")"
+            parametros = $(this).serialize();
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: parametros,
+
+                success: function (data) {
+
+                    if (data == "1") {
+                        MensajeExito("Cliente agregado con éxito");
+                        jsCloseDialog();
+
+                        jsRefrescaGrid("tabla")
+                    } else {
+                        MensajeError(data);
+                    }
+                    jsRemoveWindowLoad();
+                },
+                error: function (r) {
+                    jsRemoveWindowLoad();
+                    MensajeError("Error del servidor");
+                }
+            });
+
+        })
+
+    })
+</script>

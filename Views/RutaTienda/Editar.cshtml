@@ -1,0 +1,165 @@
+﻿@using IntegramsaUltimate.Models.ViewModels
+@model RutaTiendaViewModel
+@{
+    Layout = null;
+}
+
+<form id="frmFormulario">
+    @Html.HiddenFor(d => d.idRuta)
+    @Html.HiddenFor(d=>d.id)
+    <div>
+
+        <div>
+            <div class="bloque">
+                <div>
+                    @Html.LabelFor(d => d.idEstado)
+                    @(Html.Kendo().DropDownList()
+                      .Name("idEstado")
+                      .HtmlAttributes(new { style = "width:100%" })
+                      .OptionLabel("Selecciona un estado...")
+                      .DataTextField("nombre")
+                      .DataValueField("Id")
+
+                      .DataSource(source =>
+                      {
+                          source.Read(read =>
+                          {
+                              read.Action("GetEstados", "EstadoMunicipio");
+                          });
+                      })
+                    )
+                </div>
+                <div>
+                    <script>
+                        function filterMunicipios() {
+                            return {
+                                iddEstado: $("#idEstado").val()
+                            };
+                        }
+                    </script>
+                    @Html.LabelFor(d => d.idMunicipio)
+                    @(Html.Kendo().DropDownList()
+                      .Name("idMunicipio")
+                      .HtmlAttributes(new { style = "width:100%" })
+                      .OptionLabel("Selecciona un municipio...")
+                      .DataTextField("nombre")
+                      .DataValueField("Id")
+
+                      .DataSource(source =>
+                      {
+                          source.Read(read =>
+                          {
+                              read.Action("GetMunicipios", "EstadoMunicipio").Data("filterMunicipios");
+
+                          })
+                          .ServerFiltering(true);
+                      })
+                      .Enable(false)
+                      .AutoBind(false)
+                      .CascadeFrom("idEstado")
+                    )
+
+
+                </div>
+                <div>
+                    <script>
+                        function filterTiendas() {
+                            return {
+                                idMunicipio: $("#idMunicipio").val()
+                            };
+                        }
+                    </script>
+                    @Html.LabelFor(d => d.idTienda)
+                    @(Html.Kendo().DropDownList()
+                      .Name("idTienda")
+                      .HtmlAttributes(new { style = "width:100%" })
+                      .OptionLabel("Selecciona una tienda...")
+                      .DataTextField("nombre")
+                      .DataValueField("Id")
+
+                      .DataSource(source =>
+                      {
+                          source.Read(read =>
+                          {
+                              read.Action("GetTiendasByMunicipio", "DropDownList").Data("filterTiendas");
+
+                          })
+                          .ServerFiltering(true);
+                      })
+                      .Enable(false)
+                      .AutoBind(false)
+                      .CascadeFrom("idMunicipio")
+                    )
+
+
+                </div>
+                <div>
+                    @Html.LabelFor(d => d.idFactorVisita)
+                    @Html.DropDownListFor(d => d.idFactorVisita, (SelectList)ViewBag.lstFactorVisita)
+                </div>
+                <div>
+                    @Html.LabelFor(d => d.idClouster)
+                    @Html.DropDownListFor(d => d.idClouster, (SelectList)ViewBag.lstClousters)
+                </div>
+
+            </div>
+            <div class="clearfix"></div>
+
+        </div>
+        <div style="text-align:right;">
+            <input class="btn-success" type="submit" value="Guardar" />
+        </div>
+
+    </div>
+</form>
+
+<script>
+
+
+    $(document).ready(function () {
+
+        //actualizar el formulario
+        $("#frmFormulario").submit(function (e) {
+
+            e.preventDefault();
+
+            jsShowWindowLoad();
+
+            url="@Url.Content("~/RutaTienda/GuardarEditar")"
+            parametros = $(this).serialize();
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: parametros,
+                success: function (data) {
+
+                    if (data == "1") {
+                        MensajeExito("Tienda editada a la ruta con éxito");
+                        jsCloseDialog();
+
+                        jsRefrescaGrid("tabla")
+                    } else {
+                        MensajeError(data);
+                    }
+                    jsRemoveWindowLoad();
+                },
+                error: function (r) {
+                    jsRemoveWindowLoad();
+                    MensajeError("Error del servidor");
+                }
+            });
+
+
+
+
+        })
+
+
+    })
+
+
+
+
+
+</script>

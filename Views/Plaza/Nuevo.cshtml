@@ -1,0 +1,108 @@
+﻿@model IntegramsaUltimate.Models.ViewModels.PlazaMunicipioViewModel
+ @{
+     Layout = null;
+     
+ }
+ <form id="frmMunicipio">
+     
+         @Html.HiddenFor(d => d.idPlaza)
+
+         <div>
+
+             <div>
+                 @Html.LabelFor(d => d.iddEstado)
+                 @(Html.Kendo().DropDownList()
+                      .Name("iddEstado")
+                      .HtmlAttributes(new { style = "width:100%" })
+                      .OptionLabel("Selecciona un estado...")
+                      .DataTextField("nombre")
+                      .DataValueField("Id")
+                      .DataSource(source =>
+                      {
+                          source.Read(read =>
+                          {
+                              read.Action("GetEstados", "EstadoMunicipio");
+                          });
+                      })
+                 )
+             </div>
+             <br />
+             <div>
+                 <script>
+                     function filterMunicipios() {
+                         return {
+                             iddEstado: $("#iddEstado").val()
+                         };
+                     }
+                 </script>
+                 @Html.LabelFor(d => d.idMunicipio)
+                 @(Html.Kendo().DropDownList()
+                      .Name("idMunicipio")
+                      .HtmlAttributes(new { style = "width:100%" })
+                      .OptionLabel("Selecciona un municipio...")
+                      .DataTextField("nombre")
+                      .DataValueField("Id")
+                      .DataSource(source =>
+                      {
+                          source.Read(read =>
+                          {
+                              read.Action("GetMunicipios", "EstadoMunicipio").Data("filterMunicipios");
+
+                          })
+                          .ServerFiltering(true);
+                      })
+                      .Enable(false)
+                      .AutoBind(false)
+                      .CascadeFrom("iddEstado")
+                 )
+
+
+             </div>
+
+             <br />
+
+             <div style=" text-align:right;">
+                 <input class="btn-success" type="submit" value="Guardar" />
+             </div>
+
+         </div>
+     
+</form>
+
+<script>
+    $(document).ready(function () {
+
+        $("#frmMunicipio").submit(function (e) {
+           
+            e.preventDefault(); 
+
+            jsShowWindowLoad();
+         
+            url = "@Url.Content("~/Plaza/Guardar")"
+            parametros = $(this).serialize();
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: parametros,
+
+                success: function (data) {
+
+                    if (data == "1") {
+                        MensajeExito("Municipio agregado con éxito");
+                        jsCloseDialog();
+
+                       jsRefrescaGrid("tabla")
+                    } else {
+                        MensajeError(data);
+                    }
+                    jsRemoveWindowLoad();
+                },
+                error: function (r) {
+                    jsRemoveWindowLoad();
+                    MensajeError("Error del servidor");
+                }
+            });
+        })
+    })
+</script>

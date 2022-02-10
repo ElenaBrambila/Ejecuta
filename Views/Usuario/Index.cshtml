@@ -1,0 +1,125 @@
+﻿
+@{
+    ViewBag.Title = "Usuarios";
+}
+
+
+<div style="background-color:#eee;padding:10px" class="head-module">
+    <span style="margin-right:35px" class="modulo-titulo">Usuarios</span>
+
+    <span class="boton-style" style="float:right" onclick="jsNuevoUsuario()">
+        <img class="boton-image" src="~/Images/icon_new_element.png" />
+    </span>
+</div>
+<hr />
+<div>
+    <div id="tabstrip">
+        <ul>
+            <li  class="k-state-active">
+                Ejecutivos de cuenta
+            </li>
+            <li >
+                Promotores
+            </li>
+            <li>
+                Supervisores
+            </li>
+            <li>
+                Coordinadores
+            </li>
+            <li>
+                Gerentes de operaciones
+            </li>
+            <li>
+                Clientes
+            </li>
+            
+        </ul>
+       
+    </div>
+</div>
+
+<script>
+    var idTipoUsuarioSeleccionado = 1;
+
+    $(document).ready(function () {
+        $("#tabstrip").kendoTabStrip({
+            animation: {
+                open: {
+                    effects: "fadeIn"
+                }
+            },
+            contentUrls: [
+                       '@Url.Content("~/Usuario/Listado/")?idTipoUsuario=1',
+                       '@Url.Content("~/Usuario/Listado/")?idTipoUsuario=2',
+                       '@Url.Content("~/Usuario/Listado/")?idTipoUsuario=3',
+                       '@Url.Content("~/Usuario/Listado/")?idTipoUsuario=4',
+                       '@Url.Content("~/Usuario/Listado/")?idTipoUsuario=5',
+                       '@Url.Content("~/Usuario/Listado/")?idTipoUsuario=6'
+            ]
+        });
+
+        //permite realizar peticion ajax cada vez que se da clic y no se quede contenido anterior
+        var ts = $("#tabstrip").data().kendoTabStrip;
+        ts.tabGroup.on('click', 'li', function (e) {
+            ts.reload($(this));
+        })
+
+    })
+
+    //funciones
+
+    function jsNuevoUsuario() {
+
+        url="@Url.Content("~/Usuario/Nuevo")" + "?idTipoUsuario=" + idTipoUsuarioSeleccionado;
+        jsShowDialog(url, 800, 450, "Nuevo Usuario")
+    }
+
+    function jsEditarUsuario(id) {
+
+        url = "@Url.Content("~/Usuario/Editar")" + "?id=" + id;
+        jsShowDialog(url, 800, 450, "Editar Usuario")
+    }
+
+    function jsAsignarCliente(id) {
+
+        url = "@Url.Content("~/UsuarioCliente/AsignarCliente")" + "?id=" + id;
+        jsShowDialog(url, 300, 150, "Asignar Cliente")
+    }
+
+    function jsAsignarSupervisor(id) {
+
+        url = "@Url.Content("~/UsuarioSupervisor/AsignarSupervisor")" + "?id=" + id;
+        jsShowDialog(url, 300, 150, "Asignar Supervisor")
+    }
+
+    function jsAsignarCoordinador(id) {
+
+        url = "@Url.Content("~/UsuarioSupervisor/AsignarCoordinador")" + "?id=" + id;
+        jsShowDialog(url, 300, 150, "Asignar Coordinador")
+    }
+
+
+    function jsEliminarUsuario(id) {
+        if (confirm("¿Estas seguro de eliminar el usuario?")) {
+
+            url = "@Url.Content("~/Usuario/Eliminar")";
+            parametros = "idUsuario=" + id;
+            jsShowWindowLoad();
+
+            $.post(url, parametros, function (data) {
+
+                if (data == "1") {
+                    MensajeExito("Eliminado.")
+                    jsRefrescaGrid("tabla-" + idTipoUsuarioSeleccionado)
+                } else {
+                    MensajeError(data) //trae el error data
+                }
+
+                jsRemoveWindowLoad();
+            })
+
+
+        }
+    }
+</script>

@@ -1,0 +1,274 @@
+﻿@using IntegramsaUltimate.Models.ViewModels
+@model TiendaViewModel
+@{
+    Layout = null;
+}
+
+<form id="frmFormulario" enctype="multipart/form-data">
+    @Html.HiddenFor(d=>d.latitud)
+    @Html.HiddenFor(d=>d.longitud)
+    <div>
+        <div class="tercio float">
+            <div class="bloque">
+                <div id="map" style="height:400px;">
+                   
+                </div>
+            </div>
+        </div>
+        <div class="tercio float">
+            <div class="bloque">
+                <div>
+                    @Html.LabelFor(d => d.nombre)
+                    @Html.TextBoxFor(d => d.nombre)
+                </div>
+                <div>
+                    @Html.LabelFor(d => d.codigo)
+                    @Html.TextBoxFor(d => d.codigo)
+                </div>
+                <div>
+                    @Html.LabelFor(d => d.idGiro)
+                    @Html.DropDownListFor(d=>d.idGiro,(SelectList)ViewBag.lstGiros)
+                </div>
+                <div>
+                    @Html.LabelFor(d=>d.idCadena)
+                    @(Html.Kendo().DropDownList()
+                      .Name("idCadena")
+                      .HtmlAttributes(new { style = "width:100%" })
+                      .OptionLabel("Selecciona una cadena...")
+                      .DataTextField("nombre")
+                      .DataValueField("Id")
+                      .DataSource(source =>
+                      {
+                          source.Read(read =>
+                          {
+                              read.Action("GetCadenas", "DropDownList");
+                          });
+                      })
+                    )
+                </div>
+                <div>
+                    <script>
+                        function filterFormatos() {
+                            return {
+                                idCadena: $("#idCadena").val()
+                            };
+                        }
+                    </script>
+                    @Html.LabelFor(d => d.idFormato)
+                    @(Html.Kendo().DropDownList()
+                      .Name("idFormato")
+                      .HtmlAttributes(new { style = "width:100%" })
+                      .OptionLabel("Selecciona un formato...")
+                      .DataTextField("nombre")
+                      .DataValueField("Id")
+                      .DataSource(source =>
+                      {
+                          source.Read(read =>
+                          {
+                              read.Action("GetFormatos", "DropDownList").Data("filterFormatos");
+                              
+                          })
+                          .ServerFiltering(true);
+                      })
+                      .Enable(false)
+                      .AutoBind(false)
+                      .CascadeFrom("idCadena")
+                    )
+                  
+
+                </div>
+              
+
+            </div>
+        </div>
+        <div class="tercio float">
+            <div class="bloque">
+                <div>
+                    @Html.LabelFor(d => d.iddEstado)
+                    @(Html.Kendo().DropDownList()
+                      .Name("iddEstado")
+                      .HtmlAttributes(new { style = "width:100%" })
+                      .OptionLabel("Selecciona un estado...")
+                      .DataTextField("nombre")
+                      .DataValueField("Id")
+                     
+                      .DataSource(source =>
+                      {
+                          source.Read(read =>
+                          {
+                              read.Action("GetEstados", "EstadoMunicipio");
+                          });
+                      })
+                    )
+                </div>
+                <div>
+                    <script>
+                        function filterMunicipios() {
+                            return {
+                                iddEstado: $("#iddEstado").val()
+                            };
+                        }
+                    </script>
+                    @Html.LabelFor(d => d.idMunicipio)
+                    @(Html.Kendo().DropDownList()
+                      .Name("idMunicipio")
+                      .HtmlAttributes(new { style = "width:100%" })
+                      .OptionLabel("Selecciona un municipio...")
+                      .DataTextField("nombre")
+                      .DataValueField("Id")
+                     
+                      .DataSource(source =>
+                      {
+                          source.Read(read =>
+                          {
+                              read.Action("GetMunicipios", "EstadoMunicipio").Data("filterMunicipios");
+
+                          })
+                          .ServerFiltering(true);
+                      })
+                      .Enable(false)
+                      .AutoBind(false)
+                      .CascadeFrom("iddEstado")
+                    )
+
+
+                </div>
+
+                <div>
+                    @Html.LabelFor(d => d.colonia)
+                    @Html.TextBoxFor(d => d.colonia)
+                </div>
+                <div>
+                    @Html.LabelFor(d => d.calle)
+                    @Html.TextBoxFor(d => d.calle)
+                </div>
+                <div>
+                    @Html.LabelFor(d => d.numero)
+                    @Html.TextBoxFor(d => d.numero)
+                </div>
+                <div>
+                    @Html.LabelFor(d => d.cp)
+                    @Html.TextBoxFor(d => d.cp, new { @class = "reubica" })
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div>
+        <div style="text-align:right;">
+            <input class="btn-success" type="submit" value="Guardar" />
+        </div>
+
+    </div>
+</form>
+
+<script>
+    var marker,map; //globales
+
+    $(document).ready(function () {
+
+        jsLoadMapa();
+
+        //actualizar el formulario
+        $("#frmFormulario").submit(function (e) {
+
+            e.preventDefault();
+
+            jsShowWindowLoad();
+
+            url="@Url.Content("~/Tienda/Guardar")"
+           // parametros = $(this).serialize();
+
+            var parametros=new FormData($(this)[0])
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: parametros,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+
+                    if (data == "1") {
+                        MensajeExito("Tienda agregada con éxito");
+                        jsCloseDialog();
+
+                        jsRefrescaGrid("tabla")
+                    } else {
+                        MensajeError(data);
+                    }
+                    jsRemoveWindowLoad();
+                },
+                error: function (r) {
+                    jsRemoveWindowLoad();
+                    MensajeError("Error del servidor");
+                }
+            });
+
+
+            
+
+        })
+
+        //funcionalidad blur para poner el domicilio al mapa
+        $(".reubica").blur(function () {
+           
+            //lo ubicamos a una dirección en específico
+            geocoder = new google.maps.Geocoder();
+
+
+            //obtenemos cp
+            var cp = "" + $("#cp").prop("value")
+
+            // var calle = $("#Calle").prop("value");
+            var address = cp + " Mexico";
+            
+            //buscamos el domicilio por medio de geocoder
+            geocoder.geocode({ 'address': address }, function (results, status) {
+                //si el domicilio se encuentra lo ubicamos
+                //no valla ser que ponen crater 1512 de Marte Sistema Solar
+
+                if (status == google.maps.GeocoderStatus.OK) {
+                    map.setCenter(results[0].geometry.location);
+                    marker.setPosition(results[0].geometry.location);
+
+                    document.getElementById('latitud').value = marker.getPosition().lat();
+                    document.getElementById('longitud').value = marker.getPosition().lng();
+                }
+            });
+
+        })
+    })
+
+
+    
+    function jsLoadMapa() {
+        mapOptions = {
+            center: new google.maps.LatLng(20.6596988, -103.34960920000003),
+            zoom: 15,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        //Creamos el mapa
+        map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+        marker = new google.maps.Marker({
+            position: new google.maps.LatLng(20.6596988, -103.34960920000003),
+            map: map,
+            draggable: true,
+            icon: '@Url.Content("~/Images/icon_point.png")',
+        });
+
+        marker.setMap(map);
+
+        //evento dragg
+        google.maps.event.addListener(marker,'dragend',function(event) {
+            document.getElementById('latitud').value = this.position.lat();
+            document.getElementById('longitud').value = this.position.lng();
+           
+        });
+
+
+    }
+
+</script>

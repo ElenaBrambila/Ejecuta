@@ -1,0 +1,21 @@
+﻿@{
+    Layout = null;
+}
+<span>
+    <label>Cliente</label>
+    @(Html.Kendo().DropDownList()
+                      .Name("cboCliente")
+                      .HtmlAttributes(new { style = "width:180px;display:none;" })
+                      .OptionLabel("Selecciona un cliente...")
+                      .DataTextField("nombre")
+                      .DataValueField("Id")
+                      .DataSource(source =>
+                      {
+                          source.Read(read =>
+                          {
+                              read.Action("GetClientes", "DropDownList");
+                          });
+
+                      })
+    )
+</span>

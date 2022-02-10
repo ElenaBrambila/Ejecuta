@@ -1,0 +1,55 @@
+﻿@using IntegramsaUltimate.Models.FilterViewModel
+@model ReporteAsistenciaFechaEnEspecificoViewModel
+@{
+    Layout = null;
+}
+
+<div class="row">
+
+    <div class="col-md-12">
+        @(Html.Kendo().Grid<IntegramsaUltimate.Models.TableViewModels.TableReporteAsistenciaFechaEnEspecificoViewModel>()
+                    .Name("tabla")
+
+                     .Columns(c =>
+                        {
+                            
+                            c.Bound(p => p.plaza).Title("Plaza");
+                            c.Bound(p => p.promotor).Title("Promotor");
+                            c.Bound(p => p.fecha).Format("{0:dd/MM/yyyy}").Title("Fecha");
+                            c.Bound(p => p.entrada).Format("{0:hh:mm}").Title("Entrada");
+                            c.Bound(p => p.salida).Format("{0:hh:mm}").Title("Salida");
+                            c.Bound(p => p.tiempoEfectivo).Title("Tiempo Efectivo");
+                            c.Bound(p => p.tiendasAVisitar).Title("Tiendas");
+                            c.Bound(p => p.tiendasVisitadas).Title("Visitadas");
+                            c.Bound(p => p.tiendasNoVisitadas).Title("No Visitadas");
+                            c.Bound(p => p.dentroPerimetro).Title("Dentro Perimetro");
+                            c.Bound(p => p.fueraPerimetro).Title("Fuera del Perimetro");
+
+                            
+                        })
+                        .ToolBar(tools => tools.Excel())
+                        .Pageable()
+                        .Sortable()
+                        .Filterable()
+                        .Groupable()
+
+                        .Excel(excel => excel
+                            .FileName("reporte.xlsx")
+                            .AllPages(true)
+                                     .ProxyURL(Url.Action("JsonGrid", "ReporteAsistenciaFechaEnEspecifico", new { idCliente = Model.idCliente, fechaInicio = Model.fechaInicio, fechaFin = Model.fechaFin }))
+                         )
+                        .Resizable(resize => resize.Columns(true))
+                        .DataSource(d => d.Ajax()
+                                    .Sort(sort =>
+                                    {
+                                        sort.Add("Promotor");   
+                                        sort.Add("Fecha").Descending();
+                                    })
+                                                           .Read(r => r.Action("JsonGrid", "ReporteAsistenciaFechaEnEspecifico", new { idCliente = Model.idCliente, fechaInicio = Model.fechaInicio, fechaFin = Model.fechaFin }))
+                        )
+
+        )
+    </div>
+</div>
+
+

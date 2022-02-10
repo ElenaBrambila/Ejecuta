@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "Rutas";
+}
+<div style="background-color:#eee;padding:10px" class="head-module">
+
+    <div>
+        <span style="margin-right:35px" class="modulo-titulo">@ViewBag.Title</span>
+        <span>
+            <label>Seleccionar Cliente</label>
+            @Html.DropDownList("cboClientes", (SelectList)ViewBag.lstClientes, null, new { style = "width:300px;" })
+        </span>
+        <span class="boton-style" style="float:right" onclick="jsNuevo()">
+            <img class="boton-image" src="~/Images/icon_new_element.png" />
+        </span>
+    </div>
+
+    <div class="clearfix"></div>
+
+
+</div><br />
+<hr />
+<div id="divGrid">
+
+</div>
+
+<script>
+    var idClienteSeleccionado;
+    $(document).ready(function () {
+        $("#cboClientes").change(function () {
+
+            idClienteSeleccionado = $(this).prop("value");
+            $("#idCliente").prop("value", idClienteSeleccionado);
+
+            url = "@Url.Content("~/Ruta/Listado")" + "?idCliente=" + idClienteSeleccionado
+
+            $("#divGrid").load(url);
+
+            //limpiamos el file
+            $("#archivo").val("");
+        })
+
+        $("#cboClientes").change(); //invocamos el listado
+
+    });
+
+    //funciones
+    function jsNuevo() {
+
+        url="@Url.Content("~/Ruta/Nuevo")"+"?idCliente="+idClienteSeleccionado 
+        jsShowDialog(url, 400, 350, "Nueva Ruta")
+    }
+
+    function jsEditar(id) {
+
+        url = "@Url.Content("~/Ruta/Editar")" + "?id=" + id;
+        jsShowDialog(url, 400, 350, "Editar Ruta")
+    }
+
+  
+    function jsEliminar(id) {
+        if (confirm("¿Estas seguro de eliminar la ruta? (Se eliminara la ruta del promotor lo cual hara que el promotor no tenga ruta asignada desde la APP)")) {
+
+            url = "@Url.Content("~/Ruta/Eliminar")";
+            parametros = "id=" + id;
+            jsShowWindowLoad();
+
+            $.post(url, parametros, function (data) {
+
+                if (data == "1") {
+                    MensajeExito("Eliminado.")
+                    jsRefrescaGrid("tabla")
+                } else {
+                    MensajeError(data) //trae el error data
+                }
+
+                jsRemoveWindowLoad();
+            })
+
+
+        }
+    }
+</script>

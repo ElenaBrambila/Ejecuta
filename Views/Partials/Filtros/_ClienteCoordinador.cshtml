@@ -1,0 +1,112 @@
+﻿
+@{
+    Layout = null;
+}
+<div>
+
+
+    <div class="col-md-3">
+        <span>
+            <label>Cliente</label>
+            @(Html.Kendo().DropDownList()
+                      .Name("cboCliente")
+                      .HtmlAttributes(new { style = "width:240px;display:none;" })
+                      .OptionLabel("Selecciona un cliente...")
+                      .DataTextField("nombre")
+                      .DataValueField("Id")
+                      .DataSource(source =>
+                      {
+                          source.Read(read =>
+                          {
+                              read.Action("GetClientes", "DropDownList");
+                          });
+
+                      })
+    )
+        </span>
+        <br />
+        <br />
+        <span>
+            <label>Fecha Inicio</label>
+            @Html.Kendo().DatePicker().Name("fechaInicio").Min("01/01/2016").Max(DateTime.Now).Value(DateTime.Now).Format("dd/MM/yyyy")
+        </span>
+
+    </div>
+    <div class="col-md-3" style=" width: 27%;">
+        <span>
+            <label>Coordinador</label>
+            <script>
+                function filterCoordinadores() {
+                    return {
+                        idCliente: $("#cboCliente").val()
+                    };
+                }
+            </script>
+
+            @(Html.Kendo().DropDownList()
+                              .Name("cboCoordinadores")
+                              .HtmlAttributes(new { style = "width:240px;" })
+                      .OptionLabel("Selecciona un coordinador...")
+                      .DataTextField("nombre")
+                      .DataValueField("Id")
+                      .DataSource(source =>
+                      {
+                          source.Read(read =>
+                          {
+                              read.Action("GetCoordinadoresByCliente", "DropDownList").Data("filterCoordinadores");
+
+                          })
+                          .ServerFiltering(true);
+                      })
+                      .Enable(false)
+                      .AutoBind(false)
+                      .CascadeFrom("cboCliente")
+    )
+        </span>
+        <br />
+        <br />
+        <span>
+            <label>Fecha Fin</label>
+            @Html.Kendo().DatePicker().Name("fechaFin").Min("01/01/2016").Max(DateTime.Now).Value(DateTime.Now).Format("dd/MM/yyyy")
+        </span>
+    </div>
+    <div class="col-md-3" style="width: 27%;">
+        <span>
+            <label>Promotor</label>
+            <script>
+                function filterPromotores() {
+                    return {
+                        idCoordinador: $("#cboCoordinadores").val(),
+                        idCliente: $("#cboCliente").val()
+                    };
+                }
+            </script>
+
+            @(Html.Kendo().DropDownList()
+                      .Name("cboPromotores")
+                      .HtmlAttributes(new { style = "width:240px;" })
+                      .OptionLabel("Selecciona un promotor...")
+                      .DataTextField("nombre")
+                      .DataValueField("Id")
+                      .DataSource(source =>
+                      {
+                          source.Read(read =>
+                          {
+                              read.Action("GetPromotoresByCoordinador", "DropDownList").Data("filterPromotores");
+
+                          })
+                          .ServerFiltering(true);
+                      })
+                      .Enable(false)
+                      .AutoBind(false)
+                      .CascadeFrom("cboCoordinadores")
+    )
+        </span>
+        <br />
+        <br />
+        <span>
+            <input class="btn btn-success" type="submit" value="Buscar" />
+           
+        </span>
+    </div>
+</div>

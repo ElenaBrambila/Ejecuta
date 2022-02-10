@@ -1,0 +1,23 @@
+﻿@model int
+@{
+    Layout = null;
+    int idCliente = Model;
+}
+
+@(Html.Kendo().DropDownList()
+                      .Name("cboPromotores")
+                      .HtmlAttributes(new { style = "width:220px" })
+                      .OptionLabel("Todos")
+                      .DataTextField("nombre")
+                      .DataValueField("Id")
+                      .DataSource(source =>
+                      {
+                          source.Read(read =>
+                          {
+                              read.Action("GetPromotoresByCliente", "DropDownList", new { idCliente=idCliente});
+
+                          });
+                        
+                      })
+                     
+)

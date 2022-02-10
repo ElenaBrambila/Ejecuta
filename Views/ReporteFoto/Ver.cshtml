@@ -1,0 +1,40 @@
+﻿@model IntegramsaUltimate.Models.ViewModels.ReporteFotoViewModel
+@{
+    Layout = null;
+
+    //foto
+    string base64String1 = null,base64String2=null;
+    
+    WebImage wi = null;
+    if (Model.fotoVieja !=null)
+    {
+        wi = new WebImage((byte[])Model.fotoVieja);
+        base64String1 = "data:image/jpg;base64," + Convert.ToBase64String(wi.GetBytes());
+    }
+
+    if (Model.fotoNueva != null)
+    {
+        wi = new WebImage((byte[])Model.fotoNueva);
+        base64String2 = "data:image/jpg;base64," + Convert.ToBase64String(wi.GetBytes());
+    }
+}
+
+
+<div>
+    <h2>@Model.cadena, @Model.nombreTienda, @Model.determinante, @Model.plaza</h2>
+    <h3>@Model.promotor</h3>
+    <h4>@Model.proposito</h4>
+</div>
+
+<div style="border-top:#999;" >
+    <div class="mitad float" style="text-align:center;">
+        <img onclick="window.open('@Url.Content("~/ReporteFoto/Foto/?idFoto="+Model.idFotoVieja) '); " src="@base64String1" style="max-width:80%; max-height:250px; border:1px solid #888; cursor:pointer" />
+    </div>
+    <div class="mitad float" style="text-align:center;">
+        <img onclick="window.open('@Url.Content("~/ReporteFoto/Foto/?idFoto="+Model.idFotoNueva) ');" src="@base64String2" style="max-width:80%; max-height:250px;  border:1px solid #888; cursor:pointer;" />
+    </div>
+</div>
+
+<div>
+    <p><b>Observaciones: </b>@Model.observaciones</p>
+</div>

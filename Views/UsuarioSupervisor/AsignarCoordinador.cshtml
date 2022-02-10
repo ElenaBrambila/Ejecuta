@@ -1,0 +1,63 @@
+﻿@using IntegramsaUltimate.Models.ViewModels
+@model UsuarioSupervisorViewModel
+@{
+    Layout = null;
+}
+<form id="frmFormulario" enctype="multipart/form-data">
+
+    @Html.HiddenFor(d => d.idUsuario)
+
+    <div>
+        <div>
+            @Html.LabelFor(d => d.idSupervisor)
+            @Html.DropDownListFor(d => d.idSupervisor, (SelectList)ViewBag.lstSupervisores)
+        </div>
+        <div style="text-align: right; padding-top: 10px; ">
+            <input class="btn-success" type="submit" value="Guardar" />
+        </div>
+
+
+
+    </div>
+</form>
+
+<script>
+
+    $(document).ready(function () {
+
+        //actualizar el formulario
+        $("#frmFormulario").submit(function (e) {
+
+            e.preventDefault();
+
+            jsShowWindowLoad();
+
+            url="@Url.Content("~/UsuarioSupervisor/Asignar")"
+            parametros = $(this).serialize();
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: parametros,
+                success: function (data) {
+
+                    if (data == "1") {
+                        MensajeExito("Coordinador asignado al usuario con éxito");
+                        jsCloseDialog();
+
+                        jsRefrescaGrid("tabla-" + idTipoUsuarioSeleccionado)
+                    } else {
+                        MensajeError(data);
+                    }
+                    jsRemoveWindowLoad();
+                },
+                error: function (r) {
+                    jsRemoveWindowLoad();
+                    MensajeError("Error del servidor");
+                }
+            });
+
+        })
+
+    })
+</script>

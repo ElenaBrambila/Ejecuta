@@ -1,0 +1,48 @@
+﻿@using IntegramsaUltimate.Models.FilterViewModel
+@model ReporteAsistenciaCoberturaViewModel
+@{
+    Layout = null;
+
+}
+
+<div class="row">
+
+    <div class="col-md-12">
+        @(Html.Kendo().Grid<IntegramsaUltimate.Models.TableViewModels.TableReporteTiempoEfectivoViewModel>()
+                    .Name("tabla")
+
+                     .Columns(c =>
+                        {
+
+                            c.Bound(p => p.Nombre).Title("Nombre");
+                            c.Bound(p => p.dia1).Title("Lunes").Format("{0}");
+                            c.Bound(p => p.dia2).Title("Martes").Format("{0}");
+                            c.Bound(p => p.dia3).Title("Miercoles").Format("{0}");
+                            c.Bound(p => p.dia4).Title("Jueves").Format("{0}");
+                            c.Bound(p => p.dia5).Title("Viernes").Format("{0}");
+                            c.Bound(p => p.dia6).Title("Sabado").Format("{0}");
+                            c.Bound(p => p.total).Title("Total").Format("{0}");
+                          
+
+                        })
+                        .ToolBar(tools => tools.Excel())
+                        .Pageable()
+                        .Sortable()
+                        .Filterable()
+
+                        .Excel(excel => excel
+                            .FileName("reporte.xlsx")
+                            .AllPages(true)
+                                     .ProxyURL(Url.Action("JsonGrid", "ReporteTiempoEfectivo", new { idPromotor = Model.idPromotor, ano = Model.ano, numSemana = Model.numSemana }))
+                         )
+                        .Resizable(resize => resize.Columns(true))
+                        .DataSource(d => d.Ajax()
+                            .Sort(sort => sort.Add("Nombre").Descending())
+                                           .Read(r => r.Action("JsonGrid", "ReporteTiempoEfectivo", new { idPromotor = Model.idPromotor, ano = Model.ano, numSemana = Model.numSemana }))
+                        )
+
+        )
+    </div>
+</div>
+
+

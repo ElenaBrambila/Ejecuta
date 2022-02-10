@@ -1,0 +1,70 @@
+﻿@model IntegramsaUltimate.Models.ViewModels.EstadoViewModel
+@{
+    Layout = null;
+
+}
+<form id="frmEstadoRegion">
+  @Html.HiddenFor(d => d.idZona)
+    @Html.HiddenFor(d => d.id)
+
+
+    <div>
+        <div>
+
+        </div>
+
+        <span>
+            <label>Estados</label>
+            @Html.DropDownListFor(d => d.iddEstado, (SelectList)ViewBag.lstEstado, null, new { style = "width:200px;" })
+        </span>
+
+
+        <div style="text-align:right;">
+            <br />
+            <input class="btn-success" type="submit" value="Guardar" />
+        </div>
+
+    </div>
+</form>
+
+<script>
+
+    $(document).ready(function () {
+
+
+        $("#frmEstadoRegion").submit(function (e) {
+
+            e.preventDefault();
+
+            jsShowWindowLoad();
+
+            url="@Url.Content("~/Region/GuardarEditar")"
+            parametros = $(this).serialize();
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: parametros,
+
+                success: function (data) {
+
+                    if (data == "1") {
+                        MensajeExito("Formato agregado con éxito");
+                        jsCloseDialog();
+
+                        jsRefrescaGrid("tabla")
+                    } else {
+                        MensajeError(data);
+                    }
+                    jsRemoveWindowLoad();
+                },
+                error: function (r) {
+                    jsRemoveWindowLoad();
+                    MensajeError("Error del servidor");
+                }
+            });
+
+        })
+
+    })
+</script>

@@ -1,0 +1,125 @@
+﻿@{
+    ViewBag.Title = "Tiendas de Rutas";
+}
+<div style="background-color:#eee;padding:10px" class="head-module">
+
+    <div>
+        <span style="margin-right:35px" class="modulo-titulo">@ViewBag.Title</span>
+        <span>
+            <label>Seleccionar Cliente</label>
+            @(Html.Kendo().DropDownList()
+                      .Name("idCliente")
+               
+                      .OptionLabel("Selecciona un cliente...")
+                      .DataTextField("nombre")
+                      .DataValueField("Id")
+                      .DataSource(source =>
+                      {
+                          source.Read(read =>
+                          {
+                              read.Action("GetClientes", "DropDownList");
+                          });
+                      })
+            )
+        </span>
+        <span>
+            <label>Selecciona una ruta</label>
+            <script>
+                        function filterFormatos() {
+                            return {
+                                idCliente: $("#idCliente").val()
+                            };
+                        }
+                    </script>
+                    @(Html.Kendo().DropDownList()
+                      .Name("idRuta")
+                    
+                      .OptionLabel("Selecciona una ruta...")
+                      .DataTextField("nombre")
+                      .DataValueField("Id")
+                      .DataSource(source =>
+                      {
+                          source.Read(read =>
+                          {
+                              read.Action("GetRutas", "DropDownList").Data("filterFormatos");
+                              
+                          })
+                          .ServerFiltering(true);
+                      })
+                      .Enable(false)
+                      .AutoBind(false)
+                      .CascadeFrom("idCliente")
+                      
+                    )
+                  
+        </span>
+
+        <span class="boton-style" style="float:right" onclick="jsNuevo()">
+            <img class="boton-image" src="~/Images/icon_new_element.png" />
+        </span>
+    </div>
+
+    <div class="clearfix"></div>
+
+
+</div><br />
+<hr />
+<div id="divGrid">
+
+</div>
+
+<script>
+    var idRutaSeleccionada;
+    $(document).ready(function () {
+        $("#idRuta").change(function () {
+
+            idRutaSeleccionada = $(this).prop("value");
+
+            url = "@Url.Content("~/RutaTienda/Listado")" + "?idRuta=" + idRutaSeleccionada
+          
+            $("#divGrid").load(url);
+
+
+        })
+
+    
+    });
+
+    //funciones
+    function jsNuevo() {
+        if (idRutaSeleccionada != "") {
+            url = "@Url.Content("~/RutaTienda/Nuevo")" + "?idRuta=" + idRutaSeleccionada;
+            jsShowDialog(url, 400, 400, "Nueva Ruta-Tienda")
+        }
+    }
+
+    function jsEditar(id) {
+
+        url = "@Url.Content("~/RutaTienda/Editar")" + "?id=" + id;
+        jsShowDialog(url, 400, 400, "Editar Ruta-Tienda")
+    }
+
+
+    function jsEliminar(id) {
+        if (confirm("¿Estas seguro de eliminar la tienda de la ruta?")) {
+
+            url = "@Url.Content("~/RutaTienda/Eliminar")";
+            parametros = "id=" + id;
+            jsShowWindowLoad();
+
+            $.post(url, parametros, function (data) {
+
+                if (data == "1") {
+                    MensajeExito("Eliminado.")
+                    jsRefrescaGrid("tabla")
+                } else {
+                    MensajeError(data) //trae el error data
+                }
+
+                jsRemoveWindowLoad();
+            })
+
+
+        }
+    }
+</script>

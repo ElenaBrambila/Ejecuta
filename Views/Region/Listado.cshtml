@@ -1,0 +1,44 @@
+﻿
+@{
+    Layout = null;
+    int idZona = Model;
+}
+
+<div class="row">
+   
+    
+    <div class="col-md-12">
+        @(Html.Kendo().Grid<IntegramsaUltimate.Models.TableViewModels.TableRegionEstadoViewModel>()
+                    .Name("tabla")
+
+                     .Columns(c =>
+                     {
+                            c.Bound(p => p.iddEstado).Title("#").Width(50);
+                            c.Bound(p => p.Nombre).Title("Nombre Estado");
+                            c.Bound(p => p.id).ClientTemplate(@"
+                                                                <img class='imgGrid' src='/Images/icon_edit.png'  onclick='jsEditar(#=id#)' /> |
+                                                                <img class='imgGrid' src='/Images/icon_delete.png'  onclick='jsEliminar(#=id#)' />")
+                                                                .Title("").Width(150);
+
+
+                        })
+                        .ToolBar(tools => tools.Excel())
+                        .Pageable()
+                        .Sortable()
+                        .Filterable()
+
+                        .Excel(excel => excel
+                            .FileName("reporte.xlsx")
+                            .AllPages(true)
+                                             .ProxyURL(Url.Action("JsonGrid", "Region", new { idZona = idZona }))
+                         )
+                        .Resizable(resize => resize.Columns(true))
+                        .DataSource(d => d.Ajax()
+                          //  .Sort(sort => sort.Add("id").Descending())
+                                           .Read(r => r.Action("JsonGrid", "Region", new { idZona = idZona }))
+                        )
+
+        )
+    </div>
+</div>
+

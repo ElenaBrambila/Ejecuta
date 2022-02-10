@@ -1,0 +1,36 @@
+﻿@model int
+@{
+    Layout = null;
+    int idCliente = Model;
+}
+
+<div class="row" style="margin-top:15px">
+
+    <div class="col-md-12">
+        @(Html.Kendo().Grid<IntegramsaUltimate.Models.TableViewModels.TableEstatusViewModel>()
+                    .Name("tabla")
+
+                     .Columns(c =>
+                        {
+                            c.Bound(p => p.Nombre).Title("Estatus");
+                            c.Bound(p => p.id).Title("#").Width(50).Hidden();
+                            c.Bound(p => p.rangoSuperior).Title("Rango Superior");
+                            c.Bound(p => p.rangoInferior).Title("Rango Inferior");
+                            c.Bound(p => p.id).ClientTemplate(@"
+                                                                <img class='imgGrid' src='/Images/icon_edit.png' onclick='jsEditar(#=id#)' />")
+                                                             .Title("").Width(60);
+
+                        })
+                        .Pageable()
+                        .Sortable()
+                        .Filterable()
+                        .Resizable(resize => resize.Columns(true))
+                        .DataSource(d => d.Ajax()
+                           .Read(r => r.Action("JsonGrid", "Estatus", new { idCliente = idCliente }))
+                        )
+
+        )
+    </div>
+</div>
+
+

@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "Plaza Municipio";
+}
+
+
+<div style="background-color:#eee;padding:10px" class="head-module">
+    <span style="margin-right:35px" class="modulo-titulo">@ViewBag.Title</span>
+
+    <span class="boton-style" style="float:right" onclick="jsNuevo()">
+        <img class="boton-image" src="~/Images/icon_new_element.png" />
+    </span>
+
+
+    <span>
+        <label>Plaza</label>
+        @Html.DropDownList("cboPlaza", (SelectList)ViewBag.lst, null, new { style = "width:200px;" })
+    </span>
+
+</div>
+
+<hr />
+<div id="divGrid">
+
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        $("#cboPlaza").change(function () {
+
+            idPlaza = $(this).prop("value");
+
+            url = "@Url.Content("~/Plaza/Listado")" + "?idPlaza=" + idPlaza;
+
+            $("#divGrid").load(url);
+
+        })
+
+        $("#cboPlaza").change(); //invocamos el listado
+
+    })
+
+    //funciones
+    function jsNuevo()
+    {
+        var idPlaza = $("#cboPlaza").prop("value");
+        url = "@Url.Content("~/Plaza/Nuevo/")" + "?idPlaza=" + idPlaza;
+        jsShowDialog(url, 450, 200, "Nuevo Municipio" )
+    }
+
+    function jsEditar(id)
+    {
+
+        url="@Url.Content("~/Plaza/Editar/")"+"?id="+id;
+        jsShowDialog(url, 450,200, "Editar Plaza-Municipio")
+    }
+
+    function jsEliminar(id){
+        if(confirm("¿Estas seguro de eliminar el Municipio de la Plaza?")){
+
+            url = "@Url.Content("~/Plaza/Eliminar")";
+            parametros = "id=" + id;
+            jsShowWindowLoad();
+
+            $.post(url, parametros, function (data) {
+
+                if (data == "1") {
+                    MensajeExito("Eliminado.")
+                    jsRefrescaGrid("tabla")
+                } else {
+                    MensajeError(data) //trae el error data
+                }
+
+                jsRemoveWindowLoad();
+            })
+
+
+        }
+    }
+
+
+
+</script>

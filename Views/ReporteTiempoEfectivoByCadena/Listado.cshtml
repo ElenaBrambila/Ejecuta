@@ -1,0 +1,45 @@
+﻿@using IntegramsaUltimate.Models.FilterViewModel
+@model ReporteTiempoEfectivoByCadenaViewModel
+@{
+    Layout = null;
+
+}
+
+<div class="row">
+
+    <div class="col-md-12">
+        @(Html.Kendo().Grid<IntegramsaUltimate.Models.TableViewModels.TableReporteTiempoEfectivoByCadenaViewModel>()
+                    .Name("tabla")
+
+                     .Columns(c =>
+                        {
+                            c.Bound(p => p.Nombre).Title("Nombre");
+                            c.Bound(p => p.dia1).Title("Lunes");
+                            c.Bound(p => p.dia2).Title("Martes");
+                            c.Bound(p => p.dia3).Title("Miercoles");
+                            c.Bound(p => p.dia4).Title("Jueves");
+                            c.Bound(p => p.dia5).Title("Viernes");
+                            c.Bound(p => p.dia6).Title("Sabado");
+                            c.Bound(p => p.total).Title("Total");
+                        })
+                        .ToolBar(tools => tools.Excel())
+                        .Pageable()
+                        .Sortable()
+                        .Filterable()
+
+                        .Excel(excel => excel
+                            .FileName("reporte.xlsx")
+                            .AllPages(true)
+                                     .ProxyURL(Url.Action("JsonGrid", "ReporteTiempoEfectivoByCadena", new { idCadena = Model.idCadena, ano = Model.ano, numSemana = Model.numSemana }))
+                         )
+                        .Resizable(resize => resize.Columns(true))
+                        .DataSource(d => d.Ajax()
+                            .Sort(sort => sort.Add("Nombre").Descending())
+                                           .Read(r => r.Action("JsonGrid", "ReporteTiempoEfectivoByCadena", new { idCadena = Model.idCadena, ano = Model.ano, numSemana = Model.numSemana }))
+                        )
+
+        )
+    </div>
+</div>
+
+

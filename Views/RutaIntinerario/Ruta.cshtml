@@ -1,0 +1,306 @@
+﻿@using IntegramsaUltimate.Models
+@using IntegramsaUltimate.Models.HelperModels;
+@model IEnumerable<IntegramsaUltimate.Models.TableViewModels.TableRutaIntinerario>
+@{
+    Layout = null;
+    int idRuta = (int)ViewBag.idRuta;
+    IEnumerable<rutaIntinerario> lstIntinerario = (IEnumerable<rutaIntinerario>)ViewBag.lstIntinerario;
+}
+<div>
+    <b style="font-size:16px;">Selecciona el día que será visitada la tienda según corresponda</b>
+</div><br />
+<div>
+    <table id="tableTienda" style="width:100%; border:1px solid #666;">
+        <tr>
+            <th class="table-header-cell">Codigo</th>
+            <th>Nombre</th>
+            <th>Cadena</th>
+            <th style="width:30px">C</th>
+            <th class="bordeFin">Visitas</th>
+            <th class="bordeFin" colspan="6">Semana 1</th>
+            <th class="bordeFin" colspan="6">Semana 2</th>
+            <th class="bordeFin" colspan="6">Semana 3</th>
+            <th colspan="6">Semana 4</th>
+        </tr>
+        <tr>
+            <th class="bordeFin" colspan="5"></th>
+
+            <th class="dia lunes">L</th>
+            <th class="dia martes">M</th>
+            <th class="dia miercoles">I</th>
+            <th class="dia jueves">J</th>
+            <th class="dia viernes">V</th>
+            <th class="dia sabado bordeFin">S</th>
+            
+            <th class="dia lunes">L</th>
+            <th class="dia martes">M</th>
+            <th class="dia miercoles">I</th>
+            <th class="dia jueves">J</th>
+            <th class="dia viernes">V</th>
+            <th class="dia sabado bordeFin">S</th>
+            <th class="dia lunes">L</th>
+            <th class="dia martes">M</th>
+            <th class="dia miercoles">I</th>
+            <th class="dia jueves">J</th>
+            <th class="dia viernes">V</th>
+            <th class="dia sabado bordeFin">S</th>
+            <th class="dia lunes">L</th>
+            <th class="dia martes">M</th>
+            <th class="dia miercoles">I</th>
+            <th class="dia jueves">J</th>
+            <th class="dia viernes">V</th>
+            <th class="dia sabado">S</th>
+
+        </tr>
+
+        @foreach(IntegramsaUltimate.Models.TableViewModels.TableRutaIntinerario oTRI in Model)
+        {
+            <tr>
+                <td><a title="Ver información de tienda" style="cursor:pointer;" onclick="jsShow(@oTRI.idTienda)">@oTRI.codigo</a></td>
+                <td><a title="Ver información de tienda" style="cursor:pointer;" onclick="jsShow(@oTRI.idTienda)">@oTRI.nombre</a></td>
+                <td>@oTRI.cadena</td>
+                <td>@oTRI.clouster</td>
+                <td class="bordeFin">@oTRI.visitas <input type="hidden" class="visitas" value="@oTRI.visitas" /></td>
+                
+                <td data-tienda="@oTRI.idTienda" data-numsemana="1" data-dia="1" class="lunes uno">
+                    <input @if(RutaIntinerario.ExisteEnlstRutaIntinerario(lstIntinerario,oTRI.idTienda,1,1,idRuta)){ @Html.Raw("checked")} type="checkbox" />
+                </td>
+                <td data-tienda="@oTRI.idTienda" data-numsemana="1" data-dia="2" class="martes uno">
+                    <input @if (RutaIntinerario.ExisteEnlstRutaIntinerario(lstIntinerario, oTRI.idTienda, 1, 2, idRuta)) { @Html.Raw("checked") } type="checkbox" />
+                </td>
+                <td data-tienda="@oTRI.idTienda" data-numsemana="1" data-dia="3" class="miercoles uno">
+                    <input @if (RutaIntinerario.ExisteEnlstRutaIntinerario(lstIntinerario, oTRI.idTienda, 1, 3, idRuta)) { @Html.Raw("checked")  } type="checkbox" />
+                </td>
+                <td data-tienda="@oTRI.idTienda" data-numsemana="1" data-dia="4" class="jueves uno">
+                    <input @if (RutaIntinerario.ExisteEnlstRutaIntinerario(lstIntinerario, oTRI.idTienda, 1, 4, idRuta)) { @Html.Raw("checked")  } type="checkbox" />
+                </td>
+                <td data-tienda="@oTRI.idTienda" data-numsemana="1" data-dia="5" class="viernes uno">
+                    <input @if (RutaIntinerario.ExisteEnlstRutaIntinerario(lstIntinerario, oTRI.idTienda, 1, 5, idRuta)) { @Html.Raw("checked")  } type="checkbox" />
+                </td>
+                <td data-tienda="@oTRI.idTienda" data-numsemana="1" data-dia="6" class="sabado uno bordeFin">
+                    <input @if (RutaIntinerario.ExisteEnlstRutaIntinerario(lstIntinerario, oTRI.idTienda, 1, 6, idRuta)) { @Html.Raw("checked")  } type="checkbox" />
+                </td>
+
+                <td data-tienda="@oTRI.idTienda" data-numsemana="2" data-dia="1" class="lunes dos">
+                    <input @if (RutaIntinerario.ExisteEnlstRutaIntinerario(lstIntinerario, oTRI.idTienda, 2, 1, idRuta)) { @Html.Raw("checked")  } type="checkbox" />
+                </td>
+                <td data-tienda="@oTRI.idTienda" data-numsemana="2" data-dia="2" class="martes dos">
+                    <input @if (RutaIntinerario.ExisteEnlstRutaIntinerario(lstIntinerario, oTRI.idTienda, 2, 2, idRuta)) { @Html.Raw("checked")   } type="checkbox" />
+                </td>
+                <td data-tienda="@oTRI.idTienda" data-numsemana="2" data-dia="3" class="miercoles dos">
+                    <input @if (RutaIntinerario.ExisteEnlstRutaIntinerario(lstIntinerario, oTRI.idTienda, 2, 3, idRuta)) { @Html.Raw("checked")   } type="checkbox" />
+                </td>
+                <td data-tienda="@oTRI.idTienda" data-numsemana="2" data-dia="4" class="jueves dos">
+                    <input @if (RutaIntinerario.ExisteEnlstRutaIntinerario(lstIntinerario, oTRI.idTienda, 2, 4, idRuta)) { @Html.Raw("checked")   } type="checkbox" />
+                </td>
+                <td data-tienda="@oTRI.idTienda" data-numsemana="2" data-dia="5" class="viernes dos">
+                    <input @if (RutaIntinerario.ExisteEnlstRutaIntinerario(lstIntinerario, oTRI.idTienda, 2, 5, idRuta)) { @Html.Raw("checked")   } type="checkbox" />
+                </td>
+                <td data-tienda="@oTRI.idTienda" data-numsemana="2" data-dia="6" class="sabado dos bordeFin">
+                    <input @if (RutaIntinerario.ExisteEnlstRutaIntinerario(lstIntinerario, oTRI.idTienda, 2, 6, idRuta)) { @Html.Raw("checked")   } type="checkbox" />
+                </td>
+
+                <td data-tienda="@oTRI.idTienda" data-numsemana="3" data-dia="1" class="lunes tres">
+                    <input @if (RutaIntinerario.ExisteEnlstRutaIntinerario(lstIntinerario, oTRI.idTienda, 3, 1, idRuta)) { @Html.Raw("checked")   } type="checkbox" />
+                </td>
+                <td data-tienda="@oTRI.idTienda" data-numsemana="3" data-dia="2" class="martes tres">
+                    <input @if (RutaIntinerario.ExisteEnlstRutaIntinerario(lstIntinerario, oTRI.idTienda, 3, 2, idRuta)) { @Html.Raw("checked")    } type="checkbox" />
+                </td>
+                <td data-tienda="@oTRI.idTienda" data-numsemana="3" data-dia="3" class="miercoles tres">
+                    <input @if (RutaIntinerario.ExisteEnlstRutaIntinerario(lstIntinerario, oTRI.idTienda, 3, 3, idRuta)) { @Html.Raw("checked")    } type="checkbox" />
+                </td>
+                <td data-tienda="@oTRI.idTienda" data-numsemana="3" data-dia="4" class="jueves tres">
+                    <input @if (RutaIntinerario.ExisteEnlstRutaIntinerario(lstIntinerario, oTRI.idTienda, 3, 4, idRuta)) { @Html.Raw("checked")    } type="checkbox" />
+                </td>
+                <td data-tienda="@oTRI.idTienda" data-numsemana="3" data-dia="5" class="viernes tres">
+                    <input @if (RutaIntinerario.ExisteEnlstRutaIntinerario(lstIntinerario, oTRI.idTienda, 3, 5, idRuta)) { @Html.Raw("checked")    } type="checkbox" />
+                </td>
+                <td data-tienda="@oTRI.idTienda" data-numsemana="3" data-dia="6" class="sabado tres bordeFin">
+                    <input @if (RutaIntinerario.ExisteEnlstRutaIntinerario(lstIntinerario, oTRI.idTienda, 3, 6, idRuta)) { @Html.Raw("checked")    } type="checkbox" />
+                </td>
+
+                <td data-tienda="@oTRI.idTienda" data-numsemana="0" data-dia="1" class="lunes cuatro">
+                    <input @if (RutaIntinerario.ExisteEnlstRutaIntinerario(lstIntinerario, oTRI.idTienda, 0, 1, idRuta)) { @Html.Raw("checked")    } type="checkbox" />
+                </td>
+                <td data-tienda="@oTRI.idTienda" data-numsemana="0" data-dia="2" class="martes cuatro">
+                    <input @if (RutaIntinerario.ExisteEnlstRutaIntinerario(lstIntinerario, oTRI.idTienda, 0, 2, idRuta)) { @Html.Raw("checked")     } type="checkbox" />
+                </td>
+                <td data-tienda="@oTRI.idTienda" data-numsemana="0" data-dia="3" class="miercoles cuatro">
+                    <input @if (RutaIntinerario.ExisteEnlstRutaIntinerario(lstIntinerario, oTRI.idTienda, 0, 3, idRuta)) { @Html.Raw("checked")     } type="checkbox" />
+                </td>
+                <td data-tienda="@oTRI.idTienda" data-numsemana="0" data-dia="4" class="jueves cuatro">
+                    <input @if (RutaIntinerario.ExisteEnlstRutaIntinerario(lstIntinerario, oTRI.idTienda, 0, 4, idRuta)) { @Html.Raw("checked")     } type="checkbox" />
+                </td>
+                <td data-tienda="@oTRI.idTienda" data-numsemana="0" data-dia="5" class="viernes cuatro">
+                    <input @if (RutaIntinerario.ExisteEnlstRutaIntinerario(lstIntinerario, oTRI.idTienda, 0, 5, idRuta)) { @Html.Raw("checked")     } type="checkbox" />
+                </td>
+                <td data-tienda="@oTRI.idTienda" data-numsemana="0" data-dia="6" class="sabado cuatro">
+                    <input @if (RutaIntinerario.ExisteEnlstRutaIntinerario(lstIntinerario, oTRI.idTienda, 0, 6, idRuta)) { @Html.Raw("checked")     } type="checkbox" />
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<input type="hidden" id="hIdRuta" value="@idRuta" />
+<script>
+    $(document).ready(function () {
+
+        $("#tableTienda input[type=checkbox]").click(function () {
+            var seCheco = true;
+
+            //VALIDACIONES DE CHECKBOX PARA NO PERMITIR MÁS DE LA CUENTA------------------------
+            factorVisita=ObtieneFactorVisita($(this))
+
+            switch (factorVisita) {
+                case "0.25": {
+
+                    if (CantidadCheckBoxSeleccionadosByMes($(this)).uno > 1) {
+                        MensajeError("Esta tienda solo permite 1 visita al mes");
+                        $(this).prop('checked', false);
+
+                        seCheco = false;
+                    }
+                } break;
+                case "0.50": {
+
+                    if (CantidadCheckBoxSeleccionadosByQuincena($(this)).uno > 1 || CantidadCheckBoxSeleccionadosByQuincena($(this)).dos>1 ) {
+                        MensajeError("Esta tienda solo permite 1 visita a la quincena");
+                        $(this).prop('checked', false);
+
+                        seCheco = false;
+                    }
+                } break;
+                default: {
+                    if (CantidadCheckBoxSeleccionadosBySemana($(this)).uno > factorVisita || CantidadCheckBoxSeleccionadosBySemana($(this)).dos > factorVisita ||
+                        CantidadCheckBoxSeleccionadosBySemana($(this)).tres > factorVisita || CantidadCheckBoxSeleccionadosBySemana($(this)).cuatro>factorVisita
+                        ) {
+                        MensajeError("Esta tienda solo permite "+factorVisita+" visita(s) a la semana");
+                        $(this).prop('checked', false);
+
+                        seCheco = false;
+                    }
+
+                }
+
+            }
+            //--------------------------------------------------------------------------------------------------
+
+            //si se activo el checkbox hacemos la petición
+            if (seCheco) {
+
+                //obtenemos los valores
+                idRuta = $("#hIdRuta").prop("value");
+                numSemana = $(this).closest("td").data("numsemana");
+                dia = $(this).closest("td").data("dia")
+                idTienda = $(this).closest("td").data("tienda")
+                parametros = "idRuta=" + idRuta + "&numSemana=" + numSemana + "&idDiaSemana=" + dia + "&idTienda=" + idTienda;
+
+
+                if ($(this).prop("checked")) {
+
+                    url = "@Url.Content("~/RutaIntinerario/GuardaDia")"
+                    mensajeE="Día asignado con éxito"
+
+                } else { //si el checkbox se desactivo lo borramos de la bd
+                    url = "@Url.Content("~/RutaIntinerario/EliminaDia")"
+                    mensajeE="Día eliminado con éxito"
+                }
+
+                jsShowWindowLoad();
+                $.post(url, parametros, function (data) {
+
+                    if (data == "1") {
+                        MensajeExito(mensajeE)
+
+                        jsRefrescaHorario(); //ACTUALIZAMOS EL HORARIO
+                    } else {
+                        MensajeError(data);
+                    }
+
+                    jsRemoveWindowLoad();
+                })
+            }
+
+
+        })
+
+    })
+
+
+
+    //-------------------------FUNCIONES-----------------------------------------------------------
+
+    //obtiene el valor de factor visita
+    function ObtieneFactorVisita(obj) {
+
+        $tr = $(obj).closest("tr");
+
+        factorVisita = $tr.find(".visitas").prop("value");
+
+        return factorVisita;
+
+    }
+
+    //obtiene el total de checkbox seleccionado por semana
+    function CantidadCheckBoxSeleccionadosBySemana(obj) {
+        var resultado = new Object();
+
+        //navegamos al tr
+        $tr = $(obj).closest("tr");
+
+        //obtenermos todos los checkbox checkados
+        var uno = $tr.find(".uno input:checked").size();
+        var dos = $tr.find(".dos input:checked").size();
+        var tres = $tr.find(".tres input:checked").size();
+        var cuatro = $tr.find(".cuatro input:checked").size();
+
+        resultado.uno = uno;
+        resultado.dos = dos;
+        resultado.tres = tres;
+        resultado.cuatro = cuatro;
+
+        return resultado;
+    }
+
+    //obtenes cantidad de checkbox seleccionados por quincena
+    function CantidadCheckBoxSeleccionadosByQuincena(obj) {
+        var resultado = new Object();
+
+        //navegamos al tr
+        $tr = $(obj).closest("tr");
+
+        //obtenermos todos los checkbox checkados
+        var uno = $tr.find(".uno input:checked,.dos input:checked").size();
+        var dos = $tr.find(".tres input:checked,.cuatro input:checked").size();
+
+
+        resultado.uno = uno;
+        resultado.dos = dos;
+
+        return resultado;
+    }
+
+    //cantidad de checkbox seleccionados por mes
+    function CantidadCheckBoxSeleccionadosByMes(obj) {
+        var resultado = new Object();
+
+        //navegamos al tr
+        $tr = $(obj).closest("tr");
+
+        //obtenermos todos los checkbox checkados
+        var uno = $tr.find(".uno input:checked,.dos input:checked,.tres input:checked,.cuatro input:checked").size();
+
+        resultado.uno = uno;
+
+
+        return resultado;
+    }
+
+    function jsShow(id) {
+
+        url = "@Url.Content("~/Tienda/Show")" + "?id=" + id;
+        jsShowDialog(url, 1000,500, "Información de Tienda")
+    }
+
+</script>
+

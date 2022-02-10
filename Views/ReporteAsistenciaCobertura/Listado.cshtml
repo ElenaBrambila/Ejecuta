@@ -1,0 +1,43 @@
+﻿@using IntegramsaUltimate.Models.FilterViewModel
+@model ReporteAsistenciaCoberturaViewModel
+@{
+    Layout = null;
+    
+}
+
+<div class="row">
+
+    <div class="col-md-12">
+        @(Html.Kendo().Grid<IntegramsaUltimate.Models.TableViewModels.TableReporteAsistenciaCoberturaViewModel>()
+                    .Name("tabla")
+
+                     .Columns(c =>
+                        {
+                         
+                            c.Bound(p => p.Nombre).Title("Nombre");
+                            c.Bound(p => p.asignadas).Title("Asignadas");
+                            c.Bound(p => p.cubieras).Title("Cubiertas");
+                            c.Bound(p => p.cobertura).Title("% Cobertura");
+
+                        })
+                        .ToolBar(tools => tools.Excel())
+                        .Pageable()
+                        .Sortable()
+                        .Filterable()
+
+                        .Excel(excel => excel
+                            .FileName("reporte.xlsx")
+                            .AllPages(true)
+                             .ProxyURL(Url.Action("JsonGrid", "ReporteAsistenciaCobertura", new { idPromotor = Model.idPromotor,ano=Model.ano,numSemana=Model.numSemana }))
+                         )
+                        .Resizable(resize => resize.Columns(true))
+                        .DataSource(d => d.Ajax()
+                            .Sort(sort => sort.Add("Nombre").Descending())
+                                           .Read(r => r.Action("JsonGrid", "ReporteAsistenciaCobertura", new { idPromotor = Model.idPromotor, ano = Model.ano, numSemana = Model.numSemana }))
+                        )
+
+        )
+    </div>
+</div>
+
+

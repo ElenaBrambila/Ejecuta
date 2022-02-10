@@ -1,0 +1,447 @@
+﻿@{
+    ViewBag.Title = "Rutas Óptimas";
+}
+<div style="background-color:#eee;padding:10px" class="head-module">
+
+
+    Rutas Óptimas
+
+
+</div>
+<br />
+<hr />
+
+<div class="demo-section k-content">
+    <h4>Seleccione los Clientes a compartir</h4>
+    <label for="required">CLIENTES</label>
+    <select id="required" multiple="multiple" data-placeholder="Seleccionar clientes...">
+        <option>PAPEL SAN FRANCISO</option>
+        <option>BELENES VDM</option>
+        <option>PRODUCTOS MEDELLIN</option>
+    </select>
+    <br />  <br />
+
+    <label for="required">PLAZA</label>
+    <select data-placeholder="Seleccionar plaza...">
+        <option>JALISCO</option>
+        <option>MONTERREY</option>
+    </select>
+    <br />  <br />
+    <label for="required">MUNICIPIOS</label>
+    <select class="optional" multiple="multiple" data-placeholder="Seleccionar municipios...">
+        <option>GUADALAJARA</option>
+        <option>ZAPOPAN</option>
+        <option>TLAQUEPAQUE</option>
+    </select>
+    <br />  <br />
+        <label class="k-checkbox-label" for="eq1"> TODAS LAS TIENDAS</label>
+    <label for="required">TIENDAS</label>
+    <select class="optional" multiple="multiple" data-placeholder="Seleccionar tiendas...">
+        <option>PAPEL SAN FRANCISCO - TIENDA 1</option>
+        <option>PAPEL SAN FRANCISCO - TIENDA 2</option>
+        <option>PRODUCTOS MEDELLIN - TIENDA 1</option>
+        <option>PRODUCTOS MEDELLIN - TIENDA 2</option>
+    </select>
+    <br />   <br /><br />   <br />
+    <button class="k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md" id="" onclick="miFunc()">Generar Rutas Optimas</button>
+
+</div>
+<script>
+
+    function miFunc() {
+                // jsShowWindowLoad("Creando rutas óptimas...");
+        $("#divHorario").show();
+          
+
+        }
+</script>
+<style>
+    .demo-section label {
+        display: block;
+        margin: 15px 0 5px 0;
+    }
+
+    #get {
+        float: right;
+        margin: 25px auto 0;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        // create MultiSelect from select HTML element
+        var required = $("#required").kendoMultiSelect().data("kendoMultiSelect");
+        var optional = $(".optional").kendoMultiSelect({
+            autoClose: false
+        }).data("kendoMultiSelect");
+
+        $("#get").click(function () {
+            alert("Attendees:\n\nRequired: " + required.value() + "\nOptional: " + optional.value());
+        });
+    });
+</script>
+<div id="divHorario" style="display:none" >
+
+
+    <div>
+        <b style="font-size:16px;">Selecciona el orden de visita de la tienda arrastrando el elemento con el mouse</b>
+    </div><br>
+          <div>
+              <div class="k-tabstrip-wrapper" style="">
+                  <div id="tabstrip" data-role="tabstrip" class="k-widget k-header k-tabstrip" role="tablist" tabindex="0" aria-activedescendant="tabstrip_ts_active">
+                      <ul class="k-tabstrip-items k-reset">
+                          <li class="k-item k-state-default k-first k-tab-on-top k-state-active" role="tab" aria-controls="tabstrip-1" style="" aria-selected="true">
+                              <span class="k-loading k-complete"></span><span class="k-link">
+                                  Semana 1
+                              </span>
+                          </li>
+                          <li class="k-item k-state-default" role="tab" aria-controls="tabstrip-2" style="">
+                              <span class="k-loading k-complete"></span><span class="k-link">
+                                  Semana 2
+                              </span>
+                          </li>
+                          <li class="k-item k-state-default" role="tab" aria-controls="tabstrip-3" style="">
+                              <span class="k-loading k-complete"></span><span class="k-link">
+                                  Semana 3
+                              </span>
+                          </li>
+                          <li class="k-item k-state-default k-last" role="tab" aria-controls="tabstrip-4" style="">
+                              <span class="k-loading k-complete"></span><span class="k-link">
+                                  Semana 4
+                              </span>
+                          </li>
+                      </ul>
+                      <div class="k-content k-state-active" id="tabstrip-1" role="tabpanel" aria-expanded="true" style="display: block; opacity: 1;">
+                          <table class="tableHorario" style="width:100%; border:1px solid #666;">
+                              <tbody>
+                                  <tr>
+                                      <th><img onclick="jsShowMapaRuta(988,1,1)" src="/Images/map.png">Lunes</th>
+                                      <th><img onclick="jsShowMapaRuta(988,1,2)" src="/Images/map.png">Martes</th>
+                                      <th><img onclick="jsShowMapaRuta(988,1,3)" src="/Images/map.png">Miercoles</th>
+                                      <th><img onclick="jsShowMapaRuta(988,1,4)" src="/Images/map.png">Jueves</th>
+                                      <th><img onclick="jsShowMapaRuta(988,1,5)" src="/Images/map.png">Viernes</th>
+                                      <th><img onclick="jsShowMapaRuta(988,1,6)" src="/Images/map.png">Sabado</th>
+
+                                  </tr>
+                                  <tr>
+                                      <td style="vertical-align:top;">
+                                          <ul class="sortable-basic" data-role="sortable">
+                                              <li class="sortable">
+                                                  <input type="hidden" value="182746">
+                                                  <img src="/Images/sort-icon.png">
+                                                  <strong>TIENDA:</strong><span class="k-icon k-i-delete" style="float: right;"> </span> <br />
+                                                  SORIANA BELENES<br /><br />
+
+                                                  <strong>CLIENTES:</strong>
+                                                  <br />
+                                                  PSF <span class="k-icon k-i-delete" style="float: right;"> </span><br />
+                                                  BELENES <span class="k-icon k-i-delete" style="float: right;"> </span><br />
+                                                  MEDELLIN <span class="k-icon k-i-delete" style="float: right;"> </span><br />
+                                              </li>
+                                              <li class="sortable">
+                                                  <input type="hidden" value="182746">
+                                                  <img src="/Images/sort-icon.png">
+                                                  <strong>TIENDA:</strong><span class="k-icon k-i-delete" style="float: right;"> </span> <br />
+                                                  TIENDA PRUEBA<br /><br />
+
+                                                  <strong>CLIENTES:</strong>
+                                                  <br />
+                                                  BELENES <span class="k-icon k-i-delete" style="float: right;"> </span><br />
+                                                  MEDELLIN <span class="k-icon k-i-delete" style="float: right;"> </span><br />
+                                              </li>
+
+                                          </ul>
+                                      </td>
+                                      <td style="vertical-align:top;">
+                                          <ul class="sortable-basic" data-role="sortable">
+                                              <li class="sortable">
+                                                  <input type="hidden" value="182746">
+                                                  <img src="/Images/sort-icon.png">
+                                                  <strong>TIENDA:</strong><span class="k-icon k-i-delete" style="float: right;"> </span> <br />
+                                                  SORIANA BELENES<br /><br />
+
+                                                  <strong>CLIENTES:</strong>
+                                                  <br />
+                                                  BELENES <span class="k-icon k-i-delete" style="float: right;"> </span><br />
+                                              </li>
+                                              <li class="sortable">
+                                                  <input type="hidden" value="182746">
+                                                  <img src="/Images/sort-icon.png">
+                                                  <strong>TIENDA:</strong><span class="k-icon k-i-delete" style="float: right;"> </span> <br />
+                                                  WALT-MART<br /><br />
+
+                                                  <strong>CLIENTES:</strong>
+                                                  <br />
+                                                  PSF <span class="k-icon k-i-delete" style="float: right;"> </span><br />
+                                              </li>
+                                              <li class="sortable">
+                                                  <input type="hidden" value="182746">
+                                                  <img src="/Images/sort-icon.png">
+                                                  <strong>TIENDA:</strong><span class="k-icon k-i-delete" style="float: right;"> </span> <br />
+                                                  TIENDA PRUEBA<br /><br />
+
+                                                  <strong>CLIENTES:</strong>
+                                                  <br />
+                                                  PSF <span class="k-icon k-i-delete" style="float: right;"> </span><br />
+                                                  BELENES <span class="k-icon k-i-delete" style="float: right;"> </span><br />
+                                              </li>
+
+                                          </ul>
+                                      </td>
+                                      <td style="vertical-align:top;">
+                                          <ul class="sortable-basic" data-role="sortable">
+                                              <li class="sortable">
+                                                  <input type="hidden" value="182746">
+                                                  <img src="/Images/sort-icon.png">
+                                                  <strong>TIENDA:</strong><span class="k-icon k-i-delete" style="float: right;"> </span> <br />
+                                                  TIENDA PRUEBA<br /><br />
+
+                                                  <strong>CLIENTES:</strong>
+                                                  <br />
+                                                  PSF <span class="k-icon k-i-delete" style="float: right;"> </span><br />
+                                                  BELENES <span class="k-icon k-i-delete" style="float: right;"> </span><br />
+                                              </li>
+                                              <li class="sortable">
+                                                  <input type="hidden" value="182746">
+                                                  <img src="/Images/sort-icon.png">
+                                                  <strong>TIENDA:</strong><span class="k-icon k-i-delete" style="float: right;"> </span> <br />
+                                                  WALT-MART<br /><br />
+
+                                                  <strong>CLIENTES:</strong>
+                                                  <br />
+                                                  PSF <span class="k-icon k-i-delete" style="float: right;"> </span><br />
+                                                  BELENES <span class="k-icon k-i-delete" style="float: right;"> </span><br />
+                                              </li>
+                                              <li class="sortable">
+                                                  <input type="hidden" value="182746">
+                                                  <img src="/Images/sort-icon.png">
+                                                  <strong>TIENDA:</strong><span class="k-icon k-i-delete" style="float: right;"> </span> <br />
+                                                  SORIANA<br /><br />
+
+                                                  <strong>CLIENTES:</strong>
+                                                  <br />
+                                              </li>
+
+
+
+                                          </ul>
+                                      </td>
+                                      <td style="vertical-align:top;">
+                                          <ul class="sortable-basic" data-role="sortable">
+                                              <li class="sortable">
+                                                  <input type="hidden" value="182746">
+                                                  <img src="/Images/sort-icon.png">
+                                                  <strong>TIENDA:</strong><span class="k-icon k-i-delete" style="float: right;"> </span> <br />
+                                                  WALT-MART<br /><br />
+
+                                                  <strong>CLIENTES:</strong>
+                                                  <br />
+                                                  PSF <span class="k-icon k-i-delete" style="float: right;"> </span><br />
+                                                  BELENES <span class="k-icon k-i-delete" style="float: right;"> </span><br />
+                                              </li>
+                                              <li class="sortable">
+                                                  <input type="hidden" value="182746">
+                                                  <img src="/Images/sort-icon.png">
+                                                  <strong>TIENDA:</strong><span class="k-icon k-i-delete" style="float: right;"> </span> <br />
+                                                  TIENDA PRUEBA<br /><br />
+
+                                                  <strong>CLIENTES:</strong>
+                                                  <br />
+                                                  PSF <span class="k-icon k-i-delete" style="float: right;"> </span><br />
+                                                  BELENES <span class="k-icon k-i-delete" style="float: right;"> </span><br />
+                                              </li>
+
+                                          </ul>
+                                      </td>
+                                      <td style="vertical-align:top;">
+                                          <ul class="sortable-basic" data-role="sortable">
+                                              <li class="sortable">
+                                                  <input type="hidden" value="182746">
+                                                  <img src="/Images/sort-icon.png">
+                                                  <strong>TIENDA:</strong><span class="k-icon k-i-delete" style="float: right;"> </span> <br />
+                                                  TIENDA PRUEBA<br /><br />
+
+                                                  <strong>CLIENTES:</strong>
+                                                  <br />
+                                                  PSF <span class="k-icon k-i-delete" style="float: right;"> </span><br />
+                                                  BELENES <span class="k-icon k-i-delete" style="float: right;"> </span><br />
+                                              </li>
+
+                                          </ul>
+                                      </td>
+                                      <td style="vertical-align:top;">
+                                          <ul class="sortable-basic" data-role="sortable">
+                                              <li class="sortable">
+                                                  <input type="hidden" value="182746">
+                                                  <img src="/Images/sort-icon.png">
+                                                  <strong>TIENDA:</strong><span class="k-icon k-i-delete" style="float: right;"> </span> <br />
+                                                  WALT-MART<br /><br />
+
+                                                  <strong>CLIENTES:</strong>
+                                                  <br />
+                                                  PSF <span class="k-icon k-i-delete" style="float: right;"> </span><br />
+                                                  BELENES <span class="k-icon k-i-delete" style="float: right;"> </span><br />
+                                              </li>
+                                              <li class="sortable">
+                                                  <input type="hidden" value="182746">
+                                                  <img src="/Images/sort-icon.png">
+                                                  <strong>TIENDA:</strong><span class="k-icon k-i-delete" style="float: right;"> </span> <br />
+                                                  SORIANA BELENES<br /><br />
+
+                                                  <strong>CLIENTES:</strong>
+                                                  <br />
+                                                  PSF <span class="k-icon k-i-delete" style="float: right;"> </span><br />
+                                                  BELENES <span class="k-icon k-i-delete" style="float: right;"> </span><br />
+                                              </li>
+
+                                          </ul>
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                      <div class="k-content" id="tabstrip-2" role="tabpanel" aria-expanded="false" style="opacity: 0; display: none;" aria-hidden="true">
+
+                      </div>
+                      <div class="k-content" id="tabstrip-3" role="tabpanel" aria-expanded="false" aria-hidden="true" style="opacity: 0; display: none;">
+
+                      </div>
+                      <div class="k-content" id="tabstrip-4" role="tabpanel" aria-expanded="false" style="opacity: 1;" aria-hidden="true">
+
+                      </div>
+                  </div>
+                  <div >
+                      <button style="float: right; float: right; padding: 8px; margin-right: 1%; color: #fff6f6;background-image: linear-gradient(#ed1c24,#ed1c24);" class="k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md" id="">Guardar simulador de ruta</button>
+                      <button style="float: right; float: right; padding: 8px; margin-right: 1%; color: #fff6f6;background-image: linear-gradient(#ed1c24,#ed1c24);"  class="k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md" id="">Guardar como nueva ruta</button>
+                  </div>
+              </div>
+           
+   
+
+          </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#tabstrip").kendoTabStrip({
+                animation: {
+                    open: {
+                        effects: "fadeIn"
+                    }
+                }
+            });
+
+            $(".sortable-basic").kendoSortable({
+                hint: function (element) {
+                    return element.clone().addClass("hint");
+                },
+                placeholder: function (element) {
+                    return element.clone().addClass("placeholder").text("Arrastra aquí");
+                },
+                cursorOffset: {
+                    top: -10,
+                    left: -30
+                }, end: SoltadaTienda
+            });
+        })
+
+        function SoltadaTienda(e) {
+            jsShowWindowLoad();
+
+            setTimeout(function () {
+                var lstIds = [];
+                var $horarioDia = e.sender.element.closest(".sortable-basic");
+                $horarioDia.find("input[type=hidden]").each(function (i) {
+
+                    lstIds[i] = $(this).prop("value")
+
+                })
+
+
+                //enviamos peticion json
+                url = "/RutaIntinerario/GuardaOrden"
+                $.ajax(url, {
+                    type: "POST",
+                    traditional: true,
+                    data: {
+                        lstIdsOrden: lstIds
+                    },
+                    complete: function () {
+                        jsRemoveWindowLoad();
+                    }
+                })
+
+            }, 500)
+
+        }
+
+        function jsShowMapaRuta(idRuta, numSemana, idDia) {
+            url = "/RutaIntinerario/VerMapa" + "?idRuta=" + idRuta + "&numSemana=" + numSemana + "&idDiaSemana=" + idDia
+            jsShowDialog(url, 700, 500, "Ruta")
+
+        }
+    </script>
+
+    <style>
+        .sortable-basic img {
+            margin-right: 5px;
+        }
+
+        .sortable-basic li {
+            list-style-type: none;
+            background: #fff;
+            border: 1px solid #aaa;
+            padding: 8px 3px;
+            cursor: move;
+        }
+
+        .sortable.placeholder {
+            background-color: #dceffd;
+            color: #52aef7;
+            text-align: right;
+            padding: 8px 3px;
+        }
+
+        .sortable.hint {
+            display: block;
+            width: 200px;
+            background-color: #52aef7;
+            color: #fff;
+            padding: 8px 3px;
+        }
+
+        .sortable-basic {
+            padding: 0;
+            margin: 0;
+        }
+
+        .tableHorario td {
+            width: 16%;
+        }
+    </style>
+</div>
+<style>
+    #tableTienda, #tableTienda tr, #tableTienda td, #tableTienda th, .tableHorario, .tableHorario tr, .tableHorario td, .tableHorario th {
+        border: 1px solid #999;
+    }
+
+        #tableTienda th, .tableHorario th {
+            text-align: center;
+            background: #eee;
+        }
+
+        #tableTienda td, .tableHorario td {
+            padding: 3px;
+        }
+
+        #tableTienda .dia {
+            width: 26px !important;
+        }
+
+    .bordeFin {
+        border-right: 1px solid #000 !important;
+    }
+
+    .tableHorario img {
+        cursor: pointer;
+        width: 20px;
+    }
+</style>

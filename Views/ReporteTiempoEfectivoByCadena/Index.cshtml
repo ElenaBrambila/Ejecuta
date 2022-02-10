@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "Tiempo efectivo por Cadena";
+}
+
+
+<div style="background-color:#eee;padding:10px" class="head-module">
+    <span style="margin-right:35px" class="modulo-titulo">@ViewBag.Title</span>
+    <span>
+        <label>Cadenas</label>
+        @Html.DropDownList("cboCadenas", (SelectList)ViewBag.lstCadenas, "Todos", new { style = "width:200px;" })
+    </span>
+
+    <span>
+        <label>Semanas</label>
+        @Html.DropDownList("cboSemanas", (SelectList)ViewBag.lstSemanas,
+                                         null,
+                                         new { style = "width:200px;" })
+    </span>
+    <span>
+        <label>Años</label>
+        @Html.DropDownList("cboAno",
+                                    (SelectList)ViewBag.lstAnos,
+                                    null,
+                                    new { style = "width:200px;" })
+    </span>
+</div>
+<hr />
+<div id="divGrid">
+
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        $("#cboCadenas,#cboSemanas,#cboAno").change(function () {
+
+            idCadena = $(this).prop("value");
+            numSemana = $("#cboSemanas").prop("value");
+            ano=$("#cboAno").prop("value")
+
+            url = "@Url.Content("~/ReporteTiempoEfectivoByCadena/Listado")" + "?idCadena=" + idCadena + "&numSemana=" + numSemana + "&ano=" + ano;
+
+            $("#divGrid").load(url);
+
+        })
+
+        $("#cboCadenas").change(); //invocamos el listado
+
+    })
+
+    //funciones
+
+</script>
