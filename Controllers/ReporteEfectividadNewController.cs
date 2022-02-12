@@ -3,13 +3,11 @@ using Kendo.Mvc.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using IntegramsaUltimate.Models.TableViewModels;
-using IntegramsaUltimate.Models.ViewModels;
-using IntegramsaUltimate.Models;
 using System.Data;
+using IntegramsaUltimate.Utilidades;
 
 namespace IntegramsaUltimate.Controllers
 {
@@ -35,6 +33,8 @@ namespace IntegramsaUltimate.Controllers
 
             return View(model);
         }
+       
+        
         /// <summary>
         /// Función para el llenado de registros del reporte de Efectividad
         /// Por cada filtro se realiza unllenado de modelo y una consulta diferente.
@@ -44,190 +44,59 @@ namespace IntegramsaUltimate.Controllers
         /// </summary>
         public ActionResult JsonGrid([DataSourceRequest] DataSourceRequest request, ReporteEfectividadNewFilterViewModel model)
         {
-            DateTime FechaInicio;
-            DateTime FechaFin;
-            if (model.fechaInicio == null)
-            {
-                FechaInicio = DateTime.ParseExact(DateTime.Today.ToString("dd/MM/yyyy") + " 00:00:00", "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
-            }
-            else
-            {
-                FechaInicio = DateTime.ParseExact(model.fechaInicio + " 00:00:00", "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
-            }
-            if (model.fechaFin == null)
-            {
-                DateTime dateTimeNow = DateTime.Now;
-                string dateOnlyString = dateTimeNow.ToString("dd/MM/yyyy");
-                FechaFin = DateTime.ParseExact(dateOnlyString + " 23:59:59", "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
-            }
-            else
-            {
-                FechaFin = DateTime.ParseExact(model.fechaFin + " 23:59:59", "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
-            }
-            
-            List<string> promotorUnico = new List<string>();
-            List<TableReporteEfectividadNewViewModel> Reporte = new List<TableReporteEfectividadNewViewModel>();
-            
-            if (model.idPromotor != 0)
-            {
-                var agrupacion = from p in db.fnReporteEfectividadNew_copy1(FechaInicio, FechaFin).Where(d => d.idPromotor == model.idPromotor)
-                                 group p by new { p.idTienda, p.tienda, p.idPromotor, p.idCliente, p.promotor, p.idCoordinador, p.coordinador, p.codigoRuta, p.cadena, p.det, p.cliente } into grupo
-                                 select grupo;
+            var Reporte = new List<TableReporteEfectividadNewViewModel>();
+            int? id, filter = 0;
 
-                foreach (var grupo in agrupacion)
-                {
-                    promotorUnico.Add(grupo.Key.promotor);
-                    var idt = grupo.Key.idTienda;
-                    var nomti = grupo.Key.tienda;
-                    List<Info> inf = new List<Info>();
-                    foreach (var objetoAgrupado in grupo)
-                    {
-                        inf.Add(new Info
-                        {
-                            nombre = objetoAgrupado.fechaText,
-                            ta = objetoAgrupado.ta,
-                            cob = objetoAgrupado.cob,
-                            fp = objetoAgrupado.fp,
-                            dp = objetoAgrupado.dp
-                        });
-                    }
-                    Reporte.Add(new TableReporteEfectividadNewViewModel
-                    {
-                        
-                        tienda = grupo.Key.tienda,
-                        promotor = grupo.Key.promotor,
-                        cliente = grupo.Key.cliente,
-                        codigoRuta = grupo.Key.codigoRuta,
-                        coordinador = grupo.Key.coordinador,
-                        cadena = grupo.Key.cadena,
-                        det = grupo.Key.det,
-                        StartDate = FechaInicio.ToString("yyyy-MM-dd HH:mm:ss"),
-                        EndDate = FechaFin.ToString("yyyy-MM-dd HH:mm:ss"),
-                        info = inf
-                    });
-                }
-            }
-            else if (model.idCoordinador != 0)
-            {
-                var agrupacion = from p in db.fnReporteEfectividadNew_copy1(FechaInicio, FechaFin).Where(d => d.idCoordinador == model.idCoordinador && d.idCliente == model.idCliente)
-                                 group p by new { p.idTienda, p.tienda, p.idPromotor, p.idCliente, p.promotor, p.idCoordinador, p.coordinador, p.codigoRuta, p.cadena, p.det, p.cliente } into grupo
-                                 orderby grupo.Key.promotor
-                                 select grupo;
+            DateTime FechaInicio = FormatDatetime.GetDatetimeDefaultByString(model.fechaInicio);
+            DateTime FechaFin = FormatDatetime.GetDatetimeDefaultByString(model.fechaFin);
 
-                foreach (var grupo in agrupacion)
-                {
-                    promotorUnico.Add(grupo.Key.promotor);
-                    var idt = grupo.Key.idTienda;
-                    var nomti = grupo.Key.tienda;
-                    List<Info> inf = new List<Info>();
-                    foreach (var objetoAgrupado in grupo)
-                    {
-                        inf.Add(new Info
-                        {
-                            nombre = objetoAgrupado.fechaText,
-                            ta = objetoAgrupado.ta,
-                            cob = objetoAgrupado.cob,
-                            fp = objetoAgrupado.fp,
-                            dp = objetoAgrupado.dp
-                        });
-                    }
-                    Reporte.Add(new TableReporteEfectividadNewViewModel
-                    {
-                        
-                        tienda = grupo.Key.tienda,
-                        promotor = grupo.Key.promotor,
-                        cliente = grupo.Key.cliente,
-                        codigoRuta = grupo.Key.codigoRuta,
-                        coordinador = grupo.Key.coordinador,
-                        cadena = grupo.Key.cadena,
-                        det = grupo.Key.det,
-                        StartDate = FechaInicio.ToString("yyyy-MM-dd HH:mm:ss"),
-                        EndDate = FechaFin.ToString("yyyy-MM-dd HH:mm:ss"),
-                        info = inf
-                    });
-                }
-            }
-            else if (model.idCliente != 0)
-            {
-                var agrupacion = from p in db.fnReporteEfectividadNew_copy1(FechaInicio, FechaFin).Where(d => d.idCliente == model.idCliente)
-                                 group p by new { p.idTienda, p.tienda, p.idPromotor, p.idCliente, p.promotor, p.idCoordinador, p.coordinador, p.codigoRuta, p.cadena, p.det, p.cliente } into grupo
-                                 select grupo;
+            (id, filter) = (model.idPromotor != 0) ?
+                           (model.idPromotor, 0) : (model.idCoordinador != 0) ?
+                           (model.idCoordinador, 1) : (model.idCliente != 0) ? (model.idCliente, 2) : (0, 3);
 
-                foreach (var grupo in agrupacion)
-                {
-                    promotorUnico.Add(grupo.Key.promotor);
-                    var idt = grupo.Key.idTienda;
-                    var nomti = grupo.Key.tienda;
-                    List<Info> inf = new List<Info>();
-                    foreach (var objetoAgrupado in grupo)
-                    {
-                        inf.Add(new Info
-                        {
-                            nombre = objetoAgrupado.fechaText,
-                            ta = objetoAgrupado.ta,
-                            cob = objetoAgrupado.cob,
-                            fp = objetoAgrupado.fp,
-                            dp = objetoAgrupado.dp
-                        });
-                    }
-                    Reporte.Add(new TableReporteEfectividadNewViewModel
-                    {
-                        tienda = grupo.Key.tienda,
-                        promotor = grupo.Key.promotor,
-                        cliente = grupo.Key.cliente,
-                        codigoRuta = grupo.Key.codigoRuta,
-                        coordinador = grupo.Key.coordinador,
-                        cadena = grupo.Key.cadena,
-                        det = grupo.Key.det,
-                        StartDate = FechaInicio.ToString("yyyy-MM-dd HH:mm:ss"),
-                        EndDate = FechaFin.ToString("yyyy-MM-dd HH:mm:ss"),
-                        info = inf
-                    });
-                }
-            }
-            else
-            {
-                var agrupacion = from p in db.fnReporteEfectividadNew_copy1(FechaInicio, FechaFin)
-                                 group p by new { p.idTienda, p.tienda, p.idPromotor, p.idCliente, p.promotor, p.idCoordinador, p.coordinador, p.codigoRuta, p.cadena, p.det, p.cliente } into grupo
-                                 select grupo;
 
-                foreach (var grupo in agrupacion)
+            var result  =   from p 
+                            in  db.spxGetNewReporteEfectividad(FechaInicio, FechaFin, id, model.idCliente, filter)
+                                .ToList()
+                                group p by new {
+                                                    p.idTienda, 
+                                                    p.tienda, 
+                                                    p.idPromotor, 
+                                                    p.idCliente, 
+                                                    p.promotor, 
+                                                    p.idCoordinador, 
+                                                    p.coordinador, 
+                                                    p.codigoRuta, 
+                                                    p.cadena, 
+                                                    p.det, 
+                                                    p.cliente 
+                                                } into grupo
+                                select grupo;
+
+            Reporte = result.ToLookup(item => new TableReporteEfectividadNewViewModel
+            {
+                tienda              = item.Key.tienda,
+                promotor            = item.Key.promotor,
+                cliente             = item.Key.cliente,
+                codigoRuta          = item.Key.codigoRuta,
+                coordinador         = item.Key.coordinador,
+                cadena              = item.Key.cadena,
+                det                 = item.Key.det,
+                StartDate           = FechaInicio.ToString("yyyy-MM-dd HH:mm:ss"),
+                EndDate             = FechaFin.ToString("yyyy-MM-dd HH:mm:ss"),
+                uniquePromotorList  = item.ToLookup(i => i.promotor).Select(x => x.Key).ToList(),
+                info                = item.ToLookup(x => new Info
                 {
-                    promotorUnico.Add(grupo.Key.promotor);
-                    var idt = grupo.Key.idTienda;
-                    var nomti = grupo.Key.tienda;
-                    List<Info> inf = new List<Info>();
-                    foreach (var objetoAgrupado in grupo)
-                    {
-                        inf.Add(new Info
-                        {
-                            nombre = objetoAgrupado.fechaText,
-                            ta = objetoAgrupado.ta,
-                            cob = objetoAgrupado.cob,
-                            fp = objetoAgrupado.fp,
-                            dp = objetoAgrupado.dp
-                        });
-                    }
-                    Reporte.Add(new TableReporteEfectividadNewViewModel
-                    {
-                        tienda = grupo.Key.tienda,
-                        promotor = grupo.Key.promotor,
-                        cliente = grupo.Key.cliente,
-                        codigoRuta = grupo.Key.codigoRuta,
-                        coordinador = grupo.Key.coordinador,
-                        cadena = grupo.Key.cadena,
-                        det = grupo.Key.det,
-                        StartDate = FechaInicio.ToString("yyyy-MM-dd HH:mm:ss"),
-                        EndDate = FechaFin.ToString("yyyy-MM-dd HH:mm:ss"),
-                        info = inf
-                    });
-                }
-            }
-            promotorUnico = promotorUnico.Distinct().ToList();
-            Reporte[0].uniquePromotorList = promotorUnico;
+                    nombre  = x.fechaText,
+                    ta      = x.ta,
+                    cob     = x.cob,
+                    fp      = x.fp,
+                    dp      = x.dp
+
+                }).Select(x => x.Key).ToList()
+            }).Select(t => t.Key).ToList();
 
             return Json(Reporte.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
-
         }
 
         #endregion
