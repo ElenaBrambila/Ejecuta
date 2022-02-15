@@ -11,14 +11,14 @@ namespace IntegramsaUltimate.Models
 {
     using System;
     
-    public partial class fnReporteEfectividadNew_copy1_Result
+    public partial class spxGetNewReporteEfectividad_Result
     {
         public Nullable<int> idRutaItinerario { get; set; }
         public Nullable<int> rip { get; set; }
         public Nullable<int> idReporteTienda { get; set; }
         public Nullable<int> idCliente { get; set; }
         public string cliente { get; set; }
-        public int idRuta { get; set; }
+        public Nullable<int> idRuta { get; set; }
         public string codigoRuta { get; set; }
         public Nullable<int> idCoordinador { get; set; }
         public string coordinador { get; set; }
@@ -29,10 +29,10 @@ namespace IntegramsaUltimate.Models
         public string det { get; set; }
         public Nullable<int> idTienda { get; set; }
         public string tienda { get; set; }
-        public int ta { get; set; }
+        public Nullable<int> ta { get; set; }
         public Nullable<int> cob { get; set; }
-        public int fp { get; set; }
-        public int dp { get; set; }
+        public Nullable<int> fp { get; set; }
+        public Nullable<int> dp { get; set; }
         public Nullable<int> numeroSemana { get; set; }
         public Nullable<int> idDiaSemana { get; set; }
         public Nullable<int> numSemana { get; set; }
