@@ -59,11 +59,28 @@ function getReporteEfectividad(url, myModel) {
 
 function doEachItem(data) {
     var countItem = data.length
-   
-    data.forEach(function (item,i) {
-        loading(countItem,i)
-        fxnGenerateTemplate(item.cliente, item.codigoRuta, item.coordinador, item.promotor, item.det, item.tienda, item.info, item.StartDate, item.EndDate, item.uniquePromotorList)
-    });
+
+    if (countItem > 0) {
+        $('#buttons').show();
+        data.forEach(function (item, i) {
+           
+            if (i <= countItem) {
+                loading(countItem, i)
+                fxnGenerateTemplate(item.cliente, item.codigoRuta, item.coordinador, item.promotor, item.det, item.tienda, item.info, item.StartDate, item.EndDate, item.uniquePromotorList)
+            } else {
+                load.style.opacity = '0';
+                $(".loader-center").css({ 'position': 'unset' });
+                return;
+            }
+           
+        });
+    } else {
+        $('#buttons').hide();
+        load.style.opacity = '0';
+        $(".loader-center").css({ 'position': 'unset' });
+        $('#divTbl').text("La consulta no produjo ningun resultado.");
+    }
+  
 }
 
 
@@ -77,19 +94,21 @@ function loading(countTotal, index) {
          totalCount = countTotal * multi;
        
     }
-
-    if (myTime > totalCount) {
-        newTime = 0;
+    myTime = myTime + porcentage
+    
+    if (myTime >= totalCount) {
+        
+        //console.log("Cerrar  " + " myTime = " + myTime + " Total = " + totalCount);
         //load.style.transition = '1s all';
         load.style.opacity = '0';
         $(".loader-center").css({ 'position': 'unset' });
-    } else {
-        //loader.textContent = myTime + "%";
-        //$('#loader').text(myTime + "%");
-        myTime = myTime + porcentage
-        //console.log(" myTime = " + myTime + " Total = " + totalCount);
-        
+     
     }
+    //else {
+    //    //loader.textContent = myTime + "%";
+    //   /* $('#loader').text(myTime + "%");*/
+    //    console.log(" myTime = " + myTime + " Total = " + totalCount);
+    //}
 }
 
 function float2int(value) {
