@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading;
-using System.Web;
 
 namespace IntegramsaUltimate
 {
@@ -199,9 +198,11 @@ namespace IntegramsaUltimate
             {
                 IntegramsaUltimateDataSetTableAdapters.vwReporteFotosTableAdapter adaptador = new IntegramsaUltimateDataSetTableAdapters.vwReporteFotosTableAdapter();
                 //adaptador.FillByClienteFechaFormatos(tabla, idCliente, starD, endD, idDeFormato);
+                IEnumerable<DataRow> data = adaptador.FillByProposito(idCliente, startDate, endDate).Where(x => idDeFormato.Contains(x.proposito)).ToList();
 
-                var io = adaptador.FillByProposito(idCliente, startDate, endDate, idDeFormato);
-                return tabla;
+                // Create a table from the query.
+                DataTable boundTable = data.CopyToDataTable<DataRow>();
+                return boundTable;
             }
 
             catch (Exception e)
