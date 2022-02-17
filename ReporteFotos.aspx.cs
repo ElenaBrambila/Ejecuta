@@ -204,6 +204,7 @@ namespace IntegramsaUltimate
             ReportViewer1.LocalReport.Refresh();
 
         }
+
         protected void btnPreliminar_Click(object sender, EventArgs e)
         {
             if (cboClientes.SelectedIndex != -1)
@@ -225,8 +226,8 @@ namespace IntegramsaUltimate
                     bool validarFechaFin = DateTime.TryParse(dtFin.Text, out fechaFin);
                     tablasContenido infoReporte = new tablasContenido();
 
-                    DataTable datosReporte = (DataTable)infoReporte.dtFotosClienteFecha(fechaInicio, fechaFin, idDeCliente);
 
+                    DataTable datosReporte = null;
                     //Buscamos si se puso información del promotor
                     int i;
                     List<string> chosenItems = new List<string>();
@@ -284,6 +285,7 @@ namespace IntegramsaUltimate
                     //Promotor
                     if (chosenItems.Count() > 0)
                     {
+                        datosReporte = (DataTable)infoReporte.dtFotosClienteFecha(fechaInicio, fechaFin, idDeCliente);
                         string query = "idDUsuario IN (" + string.Join(",", chosenItems + ")");
                         string query2 = string.Join(",", chosenItems);
                         //  datosReporte.Select("idDUsuario IN (" + string.Join(",", chosenItems.ToArray() + ")").ToString());
@@ -303,6 +305,7 @@ namespace IntegramsaUltimate
                     //Plaza
                     if (elementosPlaza.Count() > 0)
                     {
+                        datosReporte = (DataTable)infoReporte.dtFotosClienteFecha(fechaInicio, fechaFin, idDeCliente);
                         string query2 = string.Join(",", elementosPlaza);
                         DataRow[] resultados = datosReporte.Select("idPlaza IN (" + query2 + ")");
                         if (resultados.Count() > 0)
@@ -320,6 +323,7 @@ namespace IntegramsaUltimate
                     //Cadena
                     if (elementosCadena.Count() > 0)
                     {
+                        datosReporte = (DataTable)infoReporte.dtFotosClienteFecha(fechaInicio, fechaFin, idDeCliente);
                         string query2 = string.Join(",", elementosCadena);
                         DataRow[] resultados = datosReporte.Select("idCadena IN (" + query2 + ")");
                         if (resultados.Count() > 0)
@@ -338,16 +342,17 @@ namespace IntegramsaUltimate
                     if (elementosTE.Count() > 0)
                     {
                         string query2 = string.Join(",", elementosTE);
-                        DataRow[] resultados = datosReporte.Select("proposito IN (" + query2 + ")");
-                        if (resultados.Count() > 0)
-                        {
-                            datosReporte = resultados.CopyToDataTable();
-                        }
+                        datosReporte = (DataTable)infoReporte.dtFotosClienteFormatos(fechaInicio, fechaFin, idDeCliente, query2);
+                        /*  DataRow[] resultados = datosReporte;
+                          if (datosReporte.Count() > 0)
+                           {
+                               datosReporte = datosReporte.CopyToDataTable();
+                          }
 
-                        else
-                        {
-                            return;
-                        }
+                           else
+                         {
+                               return;
+                          }*/
                     }
 
 
@@ -368,12 +373,14 @@ namespace IntegramsaUltimate
                                         var buscarFoto = from p in db.reporteTiendaFoto where p.id == idDeFoto select p;
                                         if (buscarFoto.Count() > 0)
                                         {
-                                       /* reporteTiendaFoto datosFoto = buscarFoto.First();
-                                        System.Drawing.Image foto = byteArrayToImage(datosFoto.foto);
-                                        string ruta = Server.MapPath("~/fotosReportes/" + datosFoto.id.ToString() + ".jpg");
-                                        foto.Save(ruta, ImageFormat.Jpeg);
-                                            listaID.Add(idDeFoto);*/
-
+                                            reporteTiendaFoto datosFoto = buscarFoto.First();
+                                            if (datosFoto.foto != null)
+                                            {
+                                                System.Drawing.Image foto = byteArrayToImage(datosFoto.foto);
+                                                string ruta = Server.MapPath("~/fotosReportes/" + datosFoto.id.ToString() + ".jpg");
+                                                foto.Save(ruta, ImageFormat.Jpeg);
+                                                listaID.Add(idDeFoto);
+                                            }
                                         }
 
                                     }
@@ -409,80 +416,6 @@ namespace IntegramsaUltimate
                     //http://portalsistema.com/fotosReportes/138261.jpg
 
 
-
-                }
-
-            }
-
-        }
-        protected void btnPreliminar_ClickR(object sender, EventArgs e)
-        {
-            if (cboClientes.SelectedIndex != -1)
-            {
-                btnGenerarReporteHorizontal.Visible = true;
-                btnGenerarReporte.Visible = true;
-                btnSelectAllPics1.Visible = true;
-                btnDeseleccionar.Visible = true;
-                btnPreliminar.Visible = false;
-                ReportViewer1.Visible = false;
-
-                int idDeCliente = 0;
-                bool validarCliente = int.TryParse(cboClientes.SelectedValue, out idDeCliente);
-                if (validarCliente)
-                {
-                    DateTime fechaInicio = new DateTime();
-                    bool validarFechaInicio = DateTime.TryParse(dtInicio.Text, out fechaInicio);
-                    DateTime fechaFin = new DateTime();
-                    bool validarFechaFin = DateTime.TryParse(dtFin.Text, out fechaFin);
-                    tablasContenido infoReporte = new tablasContenido();
-
-                    DataTable datosReporte = (DataTable)infoReporte.dtFotosClienteFecha(fechaInicio, fechaFin, idDeCliente);
-
-
-
-                    if (datosReporte.Rows.Count > 0)
-                    {
-                        if (chkDescargarFotos.Checked == true)
-                        {
-                            IList<int> listaID = new List<int>();
-                            foreach (DataRow datos in datosReporte.Rows)
-                            {
-                                if (!File.Exists(Server.MapPath("~/fotosReportes/" + datos["id"].ToString() + ".jpg")))
-                                {
-                                    int idDeFoto = 0;
-                                    bool validarIDFoto = int.TryParse(datos["id"].ToString(), out idDeFoto);
-                                    if (validarIDFoto)
-                                    {
-                                        var buscarFoto = from p in db.reporteTiendaFoto where p.id == idDeFoto select p;
-                                        if (buscarFoto.Count() > 0)
-                                        {
-                                            reporteTiendaFoto datosFoto = buscarFoto.First();
-                                            System.Drawing.Image foto = byteArrayToImage(datosFoto.foto);
-                                            string ruta = Server.MapPath("~/fotosR/" + datosFoto.id.ToString() + ".jpg");
-                                            foto.Save(ruta, ImageFormat.Jpeg);
-                                            listaID.Add(idDeFoto);
-
-                                        }
-
-                                    }
-                                }
-
-                                lblCantidadFotos.Text = "Cantidad de registros sin fotos: " + listaID.Count().ToString();
-                            }
-                        }
-
-                        datosGrid.DataSource = datosReporte;
-                        datosGrid.DataBind();
-                    }
-
-                    else
-
-                    {
-
-                        datosGrid.DataSource = null;
-                        datosGrid.DataBind();
-
-                    }
 
                 }
 
