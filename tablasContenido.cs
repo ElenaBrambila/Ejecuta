@@ -198,7 +198,9 @@ namespace IntegramsaUltimate
             try
             {
                 IntegramsaUltimateDataSetTableAdapters.vwReporteFotosTableAdapter adaptador = new IntegramsaUltimateDataSetTableAdapters.vwReporteFotosTableAdapter();
-                adaptador.FillByClienteFechaFormatos(tabla, idCliente, starD, endD, idDeFormato);
+                //adaptador.FillByClienteFechaFormatos(tabla, idCliente, starD, endD, idDeFormato);
+
+                var io = adaptador.FillByProposito(idCliente, startDate, endDate, idDeFormato);
                 return tabla;
             }
 
