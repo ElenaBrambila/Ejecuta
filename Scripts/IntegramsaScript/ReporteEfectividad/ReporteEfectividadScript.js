@@ -63,7 +63,7 @@ function doEachItem(data) {
     if (countItem > 0) {
         $('#buttons').show();
         data.forEach(function (item, i) {
-           
+
             if (i <= countItem) {
                 loading(countItem, i)
                 fxnGenerateTemplate(item.cliente, item.codigoRuta, item.coordinador, item.promotor, item.det, item.tienda, item.info, item.StartDate, item.EndDate, item.uniquePromotorList)
@@ -72,7 +72,7 @@ function doEachItem(data) {
                 $(".loader-center").css({ 'position': 'unset' });
                 return;
             }
-           
+
         });
     } else {
         $('#buttons').hide();
@@ -80,7 +80,7 @@ function doEachItem(data) {
         $(".loader-center").css({ 'position': 'unset' });
         $('#divTbl').text("La consulta no produjo ningun resultado.");
     }
-  
+
 }
 
 
@@ -89,20 +89,20 @@ function loading(countTotal, index) {
     'use strict';
 
     if (index == 0) {
-         multi = 100 / countTotal ;
-         porcentage = Math.ceil(multi);
-         totalCount = countTotal * multi;
-       
+        multi = 100 / countTotal;
+        porcentage = Math.ceil(multi);
+        totalCount = countTotal * multi;
+
     }
     myTime = myTime + porcentage
-    
+
     if (myTime >= totalCount) {
-        
+
         //console.log("Cerrar  " + " myTime = " + myTime + " Total = " + totalCount);
         //load.style.transition = '1s all';
         load.style.opacity = '0';
         $(".loader-center").css({ 'position': 'unset' });
-     
+
     }
     //else {
     //    //loader.textContent = myTime + "%";
@@ -211,7 +211,8 @@ function fxnPrintGloabalData() {
                 sVals += "<td style='text-align:center;min-width:45px'>" + v2Print2 + "</td>";
             }
             if (v2Print3 == 0) {
-                sVals += "<td class='bgRed' style='text-align:center;min-width:34px'>" + v2Print3 + "</td>";
+                // sVals += "<td class='bgRed' style='text-align:center;min-width:34px'>" + v2Print3 + "</td>";
+                sVals += "<td style='text-align:center;min-width:45px'>-</td>";
             } else {
                 sVals += "<td style='text-align:center;min-width:34px'>" + v2Print3 + "</td>";
             }
@@ -406,7 +407,7 @@ function fxnPrintGloabalData() {
     var vDivTable = this.document.getElementById("divTbl");
 
     vDivTable.innerHTML = vTable;
-   /* this.document.getElementById("divKendo").innerHTML = "";*/
+    /* this.document.getElementById("divKendo").innerHTML = "";*/
 }
 
 function transpose(matrix) {
@@ -637,6 +638,8 @@ src = "https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"
 //Expand or collapse single groupHeading on click
 $("body").on("click", "tr.groupHeading", function (e) {
     e.preventDefault();
+    console.log("Si entro");
+    console.log($(this).closest('tbody').next('tbody').css('display'));
     if ($(this).closest('tbody').next('tbody').css('display') == 'none') {
         $(this).closest('tbody').next('tbody').css('display', 'table-row-group');
         $(this).addClass('active');
@@ -644,6 +647,7 @@ $("body").on("click", "tr.groupHeading", function (e) {
         $(this).closest('tbody').next('tbody').css('display', 'none');
         $(this).removeClass('active');
     }
+    throw new Error('Codetica Rules');
 });
 
 

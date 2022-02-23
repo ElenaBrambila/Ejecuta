@@ -342,7 +342,7 @@ namespace IntegramsaUltimate
                     if (elementosTE.Count() > 0)
                     {
                         string query2 = string.Join(",", elementosTE);
-                        datosReporte = (DataTable)infoReporte.dtFotosClienteFormatos(fechaInicio, fechaFin, idDeCliente, query2);
+                        datosReporte = (DataTable)infoReporte.dtFotosClienteFormatos(fechaInicio, fechaFin.AddHours(23), idDeCliente, query2);
                         /*  DataRow[] resultados = datosReporte;
                           if (datosReporte.Count() > 0)
                            {

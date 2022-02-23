@@ -46,7 +46,7 @@ namespace IntegramsaUltimate.Controllers
             (id, filter) = (model.idPromotor != 0) ?
                            (model.idPromotor, 0) : (model.idCoordinador != 0) ?
                            (model.idCoordinador, 1) : (model.idCliente != 0) ? (model.idCliente, 2) : (0, 3);
-
+            FechaFin = FechaFin.AddHours(23);
 
             var result = from p
                          in db.spxGetNewReporteEfectividad(FechaInicio, FechaFin, id, model.idCliente, filter)
