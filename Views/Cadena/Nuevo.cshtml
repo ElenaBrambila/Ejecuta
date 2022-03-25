@@ -10,9 +10,16 @@
             @Html.TextBoxFor(d => d.nombre)
         </div>
         <div>
+            <br />
             @Html.LabelFor(d => d.idGiro)
-            @Html.DropDownListFor(d=>d.idGiro,(SelectList)ViewBag.lstGiros)
+            @Html.DropDownListFor(d => d.idGiro, (SelectList)ViewBag.lstGiros)
         </div>
+        <div>
+            <br />
+            @Html.LabelFor(d => d.cadena)
+            @Html.TextBoxFor(d => d.cadena)
+        </div>
+        <br />
         <div style="text-align:right;">
             <input class="btn-success" type="submit" value="Guardar" />
         </div>

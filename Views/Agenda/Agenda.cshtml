@@ -1,0 +1,240 @@
+﻿@using IntegramsaUltimate.Models
+@model IEnumerable<IntegramsaUltimate.Models.TableViewModels.TableAgendaViewModel>
+@{
+    Layout = null;
+    int idRuta =988;
+    int idPromotor = (int)ViewBag.idPromotor;
+    string mes = ViewBag.mes;
+    int year = ViewBag.year;
+    int semana1 = ViewBag.semana1;
+    int semana2 = ViewBag.semana2;
+    int semana3 = ViewBag.semana3;
+    int semana4 = ViewBag.semana4;
+    IEnumerable<IntegramsaUltimate.Models.TableViewModels.TableUsuarioAgendaViewModel> lstIntinerario = (IEnumerable<IntegramsaUltimate.Models.TableViewModels.TableUsuarioAgendaViewModel>)ViewBag.lstIntinerario;
+    IEnumerable<schedule> lstSchedulle = (IEnumerable<schedule>)ViewBag.lstSchedulle;
+}
+<br /><br />
+
+<br />
+<div>
+    @foreach (var oTtr in lstIntinerario)
+    {
+        if(Model.Where(D => D.idPromotor == oTtr.id).Count() > 0) { 
+            <div class="promotor" style="margin-top:2%; margin-bottom:1%">
+                <b style="font-size:16px;">@oTtr.promotor</b>
+            </div>
+            <table id="tableTienda" style="width:100%; border:1px solid #666;">
+                <tr>
+                    <th class="table-header-cell">Ruta</th>
+                    <th>Tienda</th>
+                    <th>Cadena</th>
+                    <th class="bordeFin" colspan="6">Semana @semana1</th>
+                    <th class="bordeFin" colspan="6">Semana @semana2</th>
+                    <th class="bordeFin" colspan="6">Semana @semana3</th>
+                    <th colspan="6">Semana @semana4</th>
+                </tr>
+                <tr>
+                    <th class="bordeFin" colspan="3"></th>
+
+                    <th class="dia lunes">L</th>
+                    <th class="dia martes">M</th>
+                    <th class="dia miercoles">I</th>
+                    <th class="dia jueves">J</th>
+                    <th class="dia viernes">V</th>
+                    <th class="dia sabado bordeFin">S</th>
+
+                    <th class="dia lunes">L</th>
+                    <th class="dia martes">M</th>
+                    <th class="dia miercoles">I</th>
+                    <th class="dia jueves">J</th>
+                    <th class="dia viernes">V</th>
+                    <th class="dia sabado bordeFin">S</th>
+                    <th class="dia lunes">L</th>
+                    <th class="dia martes">M</th>
+                    <th class="dia miercoles">I</th>
+                    <th class="dia jueves">J</th>
+                    <th class="dia viernes">V</th>
+                    <th class="dia sabado bordeFin">S</th>
+                    <th class="dia lunes">L</th>
+                    <th class="dia martes">M</th>
+                    <th class="dia miercoles">I</th>
+                    <th class="dia jueves">J</th>
+                    <th class="dia viernes">V</th>
+                    <th class="dia sabado">S</th>
+                </tr>
+
+
+                @foreach (IntegramsaUltimate.Models.TableViewModels.TableAgendaViewModel oTRI in Model.Where(D => D.idPromotor == oTtr.id))
+                {
+                    <tr>
+                        <td><a title="Ver información de tienda">@oTRI.ruta</a></td>
+                        <td><a title="Ver información de tienda">@oTRI.tienda</a></td>
+                        <td class="bordeFin">@oTRI.cadena</td>
+                        <td data-tienda="@oTRI.idPromotor" data-numsemana="1" data-dia="1" class="lunes uno">
+                            @if (oTRI.L1 != 0)
+                            {<input type="checkbox" id="@oTRI.L1" class="@semana1" @(oTRI.STL1 == 2 ? "checked" : "")>}
+                        </td>
+                        <td data-numsemana="1" data-dia="2" class="martes uno">
+                            @if (oTRI.M1 != 0)
+                            {<input type="checkbox" id="@oTRI.M1" class="@semana1" @(oTRI.STM1 == 2 ? "checked" : "")>}
+                        </td>
+                        <td data-numsemana="1" data-dia="2" class="miercoles uno">
+                            @if (oTRI.I1 != 0)
+                            {<input type="checkbox" id="@oTRI.I1" class="@semana1" @(oTRI.STI1 == 2 ? "checked" : "")>}
+                        </td>
+                        <td data-numsemana="1" data-dia="4" class="jueves uno">
+                            @if (oTRI.J1 != 0)
+                            {<input type="checkbox" id="@oTRI.J1" class="@semana1" @(oTRI.STJ1 == 2 ? "checked" : "")>}
+                        </td>
+                        <td data-numsemana="1" data-dia="5" class="viernes uno">
+                            @if (oTRI.V1 != 0)
+                            {<input type="checkbox" id="@oTRI.V1" class="@semana1" @(oTRI.STV1 == 2 ? "checked" : "")>}
+                        </td>
+                        <td data-numsemana="1" data-dia="6" class="sabado uno bordeFin">
+                            @if (oTRI.S1 != 0)
+                            {<input type="checkbox" id="@oTRI.S1" class="@semana1" @(oTRI.STS1 == 2 ? "checked" : "")>}
+                        </td>
+
+                        <td data-numsemana="2" data-dia="1" class="lunes dos">
+                            @if (oTRI.L2 != 0)
+                            {<input type="checkbox" id="@oTRI.L2" class="@semana2" @(oTRI.STL2 == 2 ? "checked" : "")>}
+                        </td>
+                        <td data-numsemana="2" data-dia="2" class="martes dos">
+                            @if (oTRI.M2 != 0)
+                            {<input type="checkbox" id="@oTRI.M2" class="@semana2" @(oTRI.STM2 == 2 ? "checked" : "")>}
+                        </td>
+                        <td data-numsemana="2" data-dia="3" class="miercoles dos">
+                            @if (oTRI.I2 != 0)
+                            {<input type="checkbox" id="@oTRI.I2" class="@semana2" @(oTRI.STI2 == 2 ? "checked" : "")>}
+                        </td>
+                        <td data-numsemana="2" data-dia="4" class="jueves dos">
+                            @if (oTRI.J2 != 0)
+                            {<input type="checkbox" id="@oTRI.J2" class="@semana2" @(oTRI.STJ2 == 2 ? "checked" : "")>}
+                        </td>
+                        <td data-numsemana="2" data-dia="5" class="viernes dos">
+                            @if (oTRI.V2 != 0)
+                            {<input type="checkbox" id="@oTRI.V2" class="@semana2" @(oTRI.STV2 == 2 ? "checked" : "")>}
+                        </td>
+                        <td data-numsemana="2" data-dia="6" class="sabado dos bordeFin">
+                            @if (oTRI.S2 != 0)
+                            {<input type="checkbox" id="@oTRI.S2" class="@semana2" @(oTRI.STS2 == 2 ? "checked" : "")>}
+                        </td>
+
+                        <td data-numsemana="3" data-dia="1" class="lunes tres">
+                            @if (oTRI.L3 != 0)
+                            {<input type="checkbox" id="@oTRI.L3" class="@semana3" @(oTRI.STL3 == 2 ? "checked" : "")>}
+                        </td>
+                        <td data-numsemana="3" data-dia="2" class="martes tres">
+                            @if (oTRI.M3 != 0)
+                            {<input type="checkbox" id="@oTRI.M3" class="@semana3" @(oTRI.STM3 == 2 ? "checked" : "")>}
+                        </td>
+                        <td data-numsemana="3" data-dia="3" class="miercoles tres">
+                            @if (oTRI.I3 != 0)
+                            {<input type="checkbox" id="@oTRI.I3" class="@semana3" @(oTRI.STI3 == 2 ? "checked" : "")>}
+                        </td>
+                        <td data-numsemana="3" data-dia="4" class="jueves tres">
+                            @if (oTRI.J3 != 0)
+                            {<input type="checkbox" id="@oTRI.J3" class="@semana3" @(oTRI.STJ3 == 2 ? "checked" : "")>}
+                        </td>
+                        <td data-numsemana="3" data-dia="5" class="viernes tres">
+                            @if (oTRI.V3 != 0)
+                            {<input type="checkbox" id="@oTRI.V3" class="@semana3" @(oTRI.STV3 == 2 ? "checked" : "")>}
+                        </td>
+                        <td data-numsemana="3" data-dia="6" class="sabado tres bordeFin">
+                            @if (oTRI.S3 != 0)
+                            {<input type="checkbox" id="@oTRI.S3" class="@semana3" @(oTRI.STS3 == 2 ? "checked" : "")>}
+                        </td>
+
+                        <td data-numsemana="0" data-dia="1" class="lunes cuatro">
+                            @if (oTRI.L4 != 0)
+                            {<input type="checkbox" id="@oTRI.L4" class="@semana4" @(oTRI.STL4 == 2 ? "checked" : "")>}
+                        </td>
+                        <td data-numsemana="0" data-dia="2" class="martes cuatro">
+                            @if (oTRI.M4 != 0)
+                            {<input type="checkbox" id="@oTRI.M4" class="@semana2" @(oTRI.STM4 == 2 ? "checked" : "")>}
+                        </td>
+                        <td data-numsemana="0" data-dia="3" class="miercoles cuatro">
+                            @if (oTRI.I4 != 0)
+                            {<input type="checkbox" id="@oTRI.I4" class="@semana4" @(oTRI.STI4 == 2 ? "checked" : "")>}
+                        </td>
+                        <td data-numsemana="0" data-dia="4" class="jueves cuatro">
+                            @if (oTRI.J4 != 0)
+                            {<input type="checkbox" id="@oTRI.J4" class="@semana4" @(oTRI.STJ4 == 2 ? "checked" : "")>}
+                        </td>
+                        <td data-numsemana="0" data-dia="5" class="viernes cuatro">
+                            @if (oTRI.V4 != 0)
+                            {<input type="checkbox" id="@oTRI.V4" class="@semana4" @(oTRI.STV4 == 2 ? "checked" : "")>}
+                        </td>
+                        <td data-numsemana="0" data-dia="6" class="sabado cuatro">
+                            @if (oTRI.S4 != 0)
+                            {<input type="checkbox" id="@oTRI.S4" class="@semana4" @(oTRI.STS4 == 2 ? "checked" : "")>}
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        }
+    }
+        <button style="float: right; padding: 8px; margin-top: 2%; color: #fff6f6;background-image: linear-gradient(#ed1c24,#ed1c24);" class="k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md" id="">Guardar</button>
+
+    </div>
+<input type="hidden" id="hIYear" value="@year" />
+<input type="hidden" id="hIMes" value="@mes" />
+<input type="hidden" id="hIPromotor" value="@idPromotor" />
+<input type="hidden" id="hIdRuta" value="@idRuta" />
+<script>
+
+  $(document).ready(function () {
+
+        $("#tableTienda input[type=checkbox]").click(function () {
+            var seCheco = true;
+
+            //si se activo el checkbox hacemos la petición
+            if (seCheco) {
+               
+                //obtenemos los valores
+                idRuta = $("#hIdRuta").prop("value");
+                year = $("#hIYear").prop("value");
+                idPromotor = $("#hIPromotor").prop("value");
+                mes = $("#hIMes").prop("value");
+                numSemana = $(this).closest("td").data("numsemana");
+                dia = $(this).closest("td").data("dia")
+                idTienda = $(this).closest("td").data("tienda")
+                idRutaTienda = $(this).attr("id");
+                Semana = $(this).attr("class");
+                parametros = "idRuta=" + idRuta + "&numSemana=" + numSemana + "&Semana=" + Semana + "&idDiaSemana=" + dia + "&idTienda=" + idTienda + "&idRutaTienda=" + idRutaTienda + "&idPromotor=" + idPromotor + "&year=" + year + "&mes=" + mes;
+
+
+                if ($(this).prop("checked")) {
+
+                    url = "@Url.Content("~/Agenda/GuardaDia")"
+                    mensajeE="Día asignado con éxito"
+
+                } else { //si el checkbox se desactivo lo borramos de la bd
+                    url = "@Url.Content("~/Agenda/EliminaDia")"
+                    mensajeE="Día eliminado con éxito"
+                }
+
+                jsShowWindowLoad();
+                $.post(url, parametros, function (data) {
+
+                    if (data == "1") {
+                        MensajeExito(mensajeE)
+                        jsRemoveWindowLoad();
+                    } else {
+                        MensajeError(data);
+                    }
+
+                    jsRemoveWindowLoad();
+                })
+            }
+
+
+        })
+
+    })
+
+
+
+</script>
+

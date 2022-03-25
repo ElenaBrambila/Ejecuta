@@ -1,0 +1,135 @@
+﻿
+@{
+    Layout = null;
+}
+<div>
+
+    <div class="col-md-3">
+        <span >
+            <label>Mes/Año</label>
+            <select id="cboMes" style = "width:220px;"></select>
+        </span>
+
+        <br />
+        <br />
+
+    </div>
+    <div class="col-md-3">
+        <span>
+            <label>Cliente</label>
+            @(Html.Kendo().DropDownList()
+                      .Name("cboCliente")
+                      .HtmlAttributes(new { style = "width:220px;" })
+                      .OptionLabel("Selecciona un cliente...")
+                      .DataTextField("nombre")
+                      .DataValueField("Id")
+                      .DataSource(source =>
+                      {
+                          source.Read(read =>
+                          {
+                              read.Action("GetClientes", "DropDownList");
+                          });
+
+                      })
+    )
+        </span>
+    </div>
+    <div class="col-md-3">
+        <span>
+            <label>Coordinador</label>
+            <script>
+                function filterCoordinadores() {
+                    return {
+                        idCliente: $("#cboCliente").val()
+                    };
+                }
+            </script>
+
+            @(Html.Kendo().DropDownList()
+                              .Name("cboCoordinadores")
+                              .HtmlAttributes(new { style = "width:220px;" })
+                      .OptionLabel("Selecciona un coordinador...")
+                      .DataTextField("nombre")
+                      .DataValueField("Id")
+                      .DataSource(source =>
+                      {
+                          source.Read(read =>
+                          {
+                              read.Action("GetCoordinadoresByCliente", "DropDownList").Data("filterCoordinadores");
+
+                          })
+                          .ServerFiltering(true);
+                      })
+                      .Enable(false)
+                      .AutoBind(false)
+                      .CascadeFrom("cboCliente")
+    )
+        </span>
+    </div>
+    <div class="col-md-3">
+        <span>
+            <label>Promotor</label>
+            <script>
+                function filterPromotores() {
+                    return {
+                        idCoordinador: $("#cboCoordinadores").val(),
+                        idCliente: $("#cboCliente").val()
+                    };
+                }
+            </script>
+
+            @(Html.Kendo().DropDownList()
+                      .Name("cboPromotores")
+                      .HtmlAttributes(new { style = "width:240px;" })
+                      .OptionLabel("Selecciona un promotor...")
+                      .DataTextField("nombre")
+                      .DataValueField("Id")
+                      .DataSource(source =>
+                      {
+                          source.Read(read =>
+                          {
+                              read.Action("GetPromotoresByCoordinador", "DropDownList").Data("filterPromotores");
+
+                          })
+                          .ServerFiltering(true);
+                      })
+                      .Enable(false)
+                      .AutoBind(false)
+                      .CascadeFrom("cboCoordinadores")
+    )
+        </span>
+        <br />
+        <br />
+        <span>
+            <input class="btn btn-success" type="submit" value="Buscar" style=" float: right;" />
+
+        </span>
+    </div>
+</div>
+<script>
+    $(function () {
+        var data = [
+            { text: "Seleccionar semanas", value: "" },
+            { text: "1-4 2022", value: "1/2/3/4/22" },
+            { text: "5-8 2022", value: "5/6/7/8/22" },
+            { text: "9-12 2022", value: "9/10/11/12/22" },
+            { text: "13-16 2022", value: "13/14/15/16/22" },
+            { text: "17-20 2022", value: "17/18/19/20/22" },
+            { text: "21-24 2022", value: "21/22/23/24/22" },
+            { text: "25-28 2022", value: "25/26/27/28/22" },
+            { text: "29-32 2022", value: "29/30/31/32/22"},
+            { text: "33-36 2022", value: "33/34/35/36/22" },
+            { text: "37-40 2022", value: "37/38/39/40/22" },
+            { text: "41-44 2022", value: "41/42/43/44/22" },
+            { text: "45-48 2022", value: "45/46/47/48/22" },
+            { text: "49-52 2022", value: "49/50/51/52/22" },
+        ];
+
+        $("#cboMes").kendoDropDownList({
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: data,
+
+        });
+    });
+</script>

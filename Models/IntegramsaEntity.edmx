@@ -23,6 +23,8 @@
           <Property Name="idGiroComercial" Type="int" />
           <Property Name="idEstado" Type="int" />
           <Property Name="fecha" Type="datetime" />
+          <Property Name="sugerida" Type="int" />
+          <Property Name="cadenaSugerida" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="cClouster">
           <Key>
@@ -38,8 +40,8 @@
           <Property Name="idDiaSemana" Type="int" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'EjecutaTest.dbo.cEstado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EjecutaCodetica.dbo.cEstado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="cEstado">
           <Key>
             <PropertyRef Name="id" />
@@ -47,8 +49,8 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.cEstado' no tiene definida n
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'EjecutaTest.dbo.cEstadoRuta' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EjecutaCodetica.dbo.cEstadoRuta' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="cEstadoRuta">
           <Key>
             <PropertyRef Name="id" />
@@ -160,8 +162,8 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.cEstadoRuta' no tiene defini
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'EjecutaTest.dbo.destado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EjecutaCodetica.dbo.destado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="destado">
           <Key>
             <PropertyRef Name="iddEstado" />
@@ -183,8 +185,8 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.destado' no tiene definida n
           <Property Name="idEstatus" Type="int" />
           <Property Name="idCliente" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'EjecutaTest.dbo.formatoProducto' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EjecutaCodetica.dbo.formatoProducto' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="formatoProducto">
           <Key>
             <PropertyRef Name="idFormatoProducto" />
@@ -283,8 +285,8 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.formatoProducto' no tiene de
           <Property Name="idProducto" Type="int" Nullable="false" />
           <Property Name="cantidad" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'EjecutaTest.dbo.PlazaMunicipio' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EjecutaCodetica.dbo.PlazaMunicipio' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PlazaMunicipio">
           <Key>
             <PropertyRef Name="id" />
@@ -292,6 +294,15 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.PlazaMunicipio' no tiene def
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idPlaza" Type="int" />
           <Property Name="idMunicipio" Type="int" />
+        </EntityType>
+        <EntityType Name="ponderacion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idSegmento" Type="int" Nullable="false" />
+          <Property Name="idCliente" Type="int" Nullable="false" />
+          <Property Name="ponderacion" Type="decimal" Precision="4" Scale="2" />
         </EntityType>
         <EntityType Name="producto">
           <Key>
@@ -316,6 +327,8 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.PlazaMunicipio' no tiene def
           <Property Name="idEstado" Type="int" />
           <Property Name="numSemana" Type="int" />
           <Property Name="ano" Type="int" />
+          <Property Name="storeCheck" Type="int" />
+          <Property Name="idEncargado" Type="int" />
         </EntityType>
         <EntityType Name="reporteTienda">
           <Key>
@@ -440,6 +453,29 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.PlazaMunicipio' no tiene def
           <Property Name="idFactorVisita" Type="int" />
           <Property Name="idRuta" Type="int" />
         </EntityType>
+        <EntityType Name="schedule">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idTienda" Type="int" />
+          <Property Name="idRuta" Type="int" />
+          <Property Name="idDiaSemana" Type="int" />
+          <Property Name="orden" Type="int" />
+          <Property Name="idEstado" Type="int" />
+          <Property Name="numSemana" Type="int" />
+          <Property Name="idPromotor" Type="int" />
+          <Property Name="mes" Type="varchar" MaxLength="100" />
+          <Property Name="ano" Type="int" />
+          <Property Name="fecha" Type="datetime" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="updated_at" Type="datetime" />
+          <Property Name="deleted_at" Type="datetime" />
+          <Property Name="idEncargado" Type="int" />
+          <Property Name="idRutaTienda" Type="int" />
+          <Property Name="storecheck" Type="int" />
+          <Property Name="semana" Type="int" />
+        </EntityType>
         <EntityType Name="segmentoProductos">
           <Key>
             <PropertyRef Name="idSegmentoProducto" />
@@ -518,8 +554,8 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.PlazaMunicipio' no tiene def
           <Property Name="idZona" Type="int" />
           <Property Name="iddEstado" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwclienteCoordinador' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EjecutaCodetica.dbo.vwclienteCoordinador' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwclienteCoordinador">
           <Key>
             <PropertyRef Name="id" />
@@ -532,8 +568,8 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwclienteCoordinador' no tie
           <Property Name="paterno" Type="varchar" MaxLength="50" />
           <Property Name="materno" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwcoordinador' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EjecutaCodetica.dbo.vwcoordinador' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwcoordinador">
           <Key>
             <PropertyRef Name="idPromotor" />
@@ -551,8 +587,8 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwcoordinador' no tiene defi
           <Property Name="materno" Type="varchar" MaxLength="50" />
           <Property Name="paterno" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwIDsReporteTienda' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EjecutaCodetica.dbo.vwIDsReporteTienda' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwIDsReporteTienda">
           <Key>
             <PropertyRef Name="idReporteTienda" />
@@ -561,8 +597,8 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwIDsReporteTienda' no tiene
           <Property Name="fecha" Type="varchar" MaxLength="10" />
           <Property Name="idTienda" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwInventario' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EjecutaCodetica.dbo.vwInventario' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwInventario">
           <Key>
             <PropertyRef Name="idInventario" />
@@ -582,8 +618,8 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwInventario' no tiene defin
           <Property Name="idCriterio" Type="int" />
           <Property Name="idEstatusInv" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwInventarioMainReport' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EjecutaCodetica.dbo.vwInventarioMainReport' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwInventarioMainReport">
           <Key>
             <PropertyRef Name="idInventario" />
@@ -595,8 +631,8 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwInventarioMainReport' no t
           <Property Name="Tienda" Type="varchar" MaxLength="50" />
           <Property Name="idCadena" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwPlazaMunicipio' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EjecutaCodetica.dbo.vwPlazaMunicipio' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwPlazaMunicipio">
           <Key>
             <PropertyRef Name="id" />
@@ -608,8 +644,8 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwPlazaMunicipio' no tiene d
           <Property Name="Nombre" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="plaza" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwReporteAsistenciaFechaEspecifica' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EjecutaCodetica.dbo.vwReporteAsistenciaFechaEspecifica' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwReporteAsistenciaFechaEspecifica">
           <Key>
             <PropertyRef Name="id" />
@@ -630,8 +666,8 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwReporteAsistenciaFechaEspe
           <Property Name="dentroPerimetro" Type="int" />
           <Property Name="fueraPerimetro" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwreporteEfectivadPrincipal' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EjecutaCodetica.dbo.vwreporteEfectivadPrincipal' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwreporteEfectivadPrincipal">
           <Key>
             <PropertyRef Name="idCoordinador" />
@@ -652,8 +688,8 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwreporteEfectivadPrincipal'
           <Property Name="idTienda" Type="int" />
           <Property Name="tienda" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwReporteFotos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EjecutaCodetica.dbo.vwReporteFotos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwReporteFotos">
           <Key>
             <PropertyRef Name="id" />
@@ -668,7 +704,7 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwReporteFotos' no tiene def
           <Property Name="proposito" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="fecha" Type="datetime" />
           <Property Name="formater" Type="nvarchar" MaxLength="4000" />
-          <Property Name="promotor" Type="varchar" MaxLength="101" />
+          <Property Name="promotor" Type="varchar" MaxLength="152" />
           <Property Name="idDUsuario" Type="int" Nullable="false" />
           <Property Name="idDTienda" Type="int" Nullable="false" />
           <Property Name="tienda" Type="varchar" MaxLength="50" />
@@ -684,8 +720,8 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwReporteFotos' no tiene def
           <Property Name="idFotoProposito" Type="int" />
           <Property Name="comentario" Type="text" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwReporteFotosUrl' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EjecutaCodetica.dbo.vwReporteFotosUrl' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwReporteFotosUrl">
           <Key>
             <PropertyRef Name="id" />
@@ -715,8 +751,8 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwReporteFotosUrl' no tiene 
           <Property Name="idFotoProposito" Type="int" />
           <Property Name="comentario" Type="text" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwReporteIntinerarioPromotorPlaza' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EjecutaCodetica.dbo.vwReporteIntinerarioPromotorPlaza' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwReporteIntinerarioPromotorPlaza">
           <Key>
             <PropertyRef Name="id" />
@@ -728,8 +764,8 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwReporteIntinerarioPromotor
           <Property Name="idPlaza" Type="int" />
           <Property Name="plaza" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwreporteTienda' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EjecutaCodetica.dbo.vwreporteTienda' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwreporteTienda">
           <Key>
             <PropertyRef Name="id" />
@@ -761,8 +797,8 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwreporteTienda' no tiene de
           <Property Name="idCadena" Type="int" />
           <Property Name="nombreTienda" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwreporteTiendaCobertura' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EjecutaCodetica.dbo.vwreporteTiendaCobertura' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwreporteTiendaCobertura">
           <Key>
             <PropertyRef Name="id" />
@@ -796,8 +832,8 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwreporteTiendaCobertura' no
           <Property Name="nombreTienda" Type="varchar" MaxLength="50" />
           <Property Name="perimetro" Type="varchar" MaxLength="2" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwRutaIntinerario' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EjecutaCodetica.dbo.vwRutaIntinerario' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwRutaIntinerario">
           <Key>
             <PropertyRef Name="id" />
@@ -816,8 +852,8 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwRutaIntinerario' no tiene 
           <Property Name="idPlaza" Type="int" />
           <Property Name="nombrePlaza" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwRutaIntinerarioSinEnviarse' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EjecutaCodetica.dbo.vwRutaIntinerarioSinEnviarse' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwRutaIntinerarioSinEnviarse">
           <Key>
             <PropertyRef Name="id" />
@@ -831,8 +867,8 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwRutaIntinerarioSinEnviarse
           <Property Name="numSemana" Type="int" />
           <Property Name="idPromotor" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwta' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EjecutaCodetica.dbo.vwta' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwta">
           <Key>
             <PropertyRef Name="idCoordinador" />
@@ -1098,7 +1134,7 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwta' no tiene definida ning
                 <Property Name="tienda" Type="varchar" MaxLength="50" />
                 <Property Name="ta" Type="int" Nullable="false" />
                 <Property Name="cob" Type="int" />
-                <Property Name="fp" Type="int" Nullable="false" />
+                <Property Name="fp" Type="int" />
                 <Property Name="dp" Type="int" Nullable="false" />
                 <Property Name="numeroSemana" Type="int" />
                 <Property Name="idDiaSemana" Type="int" />
@@ -1328,11 +1364,38 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwta' no tiene definida ning
           <Parameter Name="WeekNum" Type="int" Mode="In" />
           <Parameter Name="YearNum" Type="char" Mode="In" />
         </Function>
+        <Function Name="spxGetItinerarioSchedule" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idCliente" Type="int" Mode="In" />
+          <Parameter Name="mes" Type="varchar" Mode="In" />
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="filter" Type="int" Mode="In" />
+        </Function>
         <Function Name="spxGetNewReporteEfectividad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="fechaInicio" Type="datetime" Mode="In" />
           <Parameter Name="fechaFin" Type="datetime" Mode="In" />
           <Parameter Name="id" Type="int" Mode="In" />
           <Parameter Name="idCliente" Type="int" Mode="In" />
+          <Parameter Name="filter" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spxGetNewResumenEjecutivo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fechaInicio" Type="datetime" Mode="In" />
+          <Parameter Name="fechaFin" Type="datetime" Mode="In" />
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="idCliente" Type="int" Mode="In" />
+          <Parameter Name="filter" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spxGetNewResumenEjecutivoChar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fechaInicio" Type="datetime" Mode="In" />
+          <Parameter Name="fechaFin" Type="datetime" Mode="In" />
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="idCliente" Type="int" Mode="In" />
+          <Parameter Name="filter" Type="int" Mode="In" />
+          <Parameter Name="idPlaza" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spxGetSchedule" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idCliente" Type="int" Mode="In" />
+          <Parameter Name="mes" Type="varchar" Mode="In" />
+          <Parameter Name="id" Type="int" Mode="In" />
           <Parameter Name="filter" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="IntegramsaUltimateModelStoreContainer">
@@ -1363,6 +1426,7 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwta' no tiene definida ning
           <EntitySet Name="logErrorMobile" EntityType="Self.logErrorMobile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="logWebService" EntityType="Self.logWebService" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="participacion" EntityType="Self.participacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ponderacion" EntityType="Self.ponderacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="producto" EntityType="Self.producto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="reporteIntinerarioPromotor" EntityType="Self.reporteIntinerarioPromotor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="reporteTienda" EntityType="Self.reporteTienda" Schema="dbo" store:Type="Tables" />
@@ -1375,6 +1439,7 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwta' no tiene definida ning
           <EntitySet Name="ruta" EntityType="Self.ruta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="rutaIntinerario" EntityType="Self.rutaIntinerario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="rutaTienda" EntityType="Self.rutaTienda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="schedule" EntityType="Self.schedule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="segmentoProductos" EntityType="Self.segmentoProductos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="segmentos" EntityType="Self.segmentos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tienda" EntityType="Self.tienda" Schema="dbo" store:Type="Tables" />
@@ -1820,6 +1885,8 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwta' no tiene definida ning
           <NavigationProperty Name="cGiroComercial" Relationship="Self.FK__cadena__idGiroCo__5AEE82B9" FromRole="cadena" ToRole="cGiroComercial" />
           <NavigationProperty Name="formatoTienda" Relationship="Self.FK__formatoTi__idCad__619B8048" FromRole="cadena" ToRole="formatoTienda" />
           <NavigationProperty Name="tienda" Relationship="Self.FK__tienda__idCadena__02FC7413" FromRole="cadena" ToRole="tienda" />
+          <Property Name="sugerida" Type="Int32" />
+          <Property Name="cadenaSugerida" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="cClouster">
           <Key>
@@ -1923,6 +1990,8 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwta' no tiene definida ning
           <NavigationProperty Name="segmentos" Relationship="Self.FK__segmentos__idCli__2704CA5F" FromRole="cliente" ToRole="segmentos" />
           <NavigationProperty Name="usuarioCliente" Relationship="Self.FK__usuarioCl__idCli__0E6E26BF" FromRole="cliente" ToRole="usuarioCliente" />
           <NavigationProperty Name="estatusPorCliente" Relationship="IntegramsaUltimateModel.FK_cliente" FromRole="cliente" ToRole="estatusPorCliente" />
+       
+         
         </EntityType>
         <EntityType Name="cmunicipio">
           <Key>
@@ -2118,6 +2187,8 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwta' no tiene definida ning
           <NavigationProperty Name="rutaIntinerario" Relationship="Self.FK__reporteIn__idRut__68487DD7" FromRole="reporteIntinerarioPromotor" ToRole="rutaIntinerario" />
           <NavigationProperty Name="usuario" Relationship="Self.FK__reporteIn__idUsu__693CA210" FromRole="reporteIntinerarioPromotor" ToRole="usuario" />
           <NavigationProperty Name="reporteTienda" Relationship="Self.FK__reporteTi__idRep__6B24EA82" FromRole="reporteIntinerarioPromotor" ToRole="reporteTienda" />
+          <Property Name="storeCheck" Type="Int32" />
+          <Property Name="idEncargado" Type="Int32" />
         </EntityType>
         <EntityType Name="reporteTienda">
           <Key>
@@ -2297,7 +2368,7 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwta' no tiene definida ning
           <NavigationProperty Name="cliente" Relationship="Self.FK__segmentos__idCli__2704CA5F" FromRole="segmentos" ToRole="cliente" />
           <NavigationProperty Name="segmentoProductos" Relationship="Self.FK__segmentoP__idSeg__28ED12D1" FromRole="segmentos" ToRole="segmentoProductos" />
           <NavigationProperty Name="ReporteTiendaSegmento" Relationship="IntegramsaUltimateModel.FK_ReporteTiendaSegmento_ToSegmento" FromRole="segmentos" ToRole="ReporteTiendaSegmento" />
-        </EntityType>
+         </EntityType>
         <EntityType Name="tienda">
           <Key>
             <PropertyRef Name="id" />
@@ -3883,6 +3954,36 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwta' no tiene definida ning
             <Parameter Name="idCliente" Mode="In" Type="Int32" />
             <Parameter Name="filter" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="spxGetNewResumenEjecutivo" ReturnType="Collection(IntegramsaUltimateModel.spxGetNewResumenEjecutivo_Result)">
+            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaFin" Mode="In" Type="DateTime" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="idCliente" Mode="In" Type="Int32" />
+            <Parameter Name="filter" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spxGetNewResumenEjecutivoChar" ReturnType="Collection(IntegramsaUltimateModel.spxGetNewResumenEjecutivoChar_Result)">
+            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaFin" Mode="In" Type="DateTime" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="idCliente" Mode="In" Type="Int32" />
+            <Parameter Name="filter" Mode="In" Type="Int32" />
+            <Parameter Name="idPlaza" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="schedule" EntityType="IntegramsaUltimateModel.schedule" />
+          <EntitySet Name="ponderacion" EntityType="IntegramsaUltimateModel.ponderacion" />
+          <FunctionImport Name="spxGetItinerarioSchedule" ReturnType="Collection(IntegramsaUltimateModel.spxGetItinerarioSchedule_Result)">
+            <Parameter Name="idCliente" Mode="In" Type="Int32" />
+            <Parameter Name="mes" Mode="In" Type="String" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="filter" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spxGetSchedule" ReturnType="Collection(IntegramsaUltimateModel.spxGetSchedule_Result)">
+            <Parameter Name="idCliente" Mode="In" Type="Int32" />
+            <Parameter Name="mes" Mode="In" Type="String" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="filter" Mode="In" Type="Int32" />
+          </FunctionImport>
+         
           </EntityContainer>
         <EntityType Name="vwReporteFotos">
           <Key>
@@ -3897,7 +3998,7 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwta' no tiene definida ning
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="proposito" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="fecha" Type="DateTime" Precision="3" />
-          <Property Name="promotor" Type="String" MaxLength="101" FixedLength="false" Unicode="false" />
+          <Property Name="promotor" Type="String" MaxLength="152" FixedLength="false" Unicode="false" />
           <Property Name="idDUsuario" Type="Int32" Nullable="false" />
           <Property Name="idDTienda" Type="Int32" Nullable="false" />
           <Property Name="tienda" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -4475,6 +4576,171 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwta' no tiene definida ning
           <Property Type="String" Name="textfecha" Nullable="true" MaxLength="100" />
           <Property Type="Int32" Name="value" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="spxGetNewResumenEjecutivo_Result">
+          <Property Type="DateTime" Name="fecha" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="entrada" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="salida" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="tiempoEfectivo" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="tiempoTotal" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="tiempoTraslado" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="idCliente" Nullable="true" />
+          <Property Type="String" Name="cliente" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="idCoordinador" Nullable="true" />
+          <Property Type="String" Name="coordinador" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="idPromotor" Nullable="true" />
+          <Property Type="String" Name="promotor" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="idPlaza" Nullable="true" />
+          <Property Type="String" Name="plaza" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="ta" Nullable="true" />
+          <Property Type="Int32" Name="cob" Nullable="true" />
+          <Property Type="Int32" Name="fp" Nullable="true" />
+          <Property Type="Int32" Name="dp" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spxGetNewResumenEjecutivoChar_Result">
+          <Property Type="DateTime" Name="fecha" Nullable="true" Precision="23" />
+          <Property Type="String" Name="entrada" Nullable="true"  MaxLength="100"/>
+          <Property Type="String" Name="salida" Nullable="true"  MaxLength="100"/>
+          <Property Type="String" Name="tiempoEfectivo" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="tiempoTotal" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="tiempoTraslado" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="idCliente" Nullable="true" />
+          <Property Type="String" Name="cliente" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="idCoordinador" Nullable="true" />
+          <Property Type="String" Name="coordinador" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="idPromotor" Nullable="true" />
+          <Property Type="String" Name="promotor" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="idPlaza" Nullable="true" />
+          <Property Type="String" Name="plaza" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="ta" Nullable="true" />
+          <Property Type="Int32" Name="cob" Nullable="true" />
+          <Property Type="Int32" Name="dp" Nullable="true" />
+          <Property Type="Int32" Name="fp" Nullable="true" />
+			<Property Type="String" Name="ruta" Nullable="true" MaxLength="100" />
+			<Property Type="String" Name="turno" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <EntityType Name="schedule">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idTienda" Type="Int32" />
+          <Property Name="idRuta" Type="Int32" />
+          <Property Name="idDiaSemana" Type="Int32" />
+          <Property Name="orden" Type="Int32" />
+          <Property Name="idEstado" Type="Int32" />
+          <Property Name="numSemana" Type="Int32" />
+          <Property Name="idPromotor" Type="Int32" />
+		<Property Type="String" Name="mes" Nullable="true" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="ano" Type="Int32" />
+          <Property Name="fecha" Type="DateTime" Precision="3" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <Property Name="updated_at" Type="DateTime" Precision="3" />
+          <Property Name="deleted_at" Type="DateTime" Precision="3" />
+          <Property Name="idEncargado" Type="Int32" />
+          <Property Name="idRutaTienda" Type="Int32" />
+          <Property Name="storecheck" Type="Int32" />
+          <Property Name="semana" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ponderacion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idSegmento" Type="Int32" Nullable="false" />
+          <Property Name="idCliente" Type="Int32" Nullable="false" />
+          <Property Name="ponderacion1" Type="Decimal" Precision="4" Scale="2" />
+        </EntityType>
+        <ComplexType Name="spxGetItinerarioSchedule_Result">
+          <Property Type="String" Name="tienda" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="cadena" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ruta" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="promotor" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="idCliente" Nullable="true" />
+          <Property Type="Int32" Name="idCoordinador" Nullable="true" />
+			<Property Type="Int32" Name="idPromotor" Nullable="true" />
+          <Property Type="Int32" Name="L1" Nullable="true" />
+          <Property Type="Int32" Name="M1" Nullable="true" />
+          <Property Type="Int32" Name="I1" Nullable="true" />
+          <Property Type="Int32" Name="J1" Nullable="true" />
+          <Property Type="Int32" Name="V1" Nullable="true" />
+          <Property Type="Int32" Name="S1" Nullable="true" />
+          <Property Type="Int32" Name="L2" Nullable="true" />
+          <Property Type="Int32" Name="M2" Nullable="true" />
+          <Property Type="Int32" Name="I2" Nullable="true" />
+          <Property Type="Int32" Name="J2" Nullable="true" />
+          <Property Type="Int32" Name="V2" Nullable="true" />
+          <Property Type="Int32" Name="S2" Nullable="true" />
+          <Property Type="Int32" Name="L3" Nullable="true" />
+          <Property Type="Int32" Name="M3" Nullable="true" />
+          <Property Type="Int32" Name="I3" Nullable="true" />
+          <Property Type="Int32" Name="J3" Nullable="true" />
+          <Property Type="Int32" Name="V3" Nullable="true" />
+          <Property Type="Int32" Name="S3" Nullable="true" />
+          <Property Type="Int32" Name="L4" Nullable="true" />
+          <Property Type="Int32" Name="M4" Nullable="true" />
+          <Property Type="Int32" Name="I4" Nullable="true" />
+          <Property Type="Int32" Name="J4" Nullable="true" />
+          <Property Type="Int32" Name="V4" Nullable="true" />
+          <Property Type="Int32" Name="S4" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spxGetSchedule_Result">
+          <Property Type="String" Name="tienda" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="cadena" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ruta" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="promotor" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="idPromotor" Nullable="true" />
+          <Property Type="Int32" Name="idCliente" Nullable="true" />
+          <Property Type="Int32" Name="idCoordinador" Nullable="true" />
+          <Property Type="Int32" Name="L1" Nullable="true" />
+          <Property Type="Int32" Name="M1" Nullable="true" />
+          <Property Type="Int32" Name="I1" Nullable="true" />
+          <Property Type="Int32" Name="J1" Nullable="true" />
+          <Property Type="Int32" Name="V1" Nullable="true" />
+          <Property Type="Int32" Name="S1" Nullable="true" />
+          <Property Type="Int32" Name="L2" Nullable="true" />
+          <Property Type="Int32" Name="M2" Nullable="true" />
+          <Property Type="Int32" Name="I2" Nullable="true" />
+          <Property Type="Int32" Name="J2" Nullable="true" />
+          <Property Type="Int32" Name="V2" Nullable="true" />
+          <Property Type="Int32" Name="S2" Nullable="true" />
+          <Property Type="Int32" Name="L3" Nullable="true" />
+          <Property Type="Int32" Name="M3" Nullable="true" />
+          <Property Type="Int32" Name="I3" Nullable="true" />
+          <Property Type="Int32" Name="J3" Nullable="true" />
+          <Property Type="Int32" Name="V3" Nullable="true" />
+          <Property Type="Int32" Name="S3" Nullable="true" />
+          <Property Type="Int32" Name="L4" Nullable="true" />
+          <Property Type="Int32" Name="M4" Nullable="true" />
+          <Property Type="Int32" Name="I4" Nullable="true" />
+          <Property Type="Int32" Name="J4" Nullable="true" />
+          <Property Type="Int32" Name="V4" Nullable="true" />
+          <Property Type="Int32" Name="S4" Nullable="true" />
+          <Property Type="Int32" Name="STL1" Nullable="true" />
+          <Property Type="Int32" Name="STM1" Nullable="true" />
+          <Property Type="Int32" Name="STI1" Nullable="true" />
+          <Property Type="Int32" Name="STJ1" Nullable="true" />
+          <Property Type="Int32" Name="STV1" Nullable="true" />
+          <Property Type="Int32" Name="STS1" Nullable="true" />
+          <Property Type="Int32" Name="STL2" Nullable="true" />
+          <Property Type="Int32" Name="STM2" Nullable="true" />
+          <Property Type="Int32" Name="STI2" Nullable="true" />
+          <Property Type="Int32" Name="STJ2" Nullable="true" />
+          <Property Type="Int32" Name="STV2" Nullable="true" />
+          <Property Type="Int32" Name="STS2" Nullable="true" />
+          <Property Type="Int32" Name="STL3" Nullable="true" />
+          <Property Type="Int32" Name="STM3" Nullable="true" />
+          <Property Type="Int32" Name="STI3" Nullable="true" />
+          <Property Type="Int32" Name="STJ3" Nullable="true" />
+          <Property Type="Int32" Name="STV3" Nullable="true" />
+          <Property Type="Int32" Name="STS3" Nullable="true" />
+          <Property Type="Int32" Name="STL4" Nullable="true" />
+          <Property Type="Int32" Name="STM4" Nullable="true" />
+          <Property Type="Int32" Name="STI4" Nullable="true" />
+          <Property Type="Int32" Name="STJ4" Nullable="true" />
+          <Property Type="Int32" Name="STV4" Nullable="true" />
+          <Property Type="Int32" Name="STS4" Nullable="true" />
+        </ComplexType>
+        
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4494,6 +4760,8 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwta' no tiene definida ning
           <EntitySetMapping Name="cadena">
             <EntityTypeMapping TypeName="IntegramsaUltimateModel.cadena">
               <MappingFragment StoreEntitySet="cadena">
+                <ScalarProperty Name="cadenaSugerida" ColumnName="cadenaSugerida" />
+                <ScalarProperty Name="sugerida" ColumnName="sugerida" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="idGiroComercial" ColumnName="idGiroComercial" />
@@ -4746,6 +5014,8 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwta' no tiene definida ning
           <EntitySetMapping Name="reporteIntinerarioPromotor">
             <EntityTypeMapping TypeName="IntegramsaUltimateModel.reporteIntinerarioPromotor">
               <MappingFragment StoreEntitySet="reporteIntinerarioPromotor">
+                <ScalarProperty Name="idEncargado" ColumnName="idEncargado" />
+                <ScalarProperty Name="storeCheck" ColumnName="storeCheck" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="idRutaIntinerario" ColumnName="idRutaIntinerario" />
                 <ScalarProperty Name="fechaReporte" ColumnName="fechaReporte" />
@@ -5717,6 +5987,188 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwta' no tiene definida ning
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spxGetNewResumenEjecutivo" FunctionName="IntegramsaUltimateModel.Store.spxGetNewResumenEjecutivo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IntegramsaUltimateModel.spxGetNewResumenEjecutivo_Result">
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="entrada" ColumnName="entrada" />
+                <ScalarProperty Name="salida" ColumnName="salida" />
+                <ScalarProperty Name="tiempoEfectivo" ColumnName="tiempoEfectivo" />
+                <ScalarProperty Name="tiempoTotal" ColumnName="tiempoTotal" />
+                <ScalarProperty Name="tiempoTraslado" ColumnName="tiempoTraslado" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="cliente" ColumnName="cliente" />
+                <ScalarProperty Name="idCoordinador" ColumnName="idCoordinador" />
+                <ScalarProperty Name="coordinador" ColumnName="coordinador" />
+                <ScalarProperty Name="idPromotor" ColumnName="idPromotor" />
+                <ScalarProperty Name="promotor" ColumnName="promotor" />
+                <ScalarProperty Name="idPlaza" ColumnName="idPlaza" />
+                <ScalarProperty Name="plaza" ColumnName="plaza" />
+                <ScalarProperty Name="ta" ColumnName="ta" />
+                <ScalarProperty Name="cob" ColumnName="cob" />
+                <ScalarProperty Name="fp" ColumnName="fp" />
+                <ScalarProperty Name="dp" ColumnName="dp" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spxGetNewResumenEjecutivoChar" FunctionName="IntegramsaUltimateModel.Store.spxGetNewResumenEjecutivoChar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IntegramsaUltimateModel.spxGetNewResumenEjecutivoChar_Result">
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="entrada" ColumnName="entrada" />
+                <ScalarProperty Name="salida" ColumnName="salida" />
+                <ScalarProperty Name="tiempoEfectivo" ColumnName="tiempoEfectivo" />
+                <ScalarProperty Name="tiempoTotal" ColumnName="tiempoTotal" />
+                <ScalarProperty Name="tiempoTraslado" ColumnName="tiempoTraslado" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="cliente" ColumnName="cliente" />
+                <ScalarProperty Name="idCoordinador" ColumnName="idCoordinador" />
+                <ScalarProperty Name="coordinador" ColumnName="coordinador" />
+                <ScalarProperty Name="idPromotor" ColumnName="idPromotor" />
+                <ScalarProperty Name="promotor" ColumnName="promotor" />
+                <ScalarProperty Name="idPlaza" ColumnName="idPlaza" />
+                <ScalarProperty Name="plaza" ColumnName="plaza" />
+                <ScalarProperty Name="ta" ColumnName="ta" />
+                <ScalarProperty Name="cob" ColumnName="cob" />
+                <ScalarProperty Name="dp" ColumnName="dp" />
+                <ScalarProperty Name="fp" ColumnName="fp" />
+				  <ScalarProperty Name="ruta" ColumnName="ruta" />
+				  <ScalarProperty Name="turno" ColumnName="turno" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="schedule">
+            <EntityTypeMapping TypeName="IntegramsaUltimateModel.schedule">
+              <MappingFragment StoreEntitySet="schedule">
+                <ScalarProperty Name="semana" ColumnName="semana" />
+                <ScalarProperty Name="storecheck" ColumnName="storecheck" />
+                <ScalarProperty Name="idRutaTienda" ColumnName="idRutaTienda" />
+                <ScalarProperty Name="idEncargado" ColumnName="idEncargado" />
+                <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="ano" ColumnName="ano" />
+                <ScalarProperty Name="mes" ColumnName="mes" />
+                <ScalarProperty Name="idPromotor" ColumnName="idPromotor" />
+                <ScalarProperty Name="numSemana" ColumnName="numSemana" />
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+                <ScalarProperty Name="orden" ColumnName="orden" />
+                <ScalarProperty Name="idDiaSemana" ColumnName="idDiaSemana" />
+                <ScalarProperty Name="idRuta" ColumnName="idRuta" />
+                <ScalarProperty Name="idTienda" ColumnName="idTienda" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ponderacion">
+            <EntityTypeMapping TypeName="IntegramsaUltimateModel.ponderacion">
+              <MappingFragment StoreEntitySet="ponderacion">
+                <ScalarProperty Name="ponderacion1" ColumnName="ponderacion" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="idSegmento" ColumnName="idSegmento" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spxGetItinerarioSchedule" FunctionName="IntegramsaUltimateModel.Store.spxGetItinerarioSchedule">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IntegramsaUltimateModel.spxGetItinerarioSchedule_Result">
+                <ScalarProperty Name="tienda" ColumnName="tienda" />
+                <ScalarProperty Name="cadena" ColumnName="cadena" />
+                <ScalarProperty Name="ruta" ColumnName="ruta" />
+                <ScalarProperty Name="promotor" ColumnName="promotor" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="idCoordinador" ColumnName="idCoordinador" />
+				  <ScalarProperty Name="idPromotor" ColumnName="idPromotor" />
+                <ScalarProperty Name="L1" ColumnName="L1" />
+                <ScalarProperty Name="M1" ColumnName="M1" />
+                <ScalarProperty Name="I1" ColumnName="I1" />
+                <ScalarProperty Name="J1" ColumnName="J1" />
+                <ScalarProperty Name="V1" ColumnName="V1" />
+                <ScalarProperty Name="S1" ColumnName="S1" />
+                <ScalarProperty Name="L2" ColumnName="L2" />
+                <ScalarProperty Name="M2" ColumnName="M2" />
+                <ScalarProperty Name="I2" ColumnName="I2" />
+                <ScalarProperty Name="J2" ColumnName="J2" />
+                <ScalarProperty Name="V2" ColumnName="V2" />
+                <ScalarProperty Name="S2" ColumnName="S2" />
+                <ScalarProperty Name="L3" ColumnName="L3" />
+                <ScalarProperty Name="M3" ColumnName="M3" />
+                <ScalarProperty Name="I3" ColumnName="I3" />
+                <ScalarProperty Name="J3" ColumnName="J3" />
+                <ScalarProperty Name="V3" ColumnName="V3" />
+                <ScalarProperty Name="S3" ColumnName="S3" />
+                <ScalarProperty Name="L4" ColumnName="L4" />
+                <ScalarProperty Name="M4" ColumnName="M4" />
+                <ScalarProperty Name="I4" ColumnName="I4" />
+                <ScalarProperty Name="J4" ColumnName="J4" />
+                <ScalarProperty Name="V4" ColumnName="V4" />
+                <ScalarProperty Name="S4" ColumnName="S4" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spxGetSchedule" FunctionName="IntegramsaUltimateModel.Store.spxGetSchedule">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IntegramsaUltimateModel.spxGetSchedule_Result">
+                <ScalarProperty Name="tienda" ColumnName="tienda" />
+                <ScalarProperty Name="cadena" ColumnName="cadena" />
+                <ScalarProperty Name="ruta" ColumnName="ruta" />
+                <ScalarProperty Name="promotor" ColumnName="promotor" />
+                <ScalarProperty Name="idPromotor" ColumnName="idPromotor" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="idCoordinador" ColumnName="idCoordinador" />
+                <ScalarProperty Name="L1" ColumnName="L1" />
+                <ScalarProperty Name="M1" ColumnName="M1" />
+                <ScalarProperty Name="I1" ColumnName="I1" />
+                <ScalarProperty Name="J1" ColumnName="J1" />
+                <ScalarProperty Name="V1" ColumnName="V1" />
+                <ScalarProperty Name="S1" ColumnName="S1" />
+                <ScalarProperty Name="L2" ColumnName="L2" />
+                <ScalarProperty Name="M2" ColumnName="M2" />
+                <ScalarProperty Name="I2" ColumnName="I2" />
+                <ScalarProperty Name="J2" ColumnName="J2" />
+                <ScalarProperty Name="V2" ColumnName="V2" />
+                <ScalarProperty Name="S2" ColumnName="S2" />
+                <ScalarProperty Name="L3" ColumnName="L3" />
+                <ScalarProperty Name="M3" ColumnName="M3" />
+                <ScalarProperty Name="I3" ColumnName="I3" />
+                <ScalarProperty Name="J3" ColumnName="J3" />
+                <ScalarProperty Name="V3" ColumnName="V3" />
+                <ScalarProperty Name="S3" ColumnName="S3" />
+                <ScalarProperty Name="L4" ColumnName="L4" />
+                <ScalarProperty Name="M4" ColumnName="M4" />
+                <ScalarProperty Name="I4" ColumnName="I4" />
+                <ScalarProperty Name="J4" ColumnName="J4" />
+                <ScalarProperty Name="V4" ColumnName="V4" />
+                <ScalarProperty Name="S4" ColumnName="S4" />
+                <ScalarProperty Name="STL1" ColumnName="STL1" />
+                <ScalarProperty Name="STM1" ColumnName="STM1" />
+                <ScalarProperty Name="STI1" ColumnName="STI1" />
+                <ScalarProperty Name="STJ1" ColumnName="STJ1" />
+                <ScalarProperty Name="STV1" ColumnName="STV1" />
+                <ScalarProperty Name="STS1" ColumnName="STS1" />
+                <ScalarProperty Name="STL2" ColumnName="STL2" />
+                <ScalarProperty Name="STM2" ColumnName="STM2" />
+                <ScalarProperty Name="STI2" ColumnName="STI2" />
+                <ScalarProperty Name="STJ2" ColumnName="STJ2" />
+                <ScalarProperty Name="STV2" ColumnName="STV2" />
+                <ScalarProperty Name="STS2" ColumnName="STS2" />
+                <ScalarProperty Name="STL3" ColumnName="STL3" />
+                <ScalarProperty Name="STM3" ColumnName="STM3" />
+                <ScalarProperty Name="STI3" ColumnName="STI3" />
+                <ScalarProperty Name="STJ3" ColumnName="STJ3" />
+                <ScalarProperty Name="STV3" ColumnName="STV3" />
+                <ScalarProperty Name="STS3" ColumnName="STS3" />
+                <ScalarProperty Name="STL4" ColumnName="STL4" />
+                <ScalarProperty Name="STM4" ColumnName="STM4" />
+                <ScalarProperty Name="STI4" ColumnName="STI4" />
+                <ScalarProperty Name="STJ4" ColumnName="STJ4" />
+                <ScalarProperty Name="STV4" ColumnName="STV4" />
+                <ScalarProperty Name="STS4" ColumnName="STS4" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -5887,6 +6339,8 @@ advertencia 6002: La tabla o vista 'EjecutaTest.dbo.vwta' no tiene definida ning
         <EntityTypeShape EntityType="IntegramsaUltimateModel.vwclienteCoordinador" Width="1.5" PointX="13.375" PointY="14.75" />
         <EntityTypeShape EntityType="IntegramsaUltimateModel.vwcoordinador" Width="1.5" PointX="13.375" PointY="8.75" />
         <EntityTypeShape EntityType="IntegramsaUltimateModel.vwta" Width="1.5" PointX="15.375" PointY="0.75" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.schedule" Width="1.5" PointX="0.75" PointY="15.75" />
+        <EntityTypeShape EntityType="IntegramsaUltimateModel.ponderacion" Width="1.5" PointX="13.375" PointY="4.75" />
       </Diagram>
     </Diagrams>
   </Designer>

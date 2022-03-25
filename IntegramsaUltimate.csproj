@@ -62,7 +62,7 @@
     </Reference>
     <Reference Include="Kendo.Mvc, Version=2014.3.1411.545, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\edewa\Desktop\Kendo.Mvc.dll</HintPath>
+      <HintPath>bin\Kendo.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNet.Identity.Core.2.1.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
@@ -199,6 +199,9 @@
     <Compile Include="App_Start\Arquitectura\ClaseModelo.cs" />
     <Compile Include="Controllers\AccesoController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ReporteEvaluacion.cs" />
+    <Compile Include="Controllers\EvaluacionController.cs" />
+    <Compile Include="Controllers\PonderacionController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CadenaController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
@@ -229,6 +232,7 @@
     <Compile Include="Controllers\RutaTiendaController.cs" />
     <Compile Include="Controllers\TiendaController.cs" />
     <Compile Include="Controllers\UsuarioClienteController.cs" />
+    <Compile Include="Controllers\AgendaController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\UsuarioSupervisorController.cs" />
     <Compile Include="dbSetInventario.Designer.cs">
@@ -445,6 +449,7 @@
     <Compile Include="Models\HelperModels\RutaTienda.cs" />
     <Compile Include="Models\HelperModels\Semana.cs" />
     <Compile Include="Models\HelperModels\TurnoRuta.cs" />
+    <Compile Include="Models\HelperModels\Producto.cs" />
     <Compile Include="Models\HelperModels\Usuario.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IntegramsaEntity.Context.cs">
@@ -490,6 +495,9 @@
     <Compile Include="Models\PlazaMunicipio.cs">
       <DependentUpon>IntegramsaEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ponderacion.cs">
+      <DependentUpon>IntegramsaEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\producto.cs">
       <DependentUpon>IntegramsaEntity.tt</DependentUpon>
     </Compile>
@@ -526,20 +534,38 @@
     <Compile Include="Models\rutaTienda.cs">
       <DependentUpon>IntegramsaEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\schedule.cs">
+      <DependentUpon>IntegramsaEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\segmentoProductos.cs">
       <DependentUpon>IntegramsaEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\segmentos.cs">
       <DependentUpon>IntegramsaEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\spxGetItinerarioSchedule_Result.cs">
+      <DependentUpon>IntegramsaEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\spxGetNewReporteEfectividad_Result.cs">
       <DependentUpon>IntegramsaEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\spxGetNewResumenEjecutivoChar_Result.cs">
+      <DependentUpon>IntegramsaEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spxGetNewResumenEjecutivo_Result.cs">
+      <DependentUpon>IntegramsaEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spxGetSchedule_Result.cs">
+      <DependentUpon>IntegramsaEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TableViewModels\EfectividadModel.cs" />
+    <Compile Include="Models\TableViewModels\TableAgendaViewModel.cs" />
     <Compile Include="Models\TableViewModels\TableEstatusViewModel.cs" />
     <Compile Include="Models\TableViewModels\TableFotoAlmacenViewModel.cs" />
+    <Compile Include="Models\TableViewModels\TableUsuarioAgendaViewModel.cs" />
     <Compile Include="Models\TableViewModels\TableInventarioViewModel.cs" />
     <Compile Include="Models\TableViewModels\TablePlazaMunicipioViewModel.cs" />
+    <Compile Include="Models\TableViewModels\TablePonderacionViewModel.cs" />
     <Compile Include="Models\TableViewModels\TableRegionEstadoViewModel.cs" />
     <Compile Include="Models\TableViewModels\TableCadenasViewModel.cs" />
     <Compile Include="Models\TableViewModels\TableClientesViewModel.cs" />
@@ -555,6 +581,7 @@
     <Compile Include="Models\TableViewModels\TableReporteTiempoEfectivoByCadenaViewModel.cs" />
     <Compile Include="Models\TableViewModels\TableReporteTiempoEfectivoMuertoViewModel.cs" />
     <Compile Include="Models\TableViewModels\TableReporteTiempoEfectivoViewModel.cs" />
+    <Compile Include="Models\TableViewModels\TablePromotorItinerario.cs" />
     <Compile Include="Models\TableViewModels\TableRutaIntinerario.cs" />
     <Compile Include="Models\TableViewModels\TableRutaTiendaViewModel.cs" />
     <Compile Include="Models\TableViewModels\TableRutaViewModel.cs" />
@@ -575,10 +602,13 @@
     <Compile Include="Models\ViewModels\FormatoViewModel.cs" />
     <Compile Include="Models\ViewModels\InventarioViewModel.cs" />
     <Compile Include="Models\ViewModels\NotFound.cs" />
+    <Compile Include="Models\ViewModels\AgendaRegistroViewModel.cs" />
+    <Compile Include="Models\ViewModels\PonderacionViewModel.cs" />
     <Compile Include="Models\ViewModels\ReporteFotoViewModel.cs" />
     <Compile Include="Models\ViewModels\PlazaMunicipioViewModel.cs" />
     <Compile Include="Models\ViewModels\ProductoViewModel.cs" />
     <Compile Include="Models\ViewModels\ReporteAsistenciaNewMapa.cs" />
+    <Compile Include="Models\ViewModels\AgendaViewModel.cs" />
     <Compile Include="Models\ViewModels\RutaIntinerarioViewModel.cs" />
     <Compile Include="Models\ViewModels\RutaTiendaViewModel.cs" />
     <Compile Include="Models\ViewModels\RutaViewModel.cs" />
@@ -841,6 +871,7 @@
     <Content Include="Content\componentes.css" />
     <Content Include="Content\css\select2.css" />
     <Content Include="Content\css\select2.min.css" />
+    <Content Include="Content\IntegransaStyles\ReporteEfectividad\reporte-efectividad-listado-styles.css" />
     <Content Include="Content\kendo\Black\editor.png" />
     <Content Include="Content\kendo\Black\imagebrowser.png" />
     <Content Include="Content\kendo\Black\indeterminate.gif" />
@@ -1310,6 +1341,7 @@
     <Content Include="Scripts\i18n\vi.js" />
     <Content Include="Scripts\i18n\zh-CN.js" />
     <Content Include="Scripts\i18n\zh-TW.js" />
+    <Content Include="Scripts\IntegramsaScript\ReporteEfectividad\ReporteEfectividadScript.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -1815,6 +1847,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\select2.js" />
     <Content Include="Scripts\select2.min.js" />
+    <Content Include="Scripts\Utils\HttpAjaxServicesScript.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="SegmentosAlta.aspx" />
     <Content Include="SegmentosProductos.aspx" />
@@ -2023,6 +2056,9 @@
     <Content Include="v2\js\wizard\steps-active.js" />
     <Content Include="v2\js\wow.min.js" />
     <Content Include="v2\style.css" />
+    <Content Include="Views\Evaluacion\papel.png" />
+    <Content Include="Views\Evaluacion\papel2.png" />
+    <Content Include="Views\Evaluacion\papel3.png" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -2282,6 +2318,25 @@
     <Content Include="Views\Partials\Filtros\_ClienteCoordinador.cshtml" />
     <Content Include="Views\Ruta\RutaOptima.cshtml" />
     <Content Include="Views\RutaIntinerario\Index2.cshtml" />
+    <Content Include="Views\Tienda\ListadoTiendasRepetidas.cshtml" />
+    <Content Include="Views\Agenda\Editar.cshtml" />
+    <Content Include="Views\Agenda\Index.cshtml" />
+    <Content Include="Views\Agenda\Listado.cshtml" />
+    <Content Include="Views\Agenda\Nuevo.cshtml" />
+    <Content Include="Views\Ponderacion\Editar.cshtml" />
+    <Content Include="Views\Ponderacion\Index.cshtml" />
+    <Content Include="Views\Ponderacion\Listado.cshtml" />
+    <Content Include="Views\Ponderacion\Nuevo.cshtml" />
+    <Content Include="Views\Evaluacion\Editar.cshtml" />
+    <Content Include="Views\Evaluacion\Index.cshtml" />
+    <Content Include="Views\Evaluacion\Listado.cshtml" />
+    <Content Include="Views\Evaluacion\Nuevo.cshtml" />
+    <Content Include="Views\Agenda\Agenda.cshtml" />
+    <Content Include="Views\Agenda\VerHorario.cshtml" />
+    <Content Include="Views\Agenda\VerMapa.cshtml" />
+    <Content Include="Views\Evaluacion\AgregarEvaluacion.cshtml" />
+    <Content Include="Views\Partials\Filtros\_Plaza.cshtml" />
+    <Content Include="Views\Partials\Filtros\_ClienteCoordinadorSinFecha.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

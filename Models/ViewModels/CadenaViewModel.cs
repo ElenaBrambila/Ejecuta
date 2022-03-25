@@ -18,5 +18,10 @@ namespace IntegramsaUltimate.Models.ViewModels
         [Required]
         [Display(Name = "*Giro")]
         public int? idGiro { get; set; }
+
+       
+        [StringLength(50, ErrorMessage = "La cadena no admite mas de 50 caracteres")]
+        [Display(Name = "Prefijo para determinante")]
+        public string cadena { get; set; }
     }
 }

@@ -42,7 +42,11 @@ namespace IntegramsaUltimate.Controllers
                 {
                     return Content(getErroresModelo());
                 }
-
+                //validación de negocio
+                if (!Validaciones(model))
+                {
+                    return Content(error);
+                }
 
                 //guardamos
                 producto oProducto = new producto();
@@ -91,7 +95,11 @@ namespace IntegramsaUltimate.Controllers
                 {
                     return Content(getErroresModelo());
                 }
-
+                //validación de negocio
+                if (!ValidacionesEditar(model))
+                {
+                    return Content(error);
+                }
                 //guardamos
                 producto oProducto = db.producto.Find(model.id);
                 oProducto.idEstado = 1;
@@ -133,9 +141,28 @@ namespace IntegramsaUltimate.Controllers
             return Content("1");
         }
 
+        public bool Validaciones(ProductoViewModel model)
+        {
+            if (Models.HelperModels.Producto.Existe(model.sku))
+            {
+                error = "El sku del producto ya existe, intente con otro";
+                return false;
+            }
 
+            return true;
+        }
 
-        #region Grid
+        public bool ValidacionesEditar(ProductoViewModel model)
+        {
+            if (Models.HelperModels.Producto.Existe(model.sku, model.id))
+            {
+                error = "El sku del producto ya existe, intente con otro";
+                return false;
+            }
+
+            return true;
+        }
+        #region 
         public ActionResult Listado(int idCliente)
         {
 

@@ -6,50 +6,78 @@
 
 <div class="row">
 
-    <div class="col-md-12">
+    <div class="col-md-12" >
         @(Html.Kendo().Grid<IntegramsaUltimate.Models.TableViewModels.TableReporteAsistenciaFechaEnEspecificoViewModel>()
                     .Name("tabla")
 
                      .Columns(c =>
-                        {
-                            
-                            c.Bound(p => p.plaza).Title("Plaza");
-                            c.Bound(p => p.promotor).Title("Promotor");
-                            c.Bound(p => p.fecha).Format("{0:dd/MM/yyyy}").Title("Fecha");
-                            c.Bound(p => p.entrada).Format("{0:hh:mm}").Title("Entrada");
-                            c.Bound(p => p.salida).Format("{0:hh:mm}").Title("Salida");
-                            c.Bound(p => p.tiempoEfectivo).Title("Tiempo Efectivo");
-                            c.Bound(p => p.tiendasAVisitar).Title("Tiendas");
-                            c.Bound(p => p.tiendasVisitadas).Title("Visitadas");
-                            c.Bound(p => p.tiendasNoVisitadas).Title("No Visitadas");
-                            c.Bound(p => p.dentroPerimetro).Title("Dentro Perimetro");
-                            c.Bound(p => p.fueraPerimetro).Title("Fuera del Perimetro");
+                     {
+                         c.Bound(p => p.cliente).Title("Cliente").Width(140);
+                         c.Bound(p => p.coordinador).Title("Coordinador").Width(160);
+                         c.Bound(p => p.promotor).Title("Promotor").Width(160);
+                         c.Bound(p => p.plaza).Title("Plaza").Width(160);
+                         c.Bound(p => p.ruta).Title("Ruta").Width(140);
+                         c.Bound(p => p.turno).Title("Turno").Width(140);
+                         c.Bound(p => p.fecha).Format("{0:dd/MM/yyyy}").Title("Fecha").Width(100);
+                         c.Bound(p => p.entrada).Format("{0:hh:mm}").Title("Entrada").Width(100);
+                         c.Bound(p => p.salida).Format("{0:hh:mm}").Title("Salida").Width(100);
+                         c.Bound(p => p.tiempoTotal).Title("T. Total").Width(120);
+                         c.Bound(p => p.tiempoEfectivo).Title("T. Efectivo").Width(120);
+                         c.Bound(p => p.tiempoTraslado).Title("T.Traslado").Width(120);
+                         c.Bound(p => p.tiendasAVisitar).Title("TA").Width(70);
+                         c.Bound(p => p.tiendasVisitadas).Title("COB").Width(80);
+                         c.Bound(p => p.tiendasNoVisitadas).Title("NV").Width(70);
+                         c.Bound(p => p.dentroPerimetro).Title("DP").Width(70);
+                         c.Bound(p => p.fueraPerimetro).Title("FP").Width(70);
 
-                            
-                        })
+
+                     })
                         .ToolBar(tools => tools.Excel())
                         .Pageable()
+                        .Scrollable(scrollable => scrollable.Height("auto"))
                         .Sortable()
                         .Filterable()
                         .Groupable()
-
                         .Excel(excel => excel
                             .FileName("reporte.xlsx")
                             .AllPages(true)
-                                     .ProxyURL(Url.Action("JsonGrid", "ReporteAsistenciaFechaEnEspecifico", new { idCliente = Model.idCliente, fechaInicio = Model.fechaInicio, fechaFin = Model.fechaFin }))
+                                     .ProxyURL(Url.Action("JsonGrid", "ReporteAsistenciaFechaEnEspecifico", new { idCliente = Model.idCliente, fechaInicio = Model.fechaInicio, fechaFin = Model.fechaFin, idPromotor = Model.idPromotor, idCoordinador = Model.idCoordinador, idPlaza = Model.idPlaza }))
                          )
                         .Resizable(resize => resize.Columns(true))
                         .DataSource(d => d.Ajax()
                                     .Sort(sort =>
                                     {
-                                        sort.Add("Promotor");   
+                                        sort.Add("Promotor");
                                         sort.Add("Fecha").Descending();
                                     })
-                                                           .Read(r => r.Action("JsonGrid", "ReporteAsistenciaFechaEnEspecifico", new { idCliente = Model.idCliente, fechaInicio = Model.fechaInicio, fechaFin = Model.fechaFin }))
+                                                           .Read(r => r.Action("JsonGrid", "ReporteAsistenciaFechaEnEspecifico", new { idCliente = Model.idCliente, fechaInicio = Model.fechaInicio, fechaFin = Model.fechaFin, idPromotor = Model.idPromotor, idCoordinador = Model.idCoordinador, idPlaza = Model.idPlaza }))
                         )
 
         )
     </div>
 </div>
+<script>
+    $(function () {
+        // Initialize the variable which will hold the scroll positions.
+        var scrollOffset = {
+            left: 0,
+            top: 0
+        };
+
+        // Save the scroll position before the new data is rendered.
+        function onGridDataBinding (e) {
+            var container = e.sender.wrapper.children(".k-grid-content"); // Or ".k-virtual-scrollable-wrap".
+            scrollOffset.left = container.scrollLeft();
+            scrollOffset.top = container.scrollTop(); // Use only if virtual scrolling is disabled.
+        }
+
+        // Restore the scroll position after the new data is rendered.
+        function onGridDataBound (e) {
+            var container = e.sender.wrapper.children(".k-grid-content"); // Or ".k-virtual-scrollable-wrap".
+            container.scrollLeft(scrollOffset.left);
+            container.scrollTop(scrollOffset.top); // Use only if virtual scrolling is disabled.
+        }
+    });
+</script>
 
 

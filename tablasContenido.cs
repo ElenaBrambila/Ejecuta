@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading;
-using System.Web;
 
 namespace IntegramsaUltimate
 {
@@ -18,7 +17,7 @@ namespace IntegramsaUltimate
             try
             {
                 IntegramsaUltimateDataSetTableAdapters.vwReporteEfectividadTableAdapter adaptador = new IntegramsaUltimateDataSetTableAdapters.vwReporteEfectividadTableAdapter();
-                
+
                 string info = adaptador.Connection.ConnectionString;
                 adaptador.FillByClienteFecha(tabla, idCliente, startDate, endDate);
                 return tabla;
@@ -37,9 +36,9 @@ namespace IntegramsaUltimate
 
             catch (Exception error)
             {
-             //   string errorB = error.InnerException.Message.ToString();
-              //  string errorA = tabla.GetErrors()[0].RowError.ToString();
-                 return tabla;
+                //   string errorB = error.InnerException.Message.ToString();
+                //  string errorA = tabla.GetErrors()[0].RowError.ToString();
+                return tabla;
 
             }
         }
@@ -118,7 +117,7 @@ namespace IntegramsaUltimate
 
             catch (Exception e)
             {
-                  //string error = tabla.GetErrors()[0].RowError.ToString();
+                // string error = tabla.GetErrors()[0].RowError.ToString();
                 return tabla;
 
             }
@@ -140,6 +139,7 @@ namespace IntegramsaUltimate
 
 
         }
+
 
         public DataTable dtFotosClientePromotor(DateTime startDate, DateTime endDate, int idCliente, int idDePromotor)
         {
@@ -187,8 +187,72 @@ namespace IntegramsaUltimate
 
             }
         }
+        public DataTable dtFotosGeneral(DateTime startDate, DateTime endDate, int idCliente, string promotor, string plazas, string cadenas, string exhibicion)
+        {
+            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("es-ES");
+            IntegramsaUltimateDataSet.vwReporteFotosDataTable tabla = new IntegramsaUltimateDataSet.vwReporteFotosDataTable();
+            var starD = startDate.ToString("MM-dd-yyyy HH:mm:ss");
+            var endD = endDate.ToString("MM-dd-yyyy HH:mm:ss");
+            try
+            {
+                IntegramsaUltimateDataSetTableAdapters.vwReporteFotosTableAdapter adaptador = new IntegramsaUltimateDataSetTableAdapters.vwReporteFotosTableAdapter();
+                DataRow[] resultados = null;
+                IEnumerable<DataRow> data = null;
+                if (promotor != "")
+                {
+                    data = adaptador.FillByProposito(idCliente, startDate, endDate).Where(x => promotor.Contains(x.promotor)).ToList();
+                }
+                else if (cadenas != "")
+                {
+                    data = adaptador.FillByProposito(idCliente, startDate, endDate).Where(x => cadenas.Contains(x.cadena)).ToList();
+                }
+                else if (exhibicion != "")
+                {
+                    data = adaptador.FillByProposito(idCliente, startDate, endDate).Where(x => exhibicion.Contains(x.proposito)).ToList();
+                }
+                else if (plazas != "")
+                {
+                    data = adaptador.FillByProposito(idCliente, startDate, endDate).Where(x => plazas.Contains(x.plaza)).ToList();
+                }
+                else {
+                    data = adaptador.FillByProposito(idCliente, startDate, endDate).ToList();
+                }
 
+                DataTable boundTable = data.CopyToDataTable<DataRow>();
+                return boundTable;
+            }
 
+            catch (Exception e)
+            {
+
+                return tabla;
+
+            }
+        }
+        public DataTable dtFotosClienteFormatos(DateTime startDate, DateTime endDate, int idCliente, string idDeFormato)
+        {
+            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("es-ES");
+            IntegramsaUltimateDataSet.vwReporteFotosDataTable tabla = new IntegramsaUltimateDataSet.vwReporteFotosDataTable();
+            var starD = startDate.ToString("MM-dd-yyyy HH:mm:ss");
+            var endD = endDate.ToString("MM-dd-yyyy HH:mm:ss");
+            try
+            {
+                IntegramsaUltimateDataSetTableAdapters.vwReporteFotosTableAdapter adaptador = new IntegramsaUltimateDataSetTableAdapters.vwReporteFotosTableAdapter();
+                //adaptador.FillByClienteFechaFormatos(tabla, idCliente, starD, endD, idDeFormato);
+                IEnumerable<DataRow> data = adaptador.FillByProposito(idCliente, startDate, endDate).Where(x => idDeFormato.Contains(x.proposito)).ToList();
+
+                // Create a table from the query.
+                DataTable boundTable = data.CopyToDataTable<DataRow>();
+                return boundTable;
+            }
+
+            catch (Exception e)
+            {
+
+                return tabla;
+
+            }
+        }
 
         //public DataTable dtFotosClienteCadenaFecha(DateTime startDate, DateTime endDate, int idCliente)
         //{

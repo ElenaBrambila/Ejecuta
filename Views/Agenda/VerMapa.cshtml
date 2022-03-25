@@ -1,0 +1,65 @@
+﻿@using IntegramsaUltimate.Models
+@model IEnumerable<IntegramsaUltimate.Models.rutaIntinerario>
+@{
+    Layout = null;
+    
+    rutaIntinerario primerTienda=null;
+    
+    
+}
+@if (Model.Count() > 0)
+    {
+        primerTienda = Model.First();
+
+            <div style="height:440px;" id="mapa">
+            </div>
+
+            <script>
+                $(document).ready(function () {
+
+                    jsLoadMapa();
+
+                });
+
+                function jsLoadMapa() {
+                    mapOptions = {
+                       zoom: 15,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    };
+
+                    //Creamos el mapa
+                    map = new google.maps.Map(document.getElementById("mapa"), mapOptions);
+                    var markers = [];//some array
+                    @{
+                        int i = 0;
+                    }
+                    @foreach (rutaIntinerario oRI in Model.ToList())
+                    {
+                        @Html.Raw("markers["+i+"] = new google.maps.Marker({"+
+                            "position: new google.maps.LatLng('"+oRI.tienda.ubicacion.Latitude+"', '"+oRI.tienda.ubicacion.Longitude+"'),"+
+                            "map: map,"+
+                            "title:'"+oRI.tienda.nombre+"',"+
+                            "label:'"+(i+1).ToString()+"'"+
+                        "});"+
+
+                         "markers["+i+"].setMap(map);");
+                        i++;
+                    }
+
+                    //acomodamos el mapa
+                    var bounds = new google.maps.LatLngBounds();
+                    for (var i = 0; i < markers.length; i++) {
+                        bounds.extend(markers[i].getPosition());
+                    }
+
+                    map.fitBounds(bounds);
+                    map.setZoom(11);
+                }
+
+
+
+            </script>
+
+}else{
+    @Html.Raw("No existen tiendas este día");
+}

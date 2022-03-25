@@ -32,6 +32,16 @@ namespace IntegramsaUltimate.Controllers
         }
 
         /// <summary>
+        /// regresa los formatos recibiendo la cadena
+        /// </summary>
+        /// <param name="NombreDeterminante"></param>
+        /// <returns></returns>
+        public JsonResult GetDeterminante(int idCadena)
+        {
+            var db = new IntegramsaUltimateEntities();
+            return Json(db.tienda.Where(d => d.idEstado == 1 && d.idCadena == idCadena).Select(c => new { Id = c.id, nombre = c.nombre }), JsonRequestBehavior.AllowGet);
+        }
+        /// <summary>
         /// regresa todos los clientes activos
         /// </summary>
         /// <returns></returns>
@@ -39,6 +49,15 @@ namespace IntegramsaUltimate.Controllers
         {
             var db = new IntegramsaUltimateEntities();
             return Json(db.cliente.Where(d => d.idEstado == 1 ).Select(c => new { Id = c.id, nombre = c.razonSocial }), JsonRequestBehavior.AllowGet);
+        }
+        /// <summary>
+        /// regresa todos las Plazas activas
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult GetPlazas()
+        {
+            var db = new IntegramsaUltimateEntities();
+            return Json(db.cPlaza.OrderBy(d => d.nombre).Select(c => new { Id = c.id, nombre = c.nombre }), JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>

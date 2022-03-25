@@ -68,5 +68,7 @@ namespace IntegramsaUltimate.Models.ViewModels
         [Display(Name = "Longitud")]
         public string longitud { get; set; }
 
+        public string prefijo { get; set; }
+
     }
 }

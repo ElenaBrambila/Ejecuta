@@ -1,0 +1,74 @@
+﻿@model int
+@{
+    Layout = null;
+    int idCliente = Model;
+}
+
+<div class="row">
+
+    <div class="col-md-12">
+        @(Html.Kendo().Grid<IntegramsaUltimate.Models.TableViewModels.TablePonderacionViewModel>()
+                    .Name("tabla")
+
+                     .Columns(c =>
+                     {
+                         c.Bound(p => p.id).Title("#").Width(50).Hidden(true);
+                         c.Bound(p => p.cliente).Title("Cliente");
+                         c.Bound(p => p.segmento).Title("Ponderación");
+                         c.Bound(p => p.ponderacion).Title("Valor");
+                         c.Command(command => { command.Edit(); }).Width(250);
+                     })
+                        .ToolBar(toolbar => toolbar.Excel())
+                        .Pageable()
+                        .Sortable()
+                        .Filterable()
+                        .Editable(editable => editable.Mode(GridEditMode.InLine).ConfirmDelete("Continue to delete this record?").DisplayDeleteConfirmation("Continue to delete this record?"))
+                        .Excel(excel => excel
+                            .FileName("reporte.xlsx")
+                            .AllPages(true)
+                             .ProxyURL(Url.Action("JsonGrid", "Ponderacion", new { idCliente = idCliente }))
+                         )
+                        .Resizable(resize => resize.Columns(true))
+                        .DataSource(d => d.Ajax()
+                        .Model(model =>
+                        {
+                            model.Id(p => p.id);
+                            model.Field(p => p.cliente).Editable(false);
+                            model.Field(p => p.segmento).Editable(false);
+                            model.Field(p => p.ponderacion).Editable(true);
+                        })
+                            .Sort(sort =>
+                            {
+                                sort.Add("cliente").Ascending();
+                                sort.Add("segmento").Ascending();
+                            })
+                            .Create(update => update.Action("JsonGrid", "Nuevo", new { idCliente = idCliente }))
+                           .Read(r => r.Action("JsonGrid", "Ponderacion", new { idCliente = idCliente }))
+                           .Update(update => update.Action("GuardarEditar", "Ponderacion"))
+                        )
+
+        )
+    </div>
+</div>
+<script type="text/javascript">
+    function isEditable(dataItem) {
+
+        return dataItem.Id != 3;
+
+    }
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Errors:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "\n";
+                    });
+                }
+            });
+            alert(message);
+        }
+    }
+</script>
+
+

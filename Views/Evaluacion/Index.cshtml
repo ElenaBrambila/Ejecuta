@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "Evaluación";
+}
+
+<div style="background-color:#eee;padding:20px" class="head-module">
+    <span style="margin-right:35px" class="modulo-titulo">@ViewBag.Title</span>
+
+
+    <span class="boton-style" style="float:right" onclick="jsNuevo()">
+        <img class="boton-image" src="~/Images/icon_new_element.png" />
+    </span>
+
+    <span>
+        <label>Clientes: </label>
+        @Html.DropDownList("cboClientes", (SelectList)ViewBag.lstClientes, null, new { style = "width:200px;" })
+    </span>
+    <span>
+        <label>Promotor: </label>
+        @Html.DropDownList("cboClientes", (SelectList)ViewBag.lstClientes, null, new { style = "width:200px;" })
+    </span>
+</div>
+<hr />
+<div id="divGrid" class="col-md-12">
+
+</div>
+
+<script>
+    var idClienteSeleccionado;
+    $(document).ready(function () {
+        $("#cboClientes").change(function () {
+
+            idClienteSeleccionado = $(this).prop("value");
+
+            url = "@Url.Content("~/Ponderacion/Listado")" + "?idCliente=" + idClienteSeleccionado
+
+            $("#divGrid").load(url);
+
+        })
+
+        $("#cboClientes").change(); //invocamos el listado
+
+    })
+
+    //funciones
+
+    function jsNuevo() {
+        url = "@Url.Content("~/Evaluacion/AgregarEvaluacion")" + "?idCliente=" + 1
+        window.location.href = url;
+    }
+
+
+
+</script>

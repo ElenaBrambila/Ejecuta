@@ -439,7 +439,7 @@
                                                     <asp:Button runat="server" ID="btnPreliminar" Text="Generar preliminar" OnClick="btnPreliminar_Click" />
                                                      <br />
                                                       <br />
-                                                    <asp:Button runat="server" ID="btnPreliminar2" Text="Generar preliminar Test" OnClick="btnPreliminar_ClickR" />
+                                                   
                                                     <%--                                                    <asp:ImageButton ImageUrl="Images/btnGenerar.png" AlternateText="Generar" runat="server"  ID="ImageButton1" />--%>
                                                     <br />
                                                     <asp:GridView ID="datosGrid" runat="server" AutoGenerateColumns="false">
