@@ -83,6 +83,7 @@
             <ul class="dropdown-menu">
                 <li>@Html.ActionLink("Cadenas", "Index", "Cadena")</li>
                 <li>@Html.ActionLink("Tiendas", "Index", "Tienda")</li>
+                <li>@Html.ActionLink("Tiendas Repetidas", "ListadoTiendasRepetidas", "Tienda")</li>
                 <li>@Html.ActionLink("Formatos", "Index", "Formato")</li>
                 <li>@Html.ActionLink("Plazas", "Index", "Plaza")</li>
                 <li>@Html.ActionLink("Regiones", "Index", "Region")</li>
@@ -91,7 +92,20 @@
             </ul>
         </li>
 
+        <li class="dropdown">
+            <a class="dropdown-toggle"
+               data-toggle="dropdown"
+               href="#">
+                Store Check
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>@Html.ActionLink("Agenda", "Index", "Agenda")</li>
+                <li>@Html.ActionLink("Ponderación", "Index", "Ponderacion")</li>
+                <li>@Html.ActionLink("Evaluación", "Index", "Evaluacion")</li>
 
+            </ul>
+        </li>
 
     }
     else if (oUsuario.idTipoUsuario == 2) //promotor
@@ -147,8 +161,8 @@
                 </ul>
 
             </li>
-            }
         }
-    </ul>
+    }
+</ul>
 }
 

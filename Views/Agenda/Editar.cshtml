@@ -1,0 +1,174 @@
+﻿@using IntegramsaUltimate.Models.ViewModels
+@model UsuarioEditarViewModel
+@{
+    Layout = null;
+
+    //foto
+    string base64String = null;
+    WebImage wi = null;
+    if ( Model.fotoUsuario!=null )
+    {
+        wi = new WebImage((byte[])Model.fotoUsuario);
+        base64String = "data:image/jpg;base64," + Convert.ToBase64String(wi.GetBytes());
+    }
+}
+
+<form id="frmFormulario" enctype="multipart/form-data">
+
+    @Html.HiddenFor(d => d.idTipoUsuario)
+    @Html.HiddenFor(d=>d.id)
+    <div>
+        <div class="tercio float">
+            <div class="bloque">
+                <div>
+                    <div class="cajaBorder" style="margin-bottom:10px;text-align:center;display:inline-block">
+                        @if (wi == null)
+                        {
+                            <img id="imgFotoUsuario" src="~/Images/icon_admin.png" style="width:100%;" />
+                        }
+                        else
+                        {
+                            <img id="imgFotoUsuario" src=@base64String style="max-width:100%;max-height:200px;" />
+                        }
+                        
+                    </div>
+                    <input id="fotoUsuario" type="file" name="foto" accept="image/jpeg, image/png, image/jpg">
+
+                </div>
+            </div>
+        </div>
+        <div class="tercio float">
+            <div class="bloque">
+                <div>
+                    @Html.LabelFor(d => d.email)
+                    @Html.TextBoxFor(d => d.email)
+                </div>
+                <div>
+                    @Html.LabelFor(d => d.pass1)
+                    @Html.PasswordFor(d => d.pass1)
+                </div>
+
+                <div>
+                    @Html.LabelFor(d => d.pass2)
+                    @Html.PasswordFor(d => d.pass2)
+                </div>
+
+
+                <div>
+                    @Html.LabelFor(d => d.nombre)
+                    @Html.TextBoxFor(d => d.nombre)
+                </div>
+
+                <div>
+                    @Html.LabelFor(d => d.paterno)
+                    @Html.TextBoxFor(d => d.paterno)
+                </div>
+
+                <div>
+                    @Html.LabelFor(d => d.materno)
+                    @Html.TextBoxFor(d => d.materno)
+                </div>
+
+
+            </div>
+        </div>
+        <div class="tercio float">
+            <div class="bloque">
+                <div>
+                    @Html.LabelFor(d => d.fechaNacimiento)
+                    @Html.Kendo().DatePickerFor(d => d.fechaNacimiento).Depth(CalendarView.Century)
+                </div>
+                <div>
+                    @Html.LabelFor(d => d.estado)
+                    @(Html.Kendo().DropDownList()
+                      .Name("estado")
+                      .HtmlAttributes(new { style = "width:100%" })
+                      .OptionLabel("Selecciona el estado...")
+                      .DataTextField("nombre")
+                      .DataValueField("Id")
+                      .DataSource(source =>
+                      {
+                          source.Read(read =>
+                          {
+                              read.Action("GetEstados", "EstadoMunicipio");
+                          });
+                      })
+                    )
+                </div>
+                <div>
+                    @Html.LabelFor(d => d.telefono)
+                    @Html.TextBoxFor(d => d.telefono)
+                </div>
+                <div>
+                    @Html.LabelFor(d => d.celular)
+                    @Html.TextBoxFor(d => d.celular)
+                </div>
+                <div>
+                    @Html.LabelFor(d => d.curp)
+                    @Html.TextBoxFor(d => d.curp)
+                </div>
+
+                <div>
+                    @Html.LabelFor(d => d.imss)
+                    @Html.TextBoxFor(d => d.imss)
+                </div>
+
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div>
+        <div style="text-align:right;">
+            <input class="btn-success" type="submit" value="Guardar" />
+        </div>
+
+    </div>
+</form>
+
+<script>
+    $("#fotoUsuario").change(function () {
+        plasmaFoto(this,"imgFotoUsuario");
+    });
+
+    $(document).ready(function () {
+
+        //actualizar el formulario
+        $("#frmFormulario").submit(function (e) {
+
+            e.preventDefault();
+
+            jsShowWindowLoad();
+
+            url="@Url.Content("~/Usuario/GuardarEditar")"
+           // parametros = $(this).serialize();
+
+            var parametros=new FormData($(this)[0])
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: parametros,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+
+                    if (data == "1") {
+                        MensajeExito("Usuario editado con éxito");
+                        jsCloseDialog();
+
+                        jsRefrescaGrid("tabla-@Model.idTipoUsuario")
+                    } else {
+                        MensajeError(data);
+                    }
+                    jsRemoveWindowLoad();
+                },
+                error: function (r) {
+                    jsRemoveWindowLoad();
+                    MensajeError("Error del servidor");
+                }
+            });
+
+        })
+
+    })
+</script>

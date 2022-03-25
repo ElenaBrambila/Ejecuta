@@ -65,5 +65,41 @@ namespace IntegramsaUltimate.Models.HelperModels
             }
             catch { return null; }
         }
+
+        public static bool ExistePrefijo(string prefijo, int id = 0)
+        {
+            try
+            {
+                using (IntegramsaUltimateEntities db = new IntegramsaUltimateEntities())
+                {
+
+                    IEnumerable<cadena> lst;
+                    if (id != 0)
+                    {
+
+                        lst = from d in db.cadena
+                              where d.idEstado == 1 && d.cadenaSugerida.Equals(prefijo) && d.id != id
+                              select d;
+                    }
+                    else
+                    {
+                        lst = from d in db.cadena
+                              where d.idEstado == 1 && d.cadenaSugerida.Equals(prefijo)
+                              select d;
+                    }
+
+                    //si existe un usuario regresa true
+                    if (lst.Count() > 0)
+                        return true;
+
+
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }

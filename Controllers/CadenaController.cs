@@ -57,6 +57,7 @@ namespace IntegramsaUltimate.Controllers
                 oCadena.idEstado = 1;
                 oCadena.fecha = DateTime.Now;
                 oCadena.nombre = model.nombre;
+                oCadena.cadenaSugerida = model.cadena;
                 oCadena.idGiroComercial = model.idGiro;
 
                 db.cadena.Add(oCadena);
@@ -81,6 +82,7 @@ namespace IntegramsaUltimate.Controllers
             CadenaViewModel model = new CadenaViewModel();
             model.nombre = oCadena.nombre;
             model.idGiro = oCadena.idGiroComercial;
+            model.cadena = oCadena.cadenaSugerida;
             model.id = oCadena.id;
 
 
@@ -99,7 +101,7 @@ namespace IntegramsaUltimate.Controllers
                 }
 
                 //validación de negocio
-                if (!Validaciones(model))
+                if (!ValidacionesEditar(model))
                 {
                     return Content(error);
                 }
@@ -108,6 +110,7 @@ namespace IntegramsaUltimate.Controllers
                 //guardamos
                 cadena oCadena = db.cadena.Find(model.id);
                 oCadena.nombre = model.nombre;
+                oCadena.cadenaSugerida = model.cadena;
                 oCadena.idGiroComercial = model.idGiro;
 
                 db.Entry(oCadena).State = EntityState.Modified;
@@ -159,6 +162,7 @@ namespace IntegramsaUltimate.Controllers
                   {
                       id = d.id,
                       nombre = d.nombre,
+                      prefijo = d.cadenaSugerida,
                       tipoGiro = d.cGiroComercial.nombre ?? ""
                   };
 
@@ -183,10 +187,34 @@ namespace IntegramsaUltimate.Controllers
                 error = "El nombre de la cadena ya existe, intente con otro";
                 return false;
             }
+            if (model.cadena != null)
+            {
+                if (Models.HelperModels.Cadena.ExistePrefijo(model.cadena))
+            {
+                error = "El prefijo de la cadena ya existe, intente con otro";
+                return false;
+            }
+            }
+            return true;
+        }
+        public bool ValidacionesEditar(CadenaViewModel model)
+        {
+            if (Models.HelperModels.Cadena.Existe(model.nombre, model.id))
+            {
+                error = "El nombre de la cadena ya existe, intente con otro";
+                return false;
+            }
+            if (model.cadena != null) {
+                if (Models.HelperModels.Cadena.ExistePrefijo(model.cadena, model.id))
+                {
+                    error = "El prefijo de la cadena ya existe, intente con otro";
+                    return false;
+                }
+            }
+            
 
             return true;
         }
-
         #endregion
     }
 }

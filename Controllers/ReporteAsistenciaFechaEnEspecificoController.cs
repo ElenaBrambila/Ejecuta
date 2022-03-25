@@ -1,12 +1,13 @@
-﻿using Kendo.Mvc.UI;
+﻿using IntegramsaUltimate.Models.FilterViewModel;
+using Kendo.Mvc.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using IntegramsaUltimate.Models.TableViewModels;
-using IntegramsaUltimate.Models.FilterViewModel;
+using System.Data;
+using IntegramsaUltimate.Utilidades;
 
 namespace IntegramsaUltimate.Controllers
 {
@@ -37,38 +38,42 @@ namespace IntegramsaUltimate.Controllers
 
         public ActionResult JsonGrid([DataSourceRequest] DataSourceRequest request, ReporteAsistenciaFechaEnEspecificoViewModel model)
         {
+
+            var Reporte = new List<TableReporteEfectividadNewViewModel>();
+            int? id, filter = 0;
             IEnumerable<TableReporteAsistenciaFechaEnEspecificoViewModel> lst = null;
-            IQueryable<TableReporteAsistenciaFechaEnEspecificoViewModel> query = null;
+            DateTime FechaInicio = FormatDatetime.GetDatetimeDefaultByString(model.fechaInicio);
+            DateTime FechaFin = FormatDatetime.GetDatetimeDefaultByString(model.fechaFin);
+            FechaFin = FechaFin.AddHours(23);
 
-            //casteamos fechas
-            DateTime FechaInicio = DateTime.ParseExact(model.fechaInicio + " 00:00:00", "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
-            DateTime FechaFin = DateTime.ParseExact(model.fechaFin + " 23:59:59", "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+            (id, filter) = (model.idPromotor != 0) ?
+                          (model.idPromotor, 0) : (model.idCoordinador != 0) ?
+                          (model.idCoordinador, 1) : (model.idCliente != 0) ? (model.idCliente, 2) : (0, 3);
 
-
-            query = from d in db.fnReporteAsistenciaFechaEspecifica( FechaInicio, FechaFin,model.idCliente)
+           var query = from d in db.spxGetNewResumenEjecutivoChar(FechaInicio, FechaFin, id, model.idCliente, filter, model.idPlaza)
 
                     select new TableReporteAsistenciaFechaEnEspecificoViewModel
                     {
-                       
-                        plaza = d.PLAZA,
-                        promotor = d.nombre,
+                        plaza = d.plaza,
+                        promotor = d.promotor,
                         fecha = d.fecha,
-                        entrada = d.Entrada,
-                        salida = d.Salida,
+                        entrada = d.entrada,
                         tiempoEfectivo = d.tiempoEfectivo,
-                        tiendasAVisitar = d.tiendasAVisitar,
-                        tiendasVisitadas = d.tiendasVisitadas,
-                        tiendasNoVisitadas = (d.tiendasAVisitar-d.tiendasVisitadas),
-                        dentroPerimetro=d.dentroPerimetro,
-                        fueraPerimetro = d.fueraPerimetro,
-                      
-
+                        tiempoTotal = d.tiempoTotal,
+                        tiempoTraslado = d.tiempoTraslado,
+                        salida = d.salida,
+                        cliente = d.cliente,
+                        coordinador = d.coordinador,
+                        tiendasAVisitar = d.ta,
+                        tiendasVisitadas = d.cob,
+                        tiendasNoVisitadas = (d.ta - d.cob),
+                        dentroPerimetro = d.dp,
+                        fueraPerimetro = d.fp,
+                        ruta = d.ruta,
+                        turno = d.turno
                     };
-
-
             //ejecutamos el query
             lst = query.ToList();
-
 
             return Json(lst.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }

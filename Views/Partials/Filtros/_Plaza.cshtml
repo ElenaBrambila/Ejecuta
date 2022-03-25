@@ -1,0 +1,21 @@
+﻿@{
+    Layout = null;
+}
+<span>
+    <label>Plaza</label>
+    @(Html.Kendo().DropDownList()
+                      .Name("cboPlaza")
+                      .HtmlAttributes(new { style = "width:180px;display:none;" })
+                      .OptionLabel("Selecciona una plaza...")
+                      .DataTextField("nombre")
+                      .DataValueField("Id")
+                      .DataSource(source =>
+                      {
+                          source.Read(read =>
+                          {
+                              read.Action("GetPlazas", "DropDownList");
+                          });
+
+                      })
+    )
+</span>

@@ -61,7 +61,7 @@ namespace IntegramsaUltimate
             var todasPlazas = from p in db.cPlaza orderby p.nombre select p;
             cboPlazas.DataSource = todasPlazas.ToList();
             cboPlazas.DataTextField = "nombre";
-            cboPlazas.DataValueField = "id";
+            cboPlazas.DataValueField = "nombre";
             cboPlazas.DataBind();
         }
 
@@ -71,7 +71,7 @@ namespace IntegramsaUltimate
             var todasCadenas = from p in db.cadena orderby p.nombre select p;
             cboCadena.DataSource = todasCadenas.ToList();
             cboCadena.DataTextField = "nombre";
-            cboCadena.DataValueField = "id";
+            cboCadena.DataValueField = "nombre";
             cboCadena.DataBind();
 
         }
@@ -140,7 +140,7 @@ namespace IntegramsaUltimate
                 idDeCliente = indice;
             }
             cboPromotor1.DataSource = (db.usuario.Where(d => d.idEstado == 1 && d.usuarioCliente.Where(f => f.idCliente == idDeCliente).Count() > 0).Select(c => new { Id = c.id, nombre = (c.nombre + " " + c.paterno + " " + c.materno) }).OrderBy(c => c.nombre)).ToList();
-            cboPromotor1.DataValueField = "Id";
+            cboPromotor1.DataValueField = "nombre";
             cboPromotor1.DataTextField = "nombre";
             cboPromotor1.DataBind();
 
@@ -226,10 +226,24 @@ namespace IntegramsaUltimate
                     bool validarFechaFin = DateTime.TryParse(dtFin.Text, out fechaFin);
                     tablasContenido infoReporte = new tablasContenido();
 
-
+                    if (fechaInicio <= DateTime.Today.AddYears(-1))
+                    {
+                        fechaInicio = DateTime.ParseExact(DateTime.Today.AddDays(-1).ToString("dd/MM/yyyy") + " 00:00:00", "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+                    }
+                    if (fechaFin <= DateTime.Today.AddYears(-1))
+                    {
+                        DateTime dateTimeNow = DateTime.Now;
+                        string dateOnlyString = dateTimeNow.ToString("dd/MM/yyyy");
+                        fechaFin = DateTime.ParseExact(dateOnlyString + " 23:59:59", "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+                    }
                     DataTable datosReporte = null;
                     //Buscamos si se puso información del promotor
                     int i;
+                    string promotores = "";
+                    string plazas = "";
+                    string cadenas = "";
+                    string exhibicion = "";
+                    //PROMOTOR
                     List<string> chosenItems = new List<string>();
                     for (i = 0; i <= cboPromotor1.Items.Count - 1; i++)
                     {
@@ -240,9 +254,12 @@ namespace IntegramsaUltimate
 
                         }
                     }
+                    if (chosenItems.Count() > 0)
+                    {
+                        promotores = string.Join(",", chosenItems);
+                    }
 
-
-                    //Buscamos si se puso información de la plaza
+                    //PLAZA
                     int i2;
                     List<string> elementosPlaza = new List<string>();
                     for (i2 = 0; i2 <= cboPlazas.Items.Count - 1; i2++)
@@ -253,9 +270,12 @@ namespace IntegramsaUltimate
 
                         }
                     }
+                    if (elementosPlaza.Count() > 0)
+                    {
+                        plazas = string.Join(",", elementosPlaza);
+                    }
 
-
-                    //Buscamos si se puso información de la cadena
+                    //CADENA
                     int i3;
                     List<string> elementosCadena = new List<string>();
                     for (i3 = 0; i3 <= cboCadena.Items.Count - 1; i3++)
@@ -266,9 +286,12 @@ namespace IntegramsaUltimate
 
                         }
                     }
+                    if (elementosCadena.Count() > 0)
+                    {
+                        cadenas = string.Join(",", elementosCadena);
+                    }
 
-
-                    //Buscamos por tipo de exhibición
+                    //EXHIBICION
                     int i4;
                     List<string> elementosTE = new List<string>();
                     for (i4 = 0; i4 <= cboTipoExhibicion.Items.Count - 1; i4++)
@@ -279,17 +302,24 @@ namespace IntegramsaUltimate
 
                         }
                     }
+                    if (elementosTE.Count() > 0)
+                    {
+                        exhibicion = string.Join(",", elementosTE);
+                    }
 
+
+
+
+                    datosReporte = (DataTable)infoReporte.dtFotosGeneral(fechaInicio, fechaFin.AddHours(23), idDeCliente, promotores, plazas, cadenas,exhibicion);
 
 
                     //Promotor
                     if (chosenItems.Count() > 0)
                     {
-                        datosReporte = (DataTable)infoReporte.dtFotosClienteFecha(fechaInicio, fechaFin, idDeCliente);
-                        string query = "idDUsuario IN (" + string.Join(",", chosenItems + ")");
+                        //string query = "idDUsuario IN (" + string.Join(",", chosenItems + ")");
                         string query2 = string.Join(",", chosenItems);
                         //  datosReporte.Select("idDUsuario IN (" + string.Join(",", chosenItems.ToArray() + ")").ToString());
-                        DataRow[] resultados = datosReporte.Select("idDUsuario IN (" + query2 + ")");
+                        DataRow[] resultados = datosReporte.Select("promotor IN (" + query2 + ")");
                         if (resultados.Count() > 0)
                         {
                             datosReporte = resultados.CopyToDataTable();
@@ -299,15 +329,30 @@ namespace IntegramsaUltimate
                         {
                             return;
                         }
+                    }
+
+                    //TE
+                    if (elementosTE.Count() > 0)
+                    {
+                        string query2 = string.Join(",", elementosTE);
+                        DataRow[] resultados = datosReporte.Select("proposito IN (" + query2 + ")");
+                        if (resultados.Count() > 0)
+                        {
+                            datosReporte = resultados.CopyToDataTable();
+                        }
+                        else
+                        {
+                            return;
+                        }
+
                     }
 
 
                     //Plaza
                     if (elementosPlaza.Count() > 0)
                     {
-                        datosReporte = (DataTable)infoReporte.dtFotosClienteFecha(fechaInicio, fechaFin, idDeCliente);
                         string query2 = string.Join(",", elementosPlaza);
-                        DataRow[] resultados = datosReporte.Select("idPlaza IN (" + query2 + ")");
+                        DataRow[] resultados = datosReporte.Select("plaza IN (" + query2 + ")");
                         if (resultados.Count() > 0)
                         {
                             datosReporte = resultados.CopyToDataTable();
@@ -317,15 +362,12 @@ namespace IntegramsaUltimate
                             return;
                         }
                     }
-
-
 
                     //Cadena
                     if (elementosCadena.Count() > 0)
                     {
-                        datosReporte = (DataTable)infoReporte.dtFotosClienteFecha(fechaInicio, fechaFin, idDeCliente);
                         string query2 = string.Join(",", elementosCadena);
-                        DataRow[] resultados = datosReporte.Select("idCadena IN (" + query2 + ")");
+                        DataRow[] resultados = datosReporte.Select("cadena IN (" + query2 + ")");
                         if (resultados.Count() > 0)
                         {
                             datosReporte = resultados.CopyToDataTable();
@@ -338,26 +380,7 @@ namespace IntegramsaUltimate
                     }
 
 
-                    //TE
-                    if (elementosTE.Count() > 0)
-                    {
-                        string query2 = string.Join(",", elementosTE);
-                        datosReporte = (DataTable)infoReporte.dtFotosClienteFormatos(fechaInicio, fechaFin.AddHours(23), idDeCliente, query2);
-                        /*  DataRow[] resultados = datosReporte;
-                          if (datosReporte.Count() > 0)
-                           {
-                               datosReporte = datosReporte.CopyToDataTable();
-                          }
-
-                           else
-                         {
-                               return;
-                          }*/
-                    }
-
-
-
-                    if (datosReporte.Rows.Count > 0)
+                        if (datosReporte.Rows.Count > 0)
                     {
                         if (chkDescargarFotos.Checked == true)
                         {

@@ -1,33 +1,36 @@
 ﻿@using IntegramsaUltimate.Models.FilterViewModel
 @model ReporteEfectividadNewFilterViewModel
-
+@{
+    Layout = null;
+}
 <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
 <script src="~/Scripts/IntegramsaScript/ReporteEfectividad/ReporteEfectividadScript.js"></script>
 <script src="~/Scripts/Utils/HttpAjaxServicesScript.js"></script>
 <!--Report styles-->
 <link href="~/Content/IntegransaStyles/ReporteEfectividad/reporte-efectividad-listado-styles.css" rel="stylesheet" />
 
+<div class="row">
 
-<!--ACtion Buttons-->
-<div id="buttons" style="padding-bottom: 1%;">
-    <button type="button" onclick="tableToExcel('tableInfo', 'Reporte Efectivdad')" class="btn btn-primary buttonE">EXCEL</button>
-    <button type="button" class="btn btn-primary buttonE" onclick="expandAll()">EXPANDIR</button>
-    <button type="button" class="btn btn-primary buttonE" onclick="collapseAll()">COLAPSAR</button>
-</div>
-
-<!--Div for the actual report-->
-<div id="divTbl" style="margin-left: auto!important;">
-</div>
-
-<!--Actual Functionality-->
-
-
-<div class="loader-center" id="loading">
-    <div class="loader-list">
-        <div class="loader" id="loader">Loading...</div>
-        <div class="one loader-bottom"></div>
+    <div class="col-md-12" style="padding-bottom: 1%;">
+        <div id="buttons" style="padding-bottom: 1%;">
+            <button type="button" onclick="tableToExcel('tableInfo', 'Reporte Efectivdad')" class="btn btn-primary buttonE">EXCEL</button>
+            <button type="button" class="btn btn-primary buttonE" onclick="expandAll()">EXPANDIR</button>
+            <button type="button" class="btn btn-primary buttonE" onclick="collapseAll()">COLAPSAR</button>
+        </div>
+        <div id="divTbl">
+        </div>
+    </div>
+    <div class="loader-center" id="loading">
+        <div class="loader-list">
+            <div class="loader" id="loader"></div>
+            <div class="one loader-bottom"></div>
+        </div>
     </div>
 </div>
+
+
+
+
 
 <script>
 
@@ -56,7 +59,8 @@
                 subheader.classList.remove("stickySub");
             }
         }
-      
+
     });
 
 </script>
+    

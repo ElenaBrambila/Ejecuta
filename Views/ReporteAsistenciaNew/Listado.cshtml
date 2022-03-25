@@ -47,7 +47,7 @@
                                         sort.Add("Fecha").Descending();
                                         sort.Add("HoraEntrada").Ascending();
                                     })
-                                                   .Read(r => r.Action("JsonGrid", "ReporteAsistenciaNew", new { idCliente = Model.idCliente, fechaInicio = Model.fechaInicio, fechaFin = Model.fechaFin }))
+                                  .Read(r => r.Action("JsonGrid", "ReporteAsistenciaNew", new { idCliente = Model.idCliente, fechaInicio = Model.fechaInicio, fechaFin = Model.fechaFin }))
                         )
 
         )

@@ -66,7 +66,7 @@ namespace IntegramsaUltimate.Controllers
 
             if (model.fechaInicio == null)
             {
-                FechaInicio = DateTime.ParseExact(DateTime.Today.AddMonths(-3).ToString("dd/MM/yyyy") + " 00:00:00", "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+                FechaInicio = DateTime.ParseExact(DateTime.Today.AddDays(-3).ToString("dd/MM/yyyy") + " 00:00:00", "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
             }
             else
             {

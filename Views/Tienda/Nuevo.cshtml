@@ -21,16 +21,13 @@
                     @Html.LabelFor(d => d.nombre)
                     @Html.TextBoxFor(d => d.nombre)
                 </div>
-                <div>
-                    @Html.LabelFor(d => d.codigo)
-                    @Html.TextBoxFor(d => d.codigo)
-                </div>
+
                 <div>
                     @Html.LabelFor(d => d.idGiro)
-                    @Html.DropDownListFor(d=>d.idGiro,(SelectList)ViewBag.lstGiros)
+                    @Html.DropDownListFor(d => d.idGiro, (SelectList)ViewBag.lstGiros)
                 </div>
                 <div>
-                    @Html.LabelFor(d=>d.idCadena)
+                    @Html.LabelFor(d => d.idCadena)
                     @(Html.Kendo().DropDownList()
                       .Name("idCadena")
                       .HtmlAttributes(new { style = "width:100%" })
@@ -45,6 +42,10 @@
                           });
                       })
                     )
+                </div>
+                <div>
+                    @Html.LabelFor(d => d.codigo)
+                    @Html.TextBoxFor(d => d.codigo)
                 </div>
                 <div>
                     <script>
@@ -66,7 +67,7 @@
                           source.Read(read =>
                           {
                               read.Action("GetFormatos", "DropDownList").Data("filterFormatos");
-                              
+
                           })
                           .ServerFiltering(true);
                       })
@@ -74,10 +75,10 @@
                       .AutoBind(false)
                       .CascadeFrom("idCadena")
                     )
-                  
+
 
                 </div>
-              
+
 
             </div>
         </div>
@@ -166,7 +167,36 @@
     var marker,map; //globales
 
     $(document).ready(function () {
+        //Mostrar determinante
+         $("#idCadena").change(function () {
+            var idCadena = $("#idCadena").val();
+            if (idCadena != '') {
+            url = "@Url.Content("~/Tienda/Determinante")" + "?idCadena=" + idCadena
 
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: idCadena,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+
+                        if (data == "libre") {
+                            $("#codigo").val("").prop("readonly", false);
+                        } else {
+                            $("#codigo").val(data).prop("readonly", true);
+                        }
+                        jsRemoveWindowLoad();
+                    },
+                    error: function (r) {
+                        jsRemoveWindowLoad();
+                        MensajeError("Error del servidor");
+                    }
+                });
+
+            }
+
+            });
         jsLoadMapa();
 
         //actualizar el formulario
@@ -206,13 +236,13 @@
             });
 
 
-            
+
 
         })
 
         //funcionalidad blur para poner el domicilio al mapa
         $(".reubica").blur(function () {
-           
+
             //lo ubicamos a una dirección en específico
             geocoder = new google.maps.Geocoder();
 
@@ -222,7 +252,7 @@
 
             // var calle = $("#Calle").prop("value");
             var address = cp + " Mexico";
-            
+
             //buscamos el domicilio por medio de geocoder
             geocoder.geocode({ 'address': address }, function (results, status) {
                 //si el domicilio se encuentra lo ubicamos
@@ -241,7 +271,7 @@
     })
 
 
-    
+
     function jsLoadMapa() {
         mapOptions = {
             center: new google.maps.LatLng(20.6596988, -103.34960920000003),
@@ -265,7 +295,7 @@
         google.maps.event.addListener(marker,'dragend',function(event) {
             document.getElementById('latitud').value = this.position.lat();
             document.getElementById('longitud').value = this.position.lng();
-           
+
         });
 
 

@@ -1,0 +1,104 @@
+﻿@{
+    ViewBag.Title = "Agenda Store Check";
+    int? idCliente = (int?)ViewBag.idCliente;
+}
+<div style="background-color:#eee;padding:12px" class="head-module">
+    <form id="frmBuscar">
+        <div>
+            <span style="margin-right:30px" class="modulo-titulo">@ViewBag.Title</span>
+            <br /> <br />
+
+            @if (idCliente == null)
+            {
+                @Html.Partial("~/Views/Partials/Filtros/_ClienteCoordinadorSinFecha.cshtml")
+            }
+            else
+            {
+                @Html.Partial("~/Views/Partials/Filtros/_Promotores.cshtml", idCliente)
+            }
+
+        </div>
+
+        <div class="clearfix"></div>
+        <span>
+        </span>
+    </form>
+</div><br />
+
+<div id="divGrid"  style="padding-left: 4%; padding-right: 4%;">
+
+</div>
+<script>
+
+      $(document).ready(function () {
+
+        //eliminamos y ponemos el body en fluid
+        $(".body-content").removeClass("container");
+        $(".body-content").addClass("container-fluid");
+
+
+         $("#frmBuscar").submit(function (e) {
+           
+            e.preventDefault();
+             idCliente = $("#cboCliente").prop("value");
+             idPlaza = $("#cboPlaza").prop("value");
+            idCoordinador = $("#cboCoordinadores").prop("value");
+            idPromotor = $("#cboPromotores").prop("value");
+             idMes = $("#cboMes").prop("value");
+            if (idPromotor == "") {
+                idPromotor = 0;
+             }
+             if (idMes == "") {
+                 alert("Seleccione un mes para agendar");
+                 throw new error("Seleccione un mes para agendar");
+                 idMes = 0;
+             }
+             if (idCliente == "") {
+                 alert("Seleccione un cliente para agendar");
+                 throw new error("Seleccione un mes para agendar");
+                 idCliente = 0;
+             }
+             if (idCoordinador == "") {
+                 alert("Seleccione un coordinador para agendar");
+                 throw new error("Seleccione un mes para agendar");
+                idCoordinador = 0;
+             }
+             
+            jsShowWindowLoad("Cargando la información de la ruta, tardará unos segundos...");
+             url = "@Url.Content("~/Agenda/Agenda")" + "?mes=" + idMes + "&idPromotor=" + idPromotor + "&idCoordinador=" + idCoordinador + "&idCliente=" + idCliente
+             $("#divGrid").load(url, function () { jsRemoveWindowLoad(); });
+
+        })
+
+
+    })
+
+</script>
+
+<style>
+    #tableTienda, #tableTienda tr, #tableTienda td, #tableTienda th, .tableHorario, .tableHorario tr, .tableHorario td, .tableHorario th {
+        border: 1px solid #999;
+    }
+
+        #tableTienda th, .tableHorario th {
+            text-align: center;
+            background: #eee;
+        }
+
+        #tableTienda td, .tableHorario td {
+            padding: 3px;
+        }
+
+        #tableTienda .dia {
+            width: 26px !important;
+        }
+
+    .bordeFin {
+        border-right: 1px solid #000 !important;
+    }
+
+    .tableHorario img {
+        cursor: pointer;
+        width:20px;
+    }
+</style>

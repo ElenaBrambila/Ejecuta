@@ -2,14 +2,16 @@
 @model IntegramsaUltimate.Models.ViewModels.ReporteAsistenciaNewMapa
 @{
     Layout = null;
-    
+
 
 }
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYH054cm6UIwY8Gl4gwDWNM5K5caPaU9g&amp;sensor=true"></script>
+@{string google; }
+<div style="height:440px;" id="mapa">
+</div>
 
-            <div style="height:440px;" id="mapa">
-            </div>
-
-            <script>
+<script>
     $(document).ready(function () {
 
         jsLoadMapa();
@@ -54,5 +56,5 @@
 
 
 
-            </script>
+</script>
 

@@ -21,6 +21,10 @@ namespace IntegramsaUltimate.Controllers
             return View();
         }
 
+        public ActionResult ListadoTiendasRepetidas()
+        {
+            return View();
+        }
         public ActionResult Nuevo()
         {
 
@@ -100,7 +104,13 @@ namespace IntegramsaUltimate.Controllers
             model.latitud = oTienda.ubicacion.Latitude.ToString();
             model.longitud = oTienda.ubicacion.Longitude.ToString();
             model.id = id;
-            
+            var cad = "";
+            var cadena = (from d in db.cadena where d.idEstado == 1 && d.id == model.idCadena select d).FirstOrDefault();
+            if (cadena.cadenaSugerida != null) {
+                cad = cadena.cadenaSugerida;
+               
+            }
+            model.prefijo = cad;
             ObtenerComponentes();
 
             return View(model);
@@ -215,34 +225,74 @@ namespace IntegramsaUltimate.Controllers
             IEnumerable<TableTiendaViewModel> lst = null;
 
             lst = from d in db.tienda.ToList()
-                  where d.idEstado == 1
-                  select new TableTiendaViewModel
-                  {
-                      id = d.id,
-                      nombre = d.nombre,
-                      determinante=d.codigo,
-                      cadena=d.cadena.nombre ?? "",
-                      formato=d.formatoTienda.nombre ?? "",
-                      plaza= (new Func<string>(() => {
-                                                            try { return d.cmunicipio.PlazaMunicipio.First().cPlaza.nombre; } 
-                                                            catch { return ""; } 
-                                                        }
-                                                  )
-                                 )(),
-                      zona=(new Func<string>(() => {
-                                                            try { return d.destado.ZonaEstado.First().cZona.nombre; } 
-                                                            catch { return ""; } 
-                                                        }
-                                                  )
-                                 )()
-                  };
+                   where d.idEstado == 1
+                   select new TableTiendaViewModel
+                   {
+                       id = d.id,
+                       nombre = d.nombre,
+                       determinante = d.codigo,
+                       cadena = d.cadena.nombre ?? "",
+                       formato = d.formatoTienda.nombre ?? "",
+                       plaza= (new Func<string>(() => {
+                                                               try { return d.cmunicipio.PlazaMunicipio.First().cPlaza.nombre; } 
+                                                               catch { return ""; } 
+                                                           }
+                                                     )
+                                    )(),
+                         zona=(new Func<string>(() => {
+                                                               try { return d.destado.ZonaEstado.First().cZona.nombre; } 
+                                                               catch { return ""; } 
+                                                           }
+                                                     )
+                                    )()
+                    
+                   };
 
 
             return Json(lst.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
         #endregion
 
-      
+        public string Determinante(int idCadena) {
+
+            string nombre = "";
+            var cadena = (from d in db.cadena where d.idEstado == 1 && d.id == idCadena select d).FirstOrDefault();
+            if (cadena.cadenaSugerida != null)
+            {
+                var cadenaSugerida = cadena.cadenaSugerida;
+
+                int count = (from d in db.tienda where d.idCadena == idCadena select d).Count();
+
+                count = count + 1;
+                nombre = cadenaSugerida + "-00" + count;
+            }
+            else {
+                nombre = "libre";
+            }
+            
+            return nombre;
+        }
+        public string DeterminanteEditar(int idCadena, int id)
+        {
+
+            string nombre = "";
+            var cadena = (from d in db.cadena where d.idEstado == 1 && d.id == idCadena select d).FirstOrDefault();
+            if (cadena.cadenaSugerida != null)
+            {
+                var cadenaSugerida = cadena.cadenaSugerida;
+
+                int count = (from d in db.tienda where d.idCadena == idCadena && d.id != id select d).Count();
+
+                count = count + 1;
+                nombre = cadenaSugerida + "-00" + count;
+            }
+            else
+            {
+                nombre = "libre";
+            }
+
+            return nombre;
+        }
 
         #region HELPERS
         public void ObtenerComponentes()

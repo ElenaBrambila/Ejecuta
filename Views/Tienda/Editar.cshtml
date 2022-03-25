@@ -7,8 +7,8 @@
 <form id="frmFormulario" enctype="multipart/form-data">
     @Html.HiddenFor(d => d.latitud)
     @Html.HiddenFor(d => d.longitud)
-
-    @Html.HiddenFor(d=>d.id)
+    @Html.HiddenFor(d => d.prefijo)
+    @Html.HiddenFor(d => d.id)
     <div>
         <div class="tercio float">
             <div class="bloque">
@@ -23,10 +23,7 @@
                     @Html.LabelFor(d => d.nombre)
                     @Html.TextBoxFor(d => d.nombre)
                 </div>
-                <div>
-                    @Html.LabelFor(d => d.codigo)
-                    @Html.TextBoxFor(d => d.codigo)
-                </div>
+                
                 <div>
                     @Html.LabelFor(d => d.idGiro)
                     @Html.DropDownListFor(d => d.idGiro, (SelectList)ViewBag.lstGiros)
@@ -47,6 +44,10 @@
                           });
                       })
                     )
+                </div>
+                <div>
+                    @Html.LabelFor(d => d.codigo)
+                    @Html.TextBoxFor(d => d.codigo)
                 </div>
                 <div>
                     <script>
@@ -163,11 +164,40 @@
 </form>
 
 <script>
-
-
+    var id = $("#id").val();
+    var prefijo = $("#prefijo").val();
+    if (prefijo == null || prefijo == "") { $("#codigo").prop("readonly", false); } else { $("#codigo").prop("readonly", true); }
+    console.log(prefijo);
     $(document).ready(function () {
+         $("#idCadena").change(function () {
+             var idCadena = $("#idCadena").val();
+            if (idCadena != '') {
+                url = "@Url.Content("~/Tienda/DeterminanteEditar")" + "?idCadena=" + idCadena + "&id=" + id
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    contentType: false,
+                    data: { idCadena: idCadena, id: id },
+                    processData: false,
+                    success: function (data) {
+                        if (data == "libre") {
+                            $("#codigo").val("").prop("readonly", false);
+                        } else {
+                            $("#codigo").val(data).prop("readonly", true);
+                        }
+                        jsRemoveWindowLoad();
+                    },
+                    error: function (r) {
+                        jsRemoveWindowLoad();
+                        MensajeError("Error del servidor");
+                    }
+                });
 
-        jsLoadMapa();
+            }
+
+            });
+
+       // jsLoadMapa();
 
         //actualizar el formulario
         $("#frmFormulario").submit(function (e) {

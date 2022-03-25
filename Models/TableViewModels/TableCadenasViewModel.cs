@@ -10,5 +10,7 @@ namespace IntegramsaUltimate.Models.TableViewModels
         public int id { get; set; }
         public string nombre { get; set; }
         public string tipoGiro { get; set; }
+
+        public string prefijo { get; set; }
     }
 }

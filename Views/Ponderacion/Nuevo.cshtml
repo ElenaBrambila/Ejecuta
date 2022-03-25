@@ -1,0 +1,73 @@
+﻿@model IntegramsaUltimate.Models.ViewModels.ProductoViewModel
+@{
+    Layout = null;
+}
+
+<form id="frmFormulario">
+    @Html.HiddenFor(d => d.idCliente)
+    <div >
+        <div>
+            <label>Relación en Tienda</label>
+            @Html.TextBoxFor(d => d.sku)
+        </div>
+        <div>
+            <label>Anaquel</label>
+            @Html.TextBoxFor(d => d.nombre)
+        </div>
+        <div>
+            <label>Categoría 1</label>
+            @Html.TextBoxFor(d => d.presentacion)
+        </div>
+        <div>
+            <label>Categoría 2</label>
+            @Html.TextBoxFor(d => d.presentacion)
+        </div>
+        <br />
+        <div style="text-align:right;">
+            <input class="btn-success" type="submit" value="Guardar" />
+        </div>
+    </div>
+
+</form>
+
+<script>
+
+    $(document).ready(function () {
+
+        //actualizar el formulario
+        $("#frmFormulario").submit(function (e) {
+
+            e.preventDefault();
+
+            jsShowWindowLoad();
+
+            url="@Url.Content("~/Producto/Guardar")"
+            parametros = $(this).serialize();
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: parametros,
+
+                success: function (data) {
+
+                    if (data == "1") {
+                        MensajeExito("Producto agregado con éxito");
+                        jsCloseDialog();
+
+                        jsRefrescaGrid("tabla")
+                    } else {
+                        MensajeError(data);
+                    }
+                    jsRemoveWindowLoad();
+                },
+                error: function (r) {
+                    jsRemoveWindowLoad();
+                    MensajeError("Error del servidor");
+                }
+            });
+
+        })
+
+    })
+</script>

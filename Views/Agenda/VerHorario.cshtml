@@ -1,0 +1,255 @@
+﻿@using IntegramsaUltimate.Models
+@model IEnumerable<IntegramsaUltimate.Models.rutaIntinerario>
+@{
+    Layout = null;
+    int idRuta = (int)ViewBag.idRuta;
+}
+
+<div>
+    <b style="font-size:16px;">Selecciona el orden de visita de la tienda arrastrando el elemento con el mouse</b>
+</div><br />
+<div>
+    <div id="tabstrip">
+        <ul>
+            <li class="k-state-active">
+                Semana 1
+            </li>
+            <li>
+                Semana 2
+            </li>
+            <li>
+                Semana 3
+            </li>
+            <li>
+                Semana 4
+            </li>
+        </ul>
+        <div>
+            <table class="tableHorario" style="width:100%; border:1px solid #666;">
+                <tr>
+                    <th><img onclick="jsShowMapaRuta(@idRuta,1,1)" src="~/Images/map.png" />Lunes</th>
+                    <th><img onclick="jsShowMapaRuta(@idRuta,1,2)" src="~/Images/map.png" />Martes</th>
+                    <th><img onclick="jsShowMapaRuta(@idRuta,1,3)" src="~/Images/map.png" />Miercoles</th>
+                    <th><img onclick="jsShowMapaRuta(@idRuta,1,4)" src="~/Images/map.png" />Jueves</th>
+                    <th><img onclick="jsShowMapaRuta(@idRuta,1,5)" src="~/Images/map.png" />Viernes</th>
+                    <th><img onclick="jsShowMapaRuta(@idRuta,1,6)" src="~/Images/map.png" />Sabado</th>
+                   
+                </tr>
+                <tr>
+                    @for (int i = 1; i < 7;i++ ) //plasmamos los dias
+                    {
+                        <td style="vertical-align:top;">
+                            <ul class="sortable-basic">
+                                @foreach (rutaIntinerario oRI in Model.Where(d=>d.idDiaSemana==i && d.numSemana==1))
+                                {
+                                    <li class="sortable">
+                                        <input type="hidden" value="@oRI.id" />
+                                        <img src="~/Images/sort-icon.png">
+                                        
+                                        @oRI.tienda.nombre
+                                    </li>
+                                   
+                                }
+                               
+                            </ul>
+                        </td>
+                    }
+                </tr>
+            </table>
+        </div>
+        <div>
+            <table class="tableHorario" style="width:100%; border:1px solid #666;">
+                <tr>
+                    <th><img onclick="jsShowMapaRuta(@idRuta,2,1)" src="~/Images/map.png" />Lunes </th>
+                    <th><img onclick="jsShowMapaRuta(@idRuta,2,2)" src="~/Images/map.png" />Martes</th>
+                    <th><img onclick="jsShowMapaRuta(@idRuta,2,3)" src="~/Images/map.png" />Miercoles</th>
+                    <th><img onclick="jsShowMapaRuta(@idRuta,2,4)" src="~/Images/map.png" />Jueves</th>
+                    <th><img onclick="jsShowMapaRuta(@idRuta,2,5)" src="~/Images/map.png" />Viernes</th>
+                    <th><img onclick="jsShowMapaRuta(@idRuta,2,6)" src="~/Images/map.png" />Sabado</th>
+                    
+                </tr>
+                <tr>
+                    @for (int i = 1; i < 7; i++) //plasmamos los dias
+                    {
+                        <td style="vertical-align:top;">
+                            <ul class="sortable-basic">
+                                @foreach (rutaIntinerario oRI in Model.Where(d => d.idDiaSemana == i && d.numSemana == 2))
+                                {
+                                    <li class="sortable">
+                                        <input type="hidden" value="@oRI.id" />
+                                        <img src="~/Images/sort-icon.png">
+                                        @oRI.tienda.nombre
+                                    </li>
+
+                                }
+
+                            </ul>
+                        </td>
+                    }
+                </tr>
+            </table>
+        </div>
+        <div>
+            <table class="tableHorario" style="width:100%; border:1px solid #666;">
+                <tr>
+                    <th><img onclick="jsShowMapaRuta(@idRuta,3,1)" src="~/Images/map.png" />Lunes</th>
+                    <th><img onclick="jsShowMapaRuta(@idRuta,3,2)" src="~/Images/map.png" />Martes</th>
+                    <th><img onclick="jsShowMapaRuta(@idRuta,3,3)" src="~/Images/map.png" />Miercoles</th>
+                    <th><img onclick="jsShowMapaRuta(@idRuta,3,4)" src="~/Images/map.png" />Jueves</th>
+                    <th><img onclick="jsShowMapaRuta(@idRuta,3,5)" src="~/Images/map.png" />Viernes</th>
+                    <th><img onclick="jsShowMapaRuta(@idRuta,3,6)" src="~/Images/map.png" />Sabado</th>
+                   
+                </tr>
+                <tr>
+                    @for (int i = 1; i < 7; i++) //plasmamos los dias
+                    {
+                        <td style="vertical-align:top;">
+                            <ul class="sortable-basic">
+                                @foreach (rutaIntinerario oRI in Model.Where(d => d.idDiaSemana == i && d.numSemana == 3))
+                                {
+                                    <li class="sortable">
+                                        <input type="hidden" value="@oRI.id" />
+                                        <img src="~/Images/sort-icon.png">
+                                        @oRI.tienda.nombre
+                                    </li>
+
+                                }
+
+                            </ul>
+                        </td>
+                    }
+                </tr>
+            </table>
+        </div>
+        <div>
+            <table class="tableHorario" style="width:100%; border:1px solid #666;">
+                <tr>
+                    <th><img onclick="jsShowMapaRuta(@idRuta,0,1)" src="~/Images/map.png" />Lunes</th>
+                    <th><img onclick="jsShowMapaRuta(@idRuta,0,2)" src="~/Images/map.png" /></th>
+                    <th><img onclick="jsShowMapaRuta(@idRuta,0,3)" src="~/Images/map.png" />Miercoles</th>
+                    <th><img onclick="jsShowMapaRuta(@idRuta,0,4)" src="~/Images/map.png" />Jueves</th>
+                    <th><img onclick="jsShowMapaRuta(@idRuta,0,5)" src="~/Images/map.png" />Viernes</th>
+                    <th><img onclick="jsShowMapaRuta(@idRuta,0,6)" src="~/Images/map.png" />Sabado</th>
+                    
+                </tr>
+                <tr>
+                    @for (int i = 1; i < 7; i++) //plasmamos los dias
+                    {
+                        <td style="vertical-align:top;">
+                            <ul class="sortable-basic">
+                                @foreach (rutaIntinerario oRI in Model.Where(d => d.idDiaSemana == i && d.numSemana == 0))
+                                {
+                                    <li class="sortable">
+                                        <input type="hidden" value="@oRI.id" />
+                                        <img src="~/Images/sort-icon.png">
+                                        @oRI.tienda.nombre
+                                    </li>
+
+                                }
+
+                            </ul>
+                        </td>
+                    }
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#tabstrip").kendoTabStrip({
+            animation: {
+                open: {
+                    effects: "fadeIn"
+                }
+            }
+        });
+
+        $(".sortable-basic").kendoSortable({
+            hint: function (element) {
+                return element.clone().addClass("hint");
+            },
+            placeholder: function (element) {
+                return element.clone().addClass("placeholder").text("Arrastra aquí");
+            },
+            cursorOffset: {
+                top: -10,
+                left: -30
+            },end: SoltadaTienda
+        });
+    })
+
+    function SoltadaTienda(e) {
+        jsShowWindowLoad();
+
+        setTimeout(function () {
+            var lstIds = [];
+            var $horarioDia = e.sender.element.closest(".sortable-basic");
+            $horarioDia.find("input[type=hidden]").each(function (i) {
+
+                lstIds[i] = $(this).prop("value")
+
+            })
+
+
+            //enviamos peticion json
+            url="@Url.Content("~/RutaIntinerario/GuardaOrden")"
+            $.ajax(url, {
+                type: "POST",
+                traditional: true,
+                data:{
+                    lstIdsOrden:lstIds
+                },
+                complete: function () {
+                    jsRemoveWindowLoad();
+                }
+            })
+
+        },500)
+
+    }
+
+    function jsShowMapaRuta(idRuta,numSemana,idDia){
+        url="@Url.Content("~/RutaIntinerario/VerMapa")"+"?idRuta="+idRuta+"&numSemana="+numSemana+"&idDiaSemana="+idDia
+        jsShowDialog(url, 700,500, "Ruta")
+
+    }
+</script>
+
+<style>
+    .sortable-basic img{
+        margin-right:5px;
+
+    }
+
+    .sortable-basic li{
+        list-style-type:none;
+        background:#fff;
+        border:1px solid #aaa;
+       
+        padding:8px 3px;
+        cursor:move;
+    }
+    .sortable.placeholder {
+                    background-color: #dceffd;
+                    color: #52aef7;
+                    text-align: right;
+                     padding:8px 3px;
+     }
+    .sortable.hint{
+         display: block;
+                    width: 200px;
+                    background-color: #52aef7;
+                    color: #fff;
+                     padding:8px 3px;
+    }
+      .sortable-basic {
+                    padding: 0;
+                    margin: 0;
+                }
+
+    .tableHorario td{
+        width:16%;
+    }
+</style>

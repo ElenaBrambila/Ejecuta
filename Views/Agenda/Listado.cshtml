@@ -1,0 +1,80 @@
+﻿@model int
+@{
+    Layout = null;
+    int idTipoUsuario = Model;
+}
+
+<div class="row">
+    
+    <div class="col-md-11">
+        @(Html.Kendo().Grid<IntegramsaUltimate.Models.TableViewModels.TableUsuariosViewModel>()
+                    .Name("tabla-"+idTipoUsuario)
+
+                     .Columns(c =>
+                     {
+                         c.Bound(p => p.id).Title("#");
+                         c.Bound(p => p.nombre).Title("Usuario");
+                         c.Bound(p => p.email).Title("Correo");
+
+                         c.Bound(p => p.estado).Title("Estado");
+                         if (idTipoUsuario == 6 || idTipoUsuario==2) //si es tipo cliente, promotor mostramos esta columna
+                         {
+                             c.Bound(p => p.cliente).Title("Cliente");
+                             if (idTipoUsuario == 2)
+                             { //si es tipo de usuario promotor se pone este boton
+                                 c.Bound(p => p.supervisor).Title("Supervisor");
+
+                             }
+                         }
+
+                         c.Bound(p => p.id).ClientTemplate(@"
+                                                                <img class='imgGrid' src='/Images/icon_edit.png' onclick='jsEditarUsuario(#=id#)' /> |
+                                                                <img class='imgGrid' src='/Images/icon_delete.png' onclick='jsEliminarUsuario(#=id#)' />"
+                             )
+                                                          .Title("").Width(100);
+                         if(idTipoUsuario==6 || idTipoUsuario==2){ //si es tipo de usuario cliente,promotor se pone este boton
+                             c.Bound(p => p.id).ClientTemplate(@"<input type='button' value='Asignar Cliente' onclick='jsAsignarCliente(#=id#)' />"+
+                                                                 "<input style='margin-top:3px;' type='button' value='Asignar Supervisor' onclick='jsAsignarSupervisor(#=id#)' />"
+                            ).Title("").Width(80);
+
+
+
+                         }
+                         if (idTipoUsuario == 3)
+                         { //si es tipo de usuario Supervisor se pone este boton
+                             c.Bound(p => p.id).ClientTemplate(@"<input style='margin-top:3px;' type='button' value='Asignar Coordinador' onclick='jsAsignarCoordinador(#=id#)' />"
+                            ).Title("").Width(80);
+
+
+
+                         }
+
+
+                     })
+                        .ToolBar(tools => tools.Excel())
+                        .Pageable()
+                        .Sortable()
+                        .Filterable()
+
+
+                        .Excel(excel => excel
+                            .FileName("reporte.xlsx")
+                            .AllPages(true)
+                             .ProxyURL(Url.Action("JsonGrid", "Usuario", new { idTipoUsuario=idTipoUsuario}))
+                         )
+                        .Resizable(resize => resize.Columns(true))
+                        .DataSource(d => d.Ajax()
+                            .Sort(sort=>sort.Add("id").Descending())
+                           .Read(r => r.Action("JsonGrid", "Usuario", new { idTipoUsuario=idTipoUsuario}))
+                        )
+
+        )
+    </div>
+</div>
+<script>
+    //asignamos el tipo de usuario
+    idTipoUsuarioSeleccionado=@idTipoUsuario
+</script>
+
+
+
